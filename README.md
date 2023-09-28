@@ -26,5 +26,6 @@
 
 <p>&nbsp;<img align="center" src="https://github-readme-stats.vercel.app/api?username=kalpu-24&show_icons=true&locale=en" alt="kalpu-24" /></p>
 
-![Leetcode Stats](https://leetcard.jacoblin.cool/kalp9675?theme=light&font=Spline%20Sans&ext=heatmap)
 <p><img align="center" src="https://github-readme-streak-stats.herokuapp.com/?user=kalpu-24&" alt="kalpu-24" /></p>
+
+![Leetcode Stats](https://leetcard.jacoblin.cool/kalp9675?theme=light&font=Spline%20Sans&ext=heatmap)
