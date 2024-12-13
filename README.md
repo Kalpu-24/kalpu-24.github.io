@@ -1,5 +1,6 @@
 <h1 align="center">Hi 👋, I'm Kalp Shah</h1>
 <h3 align="center">A passionate Fullstack and cross-platform developer from India</h3>
+<h3 aline="center">Here is my <a href="https://kalpu-24.github.io/Kalp_Shah_CV/">CV</a></h3>
 
 <p align="left"> <img src="https://komarev.com/ghpvc/?username=kalpu-24&label=Profile%20views&color=0e75b6&style=flat" alt="kalpu-24" /> </p>
 
