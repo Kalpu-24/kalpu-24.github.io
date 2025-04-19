@@ -1,0 +1,65 @@
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    *{
+        cursor: default;
+    }
+
+    .circle{
+        display: none;
+    }
+
+    .controllericon{
+        width: 35px;
+        height: 35px;
+        margin-right: 5px;
+    }
+
+    .titletext{
+        font-size: 1.1rem;
+    }
+
+    .contactbut{
+        display: none;
+    }
+
+    .hero{
+        padding: 6%;
+        min-height: 50vh;
+    }
+
+    .hero > .intro{
+        font-size: 1.2rem;
+    }
+
+    .hero > .tagline{
+        font-size: 3.5rem;
+    }
+
+    .projects > .ProjectHeading{
+        font-size: 2rem;
+    }
+
+    .projects > .ProjectBox > .desc > .GameTitle {
+        font-size: 2rem;
+    }
+
+    .about > .aboutHeading {
+        font-size: 2rem;
+    }
+
+    .about > .aboutBoxes > .aboutBoxText > .aboutPunch{
+        font-size: 1.5rem;
+    }
+    
+    .about > .aboutBoxes > .aboutBoxText > .aboutDesc{
+        font-size: 1rem;
+    }
+
+    .about > .aboutBoxes > .aboutBoxText > .aboutButtons > a > .aboutButton{
+        font-size: .7rem;
+    }
+
+    .contact > .contactHeading{
+        font-size: 2rem;
+    }
+}

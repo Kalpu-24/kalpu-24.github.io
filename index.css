@@ -1,0 +1,766 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
+
+@font-face {
+  font-family: 'MLCD';
+  src: url(./public/mlcd.ttf);
+}
+
+:root {
+  --nav-height: 70px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: transparent;
+  -webkit-tap-highlight-color: transparent;
+  font-family: Manrope;
+  font-weight: 500;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: none;
+  color: #040711;
+}
+
+body {
+  background-color: #eeeef2;
+  color: #040711;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+.circle {
+  display: none;
+  position: absolute;
+  overflow: hidden;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  z-index: 1007;
+  pointer-events: none;
+  mix-blend-mode: difference;
+  background-color: #f7f8fa;
+  transition: all 0.3s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.nav {
+  display: flex;
+  position: fixed;
+  top: 25px;
+  left: 50%;
+  z-index: 1000;
+  transform: translate(-50%, 0%);
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1120px;
+  overflow: hidden;
+  width: 80vw;
+  height: var(--nav-height);
+  background-color: #fff;
+  border-radius: 104px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 0px 0px;
+  padding: 12px;
+}
+
+html:not([data-scroll="0"]) .nav {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 11px 12px 0px;
+}
+
+/* ham menu */
+.menu-button {
+  width: 100%;
+  background-color: #fff;
+  border-radius: 104px;
+  border: none;
+  padding: 1px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background 0.3s ease;
+  position: relative;
+}
+
+.icon {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 18px;
+  height: 15px;
+  justify-content: center;
+  align-items: center;
+}
+
+.bar {
+  width: 18px;
+  height: 2px;
+  background-color: black;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.label2 {
+  margin-left: 10px;
+  position: relative;
+  width: 60px;
+  height: 20px;
+  text-align: left;
+  font-size: 1rem;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+.menu-text,
+.close-text {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #040711;
+  transition: transform 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.close-text {
+  transform: translateY(150%);
+  pointer-events: none;
+}
+
+/* Menu Opened State */
+.menu-button.open .top-bar {
+  transform: rotate(45deg) translateY(5px);
+}
+
+.menu-button.open .bottom-bar {
+  transform: rotate(-45deg) translateY(-5px);
+}
+
+.menu-button.open .menu-text {
+  transform: translate(0%, -150%);
+  pointer-events: none;
+}
+
+.menu-button.open .close-text {
+  transform: translate(0%, -50%);
+  pointer-events: auto;
+}
+
+.menuplaceholder.active .menu{
+  height: 20vw;
+  max-height: 570px;
+  min-height: 300px;
+  padding: 30px;
+  pointer-events: auto;
+  opacity: 1;
+}
+
+.menuplaceholder{
+  position: fixed;
+  top: calc(var(--nav-height) + 25px + 12px);
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 80vw;
+  max-width: 1120px;
+  z-index: 1000;
+  transition: all 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.menuplaceholder > .menu {
+  position: absolute;
+  left: 0;
+  transform: translate(0%, 0%);
+  width: 23vw;
+  min-width: 300px;
+  max-width: 570px;
+  height: 0;
+  background-color: #040711;
+  border-radius: 24px;
+  padding: 0;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.menuplaceholder > .menu > .menuTitle {
+  display: flex;
+  align-items: center;
+  border-radius: 24px;
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+  color: #eeeef271;
+}
+
+.menuplaceholder > .menu > .menuList{
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 10px;
+}
+
+.menuplaceholder > .menu > .menuList > .menuItem{
+  position: relative;
+  min-width: 100px;
+  height: 50px;
+  color: #eeeef2;
+  font-size: 2rem;
+  overflow: hidden;
+}
+
+.menuplaceholder > .menu > .menuList > .menuItem > .arrow{
+  position: absolute;
+  top: 50%;
+  left: -20%;
+  transform: translate(0%, -50%);
+  fill: #eeeef2;
+  border-color: #eeeef2;
+  width: 40px;
+  height: 40px;
+  transition: transform 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.menuplaceholder > .menu > .menuList > .menuItem > .menuItemNames > .menuItemName{
+  color: #eeeef2;
+  position: absolute;
+  top: 50%;
+  left: 5%;
+  transform: translate(0%, -50%);
+  transition: transform 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.menuplaceholder > .menu > .menuList > .menuItem > .menuItemNames > .Secondary{
+  transform: translate(0%, 50%);
+}
+
+/* title */
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.controllericon {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+  opacity: 0.8;
+}
+
+.titletext {
+  font-weight: 400;
+  font-size: 1.5rem;
+}
+
+.contactbut, .contactbut2 {
+  position: relative;
+  padding: 10px 16px;
+  border-radius: 104px;
+  width: 14ch;
+  height: 5ch;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  font-size: 1rem;
+  overflow: hidden;
+  transition-duration: 0.6s;
+}
+
+.hover-text,
+.non-hover-text {
+  position: absolute;
+  text-wrap: nowrap;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: transform 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.hover-text {
+  transform: translate(-50%, -250%);
+  pointer-events: none;
+}
+
+/* Hero */
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  top: calc(var(--nav-height) + 25px + 12px);
+  left: 50%;
+  transform: translate(-50%, 0%);
+  background-color: #fff;
+  border-radius: 24px;
+  max-width: 1120px;
+  width: 80vw;
+  min-height: 70svh;
+  padding: 2%;
+}
+
+.hero > .intro{
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.hero > .tagline {
+  text-align: center;
+  font-size: 7rem;
+  margin-bottom: 2%;
+}
+
+.social {
+  position: relative;
+  width: 80vw;
+  max-width: 1120px;
+  height: 8vh;
+  top: calc(var(--nav-height) + 25px + 24px);
+  left: 50%;
+  transform: translate(-50%, 0%);
+  border-radius: 24px;
+  display: flex;
+  align-items: center;
+}
+
+.SocialLink {
+  flex: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 8vh;
+  border-radius: 24px;
+  background-color: #fff;
+}
+
+.linkedin {
+  margin-right: 10px;
+}
+
+.github {
+  margin-left: 10px;
+}
+
+.SocialContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: max-content;
+  height: 4vh;
+  overflow: hidden;
+}
+
+.SocialIcons {
+  position: relative;
+  width: 4vh;
+  height: 4vh;
+  margin-right: 6px;
+}
+
+.SocialIcon {
+  position: absolute;
+  user-select: none;
+  height: 100%;
+  aspect-ratio: 1;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  fill: #040711;
+  color: #040711;
+  transition: all 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.ArrowIcon{
+  top: -50%;
+}
+
+.SocialTexts {
+  position: relative;
+  width: 88px;
+  height: 100%;
+}
+
+.SocialText {
+  position: absolute;
+  text-wrap: nowrap;
+  top: 50%;
+  transform: translate(0%, -50%);
+  font-size: 1.2rem;
+  color: #040711;
+  transition: all 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.VisitText {
+  transform: translate(0%, 100%);
+}
+
+.projects{
+  position: relative;
+  top: calc(var(--nav-height) + 25px + 70px);
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 80vw;
+  max-width: 1120px;
+  text-align: center;
+}
+
+.projects > .ProjectHeading{
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.projects > .projectTag{
+  font-size: 1.1rem;
+}
+
+.projects > .ProjectBox {
+  position: relative;
+  margin-top: 24px;
+  width: 100%;
+  height: 400px;  
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  border-radius: 24px;
+  padding: 20px;
+}
+
+.projects > .ProjectBox > .thumbnail {
+  flex: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #eeeef2;
+  border-radius: 24px;
+}
+
+.projects > .ProjectBox > .Aura-prop1 {
+  filter: grayscale(100%);
+  opacity: 0.3;
+  height: 300px;
+  object-fit: contain;
+  position: absolute;
+  bottom: 0;
+  right: 0px;
+  transform: translateY(0%);
+  max-height: 100%;
+  transition: all 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.projects > .ProjectBox > .thumbnail > .mainImage {
+  filter: grayscale(100%);
+  width: 100%;
+  height: 100%;
+  border-radius: 24px;
+  object-fit: cover;
+  transition: filter 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.projects > .ProjectBox > .desc {
+  flex: 50%;
+  display: block;
+  position: relative;
+  padding: 20px;
+}
+
+.projects > .ProjectBox > .desc > .GameTitle {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.projects > .ProjectBox > .desc > .AuraGameTitle{
+  font-family: Pirata One;
+  color: #fff;
+  -webkit-text-stroke-width: .1px;
+  -webkit-text-stroke-color: #040711;
+}
+
+.projects > .ProjectBox > .desc > .GameDesc {
+  font-size: 1rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+  text-align: left;
+  padding-right: 30px;
+}
+
+.projects > .ProjectBox > .desc > .MultiLinks > a {
+  display: block;
+  width: fit-content;
+  height: max-content;
+  text-decoration: none;
+}
+
+.projects > .ProjectBox > .desc > .MultiLinks{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.projects > .ProjectBox > .desc > .MultiLinks > a > .codeBut{
+  position: relative;
+  padding: 10px;
+  border-radius: 104px;
+  width: 10ch;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  font-size: 1rem;
+  overflow: hidden;
+  background-color: #040711;
+  color: #eeeef2;
+}
+
+.projects > .ProjectBox > .desc > .MultiLinks > a > .playBut{
+  position: relative;
+  padding: 10px;
+  border-radius: 104px;
+  margin-right: 10px;
+  width: 14ch;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  font-size: 1rem;
+  overflow: hidden;
+  background-color: #3b8562;
+  filter: grayscale(100%);
+  color: #eeeef2;
+  transition: all 0.5s ease;
+}
+
+.projects > .ProjectBox > .desc > .MultiLinks > a > .TeleBut{
+  position: relative;
+  padding: 10px;
+  border-radius: 104px;
+  margin-right: 10px;
+  width: 20ch;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  font-size: 1rem;
+  overflow: hidden;
+  background-color: #24A1DE;
+  filter: grayscale(100%);
+  color: #eeeef2;
+}
+
+.projects > .ProjectBox > .desc > .SnakeWallGameTitle{
+  font-family: MLCD;
+}
+
+.projects > .ProjectBox > .SnakeWall-prop1 {
+  filter: grayscale(100%);
+  opacity: 0.3;
+  height: 220px;
+  object-fit: contain;
+  position: absolute;
+  bottom: 0;
+  left: 0px;
+  transform: translateY(0%);
+  max-height: 100%;
+  transition: all 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.about {
+  position: relative;
+  top: calc(var(--nav-height) + 25px + 120px);
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 80vw;
+  max-width: 1120px;
+  text-align: center;
+}
+
+.about > .aboutHeading {
+  font-size: 4rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.about > .aboutBoxes {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: stretch;
+  gap: 20px;
+  min-height: 400px;
+  height: fit-content;
+  margin-top: 24px;
+}
+
+.about > .aboutBoxes > .aboutBoxText{
+  font-size: 1rem;
+  font-weight: 400;
+  text-align: left;
+  padding-right: 30px;
+  flex: 60%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  background-color: #fff;
+  border-radius: 24px;
+  width: 100%;
+  padding: 50px;
+}
+
+.about > .aboutBoxes > .aboutBoxText > .aboutPunch{
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+}
+
+.about > .aboutBoxes > .aboutBoxText > .aboutDesc{
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.about > .aboutBoxes > .aboutBoxText > .aboutButtons{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.about > .aboutBoxes > .aboutBoxText > .aboutButtons > a{
+  text-decoration: none;
+}
+
+.about > .aboutBoxes > .aboutBoxText > .aboutButtons > a > .aboutButton{
+  position: relative;
+  padding: 16px 30px;
+  border-radius: 104px;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  font-size: 1rem;
+  overflow: hidden;
+  background-color: #040711;
+  color: #eeeef2;
+}
+
+.about > .aboutBoxes > .aboutBoxImage{
+  flex: 40%;
+  display: flex;
+}
+
+.about > .aboutBoxes > .aboutBoxImage > img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 24px;
+  filter: grayscale(100%);
+  transition: all 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.contact{
+  position: relative;
+  top: calc(var(--nav-height) + 25px + 164px);
+  left: 50%;
+  transform: translate(-50%, 0%);
+  width: 80vw;
+  max-width: 1120px;
+  min-height: 400px;
+  max-height: fit-content;
+  text-align: center;
+  background-color: #040711;
+  border-radius: 24px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.contact > .contactHeading{
+  font-size: 4rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+  color: #eeeef2;
+}
+
+.contact > .contactDesc{
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 20px;
+  color: #eeeef2;
+}
+
+.emailText{
+  font-size: 1.2rem;
+  margin-bottom: 40px;
+  color: #eeeef2;
+}
+
+.emailText > div{
+  font-size: 1.2rem;
+  color: #eeeef2;
+}
+
+.contact > .contactButtons{
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+
+.contact > .contactButtons > a{
+  text-decoration: none;
+}
+
+.contact > .contactButtons > a > .contactButton{
+  position: relative;
+  padding: 16px 30px;
+  border-radius: 104px;
+  width: 20ch;
+  text-align: center;
+  font-size: 1rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row;
+  color: #eeeef2;
+  filter: grayscale(100%);
+  transition: all 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.contact > .contactButtons > a > .contactButton > svg{
+  width: 30px;
+  height: 30px;
+  margin-right: 4px;
+  fill: #eeeef2;
+}
+
+.contact > .copyright{
+  font-size: 1rem;
+  color: #eeeef2;
+  margin-top: 20px;
+}
+
+.cls-1{
+  fill:transparent;
+  stroke:#eeeef2;
+  stroke-width:2.5px;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.bottomSpacer{
+  position: relative;
+  top: calc(var(--nav-height) + 25px + 164px);
+  height: 100px;
+  width: 100%;
+}

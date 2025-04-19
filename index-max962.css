@@ -1,0 +1,31 @@
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 962px) {
+    .projects > .ProjectBox {
+        flex-direction: column;
+        height: fit-content;
+    }
+
+    .projects > .ProjectBox > .thumbnail {
+        order: 0;
+        width: 100%;
+        background-color: transparent;
+    }
+    
+    .projects > .ProjectBox > .desc {
+        order: 1;
+        width: 100%;
+    }
+    
+    .projects > .ProjectBox > .thumbnail > .mainImage {
+        max-height: 250px;
+        object-fit: contain;
+    }
+
+    .about > .aboutBoxes {
+        flex-direction: column;
+        height: fit-content;
+        min-height: 400px;
+    }
+
+
+}
