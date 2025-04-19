@@ -1,6 +1,6 @@
 @media (hover: hover) {
     .menuplaceholder > .menu > .menuList > .menuItem:hover .Primary{
-        transform: translate(45%, -150%);
+        transform: translate(45%, -160%);
     }
 
     .menuplaceholder > .menu > .menuList > .menuItem:hover .Secondary{
@@ -8,7 +8,7 @@
     }  
 
     .menuplaceholder > .menu > .menuList > .menuItem:hover .arrow{
-        transform: translate(120%, -50%);
+        transform: translate(130%, -50%);
     }
 
     .contactbut:hover {
