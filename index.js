@@ -1,6 +1,4 @@
-const isTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-
-if (isTouch) {
+if (window.matchMedia("(hover: none)").matches) {
   $(".TeleBut").css({filter: 'grayscale(0%)'});
   $(".playBut").css({filter: 'grayscale(0%)'});
   $(".mainImage").css({filter: 'grayscale(0%)'});
