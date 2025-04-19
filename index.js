@@ -3,6 +3,7 @@ if (window.matchMedia("(hover: none)").matches) {
   $(".playBut").css({filter: 'grayscale(0%)'});
   $(".mainImage").css({filter: 'grayscale(0%)'});
   $(".theImage").css({filter: 'grayscale(0%)'});
+  $(".contactButton").css({filter: 'grayscale(0%)'});
 }
 
 $(".contactbut").on("click", ()=>scrollToSection(".contact"));
