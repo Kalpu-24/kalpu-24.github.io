@@ -34,7 +34,7 @@ jQuery(document).ready(function() {
   const hoverables = document.querySelectorAll('.hoverable');
   const mailhoverable = document.querySelectorAll('.mailhoverable');
   // if mobile and width smaller than 768px, return
-  if (window.innerWidth < 768 || isTouch) {
+  if (isTouch) {
     return;
   }
   $("#circle").fadeIn(1000);
