@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://github.com/Kalpu-24/Kalpu-24/blob/main/Kalp.png" style="width:200px; height:200px"/>
+  <img src="https://github.com/Kalpu-24/Kalpu-24/blob/main/public/klaplabstudios-circle.png" style="width:200px; height:200px"/>
     <br/>
   <p><h3><b><i>"Embrace The Uncertainity" <sub>- Unkown</sub></i></b></h3></p>
 </div>
