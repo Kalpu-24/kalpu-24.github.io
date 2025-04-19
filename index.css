@@ -505,6 +505,7 @@ html:not([data-scroll="0"]) .nav {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
+  gap: 10px;
 }
 
 .projects > .ProjectBox > .desc > .MultiLinks > a > .codeBut{
@@ -525,7 +526,6 @@ html:not([data-scroll="0"]) .nav {
   position: relative;
   padding: 10px;
   border-radius: 104px;
-  margin-right: 10px;
   width: 14ch;
   text-align: center;
   border-width: 1px;
@@ -542,7 +542,6 @@ html:not([data-scroll="0"]) .nav {
   position: relative;
   padding: 10px;
   border-radius: 104px;
-  margin-right: 10px;
   width: 20ch;
   text-align: center;
   border-width: 1px;

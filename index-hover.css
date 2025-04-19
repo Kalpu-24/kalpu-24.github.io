@@ -1,4 +1,8 @@
 @media (hover: hover) {
+    .circle:hover {
+        display: inline;
+    }
+
     .menuplaceholder > .menu > .menuList > .menuItem:hover .Primary{
         transform: translate(45%, -170%);
     }

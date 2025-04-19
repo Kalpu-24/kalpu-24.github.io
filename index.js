@@ -34,9 +34,8 @@ jQuery(document).ready(function() {
   const hoverables = document.querySelectorAll('.hoverable');
   const mailhoverable = document.querySelectorAll('.mailhoverable');
   // if mobile and width smaller than 768px, return
-  if (isTouch) {
-    return;
-  }
+  // if hover is not supported, return
+  if(window.matchMedia("(hover: none)").matches) return;
   $("#circle").fadeIn(1000);
 
   $(document).mousemove(function(e){
