@@ -1,7 +1,7 @@
 <div align="center">
   <img src="https://github.com/Kalpu-24/Kalpu-24/blob/main/public/klaplabstudios-circle.png" style="width:200px; height:200px"/>
     <br/>
-  <p><h3><b><i>"Embrace The Uncertainity" <sub>- Unkown</sub></i></b></h3></p>
+  <p><h3><b><i>"Embrace The Uncertainty" <sub>- Unkown</sub></i></b></h3></p>
 </div>
 
 
