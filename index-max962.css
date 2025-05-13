@@ -8,12 +8,15 @@
     .projects > .ProjectBox > .thumbnail {
         order: 0;
         width: 100%;
-        background-color: transparent;
     }
     
     .projects > .ProjectBox > .desc {
         order: 1;
         width: 100%;
+    }
+
+    .projects > .ProjectBox > .desc > .tgfGameTitle {
+        font-size: 3rem;
     }
     
     .projects > .ProjectBox > .thumbnail > .mainImage {

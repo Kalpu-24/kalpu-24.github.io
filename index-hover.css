@@ -75,7 +75,15 @@
         filter: grayscale(0%)
     }
 
+    .projects > .ProjectBox:hover .desc > .MultiLinks > a > .disablebut {
+        filter: grayscale(100%)
+    }
+
     .projects > .ProjectBox:hover .desc > .MultiLinks > a > .TeleBut {
+        filter: grayscale(0%)
+    }
+
+    .projects > .ProjectBox:hover .desc > .MultiLinks > a > .itchBut {
         filter: grayscale(0%)
     }
 
@@ -83,6 +91,12 @@
         filter: grayscale(0%);
         opacity: 1;
         transform: translateX(-120px);
+    }
+
+        .projects > .ProjectBox:hover .tgf-prop1 {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: translateX(-80px);
     }
 
     .about > .aboutBoxes > .aboutBoxImage:hover img{

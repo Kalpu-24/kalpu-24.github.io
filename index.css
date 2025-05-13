@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pirata+One&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
+
 
 @font-face {
   font-family: 'MLCD';
@@ -400,7 +402,7 @@ html:not([data-scroll="0"]) .nav {
 }
 
 .VisitText {
-  transform: translate(0%, 100%);
+  transform: translate(0%, 150%);
 }
 
 .projects{
@@ -445,6 +447,18 @@ html:not([data-scroll="0"]) .nav {
   border-radius: 24px;
 }
 
+.projects > .ProjectBox > .TgfThumbnail{
+  background-color: #000;
+}
+
+.projects > .ProjectBox > .AuraThumbnail{
+  background-color: #000;
+}
+
+.projects > .ProjectBox > .SnakeThumbnail{
+  background-color: #fff;
+}
+
 .projects > .ProjectBox > .Aura-prop1 {
   filter: grayscale(100%);
   opacity: 0.3;
@@ -453,6 +467,19 @@ html:not([data-scroll="0"]) .nav {
   position: absolute;
   bottom: 0;
   right: 0px;
+  transform: translateY(0%);
+  max-height: 100%;
+  transition: all 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.projects > .ProjectBox > .tgf-prop1 {
+  filter: grayscale(100%);
+  opacity: 0.3;
+  height: 220px;
+  object-fit: contain;
+  position: absolute;
+  bottom: 0;
+  left: 0px;
   transform: translateY(0%);
   max-height: 100%;
   transition: all 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
@@ -502,6 +529,10 @@ html:not([data-scroll="0"]) .nav {
   text-decoration: none;
 }
 
+.projects > .ProjectBox > .desc > .MultiLinks > a.disabled{
+  pointer-events: none;
+}
+
 .projects > .ProjectBox > .desc > .MultiLinks{
   display: flex;
   align-items: center;
@@ -511,9 +542,8 @@ html:not([data-scroll="0"]) .nav {
 
 .projects > .ProjectBox > .desc > .MultiLinks > a > .codeBut{
   position: relative;
-  padding: 10px;
+  padding: 10px 2ch;
   border-radius: 104px;
-  width: 10ch;
   text-align: center;
   border-width: 1px;
   border-style: solid;
@@ -525,9 +555,8 @@ html:not([data-scroll="0"]) .nav {
 
 .projects > .ProjectBox > .desc > .MultiLinks > a > .playBut{
   position: relative;
-  padding: 10px;
+  padding: 10px 2ch;
   border-radius: 104px;
-  width: 14ch;
   text-align: center;
   border-width: 1px;
   border-style: solid;
@@ -541,15 +570,28 @@ html:not([data-scroll="0"]) .nav {
 
 .projects > .ProjectBox > .desc > .MultiLinks > a > .TeleBut{
   position: relative;
-  padding: 10px;
+  padding: 10px 2ch;
   border-radius: 104px;
-  width: 20ch;
   text-align: center;
   border-width: 1px;
   border-style: solid;
   font-size: 1rem;
   overflow: hidden;
   background-color: #24A1DE;
+  filter: grayscale(100%);
+  color: #eeeef2;
+}
+
+.projects > .ProjectBox > .desc > .MultiLinks > a > .itchBut{
+  position: relative;
+  padding: 10px 2ch;
+  border-radius: 104px;
+  text-align: center;
+  border-width: 1px;
+  border-style: solid;
+  font-size: 1rem;
+  overflow: hidden;
+  background-color: #fa5c5c;
   filter: grayscale(100%);
   color: #eeeef2;
 }
@@ -569,6 +611,11 @@ html:not([data-scroll="0"]) .nav {
   transform: translateY(0%);
   max-height: 100%;
   transition: all 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
+.projects > .ProjectBox > .desc > .tgfGameTitle{
+  font-family: "Sour Gummy";
+  font-size: 3rem;
 }
 
 .about {
