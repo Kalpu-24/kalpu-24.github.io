@@ -475,7 +475,7 @@ html:not([data-scroll="0"]) .nav {
 .projects > .ProjectBox > .tgf-prop1 {
   filter: grayscale(100%);
   opacity: 0.3;
-  height: 220px;
+  height: 260px;
   object-fit: contain;
   position: absolute;
   bottom: 0;
