@@ -6,7 +6,7 @@
 
 @font-face {
   font-family: 'MLCD';
-  src: url(./public/mlcd.ttf);
+  src: url(./../public/mlcd.ttf);
 }
 
 :root {
