@@ -265,7 +265,6 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
     display: flex;
     flex-wrap: wrap;
     gap: 12px;
-    
 }
 
 .metrics > .metricsdiv > .metricbox {

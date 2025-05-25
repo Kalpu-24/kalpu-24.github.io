@@ -1,0 +1,9 @@
+@media only screen and (max-width: 962px) {
+    .brief > .briefnotes {
+        width: 40%;
+    }
+
+    .brief > .brieftext{
+        width: calc(60% - 12px);
+    }
+}

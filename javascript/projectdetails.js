@@ -14,7 +14,6 @@ jQuery(document).ready(function() {
         variableWidth: true,
         prevArrow: '<button class="button hoverable button--previous" type="button">➜</button>',
         nextArrow: '<button class="button hoverable button--next" type="button">➜</button>',
-
     });
     var mouseX = 0,
         mouseY = 0;
@@ -139,7 +138,7 @@ const list = document.querySelector(".gallerydiv");
 const item = document.querySelector(".item");
 const itemWidth = item.offsetWidth;
 
-function handleClickGallery(direction) {
+function handleClick(direction) {
     if(direction === "previous") {
         list.scrollBy({ left: -itemWidth, behavior: "smooth" });
     } else {
