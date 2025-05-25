@@ -1,7 +1,21 @@
 $(".titlebox > .titletext").on("click", () => scrollToTop());
 $(".backbox").on("click", () => history.back());
 
-jQuery(document).ready(function () {
+jQuery(document).ready(function() {
+    $('.testimonialsdiv').slick({
+        arrows: true,
+        infinite: true,
+        loop: true,
+        speed: 1000,
+        focusOnSelect: true,
+        centerMode: true,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        variableWidth: true,
+        prevArrow: '<button class="button hoverable button--previous" type="button">➜</button>',
+        nextArrow: '<button class="button hoverable button--next" type="button">➜</button>',
+
+    });
     var mouseX = 0,
         mouseY = 0;
     var xp = 0,
@@ -119,4 +133,16 @@ function scrollToTop() {
         top: 0,
         behavior: 'smooth'
     });
+}
+
+const list = document.querySelector(".gallerydiv");
+const item = document.querySelector(".item");
+const itemWidth = item.offsetWidth;
+
+function handleClickGallery(direction) {
+    if(direction === "previous") {
+        list.scrollBy({ left: -itemWidth, behavior: "smooth" });
+    } else {
+        list.scrollBy({ left: itemWidth, behavior: "smooth" });
+    }
 }

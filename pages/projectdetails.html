@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="./../css/index-max600.css" />
     <link rel="stylesheet" href="./../css/index-max962.css" />
     <link rel="stylesheet" href="./../css/index-hover.css">
+    <link rel="stylesheet" type="text/css" href="./../slick/slick.css"/>
+    <link rel="stylesheet" type="text/css" href="./../slick/slick-theme.css"/>
     <title>SnakeWall</title>
     <link rel="icon" type="image/x-icon" href="./../public/favicon.ico" />
 </head>
@@ -18,10 +20,149 @@
             <img src="./../public/arrow.png" alt=""/>
         </div>
         <div class="titlebox">
-            <div class="titletext hoverable">SNAKEWALL</div>
+            <div class="titletext hoverable">SnakeWall</div>
         </div>
     </div>
+    <div class="banner">
+        <img src="./../public/SnakeWall-main.png" alt="">
+    </div>
+    <div class="brief">
+        <div class="briefnotes">
+            <div class="briefnote">
+                <img src="./../public/Projects/Icons/calendar.png" class="noteicon" alt=""/> <div class="notedata">18-23 Dec 2024</div>
+            </div>
+            <div class="briefnote">
+                <img src="./../public/Projects/Icons/tools.png" class="noteicon" alt=""/> <div class="notedata">Android Studio</div>
+            </div>
+            <div class="briefnote">
+                <img src="./../public/Projects/Icons/code.png" class="noteicon" alt=""/> <div class="notedata">Java</div>
+            </div>
+            <a href="https://play.google.com/store/apps/details?id=com.example.snakewall">
+                <div class="briefnote hoverable itchlink">
+                    <img src="./../public/Projects/Icons/itch.png" class="noteicon" alt=""/> <div class="notedata">Play Store</div>
+                </div>
+            </a>
+        </div>
+        <div class="brieftext">
+            <div class="brieftextbox">
+                <div class="BlockTitles">Overview</div>
+                <br>
+                Snakewall is a modern twist on the classic Snake game, re-imagined as a dynamic Live Wallpaper. Built for
+                Android, it features smooth animations, adaptive design, and minimalist visuals.
+            </div>
+            <div class="brieftextbox">
+                <div class="BlockTitles">Technical</div>
+                <br>
+                The app is developed using Java in Android Studio, leveraging the Android Live Wallpaper Engine and canvas API.
+                <br> <br>
+                - The wallpaper adapts to different screen sizes and orientations, ensuring a consistent user experience across
+                devices. <br> <br>
+                - The main board is an odd number grid.<br> <br>
+                - Snake is a linked list representing coordinates on the grid.<br> <br>
+            </div>
+            <div class="brieftextbox">
+                <div class="BlockTitles">The Challenge</div>
+                <br>
+                Adapting the classic Snake game into a Live Wallpaper presented unique challenges, particularly in maintaining
+                performance and responsiveness. The dynamic nature of live wallpapers requires efficient resource management
+                to ensure smooth animations without draining battery life.
+            </div>
+        </div>
+    </div>
+    <div class="metrics">
+        <div class="PageTitles">Metrics</div>
+        <div class="metricsdiv">
+            <div class="metricbox">
+                <div class="metrictitle">Total Installs (Play Store)</div>
+                <div class="metricdata">2k+</div>
+            </div>
+            <div class="metricbox">
+                <div class="metrictitle">Stars (Github)</div>
+                <div class="metricdata">22</div>
+            </div>
+        </div>
+    </div>
+    <div class="gallery">
+        <div class="PageTitles">Gallery</div>
+        <ul class="gallerydiv">
+            <li class="item"><img src="./../public/Projects/SnakeWall/1.png" alt="" class="galleryimg"></li>
+            <li class="item"><img src="./../public/Projects/SnakeWall/2.png" alt="" class="galleryimg"></li>
+            <li class="item"><img src="./../public/Projects/SnakeWall/3.png" alt="" class="galleryimg"></li>
+            <li class="item"><img src="./../public/Projects/SnakeWall/4.png" alt="" class="galleryimg"></li>
+            <li class="item"><img src="./../public/Projects/SnakeWall/5.png" alt="" class="galleryimg"></li>
+            <button onclick="handleClickGallery('previous')" class="button hoverable button--previous" type="button">➜</button>
+            <button onclick="handleClickGallery('next')" class="button hoverable button--next" type="button">➜</button>
+        </ul>
+    </div>
+    <div class="testimonials">
+        <div class="PageTitles">Testimonials</div>
+        <div class="testimonialsdiv">
+            <div class="testimonialbox">
+                <div class="testimonialdata">
+                    <div class="testimonialtext">"A nostalgic yet fresh take on the classic Snake game. The live wallpaper feature is a game-changer!"</div>
+                    <div class="testimonialauthor">- Alex, Android User</div>
+                </div>
+            </div>
+            <div class="testimonialbox">
+                <div class="testimonialdata">
+                    <div class="testimonialtext">"Smooth animations and a minimalist design make this wallpaper a joy to use every day."</div>
+                    <div class="testimonialauthor">- Jamie, Tech Enthusiast</div>
+                </div>
+            </div>
+            <div class="testimonialbox">
+                <div class="testimonialdata">
+                    <div class="testimonialtext">"Snakewall is a perfect blend of nostalgia and modern design. It’s a must-have for any Android user!"</div>
+                    <div class="testimonialauthor">- Taylor, Game Developer</div>
+                </div>
+            </div>
+            <div class="testimonialbox">
+                <div class="testimonialdata">
+                    <div class="testimonialtext">"Snakewall is a perfect blend of nostalgia and modern design. It’s a must-have for any Android user!"</div>
+                    <div class="testimonialauthor">- Taylor, Game Developer</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="contact">
+      <div class="contactHeading">Contact Me</div>
+      <div class="contactDesc">I'm open to new opportunities or just a friendly chat. Feel free to reach out!</div>
+      <a target="_blank" href="mailto:kalp9675@gmail.com" class="emailText">
+        <div class="mailhoverable">kalp9675@gmail.com</div>
+      </a>
+      <div class="contactButtons">
+        <a target="_blank" href="https://t.me/kalpu_24">
+          <div style="background-color: #24A1DE;" class="contactButton hoverable"><svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 48 48" id="Layer_2" data-name="Layer 2"><path class="cls-1" d="M40.83,8.48c1.14,0,2,1,1.54,2.86l-5.58,26.3c-.39,1.87-1.52,2.32-3.08,1.45L20.4,29.26a.4.4,0,0,1,0-.65L35.77,14.73c.7-.62-.15-.92-1.07-.36L15.41,26.54a.46.46,0,0,1-.4.05L6.82,24C5,23.47,5,22.22,7.23,21.33L40,8.69a2.16,2.16,0,0,1,.83-.21Z"/></svg>Telegram</div>
+        </a>
+        <a target="_blank" href="https://www.linkedin.com/in/Kalpu24/">
+          <div style="background-color: #2d64bc;" class="contactButton hoverable"><svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 256 256"
+            focusable="false"
+          >
+            <g>
+              <path
+                d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"
+              ></path>
+            </g>
+          </svg>LinkedIn</div>
+        </a>
+        <a target="_blank" href="https://github.com/Kalpu-24">
+          <div style="background-color: #0e1116;" class="contactButton hoverable"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+            <g>
+              <path
+                d="M16,3a13,13,0,0,0-3.46,25.53,1,1,0,1,0,.53-1.92,11,11,0,1,1,7-.4,15.85,15.85,0,0,0-.3-3.92A6.27,6.27,0,0,0,24.68,16a6.42,6.42,0,0,0-1.05-3.87,7.09,7.09,0,0,0-.4-3.36,1,1,0,0,0-1.1-.67,8,8,0,0,0-3.37,1.28A11.35,11.35,0,0,0,16,9a13.09,13.09,0,0,0-3,.43A5.74,5.74,0,0,0,9.62,8.25a1,1,0,0,0-1,.66,7.06,7.06,0,0,0-.37,3.19A7.15,7.15,0,0,0,7.2,16a6.66,6.66,0,0,0,5,6.28,7.43,7.43,0,0,0-.15.79c-1,.06-1.58-.55-2.32-1.48a3.45,3.45,0,0,0-1.94-1.53,1,1,0,0,0-1.15.76A1,1,0,0,0,7.35,22c.16,0,.55.52.77.81a4.74,4.74,0,0,0,3.75,2.25,4.83,4.83,0,0,0,1.3-.18h0a1,1,0,0,0,.29-.14l0,0a.72.72,0,0,0,.18-.21.34.34,0,0,0,.08-.09.85.85,0,0,0,.06-.17,1.52,1.52,0,0,0,.06-.2v0a4.11,4.11,0,0,1,.46-1.91,1,1,0,0,0-.76-1.65A4.6,4.6,0,0,1,9.2,16a4.84,4.84,0,0,1,.87-3,1,1,0,0,0,.24-.83,5,5,0,0,1,0-1.85,3.59,3.59,0,0,1,1.74.92,1,1,0,0,0,1,.23A12.49,12.49,0,0,1,16,11a9.91,9.91,0,0,1,2.65.43,1,1,0,0,0,1-.18,5,5,0,0,1,2-1,4.11,4.11,0,0,1,0,1.91,1.05,1.05,0,0,0,.32,1A4,4,0,0,1,22.68,16a4.29,4.29,0,0,1-4.41,4.46,1,1,0,0,0-.94.65,1,1,0,0,0,.28,1.11c.59.51.5,4,.47,5.36a1,1,0,0,0,.38.81,1,1,0,0,0,.62.21,1.07,1.07,0,0,0,.25,0A13,13,0,0,0,16,3Z"
+              />
+            </g>
+          </svg>GitHub</div>
+        </a>
+      </div>
+      <div class="copyright">©Kalp Shah 2025, All rights reserved</div>
+    </div>
+      <div class="bottomSpacer"></div>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+    <script type="text/javascript" src="./../slick/slick.min.js"></script>
 </body>
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="./../javascript/projectdetails.js"></script>
 </html>
