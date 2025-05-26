@@ -85,12 +85,12 @@
         ],
         "testimonials": [
             {
-                "text": "\"Is a great app. Is so cool and simple\"",
-                "author": "- nevulastra, Android User"
-            },
-            {
                 "text": "\"Pretty Creative Stuff\"",
                 "author": "- HowToMen, Youtuber/Tech Enthusiast"
+            },
+            {
+                "text": "\"Is a great app. Is so cool and simple\"",
+                "author": "- nevulastra, Android User"
             },
             {
                 "text": "\"Uniquely fresh idea which brings back nostalgic memories. +1 for the haptic support since it feels premium with the haptics.\"",
