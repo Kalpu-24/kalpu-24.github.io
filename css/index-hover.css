@@ -87,6 +87,10 @@
         filter: grayscale(0%)
     }
 
+    .projects > .ProjectBox:hover .desc > .MultiLinks > a > .ViewBut {
+        filter: grayscale(0%)
+    }
+
     .projects > .ProjectBox:hover .SnakeWall-prop1 {
         filter: grayscale(0%);
         opacity: 1;

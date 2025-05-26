@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Pirata+One&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Chewy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 
 @font-face {
     font-family: "MLCD";
@@ -11,6 +11,12 @@
 
 :root {
     --nav-height: 70px;
+    --custom-bg-color: #080808;
+    --card-bg-color: #fff;
+    --card-text-color: #000;
+    --card-title-color: #000;
+    --testimonial-text-color: #676767;
+    --theme-font: MLCD;
 }
 
 * {
@@ -27,13 +33,15 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    -webkit-user-drag: none;
     cursor: none;
-    color: #040711;
+    font-family: Inter;
+    color: var(--card-text-color);
 }
 
 body {
-    background-color: #eeeef2;
-    color: #040711;
+    background-color: var(--custom-bg-color);
+    color: var(--card-text-color);
     margin: 0;
     padding: 0;
     height: 100%;
@@ -48,7 +56,7 @@ body {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    z-index: 1007;
+    z-index: 2007;
     pointer-events: none;
     mix-blend-mode: difference;
     background-color: #f7f8fa;
@@ -79,15 +87,22 @@ body {
     width: var(--nav-height);
     height: var(--nav-height);
     padding: 20px;
-    background-color: #fff;
+    background-color: var(--card-bg-color);
+    color: var(--card-title-color);
     border-radius: 50%;
     overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 2rem;
+    transform: rotate(180deg);
 }
 
 .nav > .backbox > img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    mix-blend-mode: multiply;
 }
 
 html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > .titlebox {
@@ -99,7 +114,7 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
     width: calc(100% - var(--nav-height) - 20px);
     height: var(--nav-height);
     margin-left: 20px;
-    background-color: #fff;
+    background-color: var(--card-bg-color);
     border-radius: 104px;
     overflow: hidden;
     display: flex;
@@ -109,7 +124,8 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
 
 .titlebox > .titletext {
     font-size: 2rem;
-    font-family: MLCD;
+    color: var(--card-title-color);
+    font-family: var(--theme-font);
 }
 
 .hover-text,
@@ -130,24 +146,19 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
 /* hero banner */
 .banner {
     position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: inline-block;
     margin-top: calc(var(--nav-height) + 25px + 12px);
     left: 50%;
     transform: translate(-50%, 0%);
-    background-color: #fff;
+    background-color: var(--card-bg-color);
     border-radius: 24px;
     max-width: 1120px;
     width: 80vw;
-    height: 400px;
-    padding: 2%;
 }
 
 .banner > img {
     width: 100%;
-    height: 100%;
+    max-height: 400px;
     object-fit: contain;
     border-radius: 24px;
     z-index: -1;
@@ -180,7 +191,7 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
     display: flex;
     justify-content: start;
     align-items: center;
-    background-color: #fff;
+    background-color: var(--card-bg-color);
     padding: 12px;
     padding-inline: 24px;
     border-radius: 104px;
@@ -194,6 +205,7 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
     display: flex;
     justify-content: center;
     align-items: center;
+    fill: var(--card-title-color);
 }
 
 .brief > .briefnotes > .briefnote > .notedata,
@@ -205,7 +217,7 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
 }
 
 .brief > .briefnotes > a > .briefnote > .notedata {
-    color: #eeeef2;
+    color: #fff;
 }
 
 .brief > .briefnotes > a > .playlink{
@@ -217,7 +229,7 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
 }
 
 .brief > .briefnotes > a > .gitlink {
-    background-color: #000;
+    background-color: #040711;
 }
 
 .brief > .briefnotes > a > .itchlink {
@@ -230,19 +242,21 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
 
 .brief > .brieftext > .brieftextbox {
     margin-bottom: 12px;
-    background-color: #fff;
+    background-color: var(--card-bg-color);
     padding: 24px;
     border-radius: 24px;
     min-height: 100px;
 }
 
 .BlockTitles{
-    font-family: MLCD;
+    font-family: var(--theme-font);
+    color: var(--card-title-color);
     font-size: 1.8rem;
 }
 
 .PageTitles{
-    font-family: MLCD;
+    font-family: var(--theme-font);
+    color: var(--card-title-color);
     text-align: center;
     font-size: 2rem;
     margin-bottom: 12px;
@@ -272,7 +286,7 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
     height: 200px;
     max-width: 200px;
     max-height: 200px;
-    background-color: #fff;
+    background-color: var(--card-bg-color);
     padding: 24px;
     border-radius: 24px;
     display: flex;
@@ -283,19 +297,21 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
 .metrics > .metricsdiv > .metricbox > .metrictitle {
     font-size: 1rem;
     font-weight: 600;
-    font-family: MLCD;
+    color: var(--card-title-color);
+    font-family: var(--theme-font);
 }
 
 .metrics > .metricsdiv > .metricbox > .metricdata{
     font-size: 4rem;
     font-weight: 800;
     margin-top: 12px;
-    font-family: MLCD;
+    font-family: var(--theme-font);
 }
 
 .gallery{
     margin-top: 24px;
     position: relative;
+    border: none;
     left: 50%;
     transform: translate(-50%, 0%);
     width: 80vw;
@@ -306,6 +322,7 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
     display: flex;
     gap: 8px;
     list-style: none;
+    border: none;
     overflow-x: scroll;
     scroll-snap-type: x mandatory;
     scrollbar-width: none;
@@ -320,10 +337,15 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
     flex-shrink: 0;
     scroll-snap-align: center;
     border-radius: 24px;
+    max-width: 80%;
+    overflow: hidden;
 }
 
 .gallery>.gallerydiv>.item>img {
     border-radius: 18px;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 .button {
@@ -331,10 +353,10 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
     top: 50%;
     width: 60px;
     height: 60px;
-    background-color: #ffffff8b;
-    border: 2px solid #0407118a;
+    background-color: var(--custom-bg-color);
+    border: none;
     font-size: 2rem;
-    border-radius: 50%;
+    border-radius: 24px 0 0 24px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -343,12 +365,11 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
 }
 
 .button--previous {
-    left: 1.5rem;
+    left: -2px;
     transform: rotate(180deg);
 }
-
 .button--next {
-    right: 1.5rem;
+    right: -2px;
 }
 
 .testimonials{
@@ -361,7 +382,7 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
 }
 
 .slick-slide {
-    background-color: #fff;
+    background-color: var(--card-bg-color);
     border-radius: 24px;
     padding: 24px;
     margin: 6px;
@@ -369,25 +390,26 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
 }
 
 .slick-slide > div {
-    height: 150px;
+    height: 160px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items: flex-end;
 }
 
 .testimonialtext{
-    font-family: Inter;
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: #242424;
+    font-family: Special Elite;
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: var(--testimonial-text-color);
+    padding: 30px;
 }
 
 .testimonialauthor {
-    font-family: Inter;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #040711;
+    font-family: var(--theme-font);
+    font-size: 1.1rem;
+    font-weight: 900;
+    color: var(--card-title-color);
+    text-align: end;
 }
 
 .contact {
@@ -400,7 +422,7 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
     min-height: 400px;
     max-height: fit-content;
     text-align: center;
-    background-color: #040711;
+    background-color: #000;
     border-radius: 24px;
     padding: 40px;
     display: flex;
@@ -489,4 +511,21 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
     margin-top: 24px;
     height: 100px;
     width: 100%;
+}
+
+.error{
+    width: 80vw;
+    max-width: 1120px;
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    background-color: var(--card-bg-color);
+    border-radius: 24px;
+    padding: 24px;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 0%);
 }

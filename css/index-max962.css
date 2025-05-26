@@ -1,5 +1,11 @@
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (max-width: 962px) {
+
+    .hero>.tagline {
+            font-size: 5rem;
+            text-wrap: wrap;
+        }
+
     .projects > .ProjectBox {
         flex-direction: column;
         height: fit-content;

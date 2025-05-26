@@ -30,13 +30,16 @@
         max-height: 200px;
     }
 
-    .button {
-        width: 30px;
-        height: 30px;
-        font-size: 0.8rem;
+    .slick-slide > div {
+        height: 250px;
     }
 
     .testimonialtext{
+        font-size: 1rem;
+        padding: 5px;
+    }
+
+    .testimonialauthor {
         font-size: 0.9rem;
     }
 

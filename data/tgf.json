@@ -1,0 +1,133 @@
+{
+    "project": {
+        "bgColor": "#080808",
+        "cardColor": "#000",
+        "textColor": "#eeeef2",
+        "titleColor": "#ff5db4",
+        "testimonialTextColor": "#cdcdcd",
+        "themeFont": "Sour gummy",
+        "name": "The Gravity Flip",
+        "bannerImage": "./../public/tgf-main.png",
+        "BriefNotes": [
+            {
+                "imagePath": "Calendar",
+                "text": "25 Apr-7 May 2025"
+            },
+            {
+                "imagePath": "Status",
+                "text": "Completed"
+            },
+            {
+                "imagePath": "Category",
+                "text": "Game"
+            },
+            {
+                "imagePath": "Tools",
+                "text": "Unreal Engine 5"
+            },
+            {
+                "imagePath": "Framework",
+                "text": "Blueprints"
+            },
+            {
+                "imagePath": "Code",
+                "text": "C++"
+            }
+        ],
+        "DownloadLink": [
+            {
+                "imagePath": "./../public/Projects/Icons/itch.png",
+                "text": "Itch.io",
+                "class": "itchlink",
+                "link": "https://klaplab-studios.itch.io/the-gravity-flip"
+            }
+        ],
+        "BriefBoxes": [
+            {
+                "title": "Overview",
+                "description": "The Gravity Flip is a game built around a single, perspective-bending idea — what if gravity worked the other way?<br><br>It's less about challenge and more about the feeling of disorientation, discovery, and flow as the world turns on its head."
+            },
+            {
+                "title": "Technical",
+                "description": "- Engine: Unreal Engine 5. <br> <br> - Platform: Windows <br> <br> - Scripting: C++ and Blueprints <br> <br> - Core Mechanic: Gravity inversion on player input, flipping character and environment physics. <br> <br> - Physics System: UE5's built-in physics engine with simulated actors and collision filtering. <br> <br> - Lighting: Fully dynamic lighting with Lumen (software ray tracing), tailored for performance. <br> <br> - Dynamic Camera: Follows player with adjustable angles and movement space. <br> <br> - Input: Keyboard and Touch support. <br> <br> - UI/UX: Minimal and sleek HUD. <br> <br> - Theme: Abstract sci-fi with minimal visuals.<br> <br> - Pacing: Instant retries to encourage experimentation. <br> <br> - Modular: Code is written modular and highly scalable ensuring best coding practices.<br> <br> - Obstacles: Designed to exploit momentum and inversion timing. <br> <br> - Level Design: 10 levels with increasing complexity, each introducing new mechanics and challenges. <br> <br> - Performance: Optimized for smooth gameplay on mid-range hardware. <br> <br> - Audio: Ambient soundscapes and sound effects for actions and events."
+            },
+            {
+                "title": "The Challenge",
+                "description": "<b>Gravity Inversion Mechanics</b><br><br>Problem: Implementing a smooth and responsive gravity flip introduced complications with character orientation, collision detection, and platform traversal.<br><br>Solution: Designed a custom movement system tied to a world-space gravity vector, re-calibrated physics interactions, and synced camera behavior accordingly.<br><br>Impact: Achieved precise control and predictable physics, allowing gravity to flip mid-jump or on angled surfaces without breaking gameplay flow."
+            },
+            {
+                "title": "Critical Decisions",
+                "description": "After extensive closed testing, I've made the decision to discontinue the Android release of Gravity Flip. <br><br>While the game performed well on many devices, a number of device-specific bugs emerged that would require significant time and resources to address. <br><br>While fixable, addressing them would divert focus from my core platform—Windows. Mobile is not my primary target, and this decision allows me to prioritize quality and development efficiency.<br><br>Thanks to everyone who joined the Play Store testing. Your support is truly appreciated."
+            }
+        ],
+        "metrics": [
+            {
+                "label": "Development Time",
+                "value": "2W"
+            },
+            {
+                "label": "Size (in MB)",
+                "value": 264
+            },
+            {
+                "label": "Levels",
+                "value": "10"
+            },
+            {
+                "label": "Avg. Gameplay (in min.)",
+                "value": "20"
+            }
+        ],
+        "gallery": [
+            "./../public/Projects/tgf/1.png",
+            "./../public/Projects/tgf/2.png",
+            "./../public/Projects/tgf/3.png",
+            "./../public/Projects/tgf/4.png",
+            "./../public/Projects/tgf/5.png",
+            "./../public/Projects/tgf/6.png",
+            "./../public/Projects/tgf/7.png"
+        ],
+        "testimonials": [
+            {
+                "text": "\"solid af game, works good, smooth, nice mechanic, good idea, keep it up.\"",
+                "author": "- Tako, Player"
+            },
+            {
+                "text": "\"It is a Great Game\"",
+                "author": "- Ashwamegh, Tester"
+            },
+            {
+                "text": "\"It a good game, Good mechanics, I like the concept, It feels  little bit too easy but overall great game, Waiting for more levels\"",
+                "author": "- Yash, Player"
+            },
+            {
+                "text": "\"It was short yet fun game.\"",
+                "author": "- Raj, Player"
+            },
+            {
+                "text": "\"I enjoyed it while playing man great work, waiting for more levels.\"",
+                "author": "- Nitin, Tester"
+            },
+            {
+                "text": "\"Its fun, hoping for more projects like this.\"",
+                "author": "- Spark, Player"
+            },
+            {
+                "text": "\"Its fun to play, immersive experience\"",
+                "author": "- Moksh, Player"
+            },
+            {
+                "text": "\"Enjoyed playing it.\"",
+                "author": "- Harshit, Player"
+            },
+            {
+                "text": "\"It was fun to play\"",
+                "author": "- Dilip, Player"
+            },
+            {
+                "text": "\"Amazing concept. It was fun playthrough.\"",
+                "author": "- Shreyash, Player"
+            }
+        ]
+    }
+}

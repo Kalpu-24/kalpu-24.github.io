@@ -6,4 +6,17 @@
     .brief > .brieftext{
         width: calc(60% - 12px);
     }
+
+    .slick-slide > div {
+        height: 200px;
+    }
+
+    .testimonialtext {
+        font-size: 1.3rem;
+        padding: 20px;
+    }
+
+    .testimonialauthor {
+        font-size: 1rem;
+    }
 }

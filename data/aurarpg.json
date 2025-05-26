@@ -1,0 +1,84 @@
+{
+    "project": {
+        "bgColor": "#0b072a",
+        "cardColor": "#06011f",
+        "textColor": "#eeeef2",
+        "titleColor": "#fff",
+        "testimonialTextColor": "#cdcdcd",
+        "themeFont": "Pirata One",
+        "name": "AuraRPG",
+        "bannerImage": "./../public/aura-main.png",
+        "BriefNotes": [
+            {
+                "imagePath": "Calendar",
+                "text": "Jan - Mar 2025"
+            },
+            {
+                "imagePath": "Status",
+                "text": "Completed"
+            },
+            {
+                "imagePath": "Category",
+                "text": "Game Demo"
+            },
+            {
+                "imagePath": "Tools",
+                "text": "Unreal Engine 5"
+            },
+            {
+                "imagePath": "Framework",
+                "text": "Blueprints | GAS"
+            },
+            {
+                "imagePath": "Code",
+                "text": "C++"
+            }
+        ],
+        "DownloadLink": [
+            {
+                "imagePath": "./../public/Projects/Icons/telegram.png",
+                "text": "Telegram",
+                "class": "telelink",
+                "link": "https://t.me/KlaplabStudios/7/113"
+            },
+            {
+                "imagePath": "./../public/Projects/Icons/github.png",
+                "text": "GitHub",
+                "class": "gitlink",
+                "link": "https://github.com/Kalpu-24/Aura-RPG"
+            }
+        ],
+        "BriefBoxes": [
+            {
+                "title": "Overview",
+                "description": "AuraRPG is a stylized top-down action RPG built in Unreal Engine 5 using the Gameplay Ability System (GAS). <br><br>It features fluid combat, modular abilities, and a dynamic world that reacts to player progression."
+            },
+            {
+                "title": "Technical",
+                "description": "- Engine: Unreal Engine 5.5 <br><br> - Scripting: Hybrid approach - 50% C++ / 50% Blueprint (using GAS framework) <br><br> - Core Mechanics: RPG combat system powered by GAS — including spells, attributes, and combat effects <br><br> - Ability System: Custom AbilitySystemComponent and AttributeSet in C++; uses Gameplay Tags, Gameplay Effects, and Gameplay Cues <br><br> - Combat System: Supports elemental damage (fire, lightning), crits, stuns, DOTs, blocked hits, and knockbacks <br> <br> - Modular: Code is written modular and highly scalable ensuring best coding practices.<br><br> - Stats & Leveling: Primary (STR, INT, etc.), secondary (Crit Chance, Armor), and vital stats (Health, Mana); XP + level-up with unlockable spells and attributes <br><br> - AI System: Behavior Trees + EQS; enemies like Goblins, Demons, and Ghouls with their own spellcasting logic <br><br> - UI: UMG + MVVM; Spell bar with cooldowns, attribute/spell upgrade panels, floating combat text, XP/level indicators <br><br> - Camera: Fixed top-down camera with dynamic object fading and trace-based visibility clearing <br><br> - Visual Effects: Niagara systems for spell effects (burns, explosions), damage types, and level-up feedback <br><br> - Asset Pack: Custom characters, modular environment tiles, particle VFX, icons, and SFX (licensed from course) <br><br> - Optimization: Designed with scalable architecture; effect context and replication logic optimized for multiplayer-readiness. <br><br> - Development Tools: JetBrains Rider IDE, Struct Ops, Ability Tasks, Lambdas, and Blueprint Function Libraries. <br><br> - Packaging: Targeting Windows 64-bit, shipping configuration; multiplayer-ready architecture (EOS/Steam compatible design)"
+            },
+            {
+                "title": "The Challenge",
+                "description": "Problem: The course I followed was built on Unreal Engine 5.2, while I was using UE5.5. Many systems, especially in GAS, had breaking changes or deprecated nodes, making it difficult to follow along as a complete beginner. <br><br> Solution: I cross-referenced official Unreal Engine 5.5 documentation, community forums, and GitHub discussions to manually adapt and modernize sections of the course code. I learned to identify breaking changes and refactor Blueprint and C++ logic accordingly. <br><br> Impact: This not only helped me complete the project in the latest version of UE, but also built my confidence in solving real-world versioning and migration problems — a valuable skill for working on long-term or legacy projects."
+            }
+        ],
+        "gallery": [
+            "./../public/Projects/aurarpg/1.png",
+            "./../public/Projects/aurarpg/2.png",
+            "./../public/Projects/aurarpg/3.png",
+            "./../public/Projects/aurarpg/4.png",
+            "./../public/Projects/aurarpg/5.png",
+            "./../public/Projects/aurarpg/6.png",
+            "./../public/Projects/aurarpg/7.png",
+            "./../public/Projects/aurarpg/8.png",
+            "./../public/Projects/aurarpg/9.png",
+            "./../public/Projects/aurarpg/10.png"
+        ],
+        "testimonials": [
+            {
+                "text": "\"Great game with many fun abilities. Last level was diabolical though :) \"",
+                "author": "- Shreyash, Player"
+            }
+        ]
+    }
+}

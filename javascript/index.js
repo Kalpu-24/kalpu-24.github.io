@@ -34,6 +34,7 @@ jQuery(document).ready(function () {
     var circleSize = 24;
     const hoverables = document.querySelectorAll(".hoverable");
     const mailhoverable = document.querySelectorAll(".mailhoverable");
+    const projecthoverable = document.querySelectorAll(".projecthoverable");
     // if mobile and width smaller than 768px, return
     // if hover is not supported, return
     if (window.matchMedia("(hover: none)").matches) return;
@@ -80,6 +81,40 @@ jQuery(document).ready(function () {
             $("#circle").css({ height: "24px" });
             $("#circle").css({ borderRadius: "50%" });
             $("#circle").css({ mixBlendMode: "difference" });
+            $("#circle").empty();
+        });
+    }
+    for (let i = 0; i < projecthoverable.length; i++) {
+      if(!projecthoverable[i]) continue;
+        projecthoverable[i].addEventListener("mouseenter", (e) => {
+            //add child text to circle
+            const text = document.createElement("div");
+            text.classList.add("circle-text");
+            text.innerHTML = "View More ->";
+            text.style.fontFamily = "Manrope";
+            text.style.fontSize = "1.2rem";
+            text.style.color = "#040711";
+            text.style.transition = "all 0.3s cubic-bezier(0.13, 0.41, 0.11, 1.34)";
+
+            $("#circle").css({ padding: "10px 16px" });
+            $("#circle").css({ width: "15ch" });
+            $("#circle").css({ height: "4.5ch" });
+            $("#circle").css({ textAlign: "center" });
+            $("#circle").css({ borderRadius: "104px" });
+            $("#circle").css({ mixBlendMode: "normal" });
+            $("#circle").css({ border: "1px solid #000" });
+            $("#circle").append(text);
+        });
+
+
+        projecthoverable[i].addEventListener("mouseleave", (e) => {
+            //remove all children of circle
+            $("#circle").css({ padding: "0px" });
+            $("#circle").css({ width: "24px" });
+            $("#circle").css({ height: "24px" });
+            $("#circle").css({ borderRadius: "50%" });
+            $("#circle").css({ mixBlendMode: "difference" });
+            $("#circle").css({ border: "none" });
             $("#circle").empty();
         });
     }
