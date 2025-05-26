@@ -21,7 +21,7 @@
         width: 100%;
     }
 
-    .projects > .ProjectBox > .desc > .tgfGameTitle {
+    .projects > .ProjectBox > .desc > a > .tgfGameTitle {
         font-size: 3rem;
     }
     

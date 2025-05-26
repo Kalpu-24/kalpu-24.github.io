@@ -33,7 +33,7 @@
         font-size: 2rem;
     }
 
-    .projects > .ProjectBox > .desc > .GameTitle {
+    .projects > .ProjectBox > .desc > a > .GameTitle {
         font-size: 2rem;
     }
 

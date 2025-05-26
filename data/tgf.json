@@ -36,7 +36,7 @@
         ],
         "DownloadLink": [
             {
-                "imagePath": "./../public/Projects/Icons/itch.png",
+                "imagePath": "./../public/Projects/Icons/Itch.png",
                 "text": "Itch.io",
                 "class": "itchlink",
                 "link": "https://klaplab-studios.itch.io/the-gravity-flip"
