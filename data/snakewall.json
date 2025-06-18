@@ -4,7 +4,7 @@
         "cardColor": "#fff",
         "textColor": "#040711",
         "titleColor": "#141218",
-        "testimonialTextColor": "#676767",
+        "reviewTextColor": "#676767",
         "themeFont": "MLCD",
         "name": "SnakeWall",
         "bannerImage": "./../public/SnakeWall-main.png",
@@ -83,7 +83,7 @@
             "./../public/Projects/SnakeWall/4.png",
             "./../public/Projects/SnakeWall/5.png"
         ],
-        "testimonials": [
+        "reviews": [
             {
                 "text": "\"Pretty Creative Stuff\"",
                 "author": "- HowToMen, Youtuber/Tech Enthusiast"

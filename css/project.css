@@ -15,7 +15,7 @@
     --card-bg-color: #fff;
     --card-text-color: #000;
     --card-title-color: #000;
-    --testimonial-text-color: #676767;
+    --review-text-color: #676767;
     --theme-font: MLCD;
 }
 
@@ -372,7 +372,7 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
     right: -2px;
 }
 
-.testimonials{
+.reviews{
     position: relative;
     margin-top: 24px;
     left: 50%;
@@ -396,15 +396,15 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
     justify-content: space-between;
 }
 
-.testimonialtext{
+.reviewtext{
     font-family: Special Elite;
     font-size: 1.5rem;
     font-weight: 800;
-    color: var(--testimonial-text-color);
+    color: var(--review-text-color);
     padding: 30px;
 }
 
-.testimonialauthor {
+.reviewauthor {
     font-family: var(--theme-font);
     font-size: 1.1rem;
     font-weight: 900;

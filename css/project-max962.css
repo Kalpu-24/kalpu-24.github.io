@@ -11,12 +11,12 @@
         height: 200px;
     }
 
-    .testimonialtext {
+    .reviewtext {
         font-size: 1.3rem;
         padding: 20px;
     }
 
-    .testimonialauthor {
+    .reviewauthor {
         font-size: 1rem;
     }
 }

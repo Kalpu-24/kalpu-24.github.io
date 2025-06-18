@@ -31,9 +31,9 @@ jQuery(document).ready(function() {
 
             SetGallery(data);
 
-            SetTestimonials(data);
+            SetReviews(data);
 
-            $('.testimonialsdiv').slick({
+            $('.reviewsdiv').slick({
                 arrows: true,
                 infinite: true,
                 loop: true,
@@ -132,18 +132,18 @@ jQuery(document).ready(function() {
         $("#circle").fadeIn(200);
     });
 
-    function SetTestimonials(data) {
-        if (!data.data.project.testimonials || data.data.project.testimonials.length === 0) {
-            $(".testimonials").remove();
+    function SetReviews(data) {
+        if (!data.data.project.reviews || data.data.project.reviews.length === 0) {
+            $(".reviews").remove();
             return;
         }
-        $(".testimonialsdiv").empty();
-        data.data.project.testimonials.forEach(testimonial => {
-            $(".testimonialsdiv").append(`
-                    <div class="testimonialbox">
-                        <div class="testimonialdata">
-                            <div class="testimonialtext">${testimonial.text}</div>
-                            <div class="testimonialauthor">${testimonial.author}</div>
+        $(".reviewsdiv").empty();
+        data.data.project.reviews.forEach(review => {
+            $(".reviewsdiv").append(`
+                    <div class="reviewbox">
+                        <div class="reviewdata">
+                            <div class="reviewtext">${review.text}</div>
+                            <div class="reviewauthor">${review.author}</div>
                         </div>
                     </div>
                 `);
@@ -234,7 +234,7 @@ jQuery(document).ready(function() {
         rootstyle.setProperty('--card-bg-color', data.data.project.cardColor);
         rootstyle.setProperty('--card-text-color', data.data.project.textColor);
         rootstyle.setProperty('--card-title-color', data.data.project.titleColor);
-        rootstyle.setProperty('--testimonial-text-color', data.data.project.testimonialTextColor);
+        rootstyle.setProperty('--review-text-color', data.data.project.reviewTextColor);
         rootstyle.setProperty('--theme-font', data.data.project.themeFont);
     }
 

@@ -4,7 +4,7 @@
         "cardColor": "#06011f",
         "textColor": "#eeeef2",
         "titleColor": "#fff",
-        "testimonialTextColor": "#cdcdcd",
+        "reviewTextColor": "#cdcdcd",
         "themeFont": "Pirata One",
         "name": "AuraRPG",
         "bannerImage": "./../public/Aura-main.png",
@@ -74,7 +74,7 @@
             "./../public/Projects/aurarpg/9.png",
             "./../public/Projects/aurarpg/10.png"
         ],
-        "testimonials": [
+        "reviews": [
             {
                 "text": "\"Great game with many fun abilities. Last level was diabolical though :) \"",
                 "author": "- Shreyash, Player"

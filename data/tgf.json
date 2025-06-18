@@ -4,7 +4,7 @@
         "cardColor": "#000",
         "textColor": "#eeeef2",
         "titleColor": "#ff5db4",
-        "testimonialTextColor": "#cdcdcd",
+        "reviewTextColor": "#cdcdcd",
         "themeFont": "Sour gummy",
         "name": "The Gravity Flip",
         "bannerImage": "./../public/tgf-main.png",
@@ -87,7 +87,7 @@
             "./../public/Projects/tgf/6.png",
             "./../public/Projects/tgf/7.png"
         ],
-        "testimonials": [
+        "reviews": [
             {
                 "text": "\"solid af game, works good, smooth, nice mechanic, good idea, keep it up.\"",
                 "author": "- Tako, Player"
