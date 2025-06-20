@@ -9,13 +9,23 @@ let smoother = ScrollSmoother.create({
 });
 
 document.onscroll = function() {
-  $(".stretch").css({transform: "translate(-50%, 0%) scaleX(0.97)"});
-  $(".stretchBox").css({transform: "scaleX(0.97)"});
+    $(".stretch").css({transform: "translate(-50%, 0%) scaleX(0.97)"});
+    $(".stretchBox").css({transform: "scaleX(0.97)"});
+};
+
+document.ontouchmove = function() {
+    $(".stretch").css({transform: "translate(-50%, 0%) scaleX(0.97)"});
+    $(".stretchBox").css({transform: "scaleX(0.97)"});
 };
 
 document.onscrollend = function() {
-  $(".stretch").css({transform: "translate(-50%, 0%) scaleX(1)"});
-  $(".stretchBox").css({transform: "scaleX(1)"});
+    $(".stretch").css({transform: "translate(-50%, 0%) scaleX(1)"});
+    $(".stretchBox").css({transform: "scaleX(1)"});
+};
+
+document.ontouchend = function() {
+    $(".stretch").css({transform: "translate(-50%, 0%) scaleX(1)"});
+    $(".stretchBox").css({transform: "scaleX(1)"});
 };
 
 if (window.matchMedia("(hover: none)").matches) {
