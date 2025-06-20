@@ -109,6 +109,10 @@ html:not([data-scroll="0"]) .nav > .backbox, html:not([data-scroll="0"]) .nav > 
     box-shadow: rgba(0, 0, 0, 0.1) 0px 11px 12px 0px;
 }
 
+.stretch, .stretchBox {
+    transition: transform 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
+}
+
 /* title */
 .titlebox {
     width: calc(100% - var(--nav-height) - 20px);

@@ -1,4 +1,12 @@
 $(".titlebox > .titletext").on("click", () => scrollToTop());
+document.addEventListener("DOMContentLoaded", (event) => {
+    gsap.registerPlugin(ScrollTrigger,ScrollSmoother,ScrollToPlugin);
+});
+ScrollSmoother.create({
+  smooth: 1, // how long (in seconds) it takes to "catch up" to the native scroll position
+  effects: true, // looks for data-speed and data-lag attributes on elements
+  smoothTouch: 0.1 // much shorter smoothing time on touch devices (default is NO smoothing on touch devices)
+});
 $(".backbox").on("click", () => {
     history.pushState(null, null, "./../index.html");
     location.reload();
@@ -140,7 +148,7 @@ jQuery(document).ready(function() {
         $(".reviewsdiv").empty();
         data.data.project.reviews.forEach(review => {
             $(".reviewsdiv").append(`
-                    <div class="reviewbox">
+                    <div class="reviewbox stretchBox">
                         <div class="reviewdata">
                             <div class="reviewtext">${review.text}</div>
                             <div class="reviewauthor">${review.author}</div>
@@ -158,7 +166,7 @@ jQuery(document).ready(function() {
         $(".gallerydiv").empty();
         data.data.project.gallery.forEach(image => {
             $(".gallerydiv").append(`
-                    <li class="item">
+                    <li class="item stretchBox">
                         <img draggable="false" src="${image}" alt="" class="galleryimg">
                     </li>
                 `);
@@ -177,7 +185,7 @@ jQuery(document).ready(function() {
         $(".metricsdiv").empty();
         data.data.project.metrics.forEach(metric => {
             $(".metricsdiv").append(`
-                    <div class="metricbox">
+                    <div class="metricbox stretchBox">
                         <div class="metrictitle">${metric.label}</div>
                         <div class="metricdata">${metric.value}</div>
                     </div>`);
@@ -188,7 +196,7 @@ jQuery(document).ready(function() {
         $(".briefnotes").empty();
         data.data.project.BriefNotes.forEach(note => {
             $(".briefnotes").append(`
-                    <div class="briefnote">
+                    <div class="briefnote stretchBox">
                         ${data.IconJson.Icons[note.imagePath]}
                         <div class="notedata">${note.text}</div>
                     </div>
@@ -197,7 +205,7 @@ jQuery(document).ready(function() {
         data.data.project.DownloadLink.forEach(link => {
             $(".briefnotes").append(`
                     <a href="${link.link}" target="_blank">
-                        <div class="briefnote hoverable ${link.class}">
+                        <div class="briefnote stretchBox hoverable ${link.class}">
                             <img draggable="false" src="${link.imagePath}" class="noteicon" alt=""/> 
                             <div class="notedata">${link.text}</div>
                         </div>
@@ -210,7 +218,7 @@ jQuery(document).ready(function() {
         $(".brieftext").empty();
         data.data.project.BriefBoxes.forEach(box => {
             $(".brieftext").append(`
-                    <div class="brieftextbox">
+                    <div class="brieftextbox stretchBox">
                         <div class="BlockTitles">${box.title}</div>
                         <br>
                         ${box.description}
@@ -329,6 +337,18 @@ jQuery(document).ready(function() {
     }
         return hoverables;
     }
+
+
+
+document.onscroll = function() {
+    $(".stretch").css({transform: "translate(-50%, 0%) scaleX(0.97)"});
+    $(".stretchBox").css({transform: "scaleX(0.97)"});
+};
+
+document.onscrollend = function() {
+    $(".stretch").css({transform: "translate(-50%, 0%) scaleX(1)"});
+    $(".stretchBox").css({transform: "scaleX(1)"});
+};
 });
 
 // Debounce function using requestAnimationFrame

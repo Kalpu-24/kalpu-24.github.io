@@ -1,3 +1,23 @@
+document.addEventListener("DOMContentLoaded", (event) => {
+  gsap.registerPlugin(ScrollTrigger,ScrollSmoother,ScrollToPlugin);
+});
+
+let smoother = ScrollSmoother.create({
+  smooth: 1, // how long (in seconds) it takes to "catch up" to the native scroll position
+  effects: true, // looks for data-speed and data-lag attributes on elements
+  smoothTouch: 0.1 // much shorter smoothing time on touch devices (default is NO smoothing on touch devices)
+});
+
+document.onscroll = function() {
+  $(".stretch").css({transform: "translate(-50%, 0%) scaleX(0.97)"});
+  $(".stretchBox").css({transform: "scaleX(0.97)"});
+};
+
+document.onscrollend = function() {
+  $(".stretch").css({transform: "translate(-50%, 0%) scaleX(1)"});
+  $(".stretchBox").css({transform: "scaleX(1)"});
+};
+
 if (window.matchMedia("(hover: none)").matches) {
   $(".TeleBut").css({filter: 'grayscale(0%)'});
   $(".playBut").css({filter: 'grayscale(0%)'});
