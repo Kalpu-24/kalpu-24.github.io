@@ -8,28 +8,15 @@ let smoother = ScrollSmoother.create({
   smoothTouch: 0.1 // much shorter smoothing time on touch devices (default is NO smoothing on touch devices)
 });
 
-let scrollTimeout;
+window.onscroll = function() {
+  $(".stretch").css({transform: "translate(-50%, 0%) scaleX(0.97)"});
+  $(".stretchBox").css({transform: "scaleX(0.97)"});
+};
 
-window.addEventListener("scroll", () => {
-  document.querySelectorAll(".stretch").forEach(el => {
-    el.style.transform = "translate(-50%, 0%) scaleX(0.97)";
-  });
-
-  document.querySelectorAll(".stretchBox").forEach(el => {
-    el.style.transform = "scaleX(0.97)";
-  });
-
-  clearTimeout(scrollTimeout);
-  scrollTimeout = setTimeout(() => {
-    document.querySelectorAll(".stretch").forEach(el => {
-      el.style.transform = "translate(-50%, 0%) scaleX(1)";
-    });
-
-    document.querySelectorAll(".stretchBox").forEach(el => {
-      el.style.transform = "scaleX(1)";
-    });
-  }, 500);
-});
+window.onscrollend = function() {
+  $(".stretch").css({transform: "translate(-50%, 0%) scaleX(1)"});
+  $(".stretchBox").css({transform: "scaleX(1)"});
+};
 
 if (window.matchMedia("(hover: none)").matches) {
   $(".TeleBut").css({filter: 'grayscale(0%)'});
