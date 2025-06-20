@@ -1,27 +1,27 @@
 $(".titlebox > .titletext").on("click", () => scrollToTop());
 document.addEventListener("DOMContentLoaded", (event) => {
-    gsap.registerPlugin(ScrollTrigger,ScrollSmoother,ScrollToPlugin);
+    gsap.registerPlugin(ScrollTrigger, ScrollSmoother, ScrollToPlugin);
 });
 ScrollSmoother.create({
-  smooth: 1, // how long (in seconds) it takes to "catch up" to the native scroll position
-  effects: true, // looks for data-speed and data-lag attributes on elements
-  smoothTouch: 0.1 // much shorter smoothing time on touch devices (default is NO smoothing on touch devices)
+    smooth: 1, // how long (in seconds) it takes to "catch up" to the native scroll position
+    effects: true, // looks for data-speed and data-lag attributes on elements
+    smoothTouch: 0.1 // much shorter smoothing time on touch devices (default is NO smoothing on touch devices)
 });
 $(".backbox").on("click", () => {
     history.pushState(null, null, "./../index.html");
     location.reload();
 });
 
-jQuery(document).ready(function() {
+jQuery(document).ready(function () {
 
     const queryString = window.location.search;
     const urlParams = new URLSearchParams(queryString);
     const projectId = urlParams.get("project");
     var rootstyle = document.documentElement.style;
-    
+
     const pagedata = fetchJSONData(projectId);
     pagedata.then(data => {
-        
+
         if (data.data && data.IconJson) {
             document.title = data.data.project.name + " | Portfolio";
 
@@ -65,11 +65,21 @@ jQuery(document).ready(function() {
                 });
             }
         }
-        else{
+        else {
             var hoverables = notfound(hoverables);
         }
+        window.onscroll = function () {
+            $(".stretch").css({ transform: "translate(-50%, 0%) scaleX(0.97) scaleY(1.01)" });
+            $(".stretchBox").css({ transform: "scaleX(0.97) scaleY(1.01)" });
+        };
+
+        window.onscrollend = function () {
+            $(".stretch").css({ transform: "translate(-50%, 0%) scaleX(1) scaleY(1)" });
+            $(".stretchBox").css({ transform: "scaleX(1) scaleY(1)" });
+        };
+
     }).catch(error => {
-            var hoverables = notfound(hoverables);
+        var hoverables = notfound(hoverables);
     });
 
     var mouseX = 0,
@@ -303,50 +313,40 @@ jQuery(document).ready(function() {
                 $("#circle").css({ transform: "scale(1)" });
             });
         }
-    var mailhoverable = document.querySelectorAll(".mailhoverable");
+        var mailhoverable = document.querySelectorAll(".mailhoverable");
 
         if (mailhoverable[0]) {
-        mailhoverable[0].addEventListener("mouseenter", (e) => {
-            //add child text to circle
-            const text = document.createElement("div");
-            text.classList.add("circle-text");
-            text.innerHTML = "Email me ->";
-            text.style.fontFamily = "Manrope";
-            text.style.fontSize = "1.2rem";
-            text.style.color = "#040711";
-            text.style.transition = "all 0.3s cubic-bezier(0.13, 0.41, 0.11, 1.34)";
+            mailhoverable[0].addEventListener("mouseenter", (e) => {
+                //add child text to circle
+                const text = document.createElement("div");
+                text.classList.add("circle-text");
+                text.innerHTML = "Email me ->";
+                text.style.fontFamily = "Manrope";
+                text.style.fontSize = "1.2rem";
+                text.style.color = "#040711";
+                text.style.transition = "all 0.3s cubic-bezier(0.13, 0.41, 0.11, 1.34)";
 
-            $("#circle").css({ padding: "10px 16px" });
-            $("#circle").css({ width: "14ch" });
-            $("#circle").css({ height: "4.5ch" });
-            $("#circle").css({ textAlign: "center" });
-            $("#circle").css({ borderRadius: "104px" });
-            $("#circle").css({ mixBlendMode: "normal" });
-            $("#circle").append(text);
-        });
+                $("#circle").css({ padding: "10px 16px" });
+                $("#circle").css({ width: "14ch" });
+                $("#circle").css({ height: "4.5ch" });
+                $("#circle").css({ textAlign: "center" });
+                $("#circle").css({ borderRadius: "104px" });
+                $("#circle").css({ mixBlendMode: "normal" });
+                $("#circle").append(text);
+            });
 
-        mailhoverable[0].addEventListener("mouseleave", (e) => {
-            //remove all children of circle
-            $("#circle").css({ padding: "0px" });
-            $("#circle").css({ width: "24px" });
-            $("#circle").css({ height: "24px" });
-            $("#circle").css({ borderRadius: "50%" });
-            $("#circle").css({ mixBlendMode: "difference" });
-            $("#circle").empty();
-        });
-    }
+            mailhoverable[0].addEventListener("mouseleave", (e) => {
+                //remove all children of circle
+                $("#circle").css({ padding: "0px" });
+                $("#circle").css({ width: "24px" });
+                $("#circle").css({ height: "24px" });
+                $("#circle").css({ borderRadius: "50%" });
+                $("#circle").css({ mixBlendMode: "difference" });
+                $("#circle").empty();
+            });
+        }
         return hoverables;
     }
-
-window.onscroll = function() {
-    $(".stretch").css({transform: "translate(-50%, 0%) scaleX(0.97)"});
-    $(".stretchBox").css({transform: "scaleX(0.97)"});
-};
-
-window.onscrollend = function() {
-    $(".stretch").css({transform: "translate(-50%, 0%) scaleX(1)"});
-    $(".stretchBox").css({transform: "scaleX(1)"});
-};
 });
 
 // Debounce function using requestAnimationFrame
@@ -403,7 +403,7 @@ function handleClick(direction) {
 }
 
 async function fetchJSONData(filename) {
-    const response = await fetch("./../data/" + filename +".json");
+    const response = await fetch("./../data/" + filename + ".json");
     if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
     }
