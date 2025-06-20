@@ -9,8 +9,13 @@ let smoother = ScrollSmoother.create({
 });
 
 window.onscroll = function() {
-  $(".stretch").css({transform: "translate(-50%, 0%) scaleX(0.97) scaleY(1.01)"});
-  $(".stretchBox").css({transform: "scaleX(0.97) scaleY(1.01)"});
+  const scrollVelocity = smoother.scrollTrigger.getVelocity();
+  const absScrollVelocity = Math.abs(scrollVelocity);
+  const scaleFactorX = Math.min(absScrollVelocity / 100000, 0.03);
+  const scaleFactorY = Math.min(absScrollVelocity / 100000, 0.01);
+  console.log("Scroll Velocity: " + scaleFactorY);
+  $(".stretch").css({transform: "translate(-50%, 0%) scaleX(" + (1 - scaleFactorX) + ") scaleY(" + (1 + scaleFactorY) + ")"});
+  $(".stretchBox").css({transform: "scaleX(" + (1 - scaleFactorX) + ") scaleY(" + (1 + scaleFactorY) + ")"});
 };
 
 window.onscrollend = function() {
