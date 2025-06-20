@@ -11,8 +11,6 @@ let smoother = ScrollSmoother.create({
 let scrollTimeout;
 
 window.addEventListener("scroll", () => {
-  console.log("✅ Scroll triggered");
-      document.body.style.background = `hsl(${Math.random() * 360}, 50%, 90%)`;
   document.querySelectorAll(".stretch").forEach(el => {
     el.style.transform = "translate(-50%, 0%) scaleX(0.97)";
   });
