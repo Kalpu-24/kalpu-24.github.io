@@ -3,24 +3,10 @@ document.addEventListener("DOMContentLoaded", (event) => {
 });
 
 let smoother = ScrollSmoother.create({
-  smooth: 1, // how long (in seconds) it takes to "catch up" to the native scroll position
-  effects: true, // looks for data-speed and data-lag attributes on elements
-  smoothTouch: 0.1 // much shorter smoothing time on touch devices (default is NO smoothing on touch devices)
+  smooth: 1.25, 
+  effects: true, 
+  smoothTouch: 0.2 
 });
-
-window.onscroll = function() {
-  const scrollVelocity = smoother.scrollTrigger.getVelocity();
-  const absScrollVelocity = Math.abs(scrollVelocity);
-  const scaleFactorX = Math.min(absScrollVelocity / 100000, 0.03);
-  const scaleFactorY = Math.min(absScrollVelocity / 100000, 0.01);
-  $(".stretch").css({transform: "translate(-50%, 0%) scaleX(" + (1 - scaleFactorX) + ") scaleY(" + (1 + scaleFactorY) + ")"});
-  $(".stretchBox").css({transform: "scaleX(" + (1 - scaleFactorX) + ") scaleY(" + (1 + scaleFactorY) + ")"});
-};
-
-window.onscrollend = function() {
-  $(".stretch").css({transform: "translate(-50%, 0%) scaleX(1) scaleY(1)"});
-  $(".stretchBox").css({transform: "scaleX(1) scaleY(1)"});
-};
 
 if (window.matchMedia("(hover: none)").matches) {
   $(".TeleBut").css({filter: 'grayscale(0%)'});
