@@ -1,4 +1,3 @@
-// if kalpshah.dev/index.html then remove /index.html
 if (window.location.pathname.endsWith('/index.html')) {
   window.history.replaceState({}, '', window.location.pathname.slice(0, -10));
 }
