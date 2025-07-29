@@ -290,7 +290,7 @@ jQuery(document).ready(function () {
             smoothTouch: 0.2
         });
         $(".backbox").on("click", () => {
-            history.pushState(null, null, "./../index.html");
+            history.pushState(null, null, "./../");
             location.reload();
         });
         var mouseX = 0,
