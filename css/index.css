@@ -291,10 +291,6 @@ html:not([data-scroll="0"]) .nav {
   pointer-events: none;
 }
 
-.stretch, .stretchBox {
-  transition: transform 0.5s cubic-bezier(0.13, 0.41, 0.11, 1.34);
-}
-
 /* Hero */
 .hero {
   position: relative;
