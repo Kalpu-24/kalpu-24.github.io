@@ -37,6 +37,10 @@
         font-size: 2rem;
     }
 
+    .projects > .ProjectBox > .desc > a > .BoomCorpGameTitle {
+        font-size: 3rem;
+    }
+
     .about > .aboutHeading {
         font-size: 2rem;
     }

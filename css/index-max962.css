@@ -21,6 +21,10 @@
         width: 100%;
     }
 
+    .projects > .ProjectBox > .desc > a > .BoomCorpGameTitle {
+        font-size: 4rem;
+    }
+
     .projects > .ProjectBox > .desc > a > .tgfGameTitle {
         font-size: 3rem;
     }

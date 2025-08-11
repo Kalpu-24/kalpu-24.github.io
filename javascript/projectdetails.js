@@ -7,97 +7,97 @@ jQuery(document).ready(function () {
 
     const pagedata = fetchJSONData(projectId);
 
-    setTimeout(function() {
+    setTimeout(function () {
         pagedata.then(data => {
 
-        if (data.data && data.IconJson) {
-            document.title = data.data.project.name + " | Portfolio";
+            if (data.data && data.IconJson) {
+                document.title = data.data.project.name + " | Portfolio";
 
-            SetBody();
+                SetBody();
 
-            SetCssProperties(data);
+                SetCssProperties(data);
 
-            SetTitle(data);
+                SetTitle(data);
 
-            SetBanner(data);
+                SetBanner(data);
 
-            SetBrieftext(data);
+                SetBrieftext(data);
 
-            SetBriefNotesAndLinks(data);
+                SetBriefNotesAndLinks(data);
 
-            SetMetrics(data);
+                SetMetrics(data);
 
-            SetGallery(data);
+                SetGallery(data);
 
-            SetReviews(data);
+                SetReviews(data);
 
-            SetContact();
+                SetContact();
 
-            $('.reviewsdiv').slick({
-                arrows: true,
-                infinite: true,
-                loop: true,
-                speed: 1000,
-                focusOnSelect: true,
-                centerMode: true,
-                slidesToShow: 1,
-                slidesToScroll: 1,
-                variableWidth: true,
-                prevArrow: '<button class="button hoverable button--previous" type="button">➜</button>',
-                nextArrow: '<button class="button hoverable button--next" type="button">➜</button>',
-            });
-
-            var hoverables = document.querySelectorAll(".hoverable");
-            for (let i = 0; i < hoverables.length; i++) {
-                hoverables[i].addEventListener("mouseenter", (e) => {
-                    $("#circle").css({ transform: "scale(2.5)" });
+                $('.reviewsdiv').slick({
+                    arrows: true,
+                    infinite: true,
+                    loop: true,
+                    speed: 1000,
+                    focusOnSelect: true,
+                    centerMode: true,
+                    slidesToShow: 1,
+                    slidesToScroll: 1,
+                    variableWidth: true,
+                    prevArrow: '<button class="button hoverable button--previous" type="button">➜</button>',
+                    nextArrow: '<button class="button hoverable button--next" type="button">➜</button>',
                 });
-                hoverables[i].addEventListener("mouseleave", (e) => {
-                    $("#circle").css({ transform: "scale(1)" });
-                });
+
+                var hoverables = document.querySelectorAll(".hoverable");
+                for (let i = 0; i < hoverables.length; i++) {
+                    hoverables[i].addEventListener("mouseenter", (e) => {
+                        $("#circle").css({ transform: "scale(2.5)" });
+                    });
+                    hoverables[i].addEventListener("mouseleave", (e) => {
+                        $("#circle").css({ transform: "scale(1)" });
+                    });
+                }
+
+                var mailhoverable = document.querySelectorAll(".mailhoverable");
+                if (mailhoverable[0]) {
+                    mailhoverable[0].addEventListener("mouseenter", (e) => {
+                        const text = document.createElement("div");
+                        text.classList.add("circle-text");
+                        text.innerHTML = "Email me ->";
+                        text.style.fontFamily = "Manrope";
+                        text.style.fontSize = "1.2rem";
+                        text.style.color = "#040711";
+                        text.style.transition = "all 0.3s cubic-bezier(0.13, 0.41, 0.11, 1.34)";
+
+                        $("#circle").css({ padding: "10px 16px" });
+                        $("#circle").css({ width: "14ch" });
+                        $("#circle").css({ height: "4.5ch" });
+                        $("#circle").css({ textAlign: "center" });
+                        $("#circle").css({ borderRadius: "104px" });
+                        $("#circle").css({ mixBlendMode: "normal" });
+                        $("#circle").append(text);
+                    });
+
+                    mailhoverable[0].addEventListener("mouseleave", (e) => {
+                        //remove all children of circle
+                        $("#circle").css({ padding: "0px" });
+                        $("#circle").css({ width: "24px" });
+                        $("#circle").css({ height: "24px" });
+                        $("#circle").css({ borderRadius: "50%" });
+                        $("#circle").css({ mixBlendMode: "difference" });
+                        $("#circle").empty();
+                    });
+                }
+            }
+            else {
+                var hoverables = notfound(hoverables);
             }
 
-            var mailhoverable = document.querySelectorAll(".mailhoverable");
-            if (mailhoverable[0]) {
-                mailhoverable[0].addEventListener("mouseenter", (e) => {
-                    const text = document.createElement("div");
-                    text.classList.add("circle-text");
-                    text.innerHTML = "Email me ->";
-                    text.style.fontFamily = "Manrope";
-                    text.style.fontSize = "1.2rem";
-                    text.style.color = "#040711";
-                    text.style.transition = "all 0.3s cubic-bezier(0.13, 0.41, 0.11, 1.34)";
-
-                    $("#circle").css({ padding: "10px 16px" });
-                    $("#circle").css({ width: "14ch" });
-                    $("#circle").css({ height: "4.5ch" });
-                    $("#circle").css({ textAlign: "center" });
-                    $("#circle").css({ borderRadius: "104px" });
-                    $("#circle").css({ mixBlendMode: "normal" });
-                    $("#circle").append(text);
-                });
-
-                mailhoverable[0].addEventListener("mouseleave", (e) => {
-                    //remove all children of circle
-                    $("#circle").css({ padding: "0px" });
-                    $("#circle").css({ width: "24px" });
-                    $("#circle").css({ height: "24px" });
-                    $("#circle").css({ borderRadius: "50%" });
-                    $("#circle").css({ mixBlendMode: "difference" });
-                    $("#circle").empty();
-                });
-            }
-        }
-        else {
+        }).catch(error => {
             var hoverables = notfound(hoverables);
-        }
-
-    }).catch(error => {
-        var hoverables = notfound(hoverables);
-    });
+        });
     }, 2000);
 
-    
+
     function SetContact() {
         console.log("Setting contact section");
         $(".contact").append(`

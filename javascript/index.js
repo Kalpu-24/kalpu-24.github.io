@@ -19,6 +19,7 @@ if (window.matchMedia("(hover: none)").matches) {
   $(".theImage").css({filter: 'grayscale(0%)'});
   $(".contactButton").css({filter: 'grayscale(0%)'});
   $(".itchBut").css({filter: 'grayscale(0%)'});
+  $(".youtubeBut").css({filter: 'grayscale(0%)'});
   $(".disablebut").css({filter: 'grayscale(100%)'});
 }
 

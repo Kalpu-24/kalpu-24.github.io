@@ -1,0 +1,98 @@
+{
+    "project": {
+        "bgColor": "#000",
+        "cardColor": "#061023",
+        "textColor": "#9affe7",
+        "titleColor": "#cdff1b",
+        "reviewTextColor": "#cdcdcd",
+        "themeFont": "Orbitron",
+        "name": "Boom Corp.",
+        "bannerImage": "./../public/BoomCorp-main.png",
+        "BriefNotes": [
+            {
+                "imagePath": "Calendar",
+                "text": "3 Aug-11 Aug 2025"
+            },
+            {
+                "imagePath": "Status",
+                "text": "Completed"
+            },
+            {
+                "imagePath": "Category",
+                "text": "Game Jam Project"
+            },
+            {
+                "imagePath": "Tools",
+                "text": "Unreal Engine 5"
+            },
+            {
+                "imagePath": "Framework",
+                "text": "Blueprints"
+            }
+        ],
+        "DownloadLink": [
+            {
+                "imagePath": "./../public/Projects/Icons/youtube.png",
+                "text": "Trailer",
+                "class": "ytlink",
+                "link": "https://www.youtube.com/watch?v=o26X81-yo5w"
+            },
+            {
+                "imagePath": "./../public/Projects/Icons/Itch.png",
+                "text": "Itch.io",
+                "class": "itchlink",
+                "link": "https://kryoxx-studio.itch.io/boom-corp"
+            }
+        ],
+        "BriefBoxes": [
+            {
+                "title": "Overview",
+                "description": "Boom Corp. is a first-person 3D puzzle game of logic and consequence. You will be deployed into rooms with random grid of safe and dangerous tiles, requiring careful planning and quick reflexes to navigate and locate precise coordinates of mine planted tiles."
+            },
+            {
+                "title": "Technical",
+                "description": "- Engine: Unreal Engine 5. <br> <br> - Platform: Windows <br> <br> - Scripting: Blueprints <br> <br> - Core Mechanics: <br><br> Scan: Use your bomb Scanner to interact with the grid. Clearing a tile will reveal crucial information about its surroundings.<br> Deduce: The numbers revealed tell you how many explosives are touching that tile. Use this information to logically deduce which tiles are safe and which are hiding a threat.<br> Mark: Once you have identified a threat, clear out rest of the tiles to mark the location of it.<br> Survive: One wrong move, one lapse in judgment, and the consequences will be... immediate and explosive. <br> <br> - Physics System: UE5's built-in physics engine with simulated actors and collision filtering. <br> <br> - Lighting: Fully dynamic lighting with Lumen (software ray tracing), tailored for performance. <br> <br> - Post process: Toon shading using post process materials with outline shader. <br> <br> - Input: Keyboard and Mouse support. <br> <br> - UI/UX: Minimal and sleek HUD. <br> <br> - Theme: Mixture of retro and scifi<br> <br> - Audio: Ambient soundscapes and sound effects for actions and UI's."
+            },
+            {
+                "title": "The Challenge",
+                "description": "<b>From Concept to Completion in 9 Days</b><br><br>Problem: The primary challenge was the extreme time constraint of a 9-day game jam. The goal was to take a simple idea and develop it into a complete and polished game from scratch, covering all stages from initial design and programming to final art and sound.<br><br>Solution: To meet the deadline, development was scoped appropriately, focusing on core gameplay mechanics and iterative design. Regular updates on progress were shared for accountability, ensuring every day I completed specific milestones.<br><br>Impact: The result was a successfully completed and published game, 'Boom Corp.', delivered before time. The project demonstrates the ability to manage a tight schedule, prioritize core features, and execute on a concept to deliver a polished and engaging experience from start to finish."
+            },
+            {
+                "title": "Extra Note",
+                "description": "This game was created for the Druid Mechanics Game Jam 2025 over 9 of days."
+            }
+        ],
+        "metrics": [
+            {
+                "label": "Development Time",
+                "value": "9D"
+            },
+            {
+                "label": "Size (in MB)",
+                "value": 700
+            },
+            {
+                "label": "Tile Grid",
+                "value": "8x8"
+            },
+            {
+                "label": "No. of Planted Tiles",
+                "value": "8"
+            }
+        ],
+        "gallery": [
+            "./../public/Projects/boomcorp/1.png",
+            "./../public/Projects/boomcorp/2.png",
+            "./../public/Projects/boomcorp/3.png",
+            "./../public/Projects/boomcorp/4.png",
+            "./../public/Projects/boomcorp/5.png",
+            "./../public/Projects/boomcorp/6.png"
+        ],
+        "reviews": [
+            {
+                "text": "\"I'm very proud of my creation.\"",
+                "author": "- Kalp, Myself"
+            }
+        ]
+    }
+}

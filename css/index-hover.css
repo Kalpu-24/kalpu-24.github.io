@@ -71,6 +71,12 @@
         transform: translateX(80px);
     }
 
+    .projects > .ProjectBox:hover .BoomCorp-prop1 {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: translateX(80px);
+    }
+
     .projects > .ProjectBox:hover .desc > .MultiLinks > a > .playBut {
         filter: grayscale(0%)
     }
@@ -84,6 +90,10 @@
     }
 
     .projects > .ProjectBox:hover .desc > .MultiLinks > a > .itchBut {
+        filter: grayscale(0%)
+    }
+
+    .projects > .ProjectBox:hover .desc > .MultiLinks > a > .youtubeBut {
         filter: grayscale(0%)
     }
 
