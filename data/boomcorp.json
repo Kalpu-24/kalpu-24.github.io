@@ -90,6 +90,10 @@
         ],
         "reviews": [
             {
+                "text": "\"Absolutely Awesome game.<br>Well done. Exceptional work. Hope you gonna take it further.\"",
+                "author": "- Petraefa, Game Jam Host"
+            },
+            {
                 "text": "\"I'm very proud of my creation.\"",
                 "author": "- Kalp, Myself"
             },
