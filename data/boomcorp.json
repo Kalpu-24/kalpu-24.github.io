@@ -1,6 +1,6 @@
 {
     "project": {
-        "bgColor": "#000",
+        "bgColor": "#020710",
         "cardColor": "#061023",
         "textColor": "#9affe7",
         "titleColor": "#cdff1b",
@@ -92,6 +92,22 @@
             {
                 "text": "\"I'm very proud of my creation.\"",
                 "author": "- Kalp, Myself"
+            },
+            {
+                "text": "\"Fun: Funny, good idea, we can enjoy old small minesweeper but this time in 3D.\"",
+                "author": "- Warrpirek, Game Jam Participant"
+            },
+            {
+                "text": "\"I think it's quite fitting\"",
+                "author": "- xTriplex, Game Jam Participant"
+            },
+            {
+                "text": "\"I think this is our winner. Fun, unique approach to the classic minesweeper.\"",
+                "author": "- Lexior, Game Jam Participant"
+            },
+            {
+                "text": "\"Really love the modern twist on the classic Minesweeper! Ah memories :)\"",
+                "author": "- Exetorius, Game Jam Participant"
             }
         ]
     }
