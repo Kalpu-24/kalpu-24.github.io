@@ -22,6 +22,10 @@
                 "text": "Game Jam Project"
             },
             {
+                "imagePath": "Trophy",
+                "text": "Jam Winner"
+            },
+            {
                 "imagePath": "Tools",
                 "text": "Unreal Engine 5"
             },
