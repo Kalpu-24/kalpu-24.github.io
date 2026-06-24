@@ -3,6 +3,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Sour+Gummy:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Jaro:opsz@6..72&display=swap');
 
 
 @font-face {
@@ -538,6 +539,11 @@ html:not([data-scroll="0"]) .nav {
 
 .projects > .ProjectBox > .desc > a > .BoomCorpGameTitle{
   font-family: Orbitron;
+  color: #1e1e1e;
+}
+
+.projects > .ProjectBox > .desc > a > .RollEmOutGameTitle{
+  font-family: Jaro;
   color: #1e1e1e;
 }
 
