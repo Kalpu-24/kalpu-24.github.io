@@ -1,17 +1,17 @@
 {
     "project": {
-        "bgColor": "#eeeef2",
-        "cardColor": "#fff",
-        "textColor": "#040711",
-        "titleColor": "#141218",
-        "reviewTextColor": "#676767",
-        "themeFont": "MLCD",
-        "name": "SnakeWall",
-        "bannerImage": "./../public/SnakeWall-main.png",
+        "bgColor": "#020203",
+        "cardColor": "#0c2025",
+        "textColor": "#fff",
+        "titleColor": "#fff",
+        "reviewTextColor": "#fff",
+        "themeFont": "Jaro",
+        "name": "Roll 'Em Out",
+        "bannerImage": "./../public/RollEmOut-main.png",
         "BriefNotes": [
             {
                 "imagePath": "Calendar",
-                "text": "18-23 Dec 2024"
+                "text": "March-June 2026"
             },
             {
                 "imagePath": "Status",
@@ -19,95 +19,61 @@
             },
             {
                 "imagePath": "Category",
-                "text": "Live Wallpaper"
+                "text": "Game"
             },
             {
                 "imagePath": "Tools",
-                "text": "Android Studio"
+                "text": "Unreal Engine 5"
             },
             {
                 "imagePath": "Framework",
-                "text": "Wallpaper Engine"
+                "text": "Blueprints"
             },
             {
                 "imagePath": "Code",
-                "text": "Java"
+                "text": "C++"
             }
         ],
         "DownloadLink": [
             {
-                "imagePath": "./../public/Projects/Icons/playstore.png",
-                "text": "Google Play",
-                "class": "playlink",
-                "link": "https://play.google.com/store/apps/details?id=kalp.snake.wall"
-            },
-            {
-                "imagePath": "./../public/Projects/Icons/github.png",
-                "text": "GitHub",
-                "class": "gitlink",
-                "link": "https://github.com/Kalpu-24/SnakeWall"
+                "imagePath": "./../public/Projects/Icons/steam.png",
+                "text": "Steam",
+                "class": "steamlink",
+                "link": "https://store.steampowered.com/app/4139160/Roll_em_Out/"
             }
         ],
         "BriefBoxes": [
             {
                 "title": "Overview",
-                "description": "Snakewall is a modern twist on the classic Snake game, re-imagined as a dynamic Live Wallpaper. Built for Android, it features smooth animations, adaptive design, and minimalist visuals."
+                "description": "I worked on this project as a programmer at Shortgun Games. Roll 'Em Out is a first-person co-op adventure about rolling your friend out of a mysterious cave. The game features a unique rolling mechanic, where players must work together to navigate through challenging environments while they are tied up."
             },
             {
                 "title": "Technical",
-                "description": "- Tech Stack: Java, Android Studio. <br> <br> - Platform: Android Live Wallpaper Engine. <br> <br> - Rendering: Canvas API (hardware-accelerated). <br> <br> - Grid System: Odd-number square grid (dynamic size).<br> <br> - Modular: Code is written modular and highly scalable ensuring best coding practices. <br> <br> - Snake Structure: Linked list of grid coordinates. <br> <br> - Screen Handling: Responsive to resolution & orientation. <br> <br> - Persistence: Game state saved/restored on wallpaper pause/resume. <br> <br> - Performance: Optimized for minimal battery usage. <br> <br> - Update Cycle: Runs on a low-interval frame loop. <br> <br> - Input using touch detection in wallpaper engine.<br> <br> - Customizable: Color themes and Grid visibility options. <br> <br> - Sleek UI."
+                "description": "- TechStack: Unreal Engine, Blueprints, C++ <br> - As a programmer at startup, wore multiple hats, includiong gameplay, UI, networking, animation and more. <br> - Prominently worked on inventory system, Settings, UI and more."
             },
             {
                 "title": "The Challenge",
-                "description": "The initial idea was to mimic Nothing's Snake Game Widget, I created a custom view for game with gesture support. However, when i tried to implement it as a widget, i hit a roadblock with the widget's limitations. <br> <br> I posted about this on my telegram channel and got a suggestion to implement it as a live wallpaper instead. This was a game-changer, allowing me to use the Android Live Wallpaper Engine and canvas API for smooth animations and adaptive design. <br> <br>However one limitation came as i could not use gestures as it will trigger system gestures like app drawer or notification panel, for which i adapted to buttons on screen. <br> <br>"
+                "description": "There were several challeneges like time contraint and resources. The game was developed in a short span of 4 months, which required efficient time management and prioritization of tasks. Additionally, the team had to work with limited resources, which meant that we had to be creative and resourceful in our approach to problem-solving."
             }
         ],
         "metrics": [
             {
-                "label": "Total Installs (Playstore",
-                "value": "3k+"
+                "label": "Development Time",
+                "value": "4M"
             },
             {
-                "label": "Stars (GitHub)",
-                "value": 29
-            },
-            {
-                "label": "Rating",
-                "value": 4.6
+                "label": "Steam Wishlists",
+                "value": "150+"
             }
         ],
         "gallery": [
-            "./../public/Projects/SnakeWall/1.png",
-            "./../public/Projects/SnakeWall/2.png",
-            "./../public/Projects/SnakeWall/3.png",
-            "./../public/Projects/SnakeWall/4.png",
-            "./../public/Projects/SnakeWall/5.png"
+            "./../public/Projects/rollemout/1.png",
+            "./../public/Projects/rollemout/2.png",
+            "./../public/Projects/rollemout/3.png",
+            "./../public/Projects/rollemout/4.png"
         ],
         "reviews": [
-            {
-                "text": "\"Pretty Creative Stuff\"",
-                "author": "- HowToMen, Youtuber/Tech Enthusiast"
-            },
-            {
-                "text": "\"Is a great app. Is so cool and simple\"",
-                "author": "- nevulastra, Android User"
-            },
-            {
-                "text": "\"Uniquely fresh idea which brings back nostalgic memories. +1 for the haptic support since it feels premium with the haptics.\"",
-                "author": "- Raj, Android User"
-            },
-            {
-                "text": "\"A super creative idea! Playing Snake right on the wallpaper is both fun and unique never seen anything like it.\"",
-                "author": "- Sujal, Android User"
-            },
-            {
-                "text": "\"Didn't expect to be playing Snake on my home screen lol. Super fun as always and works smoothly.\"",
-                "author": "- Adarsh, Android User"
-            },
-            {
-                "text": "\"Unique idea, it works really well, I can spend hours playing the snake game, and never get tired of :)\"",
-                "author": "- Pie, Android User"
-            }
+           
         ]
     }
 }
