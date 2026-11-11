@@ -1,0 +1,44 @@
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (max-width: 962px) {
+
+    .hero>.tagline {
+            font-size: 5rem;
+            text-wrap: wrap;
+        }
+
+    .projects > .ProjectBox {
+        flex-direction: column;
+        height: fit-content;
+    }
+
+    .projects > .ProjectBox > .thumbnail {
+        order: 0;
+        width: 100%;
+    }
+    
+    .projects > .ProjectBox > .desc {
+        order: 1;
+        width: 100%;
+    }
+
+    .projects > .ProjectBox > .desc > a > .BoomCorpGameTitle {
+        font-size: 4rem;
+    }
+
+    .projects > .ProjectBox > .desc > a > .tgfGameTitle {
+        font-size: 3rem;
+    }
+    
+    .projects > .ProjectBox > .thumbnail > .mainImage {
+        max-height: 250px;
+        object-fit: contain;
+    }
+
+    .about > .aboutBoxes {
+        flex-direction: column;
+        height: fit-content;
+        min-height: 400px;
+    }
+
+
+}

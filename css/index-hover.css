@@ -1,0 +1,129 @@
+@media (hover: hover) {
+    .circle:hover {
+        display: inline;
+    }
+
+    .menuplaceholder > .menu > .menuList > .menuItem:hover .Primary{
+        transform: translate(45%, -170%);
+    }
+
+    .menuplaceholder > .menu > .menuList > .menuItem:hover .Secondary{
+        transform: translate(30%, -50%);
+    }  
+
+    .menuplaceholder > .menu > .menuList > .menuItem:hover .arrow{
+        transform: translate(130%, -50%);
+    }
+
+    .contactbut:hover {
+        background-color: #040711;
+        border-color: #eeeef2;
+        color: #eeeef2;
+    }
+
+    .contactbut2:hover{
+        background-color: #040711;
+        border-color: #eeeef2;
+        color: #eeeef2;
+    }
+
+    .contactbut:hover .hover-text {
+        transform: translate(-50%, -50%);
+        color: #eeeef2;
+        pointer-events: auto;
+    }
+
+    .contactbut2:hover .hover-text {
+        transform: translate(-50%, -50%);
+        color: #eeeef2;
+        pointer-events: auto;
+    }
+
+    .contactbut:hover .non-hover-text {
+        transform: translate(-50%, 250%);
+        pointer-events: none;
+    }
+
+    .contactbut2:hover .non-hover-text {
+        transform: translate(-50%, 250%);
+        pointer-events: none;
+    }
+
+    .SocialLink:hover .SocialIcon {
+        transform: translate(-50%, 50%);
+    }
+
+    .SocialLink:hover .VisitText {
+        transform: translate(0%, -50%);
+    }
+
+    .SocialLink:hover .SocialName {
+        transform: translate(0%, -180%);
+    }
+
+    .projects > .ProjectBox:hover .thumbnail > .mainImage {
+        filter: grayscale(0%);
+    }
+
+    .projects > .ProjectBox:hover .Aura-prop1 {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: translateX(80px);
+    }
+
+    .projects > .ProjectBox:hover .BoomCorp-prop1 {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: translateX(80px);
+    }
+
+    .projects > .ProjectBox:hover .desc > .MultiLinks > a > .playBut {
+        filter: grayscale(0%)
+    }
+
+    .projects > .ProjectBox:hover .desc > .MultiLinks > a > .disablebut {
+        filter: grayscale(100%)
+    }
+
+    .projects > .ProjectBox:hover .desc > .MultiLinks > a > .TeleBut {
+        filter: grayscale(0%)
+    }
+
+    .projects > .ProjectBox:hover .desc > .MultiLinks > a > .itchBut {
+        filter: grayscale(0%)
+    }
+
+    .projects > .ProjectBox:hover .desc > .MultiLinks > a > .youtubeBut {
+        filter: grayscale(0%)
+    }
+
+    .projects > .ProjectBox:hover .desc > .MultiLinks > a > .ViewBut {
+        filter: grayscale(0%)
+    }
+
+    .projects > .ProjectBox:hover .SnakeWall-prop1 {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: translateX(-120px);
+    }
+
+    .projects > .ProjectBox:hover .RollEmOut-prop1 {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: translateX(-80px);
+    }
+
+        .projects > .ProjectBox:hover .tgf-prop1 {
+        filter: grayscale(0%);
+        opacity: 1;
+        transform: translateX(-80px);
+    }
+
+    .about > .aboutBoxes > .aboutBoxImage:hover img{
+        filter: grayscale(0%);
+    }
+
+    .contact:hover .contactButtons > a > .contactButton{
+        filter: grayscale(0%);
+    }
+}

@@ -3,129 +3,331 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kalp Shah — Game Developer</title>
-    <meta name="description" content="Kalp Shah is a game developer working in Unreal Engine 5 and C++. Roll 'Em Out, Boom Corp., The Gravity Flip, AuraRPG and SnakeWall." />
-    <meta name="theme-color" content="#0b1f24" />
-    <link rel="canonical" href="https://kalpshah.dev/" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://kalpshah.dev/" />
-    <meta property="og:title" content="Kalp Shah — Game Developer" />
-    <meta property="og:description" content="Games built in Unreal Engine 5 and C++: Roll 'Em Out, Boom Corp., The Gravity Flip, AuraRPG and SnakeWall." />
-    <meta property="og:image" content="https://kalpshah.dev/assets/og.jpg" />
-    <meta name="twitter:card" content="summary_large_image" />
-    <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400..900&family=DM+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap" />
-    <link rel="stylesheet" href="css/site.css" />
-    <link rel="modulepreload" href="data/games.js" />
-    <link rel="modulepreload" href="js/shared.js" />
-    <script type="module" src="js/home.js"></script>
+    <link rel="stylesheet" href="./css/index.css" />
+    <link rel="stylesheet" href="./css/index-max962.css" />
+    <link rel="stylesheet" href="./css/index-max600.css" />
+    <link rel="stylesheet" href="./css/index-max350.css" />
+    <link rel="stylesheet" href="./css/index-hover.css">
+    <title>Kalp Shah</title>
+    <link rel="icon" type="image/x-icon" href="./public/favicon.ico">
   </head>
-  <body class="home">
-    <a class="skip" href="#games">Skip to games</a>
-
-    <header class="top">
-      <a class="top__name" href="./">Kalp Shah</a>
-      <nav class="top__nav" aria-label="Main">
-        <a class="hide-s" href="#games">Shelf</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a class="btn btn--small" href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Résumé</a>
-      </nav>
-    </header>
-
-    <main>
-      <section class="room" id="games" aria-label="Games">
-        <div class="wrap">
-          <h1>Kalp Shah<br />makes <span class="gamefont">games.</span></h1>
-          <div class="room__grid">
-            <div class="room__side">
-              <p>
-                Game developer working in Unreal Engine 5 and C++.
-                Pull a game off the shelf — the whole room changes with it.
-              </p>
-              <figure class="note" id="note"></figure>
+  <body>
+    <span id="circle" class="circle"></span>
+    <div class="menuplaceholder">
+      <div class="menu">
+        <div class="menuTitle">Menu</div>
+        <div class="menuList">
+          <div class="menuItem workMenuItem">
+            <div class="arrow">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 256 256"
+                focusable="false"
+              >
+                <g>
+                  <path
+                    d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
+                  ></path>
+                </g>
+              </svg>
             </div>
-            <div class="pulled" id="pulled" role="tabpanel" aria-live="polite"></div>
+            <div class="menuItemNames">
+              <div class="menuItemName Primary">Projects</div>
+              <div class="menuItemName Secondary">Projects</div>
+            </div>
+          </div>
+          <div class="menuItem aboutMenuItem">
+            <div class="arrow">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 256 256"
+                focusable="false"
+              >
+                <g>
+                  <path
+                    d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
+                  ></path>
+                </g>
+              </svg>
+            </div>
+            <div class="menuItemNames">
+              <div class="menuItemName Primary">About</div>
+              <div class="menuItemName Secondary">About</div>
+            </div>
+          </div>
+          <div class="menuItem contactMenuItem">
+            <div class="arrow">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 256 256"
+                focusable="false"
+              >
+                <g>
+                  <path
+                    d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
+                  ></path>
+                </g>
+              </svg>
+            </div>
+            <div class="menuItemNames">
+              <div class="menuItemName Primary">Contact</div>
+              <div class="menuItemName Secondary">Contact</div>
+            </div>
           </div>
         </div>
-        <div class="shelf" id="shelf" role="tablist" aria-label="Choose a game"></div>
-        <div class="board"></div>
-        <div class="base">
-          <p class="mono" id="stage-hint">← → browse the shelf · Enter opens</p>
-          <p class="mono" id="shelf-count"></p>
+      </div>
+    </div>
+    <div class="nav">
+      <div class="ham">
+        <button class="menu-button hoverable" id="menuToggle">
+          <div class="icon">
+            <span class="bar top-bar"></span>
+            <span class="bar bottom-bar"></span>
+          </div>
+          <div class="label2">
+            <div class="menu-text">MENU</div>
+            <div class="close-text">CLOSE</div>
+          </div>
+        </button>
+      </div>
+      <div class="title hoverable">
+        <div class="titletext">KALP.SHAH</div>
+      </div>
+      <div class="contactbut hoverable">
+        <div class="hover-text">NOW -></div>
+        <div class="non-hover-text">CONTACT ME</div>
+      </div>
+    </div>
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <div class="hero stretch">
+          <div class="intro">Hello, I'm Kalp Shah</div>
+          <div class="tagline">Game Developer</div>
+          <div class="intro">I develop games using Unreal Engine 5</div>
+          <br />
+          <div class="contactbut2 hoverable">
+            <div class="hover-text">NOW -></div>
+            <div class="non-hover-text">CONTACT ME</div>
+          </div>
         </div>
-        <noscript>
-          <ul class="wrap">
-            <li><a href="game.html?g=rollemout">Roll 'Em Out</a></li>
-            <li><a href="game.html?g=boomcorp">Boom Corp.</a></li>
-            <li><a href="game.html?g=tgf">The Gravity Flip</a></li>
-            <li><a href="game.html?g=aurarpg">AuraRPG</a></li>
-            <li><a href="game.html?g=snakewall">SnakeWall</a></li>
-          </ul>
-        </noscript>
-      </section>
-
-      <section class="scores wrap" aria-labelledby="scores-h">
-        <h2 id="scores-h" class="section-h">High scores</h2>
-        <ul class="scores__list" id="scores"></ul>
-      </section>
-
-      <section class="said wrap" aria-labelledby="said-h">
-        <h2 id="said-h" class="section-h">What players said</h2>
-        <div class="quotes quotes--row" id="quotes"></div>
-      </section>
-
-      <section class="about wrap" id="about" aria-labelledby="about-h">
-        <h2 id="about-h" class="section-h">About</h2>
-        <div class="about__grid">
-          <img class="about__pic" src="assets/kalp.webp" width="640" height="640" loading="lazy" alt="Illustrated portrait of Kalp wearing headphones" />
-          <div class="about__text">
-            <p class="about__punch">A game developer figuring it out, one idea at a time.</p>
-            <p>
-              I didn't start building things because I had a plan — I just couldn't stop
-              thinking about how cool it would be if this existed.
-            </p>
-            <p>
-              I make things out of curiosity, emotion, and the hope that someone out there
-              will feel something too.
-            </p>
-            <a class="btn btn--solid" href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">
-              Download résumé
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+        <div class="social stretch">
+          <a
+            target="_blank"
+            href="https://www.linkedin.com/in/Kalpu24/"
+            class="hoverable SocialLink linkedin"
+          >
+            <div class="SocialContainer">
+              <div class="SocialIcons">
+                <div class="SocialIcon ArrowIcon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 256 256"
+                    focusable="false"
+                  >
+                    <g>
+                      <path
+                        d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
+                      ></path>
+                    </g>
+                  </svg>
+                </div>
+                <div class="SocialIcon LinkedInIcon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 256 256"
+                    focusable="false"
+                  >
+                    <g>
+                      <path
+                        d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"
+                      ></path>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+              <div class="SocialTexts">
+                <div class="SocialText SocialName">LinkedIn</div>
+                <div class="SocialText VisitText">Visit Link</div>
+              </div>
+            </div>
+          </a>
+          <a target="_blank" href="https://github.com/Kalpu-24" class="hoverable SocialLink github">
+            <div class="SocialContainer">
+              <div class="SocialIcons">
+                <div class="SocialIcon ArrowIcon">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 256 256"
+                    focusable="false"
+                  >
+                    <g>
+                      <path
+                        d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
+                      ></path>
+                    </g>
+                  </svg>
+                </div>
+                <div class="SocialIcon GithubInIcon">
+                  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                      <path
+                        d="M16,3a13,13,0,0,0-3.46,25.53,1,1,0,1,0,.53-1.92,11,11,0,1,1,7-.4,15.85,15.85,0,0,0-.3-3.92A6.27,6.27,0,0,0,24.68,16a6.42,6.42,0,0,0-1.05-3.87,7.09,7.09,0,0,0-.4-3.36,1,1,0,0,0-1.1-.67,8,8,0,0,0-3.37,1.28A11.35,11.35,0,0,0,16,9a13.09,13.09,0,0,0-3,.43A5.74,5.74,0,0,0,9.62,8.25a1,1,0,0,0-1,.66,7.06,7.06,0,0,0-.37,3.19A7.15,7.15,0,0,0,7.2,16a6.66,6.66,0,0,0,5,6.28,7.43,7.43,0,0,0-.15.79c-1,.06-1.58-.55-2.32-1.48a3.45,3.45,0,0,0-1.94-1.53,1,1,0,0,0-1.15.76A1,1,0,0,0,7.35,22c.16,0,.55.52.77.81a4.74,4.74,0,0,0,3.75,2.25,4.83,4.83,0,0,0,1.3-.18h0a1,1,0,0,0,.29-.14l0,0a.72.72,0,0,0,.18-.21.34.34,0,0,0,.08-.09.85.85,0,0,0,.06-.17,1.52,1.52,0,0,0,.06-.2v0a4.11,4.11,0,0,1,.46-1.91,1,1,0,0,0-.76-1.65A4.6,4.6,0,0,1,9.2,16a4.84,4.84,0,0,1,.87-3,1,1,0,0,0,.24-.83,5,5,0,0,1,0-1.85,3.59,3.59,0,0,1,1.74.92,1,1,0,0,0,1,.23A12.49,12.49,0,0,1,16,11a9.91,9.91,0,0,1,2.65.43,1,1,0,0,0,1-.18,5,5,0,0,1,2-1,4.11,4.11,0,0,1,0,1.91,1.05,1.05,0,0,0,.32,1A4,4,0,0,1,22.68,16a4.29,4.29,0,0,1-4.41,4.46,1,1,0,0,0-.94.65,1,1,0,0,0,.28,1.11c.59.51.5,4,.47,5.36a1,1,0,0,0,.38.81,1,1,0,0,0,.62.21,1.07,1.07,0,0,0,.25,0A13,13,0,0,0,16,3Z"
+                      />
+                    </g>
+                  </svg>
+                </div>
+              </div>
+              <div class="SocialTexts">
+                <div class="SocialText SocialName">Github</div>
+                <div class="SocialText VisitText">Visit Link</div>
+              </div>
+            </div>
+          </a>
+        </div>
+        <div class="projects">
+          <div class="ProjectHeading">Selected Works</div>
+          <div class="projectTag">The work I'm proud of</div>
+          <div class="ProjectBox stretchBox">
+            <img src="./public/RollEmOut-prop1.png" alt="" srcset="" class="RollEmOut-prop1"/>
+            <div class="desc">
+              <a href="./pages/projectdetails.html?project=rollemout"><div class="GameTitle projecthoverable RollEmOutGameTitle">ROLL 'EM OUT</div></a>
+              <div class="GameDesc">Roll 'Em Out is a first-person co-op adventure about rolling your friend out of a mysterious cave.</div>
+                <div class="MultiLinks">
+                <a target="_blank" class="hoverable" href="https://store.steampowered.com/app/4139160/Roll_em_Out/"><div class="SteamBut">Steam(Windows) -></div></a>
+                <a class="hoverable" href="./pages/projectdetails.html?project=rollemout"><div class="ViewBut">View More -></div></a>
+              </div>
+            </div>
+            <div class="thumbnail RollEmOutThumbnail">
+              <img src="./public/RollEmOut-main.png" alt="" srcset="" class="mainImage"/>
+            </div>
+          </div>
+          <div class="ProjectBox stretchBox">
+            <img src="./public/BoomCorp-prop1.png" alt="" srcset="" class="BoomCorp-prop1"/>
+            <div class="thumbnail BoomCorpThumbnail">
+              <img src="./public/BoomCorp-main.png" alt="" srcset="" class="mainImage"/>
+            </div>
+            <div class="desc">
+              <a href="./pages/projectdetails.html?project=boomcorp"><div class="GameTitle projecthoverable BoomCorpGameTitle">Boom Corp.</div></a>
+              <div class="GameDesc">Boom Corp. is a first-person 3D puzzle game of logic and consequence.</div>
+                <div class="MultiLinks">
+                <a target="_blank" class="hoverable" href="https://www.youtube.com/watch?v=o26X81-yo5w"><div class="youtubeBut">Trailer -></div></a>
+                <a target="_blank" class="hoverable" href="https://kryoxx-studio.itch.io/boom-corp"><div class="itchBut">Itch.io(Windows) -></div></a>
+                <a class="hoverable" href="./pages/projectdetails.html?project=boomcorp"><div class="ViewBut">View More -></div></a>
+              </div>
+              </div>
+          </div>
+          <div class="ProjectBox stretchBox">
+            <img src="./public/tgf-prop1.png" alt="" srcset="" class="tgf-prop1"/>
+            <div class="desc">
+              <a href="./pages/projectdetails.html?project=tgf"><div class="GameTitle projecthoverable tgfGameTitle">The Gravity Flip</div></a>
+              <div class="GameDesc">The Gravity Flip is a game built around a single, perspective-bending idea — what if gravity worked the other way?<br/></div>
+              <div class="MultiLinks">
+                <a target="_blank" class="hoverable" href="https://kryoxx-studio.itch.io/the-gravity-flip"><div class="itchBut">Itch.io(Windows) -></div></a>
+                <a class="hoverable" href="./pages/projectdetails.html?project=tgf"><div class="ViewBut">View More -></div></a>
+              </div>
+            </div>
+                    <div class="thumbnail TgfThumbnail">
+              <img src="./public/tgf-main.png" alt="" srcset="" class="mainImage"/>
+            </div>
+          </div>
+          <div class="ProjectBox stretchBox">
+            <img src="./public/Aura-prop1.png" alt="" srcset="" class="Aura-prop1"/>
+            <div class="thumbnail AuraThumbnail">
+              <img src="./public/Aura-main.png" alt="" srcset="" class="mainImage"/>
+            </div>
+            <div class="desc">
+              <a href="./pages/projectdetails.html?project=aurarpg"><div class="GameTitle projecthoverable AuraGameTitle">AuraRPG</div></a>
+              <div class="GameDesc">AuraRPG is a stylized top-down action RPG built in Unreal Engine 5 using the Gameplay Ability System. It features fluid combat, modular abilities, and a dynamic world that reacts to player progression.</div>
+              <div class="MultiLinks">
+                <a target="_blank" class="hoverable" href="https://t.me/KryoxxStudio/7/113"><div class="TeleBut">Download(Telegram) -></div></a>
+                <a target="_blank" class="hoverable" href="https://github.com/Kalpu-24/Aura-RPG"><div class="codeBut">GitHub -></div></a>
+                <a class="hoverable" href="./pages/projectdetails.html?project=aurarpg"><div class="ViewBut">View More -></div></a>
+              </div>
+              </div>
+          </div>
+          <div class="ProjectBox stretchBox">
+            <img src="./public/SnakeWall-prop1.png" alt="" srcset="" class="SnakeWall-prop1"/>
+            <div class="desc">
+              <a href="./pages/projectdetails.html?project=snakewall"><div class="GameTitle projecthoverable SnakeWallGameTitle">SnakeWall</div></a>
+              <div class="GameDesc">Snakewall is a modern twist on the classic Snake game, re-imagined as a dynamic Live Wallpaper. Built for Android, it features smooth animations, adaptive design, and minimalist visuals.</div>
+              <div class="MultiLinks">
+                <a target="_blank" class="hoverable" href="https://play.google.com/store/apps/details?id=kalp.snake.wall"><div class="playBut">PlayStore -></div></a>
+                <a target="_blank" class="hoverable" href="https://github.com/Kalpu-24/SnakeWall"><div class="codeBut">GitHub -></div></a>
+                <a class="hoverable" href="./pages/projectdetails.html?project=snakewall"><div class="ViewBut">View More -></div></a>
+              </div>
+            </div>
+            <div class="thumbnail SnakeThumbnail">
+              <img src="./public/SnakeWall-main.png" alt="" srcset="" class="mainImage"/>
+            </div>
+          </div>
+        </div>
+        <div class="about">
+          <div class="aboutHeading">About Me</div>
+          <div class="projectTag">Where I press, I feel.</div>
+          <div class="aboutBoxes">
+            <div class="aboutBoxText stretchBox">
+              <div class="aboutPunch">A game developer figuring it out, one idea at a time.</div>
+              <div class="aboutDesc">I didn't start building things because I had a plan — I just couldn't stop thinking about how cool it would be if this existed.
+                <br/> I make things out of curiosity, emotion, and the hope that someone out there will feel something too.</div>
+              <div class="aboutButtons">
+                <a target="_blank" href="./public/Kalp-Resume-Game.pdf">
+                  <div class="aboutButton hoverable">Download Resume ⇩</div>
+                </a>
+              </div>
+            </div>
+            <div class="aboutBoxImage stretchBox">
+              <img src="./public/kalp.png" class="theImage" />
+            </div>
+          </div>
+        </div>
+        <div class="contact stretch">
+          <div class="contactHeading">Contact Me</div>
+          <div class="contactDesc">I'm open to new opportunities or just a friendly chat. Feel free to reach out!</div>
+          <a target="_blank" href="mailto:contact@kalpshah.dev" class="emailText">
+            <div class="mailhoverable">contact@kalpshah.dev</div>
+          </a>
+          <div class="contactButtons">
+            <a target="_blank" href="https://t.me/kalpu_24">
+              <div style="background-color: #24A1DE;" class="contactButton hoverable"><svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 48 48" id="Layer_2" data-name="Layer 2"><path class="cls-1" d="M40.83,8.48c1.14,0,2,1,1.54,2.86l-5.58,26.3c-.39,1.87-1.52,2.32-3.08,1.45L20.4,29.26a.4.4,0,0,1,0-.65L35.77,14.73c.7-.62-.15-.92-1.07-.36L15.41,26.54a.46.46,0,0,1-.4.05L6.82,24C5,23.47,5,22.22,7.23,21.33L40,8.69a2.16,2.16,0,0,1,.83-.21Z"/></svg>Telegram</div>
+            </a>
+            <a target="_blank" href="https://www.linkedin.com/in/Kalpu24/">
+              <div style="background-color: #2d64bc;" class="contactButton hoverable"><svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 256 256"
+                focusable="false"
+              >
+                <g>
+                  <path
+                    d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"
+                  ></path>
+                </g>
+              </svg>LinkedIn</div>
+            </a>
+            <a target="_blank" href="https://github.com/Kalpu-24">
+              <div style="background-color: #0e1116;" class="contactButton hoverable"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+                <g>
+                  <path
+                    d="M16,3a13,13,0,0,0-3.46,25.53,1,1,0,1,0,.53-1.92,11,11,0,1,1,7-.4,15.85,15.85,0,0,0-.3-3.92A6.27,6.27,0,0,0,24.68,16a6.42,6.42,0,0,0-1.05-3.87,7.09,7.09,0,0,0-.4-3.36,1,1,0,0,0-1.1-.67,8,8,0,0,0-3.37,1.28A11.35,11.35,0,0,0,16,9a13.09,13.09,0,0,0-3,.43A5.74,5.74,0,0,0,9.62,8.25a1,1,0,0,0-1,.66,7.06,7.06,0,0,0-.37,3.19A7.15,7.15,0,0,0,7.2,16a6.66,6.66,0,0,0,5,6.28,7.43,7.43,0,0,0-.15.79c-1,.06-1.58-.55-2.32-1.48a3.45,3.45,0,0,0-1.94-1.53,1,1,0,0,0-1.15.76A1,1,0,0,0,7.35,22c.16,0,.55.52.77.81a4.74,4.74,0,0,0,3.75,2.25,4.83,4.83,0,0,0,1.3-.18h0a1,1,0,0,0,.29-.14l0,0a.72.72,0,0,0,.18-.21.34.34,0,0,0,.08-.09.85.85,0,0,0,.06-.17,1.52,1.52,0,0,0,.06-.2v0a4.11,4.11,0,0,1,.46-1.91,1,1,0,0,0-.76-1.65A4.6,4.6,0,0,1,9.2,16a4.84,4.84,0,0,1,.87-3,1,1,0,0,0,.24-.83,5,5,0,0,1,0-1.85,3.59,3.59,0,0,1,1.74.92,1,1,0,0,0,1,.23A12.49,12.49,0,0,1,16,11a9.91,9.91,0,0,1,2.65.43,1,1,0,0,0,1-.18,5,5,0,0,1,2-1,4.11,4.11,0,0,1,0,1.91,1.05,1.05,0,0,0,.32,1A4,4,0,0,1,22.68,16a4.29,4.29,0,0,1-4.41,4.46,1,1,0,0,0-.94.65,1,1,0,0,0,.28,1.11c.59.51.5,4,.47,5.36a1,1,0,0,0,.38.81,1,1,0,0,0,.62.21,1.07,1.07,0,0,0,.25,0A13,13,0,0,0,16,3Z"
+                  />
+                </g>
+              </svg>GitHub</div>
             </a>
           </div>
-          <div class="about__side">
-            <h3 class="label">Path</h3>
-            <ol class="path">
-              <li>
-                <span class="mono">Mar – Jun 2026</span>
-                <strong>Programmer, Shortgun Games</strong>
-                <span>Gameplay, UI, networking and animation on Roll 'Em Out.</span>
-              </li>
-              <li>
-                <span class="mono">2022 – 2026</span>
-                <strong>B.Tech, Computer Science and Engineering</strong>
-                <span>Uka Tarsadia University, Gujarat.</span>
-              </li>
-              <li>
-                <span class="mono">2025</span>
-                <strong>UE5 Gameplay Ability System — Top Down RPG</strong>
-                <span>Udemy course, C++ and Blueprints.</span>
-              </li>
-            </ol>
-            <h3 class="label">Toolkit</h3>
-            <ul class="chips">
-              <li>Unreal Engine 5</li><li>C++</li><li>Blueprints</li><li>Gameplay Ability System</li>
-              <li>Niagara</li><li>Behavior Trees</li><li>EQS</li><li>UMG</li><li>Git</li>
-              <li>Java</li><li>Android Canvas API</li><li>SQL</li>
-            </ul>
-          </div>
+          <div class="copyright">©Kalp Shah 2025, All rights reserved</div>
         </div>
-      </section>
-    </main>
-
-    <footer class="contact wrap" id="contact"></footer>
+        <div class="bottomSpacer"></div>
+      </div>
+    </div>
   </body>
+  <script
+    src="https://code.jquery.com/jquery-3.7.1.min.js"
+    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+    crossorigin="anonymous"
+  ></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <!-- ScrollSmoother requires ScrollTrigger -->
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+  <script defer src="./javascript/index.js"></script>
 </html>

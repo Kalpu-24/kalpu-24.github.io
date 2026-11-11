@@ -1,0 +1,5 @@
+@media only screen and (max-width: 350px) {
+    .hero > .tagline{
+        font-size: 2.3rem;
+    }
+}
