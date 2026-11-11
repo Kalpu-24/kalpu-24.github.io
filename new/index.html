@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kalp Shah — Game Developer</title>
+    <meta name="description" content="Kalp Shah is a game developer working in Unreal Engine 5 and C++. Roll 'Em Out, Boom Corp., The Gravity Flip, AuraRPG and SnakeWall." />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#0b1f24" />
+    <link rel="canonical" href="https://kalpshah.dev/new/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kalpshah.dev/new/" />
+    <meta property="og:title" content="Kalp Shah — Game Developer" />
+    <meta property="og:description" content="Games built in Unreal Engine 5 and C++: Roll 'Em Out, Boom Corp., The Gravity Flip, AuraRPG and SnakeWall." />
+    <meta property="og:image" content="https://kalpshah.dev/new/assets/og.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400..900&family=DM+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap" />
+    <link rel="stylesheet" href="css/site.css" />
+    <link rel="modulepreload" href="data/games.js" />
+    <link rel="modulepreload" href="js/shared.js" />
+    <script type="module" src="js/home.js"></script>
+  </head>
+  <body class="home">
+    <a class="skip" href="#games">Skip to games</a>
+
+    <header class="top">
+      <a class="top__name" href="./">Kalp Shah</a>
+      <nav class="top__nav" aria-label="Main">
+        <a class="hide-s" href="#games">Shelf</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+        <a class="btn btn--small" href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Résumé</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="room" id="games" aria-label="Games">
+        <div class="wrap">
+          <h1>Kalp Shah<br />makes <span class="gamefont">games.</span></h1>
+          <div class="room__grid">
+            <div class="room__side">
+              <p>
+                Game developer working in Unreal Engine 5 and C++.
+                Pull a game off the shelf — the whole room changes with it.
+              </p>
+              <figure class="note" id="note"></figure>
+            </div>
+            <div class="pulled" id="pulled" role="tabpanel" aria-live="polite"></div>
+          </div>
+        </div>
+        <div class="shelf" id="shelf" role="tablist" aria-label="Choose a game"></div>
+        <div class="board"></div>
+        <div class="base">
+          <p class="mono" id="stage-hint">← → browse the shelf · Enter opens</p>
+          <p class="mono" id="shelf-count"></p>
+        </div>
+        <noscript>
+          <ul class="wrap">
+            <li><a href="game.html?g=rollemout">Roll 'Em Out</a></li>
+            <li><a href="game.html?g=boomcorp">Boom Corp.</a></li>
+            <li><a href="game.html?g=tgf">The Gravity Flip</a></li>
+            <li><a href="game.html?g=aurarpg">AuraRPG</a></li>
+            <li><a href="game.html?g=snakewall">SnakeWall</a></li>
+          </ul>
+        </noscript>
+      </section>
+
+      <section class="scores wrap" aria-labelledby="scores-h">
+        <h2 id="scores-h" class="section-h">High scores</h2>
+        <ul class="scores__list" id="scores"></ul>
+      </section>
+
+      <section class="said wrap" aria-labelledby="said-h">
+        <h2 id="said-h" class="section-h">What players said</h2>
+        <div class="quotes quotes--row" id="quotes"></div>
+      </section>
+
+      <section class="about wrap" id="about" aria-labelledby="about-h">
+        <h2 id="about-h" class="section-h">About</h2>
+        <div class="about__grid">
+          <img class="about__pic" src="assets/kalp.webp" width="640" height="640" loading="lazy" alt="Illustrated portrait of Kalp wearing headphones" />
+          <div class="about__text">
+            <p class="about__punch">A game developer figuring it out, one idea at a time.</p>
+            <p>
+              I didn't start building things because I had a plan — I just couldn't stop
+              thinking about how cool it would be if this existed.
+            </p>
+            <p>
+              I make things out of curiosity, emotion, and the hope that someone out there
+              will feel something too.
+            </p>
+            <a class="btn btn--solid" href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">
+              Download résumé
+              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
+            </a>
+          </div>
+          <div class="about__side">
+            <h3 class="label">Path</h3>
+            <ol class="path">
+              <li>
+                <span class="mono">Mar – Jun 2026</span>
+                <strong>Programmer, Shortgun Games</strong>
+                <span>Gameplay, UI, networking and animation on Roll 'Em Out.</span>
+              </li>
+              <li>
+                <span class="mono">2022 – 2026</span>
+                <strong>B.Tech, Computer Science and Engineering</strong>
+                <span>Uka Tarsadia University, Gujarat.</span>
+              </li>
+              <li>
+                <span class="mono">2025</span>
+                <strong>UE5 Gameplay Ability System — Top Down RPG</strong>
+                <span>Udemy course, C++ and Blueprints.</span>
+              </li>
+            </ol>
+            <h3 class="label">Toolkit</h3>
+            <ul class="chips">
+              <li>Unreal Engine 5</li><li>C++</li><li>Blueprints</li><li>Gameplay Ability System</li>
+              <li>Niagara</li><li>Behavior Trees</li><li>EQS</li><li>UMG</li><li>Git</li>
+              <li>Java</li><li>Android Canvas API</li><li>SQL</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="contact wrap" id="contact"></footer>
+  </body>
+</html>
