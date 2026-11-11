@@ -15,6 +15,27 @@ document.title = `${g.name} — Kalp Shah`;
 const paras = (list) => list.map((p) => `<p>${esc(p)}</p>`).join("");
 const section = (title, body, cls = "") => `<section class="block wrap ${cls}"><h2 class="section-h">${esc(title)}</h2>${body}</section>`;
 
+// "How it plays": the game's loop as a small wired graph.
+const node = (n, cls = "") => `
+  <li class="loop__node ${cls}">
+    ${n.shot ? `<img src="${img(g, `${n.shot}-sm`)}" alt="" loading="lazy" />` : ""}
+    <h3>${esc(n.title)}</h3>
+    ${n.text ? `<p>${esc(n.text)}</p>` : ""}
+  </li>`;
+const loop = g.loop
+  ? section(
+      "How it plays",
+      `<ol class="loop" id="loop">
+        ${g.loop.steps.map((n) => node(n)).join("")}
+        ${g.loop.branch
+          ? node({ title: g.loop.branch.title, text: g.loop.branch.text }, "loop__node--branch") +
+            `<li class="loop__fork"><ol>${node(g.loop.branch.yes, "loop__node--yes")}${node(g.loop.branch.no, "loop__node--no")}</ol></li>`
+          : ""}
+        <svg class="loop__wires" aria-hidden="true"></svg>
+      </ol>`
+    )
+  : "";
+
 const challenge = g.challenge
   ? section(
       "The challenge",
@@ -28,7 +49,7 @@ const challenge = g.challenge
 document.getElementById("main").innerHTML = `
   <section class="ghero wrap">
     <a class="ghero__back mono" href="./#games">${icon("back")} All games</a>
-    <p class="stage__count mono">${esc(g.kind)} · ${esc(g.year)}</p>
+    <p class="ghero__kind mono">${esc(g.kind)} · ${esc(g.year)}</p>
     <h1 class="ghero__title">${esc(g.name)}</h1>
     <p class="ghero__pitch">${esc(g.pitch)}</p>
     <div class="actions">
@@ -43,6 +64,8 @@ document.getElementById("main").innerHTML = `
   </section>
 
   ${section("Overview", `<div class="prose prose--big">${paras(g.overview)}</div>`)}
+
+  ${loop}
 
   ${g.metrics.length
     ? `<section class="wrap block"><h2 class="section-h">By the numbers</h2><ul class="scores__list">${g.metrics
@@ -115,3 +138,31 @@ box.addEventListener("keydown", (e) => {
   if (e.key === "ArrowRight") open(at + 1);
   if (e.key === "ArrowLeft") open(at - 1);
 });
+
+// Wires for the "How it plays" graph: drawn between neighbouring nodes, sideways or downwards
+// depending on how the layout has wrapped.
+const loopEl = document.getElementById("loop");
+function wire() {
+  if (!loopEl) return;
+  const svg = loopEl.querySelector(".loop__wires");
+  const box = loopEl.getBoundingClientRect();
+  const main = [...loopEl.querySelectorAll(":scope > .loop__node")];
+  const ends = [...loopEl.querySelectorAll(".loop__fork .loop__node")];
+  const pairs = main.slice(1).map((n, i) => [main[i], n]).concat(ends.map((n) => [main.at(-1), n]));
+  svg.innerHTML = pairs
+    .map(([a, b]) => {
+      const A = a.getBoundingClientRect(), B = b.getBoundingClientRect();
+      const side = B.left >= A.right - 1;
+      const [x1, y1] = side ? [A.right, A.top + A.height / 2] : [A.left + A.width / 2, A.bottom];
+      const [x2, y2] = side ? [B.left, B.top + B.height / 2] : [B.left + B.width / 2, B.top];
+      const [p1, p2] = [[x1 - box.left, y1 - box.top], [x2 - box.left, y2 - box.top]];
+      const d = side ? (p2[0] - p1[0]) / 2 : (p2[1] - p1[1]) / 2;
+      const c = side ? `${p1[0] + d} ${p1[1]} ${p2[0] - d} ${p2[1]}` : `${p1[0]} ${p1[1] + d} ${p2[0]} ${p2[1] - d}`;
+      return `<path d="M${p1} C${c} ${p2}"/><circle cx="${p1[0]}" cy="${p1[1]}" r="5"/><circle cx="${p2[0]}" cy="${p2[1]}" r="5"/>`;
+    })
+    .join("");
+}
+if (loopEl) {
+  new ResizeObserver(wire).observe(loopEl);
+  document.fonts.ready.then(wire);
+}

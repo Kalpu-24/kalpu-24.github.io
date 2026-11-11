@@ -16,7 +16,7 @@
     <link rel="icon" type="image/x-icon" href="public/favicon.ico" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400..700&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@400..900&family=DM+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap" />
     <link rel="stylesheet" href="css/site.css" />
     <link rel="modulepreload" href="data/games.js" />
     <link rel="modulepreload" href="js/shared.js" />
@@ -28,7 +28,7 @@
     <header class="top">
       <a class="top__name" href="./">Kalp Shah</a>
       <nav class="top__nav" aria-label="Main">
-        <a class="hide-s" href="#games">Games</a>
+        <a class="hide-s" href="#games">Shelf</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
         <a class="btn btn--small" href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Résumé</a>
@@ -36,23 +36,28 @@
     </header>
 
     <main>
-      <section class="intro wrap">
-        <h1>Kalp Shah makes <span class="gamefont">games.</span></h1>
-        <p class="intro__sub">
-          Game developer working in Unreal Engine 5 and C++.
-          Pick a game below — the site turns into it.
-        </p>
-      </section>
-
-      <section class="stage wrap" id="games" aria-label="Games">
-        <div class="stage__panel" id="stage-panel" role="tabpanel">
-          <div class="stage__copy" id="stage-copy" aria-live="polite"></div>
-          <div class="art" id="stage-art"></div>
+      <section class="room" id="games" aria-label="Games">
+        <div class="wrap">
+          <h1>Kalp Shah<br />makes <span class="gamefont">games.</span></h1>
+          <div class="room__grid">
+            <div class="room__side">
+              <p>
+                Game developer working in Unreal Engine 5 and C++.
+                Pull a game off the shelf — the whole room changes with it.
+              </p>
+              <figure class="note" id="note"></figure>
+            </div>
+            <div class="pulled" id="pulled" role="tabpanel" aria-live="polite"></div>
+          </div>
         </div>
-        <div class="select" id="stage-select" role="tablist" aria-label="Choose a game"></div>
-        <p class="stage__hint mono" id="stage-hint" aria-hidden="true">← → browse · Enter opens</p>
+        <div class="shelf" id="shelf" role="tablist" aria-label="Choose a game"></div>
+        <div class="board"></div>
+        <div class="base">
+          <p class="mono" id="stage-hint">← → browse the shelf · Enter opens</p>
+          <p class="mono" id="shelf-count"></p>
+        </div>
         <noscript>
-          <ul>
+          <ul class="wrap">
             <li><a href="game.html?g=rollemout">Roll 'Em Out</a></li>
             <li><a href="game.html?g=boomcorp">Boom Corp.</a></li>
             <li><a href="game.html?g=tgf">The Gravity Flip</a></li>

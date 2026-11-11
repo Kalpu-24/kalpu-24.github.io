@@ -1,6 +1,8 @@
 /*
   Single source of truth for the whole site.
   Add a game: drop its images in assets/games/<id>/ and add one entry here.
+  `cover`, `back` and `stickers` drive the shelf on the home page; `loop` draws the
+  "How it plays" graph on the game page (leave it out to skip that section).
   The home page, the game page and the scoreboard all read from this file.
 
   Text is plain text (no HTML). Use arrays for multiple paragraphs.
@@ -34,6 +36,18 @@ export const games = [
       accent: "#ffb347", onAccent: "#1d1300",
     },
     stage: { shot: 2, prop: { left: "-7%", bottom: "-9%", height: "44%" } },
+    cover: { fit: "cover", bg: "#0b1f24" },
+    back: ["Programmer, Shortgun Games", "Unreal Engine 5 · C++ · Blueprints", "Inventory, settings, UI, networking"],
+    stickers: [["150+", "Steam wishlists"], ["4 mo", "start to finish"]],
+    // DRAFT: written from the overview text. Replace with the real loop.
+    loop: {
+      steps: [
+        { title: "Tied up", text: "You and your friend start deep in a mysterious cave, tied up.", shot: 3 },
+        { title: "Roll 'em", text: "The rolling mechanic: one player rolls the other along." },
+        { title: "Work together", text: "Get through challenging environments as a pair.", shot: 2 },
+        { title: "Out of the cave", text: "Roll your friend all the way out." },
+      ],
+    },
     facts: [
       ["Period", "March – June 2026"],
       ["Status", "Completed"],
@@ -83,6 +97,20 @@ export const games = [
       accent: "#cdff1b", onAccent: "#0b1300",
     },
     stage: { shot: 4, prop: { left: "-10%", bottom: "-13%", height: "56%" } },
+    cover: { fit: "contain", bg: "#061023" },
+    back: ["Solo developer", "Unreal Engine 5 · Blueprints", "Toon shading · Lumen · 8×8 grid"],
+    stickers: [["#1", "Druid Mechanics Jam 2025"], ["9 days", "concept to release"]],
+    loop: {
+      steps: [
+        { title: "Enter room", text: "A random 8×8 grid of safe and dangerous tiles." },
+        { title: "Scan", text: "Clearing a tile reveals information about its surroundings.", shot: 3 },
+        { title: "Deduce", text: "The numbers tell you how many explosives touch that tile." },
+      ],
+      branch: {
+        title: "Safe tile?", text: "One wrong move and the consequences are immediate.",
+        yes: { title: "Mark", shot: 4 }, no: { title: "Boom", shot: 5 },
+      },
+    },
     facts: [
       ["Period", "3 – 11 Aug 2025"],
       ["Status", "Completed"],
@@ -154,6 +182,20 @@ export const games = [
       accent: "#ff5db4", onAccent: "#2b0017",
     },
     stage: { shot: 5, prop: { right: "5%", top: "-9%", height: "64%" } },
+    cover: { fit: "contain", bg: "#000000" },
+    back: ["Solo developer", "Unreal Engine 5 · C++ · Blueprints", "Custom gravity movement system"],
+    stickers: [["10", "levels"], ["2 wks", "solo build"]],
+    loop: {
+      steps: [
+        { title: "Run", text: "Move and jump through an abstract sci-fi level.", shot: 2 },
+        { title: "Read the room", text: "Obstacles are built around momentum and inversion timing." },
+        { title: "Flip gravity", text: "Flip it, or turn it 90° either way — even mid-jump.", shot: 4 },
+      ],
+      branch: {
+        title: "Landed clean?", text: "The world turns on its head; you have to keep up.",
+        yes: { title: "Next level", shot: 3 }, no: { title: "Instant retry", shot: 5 },
+      },
+    },
     facts: [
       ["Period", "25 Apr – 7 May 2025"],
       ["Status", "Completed"],
@@ -241,6 +283,20 @@ export const games = [
       accent: "#f3c969", onAccent: "#251a00",
     },
     stage: { shot: 8, prop: { left: "-11%", bottom: "-7%", height: "84%" } },
+    cover: { fit: "cover", bg: "#0b072a" },
+    back: ["Solo developer", "Unreal Engine 5.5 · C++ · GAS", "Spells, stats, enemy AI, UI"],
+    stickers: [["GAS", "playable RPG demo"], ["50/50", "C++ and Blueprint"]],
+    loop: {
+      steps: [
+        { title: "Enter the level", text: "Goblins, Demons and Ghouls are waiting.", shot: 2 },
+        { title: "Cast", text: "Fire and lightning spells from the spell bar, each on a cooldown.", shot: 9 },
+        { title: "Hit lands", text: "Crits, stuns, damage over time, blocks and knockbacks.", shot: 8 },
+      ],
+      branch: {
+        title: "Enemy down?", text: "Every enemy type has its own spellcasting logic.",
+        yes: { title: "XP and level up", shot: 5 }, no: { title: "They cast back", shot: 7 },
+      },
+    },
     facts: [
       ["Period", "Jan – Mar 2025"],
       ["Status", "Completed"],
@@ -304,6 +360,20 @@ export const games = [
       accent: "#c8201b", onAccent: "#ffffff",
     },
     stage: { shot: "key", fit: "contain", prop: { right: "-3%", bottom: "-11%", height: "82%" } },
+    cover: { fit: "contain", bg: "#ffffff" },
+    back: ["Solo developer", "Java · Android Canvas API", "A live wallpaper you can play"],
+    stickers: [["6k+", "Play Store installs"], ["4.6", "store rating"]],
+    loop: {
+      steps: [
+        { title: "Home screen", text: "The wallpaper is the game.", shot: 1 },
+        { title: "Tap start", text: "Touch is detected inside the wallpaper engine." },
+        { title: "Steer", text: "On-screen buttons, because swipes belong to the system.", shot: 3 },
+      ],
+      branch: {
+        title: "Left the home screen?", text: "The game runs on a low-interval frame loop to save battery.",
+        yes: { title: "State saved", shot: 5 }, no: { title: "Keep playing", shot: 2 },
+      },
+    },
     keyFit: "contain",
     facts: [
       ["Period", "18 – 23 Dec 2024"],

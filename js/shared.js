@@ -28,9 +28,16 @@ export function applyTheme(game) {
   s.setProperty("--on-accent", t.onAccent);
   s.setProperty("--font-game", `"${t.font}"`);
   s.setProperty("--game-scale", t.scale);
+  // Outlines and hard shadows: dark ink on light themes, light outline + black shadow on dark ones.
+  s.setProperty("--edge", t.ink);
+  s.setProperty("--shadow", t.light ? t.ink : "#000");
+  s.setProperty("--base", t.light ? t.ink : "#000");
   s.colorScheme = t.light ? "light" : "dark";
   document.querySelector('meta[name="theme-color"]')?.setAttribute("content", t.bg);
 }
+
+export const cover = (game, label) =>
+  `<span class="cover${game.cover.fit === "contain" ? " is-contain" : ""}" style="--cover-bg:${game.cover.bg}"><img src="${img(game, "key")}" alt="" /><small>${esc(label)}</small></span>`;
 
 export function remember(id) {
   try { sessionStorage.setItem("game", id); } catch {}

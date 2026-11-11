@@ -8,7 +8,7 @@ Plain HTML, CSS and JavaScript modules. No build step; GitHub Pages serves the r
 
 | Path | What it is |
 | --- | --- |
-| `index.html` | Home page: game select, high scores, about, contact |
+| `index.html` | Home page: the game shelf, high scores, about, contact |
 | `game.html?g=<id>` | One page per game, rendered from the data file |
 | `data/games.js` | All game content, colours and fonts. The only file to edit for content changes |
 | `assets/games/<id>/` | Web-sized images (WebP) used by the site |
@@ -20,6 +20,7 @@ Plain HTML, CSS and JavaScript modules. No build step; GitHub Pages serves the r
 1. Put images in `assets/games/<id>/`: `key.webp` (key art), `prop.webp` (transparent cut-out),
    and screenshots as `1.webp`, `2.webp`, … each with a smaller `1-sm.webp` thumbnail (about 720px wide).
 2. Add or edit the entry in `data/games.js`. Metrics, reviews and the home page scoreboard are all in that file.
+   `cover`, `back` and `stickers` set what the shelf shows; `loop` draws the "How it plays" graph on the game page.
 
 ## Running locally
 
