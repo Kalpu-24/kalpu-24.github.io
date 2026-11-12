@@ -29,7 +29,7 @@
     <header class="top">
       <a class="top__name" href="./">Kalp Shah</a>
       <nav class="top__nav" aria-label="Main">
-        <a class="hide-s" href="#games">Shelf</a>
+        <a class="hide-s" href="#games">Games</a>
         <a href="#about">About</a>
         <a href="#contact">Contact</a>
         <a class="btn btn--small" href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Résumé</a>
@@ -37,28 +37,19 @@
     </header>
 
     <main>
-      <section class="room" id="games" aria-label="Games">
-        <div class="wrap">
-          <h1>Kalp Shah<br />makes <span class="gamefont">games.</span></h1>
-          <div class="room__grid">
-            <div class="room__side">
-              <p>
-                Game developer working in Unreal Engine 5 and C++.
-                Pull a game off the shelf — the whole room changes with it.
-              </p>
-              <figure class="note" id="note"></figure>
-            </div>
-            <div class="pulled" id="pulled" role="tabpanel" aria-live="polite"></div>
-          </div>
+      <section class="room wrap" id="games" aria-label="Games">
+        <h1 class="who"><b>Kalp Shah</b> makes games in Unreal Engine 5 and C++.</h1>
+        <div class="hero">
+          <div class="hero__text" id="pulled" role="tabpanel" aria-live="polite"></div>
+          <div class="hero__box" id="box"></div>
         </div>
-        <div class="shelf" id="shelf" role="tablist" aria-label="Choose a game"></div>
+        <div class="rail">
+          <div class="shelf" id="shelf" role="tablist" aria-label="Choose a game"></div>
+          <p class="mono" id="stage-hint"></p>
+        </div>
         <div class="board"></div>
-        <div class="base">
-          <p class="mono" id="stage-hint">← → browse the shelf · Enter opens</p>
-          <p class="mono" id="shelf-count"></p>
-        </div>
         <noscript>
-          <ul class="wrap">
+          <ul>
             <li><a href="game.html?g=rollemout">Roll 'Em Out</a></li>
             <li><a href="game.html?g=boomcorp">Boom Corp.</a></li>
             <li><a href="game.html?g=tgf">The Gravity Flip</a></li>

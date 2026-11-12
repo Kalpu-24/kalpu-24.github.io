@@ -2,19 +2,22 @@ import { games, profile, scoreboard } from "../data/games.js";
 import { applyTheme, contactBlock, cover, esc, gameUrl, icon, recall, remember } from "./shared.js";
 
 const pulled = document.getElementById("pulled");
+const box = document.getElementById("box");
 const shelf = document.getElementById("shelf");
-const note = document.getElementById("note");
+const hint = document.getElementById("stage-hint");
+const num = (i) => String(i + 1).padStart(2, "0");
+const baseHint = `${games.length} games · ${games.at(-1).year} – ${games[0].year}`;
 
 // The shelf: one boxed copy per game. The selected one leaves an empty slot.
 shelf.innerHTML = games
   .map(
     (g, i) => `
-    <button class="shelf__slot" role="tab" id="tab-${g.id}" aria-controls="pulled" aria-selected="false" tabindex="-1" data-i="${i}" aria-label="${esc(g.name)}, ${esc(g.kind)}">
-      ${cover(g, g.name)}
+    <button class="shelf__slot" role="tab" id="tab-${g.id}" aria-controls="pulled" aria-selected="false" tabindex="-1" data-i="${i}" aria-label="${esc(g.name)}, ${esc(g.kind)}" title="${esc(g.name)}">
+      ${cover(g)}
     </button>`
   )
   .join("");
-document.getElementById("shelf-count").textContent = `${games.length} games · ${games.at(-1).year} – ${games[0].year}`;
+hint.textContent = `← → browse · ${baseHint}`;
 
 const slots = [...shelf.querySelectorAll(".shelf__slot")];
 let current = -1;
@@ -32,34 +35,27 @@ function show(i, { focus = false } = {}) {
     s.tabIndex = k === i ? 0 : -1;
   });
   if (focus) slots[i].focus();
-  // Keep the selected slot in view on narrow screens without moving the page.
-  shelf.scrollTo({ left: slots[i].offsetLeft - (shelf.clientWidth - slots[i].offsetWidth) / 2, behavior: "smooth" });
   pulled.setAttribute("aria-labelledby", `tab-${g.id}`);
 
   const store = g.links[0];
-  const sticker = ([value, label], n) => `<span class="sticker sticker--${n}"><b>${esc(value)}</b><span>${esc(label)}</span></span>`;
+  const [value, label] = g.stickers[0];
   pulled.innerHTML = `
-    <a class="pulled__box" href="${gameUrl(g)}" aria-label="${esc(g.name)}: how it was made">
-      ${cover(g, g.kind)}
-      ${sticker(g.stickers[0], 1)}
-    </a>
-    <div class="backpanel">
-      <h2 class="backpanel__title"><a href="${gameUrl(g)}">${esc(g.name)}</a></h2>
-      <p>${esc(g.pitch)}</p>
-      <ul class="mono">${g.back.map((b) => `<li>${esc(b)}</li>`).join("")}</ul>
-      <div class="actions">
-        <a class="btn btn--solid" href="${gameUrl(g)}">How it was made ${icon("arrow")}</a>
-        <a class="btn" href="${esc(store.url)}" target="_blank" rel="noopener">${esc(store.label)} ${icon("out")}</a>
-      </div>
-      ${sticker(g.stickers[1], 2)}
+    <p class="mono">${num(i)} / ${num(games.length - 1)} · ${esc(g.kind)} · ${esc(g.year)}</p>
+    <h2 class="hero__title"><a href="${gameUrl(g)}">${esc(g.name)}</a></h2>
+    <p class="hero__pitch">${esc(g.pitch)}</p>
+    <p class="mono">${esc(g.role)} · ${esc(g.stack)}</p>
+    <div class="actions">
+      <a class="btn btn--solid" href="${gameUrl(g)}">How it was made ${icon("arrow")}</a>
+      <a class="link" href="${esc(store.url)}" target="_blank" rel="noopener">${esc(store.label)} ${icon("out")}</a>
     </div>`;
-  pulled.classList.remove("is-in");
-  void pulled.offsetWidth;
-  pulled.classList.add("is-in");
-
-  const r = g.reviews.find((x) => x.featured) || g.reviews[0];
-  note.hidden = !r;
-  if (r) note.innerHTML = `<blockquote>${esc(r.text)}</blockquote><figcaption class="mono">${esc(r.author)} · ${esc(r.role)}</figcaption>`;
+  box.innerHTML = `
+    <a class="hero__cover" href="${gameUrl(g)}" aria-label="${esc(g.name)}: how it was made">${cover(g)}</a>
+    <span class="sticker"><b>${esc(value)}</b><span>${esc(label)}</span></span>`;
+  for (const el of [pulled, box]) {
+    el.classList.remove("is-in");
+    void el.offsetWidth;
+    el.classList.add("is-in");
+  }
 }
 
 slots.forEach((s) => s.addEventListener("click", () => show(+s.dataset.i)));
@@ -77,7 +73,7 @@ addEventListener("keydown", (e) => {
 
 // Gamepad: d-pad or stick browses, A opens.
 addEventListener("gamepadconnected", () => {
-  document.getElementById("stage-hint").textContent = "Gamepad connected · D-pad browse · A opens";
+  hint.textContent = `D-pad browse · A opens · ${baseHint}`;
   let held = false;
   (function poll() {
     const pad = [...navigator.getGamepads()].find(Boolean);
