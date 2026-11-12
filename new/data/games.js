@@ -1,7 +1,8 @@
 /*
   Single source of truth for the whole site.
   Add a game: drop its images in assets/games/<id>/ and add one entry here.
-  `cover`, `back` and `stickers` drive the shelf on the home page; `loop` draws the
+  `reward` is the badge shown in the quest log; `toy` adds a playable mini version to the
+  game page ("mines" or "snake"); `loop` draws the
   "How it plays" graph on the game page (leave it out to skip that section).
   The home page, the game page and the scoreboard all read from this file.
 
@@ -23,6 +24,7 @@ export const profile = {
 export const games = [
   {
     id: "rollemout",
+    reward: "150+ Steam wishlists",
     name: "Roll 'Em Out",
     kind: "Co-op adventure",
     year: "2026",
@@ -84,6 +86,7 @@ export const games = [
 
   {
     id: "boomcorp",
+    reward: "Jam winner",
     name: "Boom Corp.",
     kind: "3D puzzle · Jam winner",
     year: "2025",
@@ -98,6 +101,7 @@ export const games = [
     },
     stage: { shot: 4, prop: { left: "-10%", bottom: "-13%", height: "56%" } },
     cover: { fit: "contain", bg: "#061023" },
+    toy: { kind: "mines", title: "Scan the room", text: "An 8×8 grid with 8 planted tiles, the same numbers as the game. Clear every safe tile." },
     back: ["Solo developer", "Unreal Engine 5 · Blueprints", "Toon shading · Lumen · 8×8 grid"],
     stickers: [["#1", "Druid Mechanics Jam 2025"], ["9 days", "concept to release"]],
     loop: {
@@ -169,6 +173,7 @@ export const games = [
 
   {
     id: "tgf",
+    reward: "10 levels",
     name: "The Gravity Flip",
     kind: "Puzzle platformer",
     year: "2025",
@@ -270,6 +275,7 @@ export const games = [
 
   {
     id: "aurarpg",
+    reward: "Playable GAS demo",
     name: "AuraRPG",
     kind: "Top-down action RPG",
     year: "2025",
@@ -347,6 +353,7 @@ export const games = [
 
   {
     id: "snakewall",
+    reward: "6k+ installs",
     name: "SnakeWall",
     kind: "Android live wallpaper",
     year: "2024",
@@ -361,6 +368,7 @@ export const games = [
     },
     stage: { shot: "key", fit: "contain", prop: { right: "-3%", bottom: "-11%", height: "82%" } },
     cover: { fit: "contain", bg: "#ffffff" },
+    toy: { kind: "snake", title: "Play it right here", text: "The same idea as the wallpaper: a dot-grid Snake steered with on-screen buttons. Arrow keys work too." },
     back: ["Solo developer", "Java · Android Canvas API", "A live wallpaper you can play"],
     stickers: [["6k+", "Play Store installs"], ["4.6", "store rating"]],
     loop: {
@@ -428,10 +436,26 @@ export const games = [
   },
 ];
 
-/* Headline numbers shown on the home page. */
-export const scoreboard = [
-  { value: "Winner", label: "Druid Mechanics Game Jam 2025", game: "boomcorp" },
-  { value: "6k+", label: "Play Store installs", game: "snakewall" },
-  { value: "4.6", label: "Store rating", game: "snakewall" },
-  { value: "150+", label: "Steam wishlists", game: "rollemout" },
+/* Trophies screen. Real numbers only. `icon` is a name from js/shared.js. */
+export const trophies = [
+  { icon: "trophy", value: "Winner", label: "Druid Mechanics Game Jam 2025", game: "boomcorp" },
+  { icon: "down", value: "6k+", label: "Play Store installs", game: "snakewall" },
+  { icon: "star", value: "4.6", label: "Store rating", game: "snakewall" },
+  { icon: "heart", value: "150+", label: "Steam wishlists", game: "rollemout" },
+  { icon: "code", value: "29", label: "GitHub stars", game: "snakewall" },
+  { icon: "clock", value: "9 days", label: "Concept to release", game: "boomcorp" },
+];
+
+/* Skill tree. `parent` wires a skill to the one it grows from; `games` lists where it was used. */
+export const skills = [
+  { id: "ue5", label: "Unreal Engine 5", games: ["rollemout", "boomcorp", "tgf", "aurarpg"] },
+  { id: "cpp", label: "C++", parent: "ue5", games: ["rollemout", "tgf", "aurarpg"] },
+  { id: "bp", label: "Blueprints", parent: "ue5", games: ["rollemout", "boomcorp", "tgf", "aurarpg"] },
+  { id: "gas", label: "Gameplay Ability System", parent: "cpp", games: ["aurarpg"] },
+  { id: "ai", label: "Behavior Trees · EQS", parent: "cpp", games: ["aurarpg"] },
+  { id: "vfx", label: "Niagara VFX", parent: "bp", games: ["aurarpg"] },
+  { id: "ui", label: "UMG / UI", parent: "bp", games: ["rollemout", "aurarpg"] },
+  { id: "android", label: "Android", games: ["snakewall"] },
+  { id: "java", label: "Java", parent: "android", games: ["snakewall"] },
+  { id: "canvas", label: "Canvas API", parent: "java", games: ["snakewall"] },
 ];

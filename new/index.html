@@ -24,100 +24,88 @@
     <script type="module" src="js/home.js"></script>
   </head>
   <body class="home">
-    <a class="skip" href="#games">Skip to games</a>
+    <a class="skip" href="#panel">Skip to content</a>
 
-    <header class="top">
-      <a class="top__name" href="./">Kalp Shah</a>
-      <nav class="top__nav" aria-label="Main">
-        <a class="hide-s" href="#games">Games</a>
-        <a href="#about">About</a>
-        <a href="#contact">Contact</a>
-        <a class="btn btn--small" href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Résumé</a>
-      </nav>
+    <header class="player wrap">
+      <img class="player__pic" src="assets/kalp.webp" width="64" height="64" alt="" />
+      <div class="player__who">
+        <h1>Kalp Shah</h1>
+        <p class="mono">Game Developer · Unreal Engine 5 · C++</p>
+      </div>
+      <dl class="hud" id="hud"></dl>
     </header>
 
-    <main>
-      <section class="room wrap" id="games" aria-label="Games">
-        <h1 class="who"><b>Kalp Shah</b> makes games in Unreal Engine 5 and C++.</h1>
-        <div class="hero">
-          <div class="hero__text" id="pulled" role="tabpanel" aria-live="polite"></div>
-          <div class="hero__box" id="box"></div>
-        </div>
-        <div class="rail">
-          <div class="shelf" id="shelf" role="tablist" aria-label="Choose a game"></div>
-          <p class="mono" id="stage-hint"></p>
-        </div>
-        <div class="board"></div>
-        <noscript>
-          <ul>
-            <li><a href="game.html?g=rollemout">Roll 'Em Out</a></li>
-            <li><a href="game.html?g=boomcorp">Boom Corp.</a></li>
-            <li><a href="game.html?g=tgf">The Gravity Flip</a></li>
-            <li><a href="game.html?g=aurarpg">AuraRPG</a></li>
-            <li><a href="game.html?g=snakewall">SnakeWall</a></li>
+    <main class="menu-layout wrap">
+      <nav class="menu" id="menu" role="tablist" aria-label="Menu" aria-orientation="vertical">
+        <a class="menu__item" role="tab" href="#quests" id="tab-quests" data-icon="list"><span>Quest log</span><small>5 games, newest first</small></a>
+        <a class="menu__item" role="tab" href="#character" id="tab-character" data-icon="user"><span>Character</span><small>Who is playing</small></a>
+        <a class="menu__item" role="tab" href="#trophies" id="tab-trophies" data-icon="trophy"><span>Trophies</span><small>All real numbers</small></a>
+        <a class="menu__item" role="tab" href="#skills" id="tab-skills" data-icon="branch"><span>Skill tree</span><small>What was used where</small></a>
+        <a class="menu__item" role="tab" href="#contact" id="tab-contact" data-icon="mail"><span>Contact</span><small>Send a message</small></a>
+      </nav>
+
+      <div class="panel" id="panel">
+        <section class="screen" id="quests" role="tabpanel" aria-labelledby="tab-quests">
+          <h2 class="screen__h">Quest log</h2>
+          <ol class="quests" id="quest-list">
+            <noscript>
+              <li><a href="game.html?g=rollemout">Roll 'Em Out</a></li>
+              <li><a href="game.html?g=boomcorp">Boom Corp.</a></li>
+              <li><a href="game.html?g=tgf">The Gravity Flip</a></li>
+              <li><a href="game.html?g=aurarpg">AuraRPG</a></li>
+              <li><a href="game.html?g=snakewall">SnakeWall</a></li>
+            </noscript>
+          </ol>
+        </section>
+
+        <section class="screen" id="character" role="tabpanel" aria-labelledby="tab-character">
+          <h2 class="screen__h">Character</h2>
+          <div class="sheet">
+            <img class="sheet__pic" src="assets/kalp.webp" width="640" height="640" loading="lazy" alt="Illustrated portrait of Kalp wearing headphones" />
+            <div>
+              <p class="sheet__punch">A game developer figuring it out, one idea at a time.</p>
+              <p>I didn't start building things because I had a plan — I just couldn't stop thinking about how cool it would be if this existed.</p>
+              <p>I make things out of curiosity, emotion, and the hope that someone out there will feel something too.</p>
+              <dl class="sheet__stats">
+                <div><dt>Class</dt><dd><b>Game Developer</b></dd></div>
+                <div><dt>Main engine</dt><dd><b>Unreal Engine 5</b> <span>C++ and Blueprints</span></dd></div>
+                <div><dt>Last party</dt><dd><b>Shortgun Games</b> <span>Programmer, Mar – Jun 2026</span></dd></div>
+                <div><dt>Origin</dt><dd><b>B.Tech, Computer Science and Engineering</b> <span>Uka Tarsadia University, 2022 – 2026</span></dd></div>
+                <div><dt>Training</dt><dd><b>UE5 Gameplay Ability System — Top Down RPG</b> <span>Udemy, 2025</span></dd></div>
+              </dl>
+              <a class="btn btn--solid" href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Download résumé</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="screen" id="trophies" role="tabpanel" aria-labelledby="tab-trophies">
+          <h2 class="screen__h">Trophies</h2>
+          <ul class="trophies" id="trophy-list"></ul>
+        </section>
+
+        <section class="screen" id="skills" role="tabpanel" aria-labelledby="tab-skills">
+          <h2 class="screen__h">Skill tree</h2>
+          <div class="tree" id="tree"></div>
+        </section>
+
+        <section class="screen" id="contact" role="tabpanel" aria-labelledby="tab-contact">
+          <h2 class="screen__h">Contact</h2>
+          <p class="contact__lead">I'm open to new opportunities, or just a friendly chat.</p>
+          <a class="contact__mail" href="mailto:contact@kalpshah.dev">contact@kalpshah.dev</a>
+          <ul class="options">
+            <li><a href="mailto:contact@kalpshah.dev">Send an email</a></li>
+            <li><a href="https://www.linkedin.com/in/Kalpu24/" target="_blank" rel="noopener">LinkedIn</a></li>
+            <li><a href="https://github.com/Kalpu-24" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://t.me/kalpu_24" target="_blank" rel="noopener">Telegram</a></li>
+            <li><a href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Download résumé</a></li>
           </ul>
-        </noscript>
-      </section>
-
-      <section class="scores wrap" aria-labelledby="scores-h">
-        <h2 id="scores-h" class="section-h">High scores</h2>
-        <ul class="scores__list" id="scores"></ul>
-      </section>
-
-      <section class="said wrap" aria-labelledby="said-h">
-        <h2 id="said-h" class="section-h">What players said</h2>
-        <div class="quotes quotes--row" id="quotes"></div>
-      </section>
-
-      <section class="about wrap" id="about" aria-labelledby="about-h">
-        <h2 id="about-h" class="section-h">About</h2>
-        <div class="about__grid">
-          <img class="about__pic" src="assets/kalp.webp" width="640" height="640" loading="lazy" alt="Illustrated portrait of Kalp wearing headphones" />
-          <div class="about__text">
-            <p class="about__punch">A game developer figuring it out, one idea at a time.</p>
-            <p>
-              I didn't start building things because I had a plan — I just couldn't stop
-              thinking about how cool it would be if this existed.
-            </p>
-            <p>
-              I make things out of curiosity, emotion, and the hope that someone out there
-              will feel something too.
-            </p>
-            <a class="btn btn--solid" href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">
-              Download résumé
-              <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v12M6 11l6 6 6-6M5 20h14"/></svg>
-            </a>
-          </div>
-          <div class="about__side">
-            <h3 class="label">Path</h3>
-            <ol class="path">
-              <li>
-                <span class="mono">Mar – Jun 2026</span>
-                <strong>Programmer, Shortgun Games</strong>
-                <span>Gameplay, UI, networking and animation on Roll 'Em Out.</span>
-              </li>
-              <li>
-                <span class="mono">2022 – 2026</span>
-                <strong>B.Tech, Computer Science and Engineering</strong>
-                <span>Uka Tarsadia University, Gujarat.</span>
-              </li>
-              <li>
-                <span class="mono">2025</span>
-                <strong>UE5 Gameplay Ability System — Top Down RPG</strong>
-                <span>Udemy course, C++ and Blueprints.</span>
-              </li>
-            </ol>
-            <h3 class="label">Toolkit</h3>
-            <ul class="chips">
-              <li>Unreal Engine 5</li><li>C++</li><li>Blueprints</li><li>Gameplay Ability System</li>
-              <li>Niagara</li><li>Behavior Trees</li><li>EQS</li><li>UMG</li><li>Git</li>
-              <li>Java</li><li>Android Canvas API</li><li>SQL</li>
-            </ul>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
     </main>
 
-    <footer class="contact wrap" id="contact"></footer>
+    <footer class="keys wrap">
+      <p class="mono keys__hint"><kbd>↑</kbd><kbd>↓</kbd> select <kbd>Enter</kbd> open <kbd>Esc</kbd> back</p>
+      <p class="mono">© <span id="year">2026</span> Kalp Shah</p>
+    </footer>
   </body>
 </html>

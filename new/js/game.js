@@ -48,7 +48,7 @@ const challenge = g.challenge
 
 document.getElementById("main").innerHTML = `
   <section class="ghero wrap">
-    <a class="ghero__back mono" href="./#games">${icon("back")} All games</a>
+    <a class="ghero__back mono" href="./#quests">${icon("back")} Quest log</a>
     <p class="ghero__kind mono">${esc(g.kind)} · ${esc(g.year)}</p>
     <h1 class="ghero__title">${esc(g.name)}</h1>
     <p class="ghero__pitch">${esc(g.pitch)}</p>
@@ -63,6 +63,21 @@ document.getElementById("main").innerHTML = `
     </dl>
   </section>
 
+  ${g.toy
+    ? `<section class="block wrap toy" id="toy" data-kind="${g.toy.kind}">
+        <div class="toy__board" id="toy-board"></div>
+        <div class="toy__side">
+          <h2 class="section-h">${esc(g.toy.title)}</h2>
+          <p>${esc(g.toy.text)}</p>
+          <dl class="toy__stats" id="toy-stats"></dl>
+          <p class="toy__msg" id="toy-msg" role="status"></p>
+          <div class="actions" id="toy-actions"></div>
+          <a class="link" href="#case-study">Skip to how it was made ${icon("arrow")}</a>
+        </div>
+      </section>`
+    : ""}
+
+  <span id="case-study"></span>
   ${section("Overview", `<div class="prose prose--big">${paras(g.overview)}</div>`)}
 
   ${loop}
@@ -102,12 +117,13 @@ document.getElementById("main").innerHTML = `
     : ""}
 
   <a class="next wrap" href="${gameUrl(next)}">
-    <span class="mono">Next game</span>
+    <span class="mono">Next quest</span>
     <strong style="font-family:'${next.theme.font}',var(--font-display)">${esc(next.name)}</strong>
     ${icon("arrow")}
   </a>`;
 
 document.getElementById("contact").innerHTML = contactBlock(profile);
+if (g.toy) import("./toys.js").then((m) => m[g.toy.kind](document.getElementById("toy")));
 document.body.style.visibility = "visible";
 
 // Screenshot viewer
