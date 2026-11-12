@@ -36,8 +36,8 @@ export function applyTheme(game) {
   document.querySelector('meta[name="theme-color"]')?.setAttribute("content", t.bg);
 }
 
-export const cover = (game, label) =>
-  `<span class="cover${game.cover.fit === "contain" ? " is-contain" : ""}" style="--cover-bg:${game.cover.bg}"><img src="${img(game, "key")}" alt="" /><small>${esc(label)}</small></span>`;
+export const cover = (game) =>
+  `<span class="cover${game.cover.fit === "contain" ? " is-contain" : ""}" style="--cover-bg:${game.cover.bg}"><img src="${img(game, "key")}" alt="" /></span>`;
 
 export function remember(id) {
   try { sessionStorage.setItem("game", id); } catch {}
