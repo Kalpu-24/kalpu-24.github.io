@@ -10,10 +10,10 @@ const img = (p, n) => `assets/games/${p.id}/${n}.webp`;
 const arrow = `<svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const out = `<svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const ext = (url) => (/^https?:/.test(url) ? ` target="_blank" rel="noopener"` : "");
-const theme = (p) => `--accent:${p.accent};--game-font:'${p.font}';--game-scale:${p.fontScale}`;
-const FONTS = "https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap";
+const theme = (p) => `--bg:${p.theme.bg};--surface:${p.theme.surface};--ink:${p.theme.ink};--muted:${p.theme.muted};--accent:${p.theme.accent};--on-accent:${p.theme.onAccent};--game-font:'${p.font}';--game-scale:${p.fontScale}`;
+const FONTS = "https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap";
 
-function page({ file, title, description, image, body, bodyClass = "", style = "" }) {
+function page({ file, title, description, image, body, bodyClass = "", style = "", themeColor = "#07080a" }) {
   const url = site.url + (file === "index.html" ? "" : file);
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -22,7 +22,7 @@ function page({ file, title, description, image, body, bodyClass = "", style = "
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-${site.noindex ? `<meta name="robots" content="noindex">\n` : ""}<meta name="theme-color" content="#0b0c0f">
+${site.noindex ? `<meta name="robots" content="noindex">\n` : ""}<meta name="theme-color" content="${themeColor}">
 <link rel="canonical" href="${url}">
 <meta property="og:type" content="website">
 <meta property="og:url" content="${url}">
@@ -81,77 +81,78 @@ ${body}
 
 /* ---------------------------------------------------------------- home */
 function home() {
-  const card = (p, i) => `
-    <article class="work${i % 2 ? " work--flip" : ""}" style="${theme(p)}">
-      <a class="work__media" href="${p.id}.html" tabindex="-1" aria-hidden="true">
-        <img src="${img(p, p.cover)}" alt="" loading="${i ? "lazy" : "eager"}">
-        ${p.award ? `<span class="work__award">${esc(p.award)}</span>` : ""}
+  const game = (p, i) => `
+    <article class="slide${p.theme.bg > "#8" ? " slide--light" : ""}" style="${theme(p)}">
+      <a class="slide__art" href="${p.id}.html" tabindex="-1" aria-hidden="true">
+        <img src="${img(p, p.art.src)}" style="object-position:${p.art.pos}" alt="" loading="${i ? "lazy" : "eager"}">
       </a>
-      <div class="work__body">
-        <p class="label"><span class="work__n">0${i + 1}</span> ${esc(p.kind)} · ${esc(p.year)}</p>
-        <h3 class="work__title"><a href="${p.id}.html">${esc(p.name)}</a></h3>
-        <p class="work__pitch">${esc(p.pitch)}</p>
-        <p class="work__role">${esc(p.role)} <span>${esc(p.engine)}</span></p>
-        <ul class="ticks">
-          ${p.highlights.map((h) => `<li>${esc(h)}</li>`).join("\n          ")}
-        </ul>
-        <p class="work__cta">
-          <a class="btn btn--solid" href="${p.id}.html">Read the case study ${arrow}</a>
-          <a class="btn" href="${p.links[0].url}"${ext(p.links[0].url)}>${esc(p.links[0].label)} ${out}</a>
-        </p>
+      ${p.prop ? `<img class="slide__prop slide__prop--${p.prop}" src="${img(p, "prop")}" alt="" data-drift loading="lazy">` : ""}
+      <div class="slide__info">
+        <div class="slide__main">
+          <p class="label">${String(i + 1).padStart(2, "0")} / ${esc(p.kind)} · ${esc(p.year)}</p>
+          <h3 class="slide__title"><a href="${p.id}.html">${esc(p.name)}</a></h3>
+          <p class="slide__pitch">${esc(p.pitch)}</p>
+        </div>
+        <div class="slide__side">
+          <p class="fact">${esc(p.fact)}</p>
+          <p class="slide__role">${esc(p.role)}</p>
+          <a class="btn btn--solid" href="${p.id}.html">View project ${arrow}</a>
+        </div>
       </div>
     </article>`;
 
+  const reel = [["rollemout", 3], ["aurarpg", 8], ["boomcorp", 4], ["tgf", 5]];
+
   const body = `
-<section class="hero wrap">
-  <div class="hero__text">
-    <p class="label">${esc(profile.role)} · ${esc(profile.location)}</p>
-    <h1 class="hero__h">${esc(profile.headline)}</h1>
+<section class="hero">
+  <div class="hero__reel" aria-hidden="true">
+    ${reel.map(([id, n]) => `<img src="assets/games/${id}/${n}.webp" alt="">`).join("\n    ")}
+  </div>
+  <div class="wrap hero__in">
+    <p class="hero__who"><img src="assets/kalp.webp" width="56" height="56" alt=""> <span><b>${esc(profile.name)}</b>${esc(profile.role)} · ${esc(profile.location)}</span></p>
+    <h1 class="hero__h">I build games in Unreal Engine 5 and C++.</h1>
     <p class="hero__p">${esc(profile.intro)}</p>
     <p class="hero__cta">
-      <a class="btn btn--solid" href="#work">See the work ${arrow}</a>
-      <a class="btn" href="mailto:${profile.email}">${profile.email}</a>
+      <a class="btn btn--solid btn--big" href="#work">See the games ${arrow}</a>
+      <a class="btn btn--big" href="mailto:${profile.email}">${profile.email}</a>
     </p>
   </div>
-  <img class="hero__pic" src="assets/kalp.webp" width="640" height="640" alt="Illustrated portrait of Kalp wearing headphones">
 </section>
 
 <section class="wrap">
-  <dl class="stats stats--home">
-    ${headlineStats.map((s) => `<div><dt>${esc(s.l)}</dt><dd>${s.to ? `<a href="${s.to}.html">${esc(s.v)}</a>` : esc(s.v)}</dd></div>`).join("\n    ")}
+  <dl class="numbers">
+    ${headlineStats.map((s) => `<div><dt>${esc(s.l)}</dt><dd>${esc(s.v)}</dd></div>`).join("\n    ")}
   </dl>
 </section>
 
-<section class="wrap section" id="work">
+<section class="wrap wrap--wide section" id="work">
   <header class="section__head">
     <p class="label">Selected work</p>
-    <h2>Five projects, newest first.</h2>
+    <h2 class="big">The games</h2>
   </header>
-  ${projects.map(card).join("\n")}
+  ${projects.map(game).join("\n")}
 </section>
 
 <section class="wrap section" id="skills">
   <header class="section__head">
-    <p class="label">Toolbox</p>
-    <h2>What I work with, and where I used it.</h2>
+    <p class="label">The dots show which games used it</p>
+    <h2 class="big">Toolbox</h2>
   </header>
   <div class="skills">
     ${skills.map((g) => `<div class="skills__group">
       <h3>${esc(g.group)}</h3>
       <ul>
-        ${g.items.map((s) => `<li><span>${esc(s.label)}</span><span class="skills__in">${s.in.map((id) => `<a href="${id}.html" style="--accent:${byId[id].accent}" title="${esc(byId[id].name)}"><i></i><b>${esc(byId[id].name)}</b></a>`).join("")}</span></li>`).join("\n        ")}
+        ${g.items.map((s) => `<li><span>${esc(s.label)}</span><span class="skills__in">${s.in.map((id) => `<a href="${id}.html" style="--dot:${byId[id].theme.accent}" title="${esc(byId[id].name)}"><i></i><b>${esc(byId[id].name)}</b></a>`).join("")}</span></li>`).join("\n        ")}
       </ul>
     </div>`).join("\n    ")}
   </div>
-  <p class="skills__key">${projects.map((p) => `<span style="--accent:${p.accent}"><i></i>${esc(p.name)}</span>`).join("")}</p>
+  <p class="skills__key">${projects.map((p) => `<span style="--dot:${p.theme.accent}"><i></i>${esc(p.name)}</span>`).join("")}</p>
 </section>
 
 <section class="wrap section about" id="about">
-  <div>
-    <header class="section__head">
-      <p class="label">About</p>
-      <h2>${esc(profile.about.punch)}</h2>
-    </header>
+  <div class="about__card">
+    <p class="label">About</p>
+    <h2>${esc(profile.about.punch)}</h2>
     ${profile.about.paragraphs.map((t) => `<p class="prose">${esc(t)}</p>`).join("\n    ")}
     <p><a class="btn" href="${profile.resume}" target="_blank" rel="noopener">Download résumé ${out}</a></p>
   </div>
@@ -175,25 +176,12 @@ function home() {
 }
 
 /* ------------------------------------------------------------- project */
-function codeBlock(c) {
-  const src = esc(c.src).split("\n").map((l) => l.replace(/^(\s*)(\/\/.*)$/, '$1<span class="c">$2</span>')).join("\n");
-  return `
-<section class="wrap section">
-  <header class="section__head"><p class="label">From the source</p><h2>${esc(c.title)}</h2></header>
-  <figure class="code">
-    <figcaption>${c.url ? `<a href="${c.url}" target="_blank" rel="noopener">${esc(c.path)} ${out}</a>` : esc(c.path)}</figcaption>
-    <pre tabindex="0"><code>${src}</code></pre>
-  </figure>
-  ${c.note ? `<p class="prose prose--note">${fmt(c.note)}</p>` : ""}
-</section>`;
-}
-
 function project(p, i) {
   const next = projects[(i + 1) % projects.length];
   const facts = [["Role", p.role], ["When", p.period], ["Built with", p.engine], ["Platform", p.platform], ["Status", p.status]];
   const media = p.video
     ? `<div class="phone"><video src="${p.video.src}" poster="assets/games/${p.id}/demo-poster.jpg" width="${p.video.w}" height="${p.video.h}" controls muted loop playsinline preload="none" aria-label="${esc(p.video.caption)}"></video></div>`
-    : `<img class="phead__img" src="${img(p, p.hero)}" alt="" fetchpriority="high">`;
+    : `<img class="phead__img" src="${img(p, "key")}" style="object-position:${p.art.pos}" alt="" fetchpriority="high">`;
 
   const challenge = p.challenge.steps
     ? `<ol class="psr">${p.challenge.steps.map(([k, t]) => `<li><p class="label">${esc(k)}</p><p>${fmt(t)}</p></li>`).join("")}</ol>`
@@ -258,7 +246,6 @@ ${p.flow ? `
     ${p.flow.steps.map((s) => `<li><h3>${esc(s.t)}</h3><p>${fmt(s.d)}</p></li>`).join("\n    ")}
   </ol>
 </section>` : ""}
-${p.code ? codeBlock(p.code) : ""}
 ${p.devlog ? `
 <section class="wrap section section--split">
   <header class="section__head"><p class="label">Timeline</p><h2>${esc(p.devlog.title)}</h2></header>
@@ -292,8 +279,8 @@ ${(p.notes || []).map((n) => `
 </section>`).join("")}
 </article>
 
-<nav class="wrap next" aria-label="Next project" style="${theme(next)}">
-  <a href="${next.id}.html">
+<nav class="wrap next" aria-label="Next project">
+  <a href="${next.id}.html" style="${theme(next)}">
     <span class="label">Next project</span>
     <span class="next__title">${esc(next.name)}</span>
     <span class="next__kind">${esc(next.kind)} · ${esc(next.year)} ${arrow}</span>
@@ -304,8 +291,9 @@ ${(p.notes || []).map((n) => `
     file: `${p.id}.html`,
     title: `${p.name} — ${p.kind} · Kalp Shah`,
     description: p.pitch,
-    image: img(p, p.cover).replace(".webp", ".webp"),
-    bodyClass: "proj",
+    image: img(p, "key"),
+    bodyClass: p.theme.bg > "#8" ? "proj proj--light" : "proj",
+    themeColor: p.theme.bg,
     style: theme(p),
     body,
   });

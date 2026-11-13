@@ -102,7 +102,10 @@ export const projects = [
     name: "Roll 'Em Out",
     font: "Jaro",
     fontScale: 1.08,
-    accent: "#ffb347",
+    theme: { bg: "#0b1f24", surface: "#12303a", ink: "#f3efe6", muted: "#9fb6b6", accent: "#ffb347", onAccent: "#1d1300" },
+    fact: "Free demo on Steam",
+    art: { src: "key", pos: "50% 30%" },
+    prop: "roll", // the ball rolls along the card as you scroll
     kind: "Co-op adventure",
     year: "2026",
     pitch: "A co-op adventure for up to four players, tied together by a rope, rolling a cursed friend out of a collapsing cave.",
@@ -111,8 +114,6 @@ export const projects = [
     status: "Free demo on Steam, full release coming soon", // source: Steam store page
     engine: "Unreal Engine 5 · C++ · Blueprints",
     platform: "Windows (Steam)",
-    cover: "2",
-    hero: "key",
     links: [
       { label: "Steam page", note: "Wishlist", url: "https://store.steampowered.com/app/4139160/Roll_em_Out/" },
       { label: "Play the demo", note: "Steam", url: "https://store.steampowered.com/app/4676930/Roll_em_Out_Demo/" },
@@ -149,7 +150,7 @@ export const projects = [
       ],
     },
     notes: [
-      { title: "About this page", paragraphs: ["Roll 'Em Out belongs to Shortgun Games and its source is private, so this page describes my role rather than showing code. The description of the game comes from its Steam page."] },
+      { title: "About this page", paragraphs: ["Roll 'Em Out belongs to Shortgun Games and its source is private, so this page describes my role and not the internals. The description of the game comes from its Steam page."] },
     ],
     shots: [
       { n: 1, w: 1920, h: 1080, alt: "Looking down a cave shaft at three roped explorers and the ball" },
@@ -166,7 +167,10 @@ export const projects = [
     name: "Boom Corp.",
     font: "Orbitron",
     fontScale: 0.8,
-    accent: "#cdff1b",
+    theme: { bg: "#020710", surface: "#08142b", ink: "#dcfff7", muted: "#84aeb0", accent: "#cdff1b", onAccent: "#0b1300" },
+    fact: "Winner, Druid Mechanics Game Jam 2025",
+    art: { src: "key", pos: "50% 50%" },
+    prop: "float", // the bomb drifts above the card
     kind: "First-person puzzle",
     year: "2025",
     pitch: "Minesweeper you have to walk through: a first-person puzzle game about scanning a room for buried explosives.",
@@ -175,9 +179,6 @@ export const projects = [
     status: "Released on itch.io · v1.2", // source: itch.io page
     engine: "Unreal Engine 5.6 · Blueprints", // source: BoomCorp.uproject
     platform: "Windows",
-    cover: "4",
-    hero: "3",
-    award: "Jam winner",
     links: [
       { label: "Download", note: "itch.io", url: "https://kryoxx-studio.itch.io/boom-corp" },
       { label: "Watch the trailer", note: "YouTube", url: "https://www.youtube.com/watch?v=o26X81-yo5w" },
@@ -275,7 +276,9 @@ export const projects = [
     name: "The Gravity Flip",
     font: "Sour Gummy",
     fontScale: 1,
-    accent: "#ff5db4",
+    theme: { bg: "#0c0b10", surface: "#1a1722", ink: "#f2f0f6", muted: "#a7a2b5", accent: "#ff5db4", onAccent: "#2b0017" },
+    fact: "Four-way gravity, written in C++",
+    art: { src: "key", pos: "50% 20%" },
     kind: "Puzzle platformer",
     year: "2025",
     pitch: "A side-scrolling platformer where one key turns the whole world: flip gravity, or bend it ninety degrees, and walk on whatever is now the floor.",
@@ -284,8 +287,6 @@ export const projects = [
     status: "Released on itch.io",
     engine: "Unreal Engine 5 · C++ · Blueprints",
     platform: "Windows",
-    cover: "4",
-    hero: "5",
     links: [
       { label: "Download", note: "itch.io", url: "https://kryoxx-studio.itch.io/the-gravity-flip" },
     ],
@@ -314,22 +315,6 @@ export const projects = [
       { title: "A camera with a dead zone", text: "A separate camera actor follows the character only once they leave a box in the middle of the frame, with lag on the spring arm. Which world axes count as horizontal and vertical swap when gravity goes sideways." },
       { title: "Progress and input mode", text: "A save file records which levels are finished and whether you play with a keyboard or on a touchscreen. The HUD loads a different overlay for each, and the level select unlocks from the saved list." },
     ],
-    code: {
-      title: "Gravity for physics props",
-      path: "Source/TheGravityFlip/Private/SpecialActors/GravityActor.cpp",
-      note: "The engine's own gravity is switched off for these bodies in the constructor. This is everything that replaces it.",
-      src: `void AGravityActor::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-	const FVector GravityForce = CustomGravityDirection.GetSafeNormal() * GravityStrength * MeshComponent->GetMass();
-	MeshComponent->AddForce(GravityForce);
-}
-
-void AGravityActor::OnGravityChanged_Implementation(const FVector& NewGravity)
-{
-	SetGravityDirection(NewGravity);
-}`,
-    },
     flow: {
       title: "What one key press does",
       steps: [
@@ -383,7 +368,9 @@ void AGravityActor::OnGravityChanged_Implementation(const FVector& NewGravity)
     name: "AuraRPG",
     font: "Pirata One",
     fontScale: 1.12,
-    accent: "#c9a2ff",
+    theme: { bg: "#0b072a", surface: "#161042", ink: "#eeeef8", muted: "#aaa5d2", accent: "#f3c969", onAccent: "#251a00" },
+    fact: "10,000 lines of C++ on the Gameplay Ability System",
+    art: { src: "key", pos: "50% 22%" },
     kind: "Top-down action RPG",
     year: "2025",
     pitch: "A top-down action RPG on Unreal's Gameplay Ability System: spells, attributes, enemy AI, save slots and a full UI, in about ten thousand lines of C++.",
@@ -392,8 +379,6 @@ void AGravityActor::OnGravityChanged_Implementation(const FVector& NewGravity)
     status: "Playable demo · source on GitHub",
     engine: "Unreal Engine 5.5 · C++ · Blueprints · GAS", // source: Aura.uproject
     platform: "Windows, Linux", // source: Build/ folder and commit log
-    cover: "8",
-    hero: "8",
     links: [
       { label: "Source code", note: "GitHub", url: "https://github.com/Kalpu-24/Aura-RPG" },
       { label: "Download the demo", note: "Telegram", url: "https://t.me/KryoxxStudio/7/113" },
@@ -418,7 +403,7 @@ void AGravityActor::OnGravityChanged_Implementation(const FVector& NewGravity)
     systems: [
       { title: "Ability system core", text: "A custom `UAuraAbilitySystemComponent` and `UAuraAttributeSet`. Abilities are granted, levelled, equipped to input slots and unlocked by level, with their state tracked through gameplay tags (locked, eligible, unlocked, equipped)." },
       { title: "Seven spells", text: "Fire Bolt (projectiles that home and spread as it levels), Fire Blast (a ring of fireballs that go out and come back), Electrocute (a beam that chains to nearby enemies) and Arcane Shards (a targeted area spell with a magic-circle cursor). Three passives: Halo of Protection, Life Siphon and Mana Siphon." },
-      { title: "Attributes and damage", text: "Four primary attributes drive ten secondary ones through gameplay effects and custom modifier calculations. Four resistances, health and mana complete the set. All damage goes through one execution calculation, shown below." },
+      { title: "Attributes and damage", text: "Four primary attributes drive ten secondary ones through gameplay effects and custom modifier calculations. Four resistances, health and mana complete the set. All damage goes through one execution calculation." },
       { title: "Debuffs", text: "Each damage type can apply its own debuff: burn, stun, and arcane and physical effects. The chance is reduced by the target's resistance, and the damage, frequency and duration ride along in a custom gameplay effect context that is serialised for the network." },
       { title: "Enemies", text: "Six variants across three classes (warrior, ranger, elementalist): spear and slingshot goblins, demon warriors and rangers, ghouls, and a shaman that throws fire and summons minions. Behavior Trees pick the action; an EQS query finds ranged attackers a position with a clear shot." },
       { title: "Click-to-move", text: "A short click builds a navigation path, turns it into a spline and auto-runs the character along it. Holding the button moves directly toward the cursor. The same cursor trace highlights enemies and interactable objects in different colours." },
@@ -436,20 +421,6 @@ void AGravityActor::OnGravityChanged_Implementation(const FVector& NewGravity)
         { t: "Armor", d: "Armor, less the attacker's penetration, scaled by level curves." },
         { t: "Crit", d: "Crit chance less the target's crit resistance. A crit doubles the hit and adds bonus damage." },
       ],
-    },
-    code: {
-      title: "The critical-hit step",
-      path: "Source/Aura/Private/AbilitySystem/ExecCalc/ExecCalc_Damage.cpp",
-      url: "https://github.com/Kalpu-24/Aura-RPG/blob/main/Source/Aura/Private/AbilitySystem/ExecCalc/ExecCalc_Damage.cpp",
-      note: "The block and crit results are written into the effect context so the UI can show \"Block!\" or a crit colour on the floating number.",
-      src: `// Critical Hit Resistance reduces Critical Hit Chance by a certain percentage
-const float EffectiveCriticalHitChance = SourceCriticalHitChance - TargetCriticalHitResistance * CriticalHitResistanceCoefficient;
-const bool bCriticalHit = FMath::RandRange(1, 100) < EffectiveCriticalHitChance;
-
-UAuraAbilitySystemLibrary::SetIsCriticalHit(ContextHandle, bCriticalHit);
-
-// Double damage plus a bonus if critical hit
-Damage = bCriticalHit ? 2.f * Damage + SourceCriticalHitDamage : Damage;`,
     },
     challenge: {
       title: "Following a 5.2 course on 5.5",
@@ -491,7 +462,9 @@ Damage = bCriticalHit ? 2.f * Damage + SourceCriticalHitDamage : Damage;`,
     name: "SnakeWall",
     font: "MLCD",
     fontScale: 0.92,
-    accent: "#ff5a4d",
+    theme: { bg: "#eeeef2", surface: "#ffffff", ink: "#141218", muted: "#5d5a66", accent: "#c8201b", onAccent: "#ffffff" },
+    fact: "6k+ installs on Google Play",
+    art: { src: "prop", pos: "50% 46%" },
     kind: "Android live wallpaper",
     year: "2024",
     pitch: "The classic Snake, rebuilt as an Android live wallpaper. The game is your home screen.",
@@ -500,8 +473,6 @@ Damage = bCriticalHit ? 2.f * Damage + SourceCriticalHitDamage : Damage;`,
     status: "On Google Play · v1.0.8 · open source", // source: app/build.gradle.kts, Play Store page
     engine: "Java · Android SDK · Canvas",
     platform: "Android 8.0 and later", // source: minSdk 26
-    cover: "prop",
-    hero: "prop",
     links: [
       { label: "Get it on Google Play", note: "Android", url: "https://play.google.com/store/apps/details?id=kalp.snake.wall" },
       { label: "Source code", note: "GitHub", url: "https://github.com/Kalpu-24/SnakeWall" },
@@ -531,24 +502,6 @@ Damage = bCriticalHit ? 2.f * Damage + SourceCriticalHitDamage : Damage;`,
       { title: "Customisation", text: "Five colour themes, an option to change colours automatically, a grid toggle, a vibration toggle, and a custom image as the background with light or dark controls. A preview in the app renders the same game view before you apply it." },
       { title: "Releases", text: "GitHub Actions builds debug and signed release APKs. The best score is kept in shared preferences, and the app collects no data." },
     ],
-    code: {
-      title: "The speed ramp",
-      path: "app/src/main/java/kalp/snake/wall/service/SnakeWallpaperService.java",
-      url: "https://github.com/Kalpu-24/SnakeWall/blob/main/app/src/main/java/kalp/snake/wall/service/SnakeWallpaperService.java",
-      note: "`snakeSpeed` is the delay between steps in milliseconds, so smaller is faster.",
-      src: `// Adjust speed every 3 points
-if ((this.snake.size() - this.snakeBodySize) % 3 == 0) {
-    if (this.snakeSpeed > 100) {
-        this.snakeSpeed -= 15;
-    } else if (this.snakeSpeed > 50) {
-        this.snakeSpeed -= 5;
-    } else if (this.snakeSpeed > 20) {
-        this.snakeSpeed -= 2;
-    } else if (this.snakeSpeed > 10) {
-        this.snakeSpeed -= 1;
-    }
-}`,
-    },
     devlog: {
       title: "Release history",
       items: [

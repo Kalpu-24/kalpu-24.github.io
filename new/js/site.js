@@ -2,6 +2,23 @@
 (() => {
   document.querySelectorAll("[data-year]").forEach((el) => (el.textContent = new Date().getFullYear()));
 
+  /* Home: characters that drift as their slide crosses the screen ------ */
+  const drifters = [...document.querySelectorAll("[data-drift]")];
+  if (drifters.length && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    let queued = false;
+    const place = () => {
+      queued = false;
+      for (const el of drifters) {
+        const r = el.parentElement.getBoundingClientRect();
+        const p = (r.top + r.height / 2 - innerHeight / 2) / (innerHeight / 2 + r.height / 2);
+        el.style.setProperty("--p", Math.max(-1, Math.min(1, p)).toFixed(3));
+      }
+    };
+    addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(place); } }, { passive: true });
+    addEventListener("resize", place);
+    place();
+  }
+
   /* Screenshot lightbox ------------------------------------------------ */
   const box = document.getElementById("lightbox");
   const shots = [...document.querySelectorAll(".shot")];

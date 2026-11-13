@@ -6,22 +6,22 @@
 <title>The Gravity Flip — Puzzle platformer · Kalp Shah</title>
 <meta name="description" content="A side-scrolling platformer where one key turns the whole world: flip gravity, or bend it ninety degrees, and walk on whatever is now the floor.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0b0c0f">
+<meta name="theme-color" content="#0c0b10">
 <link rel="canonical" href="https://kalpshah.dev/new/tgf.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kalpshah.dev/new/tgf.html">
 <meta property="og:title" content="The Gravity Flip — Puzzle platformer · Kalp Shah">
 <meta property="og:description" content="A side-scrolling platformer where one key turns the whole world: flip gravity, or bend it ninety degrees, and walk on whatever is now the floor.">
-<meta property="og:image" content="https://kalpshah.dev/new/assets/games/tgf/4.webp">
+<meta property="og:image" content="https://kalpshah.dev/new/assets/games/tgf/key.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/x-icon" href="public/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap">
 <link rel="stylesheet" href="css/site.css">
 <script src="js/site.js" defer></script>
 </head>
-<body class="proj" style="--accent:#ff5db4;--game-font:'Sour Gummy';--game-scale:1">
+<body class="proj" style="--bg:#0c0b10;--surface:#1a1722;--ink:#f2f0f6;--muted:#a7a2b5;--accent:#ff5db4;--on-accent:#2b0017;--game-font:'Sour Gummy';--game-scale:1">
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="wrap top__in">
@@ -46,7 +46,7 @@
       <a class="btn btn--solid" href="https://kryoxx-studio.itch.io/the-gravity-flip" target="_blank" rel="noopener">Download <small>itch.io</small> <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </p>
   </div>
-  <img class="phead__img" src="assets/games/tgf/5.webp" alt="" fetchpriority="high">
+  <img class="phead__img" src="assets/games/tgf/key.webp" style="object-position:50% 20%" alt="" fetchpriority="high">
 </header>
 
 <section class="wrap">
@@ -99,25 +99,6 @@
   </ol>
 </section>
 
-<section class="wrap section">
-  <header class="section__head"><p class="label">From the source</p><h2>Gravity for physics props</h2></header>
-  <figure class="code">
-    <figcaption>Source/TheGravityFlip/Private/SpecialActors/GravityActor.cpp</figcaption>
-    <pre tabindex="0"><code>void AGravityActor::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-	const FVector GravityForce = CustomGravityDirection.GetSafeNormal() * GravityStrength * MeshComponent-&gt;GetMass();
-	MeshComponent-&gt;AddForce(GravityForce);
-}
-
-void AGravityActor::OnGravityChanged_Implementation(const FVector&amp; NewGravity)
-{
-	SetGravityDirection(NewGravity);
-}</code></pre>
-  </figure>
-  <p class="prose prose--note">The engine's own gravity is switched off for these bodies in the constructor. This is everything that replaces it.</p>
-</section>
-
 
 <section class="wrap section">
   <header class="section__head"><p class="label">The hard part</p><h2>Making the flip feel right</h2></header>
@@ -155,8 +136,8 @@ void AGravityActor::OnGravityChanged_Implementation(const FVector&amp; NewGravit
 </section>
 </article>
 
-<nav class="wrap next" aria-label="Next project" style="--accent:#c9a2ff;--game-font:'Pirata One';--game-scale:1.12">
-  <a href="aurarpg.html">
+<nav class="wrap next" aria-label="Next project">
+  <a href="aurarpg.html" style="--bg:#0b072a;--surface:#161042;--ink:#eeeef8;--muted:#aaa5d2;--accent:#f3c969;--on-accent:#251a00;--game-font:'Pirata One';--game-scale:1.12">
     <span class="label">Next project</span>
     <span class="next__title">AuraRPG</span>
     <span class="next__kind">Top-down action RPG · 2025 <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
