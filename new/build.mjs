@@ -108,6 +108,18 @@ function home() {
       </div>
     </article>`;
 
+  /* Toolbox graph: nested lists; js/site.js draws the wires between a node and its parent. */
+  const branch = (s) => {
+    const kids = skills.filter((k) => k.parent === s.id);
+    return `<li>
+        <div class="node${s.parent ? "" : " node--root"}" id="skill-${s.id}" data-parent="${s.parent || ""}" data-in="${s.in.join(" ")}">
+          <span>${esc(s.label)}</span>
+          <span class="node__in">${s.in.map((id) => `<i style="--dot:${byId[id].theme.accent}" title="${esc(byId[id].name)}"></i>`).join("")}</span>
+          <span class="sr">Used in ${s.in.map((id) => esc(byId[id].name)).join(", ")}</span>
+        </div>${kids.length ? `<ul>${kids.map(branch).join("")}</ul>` : ""}
+      </li>`;
+  };
+
   const reel = [["rollemout", 3], ["aurarpg", 8], ["boomcorp", 4], ["tgf", 5]];
 
   const body = `
@@ -142,18 +154,16 @@ function home() {
 
 <section class="wrap section" id="skills">
   <header class="section__head">
-    <p class="label">The dots show which games used it</p>
+    <p class="label">Pick a game to light up what it used</p>
     <h2 class="big">Toolbox</h2>
   </header>
-  <div class="skills">
-    ${skills.map((g) => `<div class="skills__group">
-      <h3>${esc(g.group)}</h3>
-      <ul>
-        ${g.items.map((s) => `<li><span>${esc(s.label)}</span><span class="skills__in">${s.in.map((id) => `<a href="${id}.html" style="--dot:${byId[id].theme.accent}" title="${esc(byId[id].name)}"><i></i><b>${esc(byId[id].name)}</b></a>`).join("")}</span></li>`).join("\n        ")}
-      </ul>
-    </div>`).join("\n    ")}
+  <p class="tree__key" data-tree-key>${projects.map((p) => `<button type="button" data-game="${p.id}" style="--dot:${p.theme.accent}"><i></i>${esc(p.name)}</button>`).join("")}</p>
+  <div class="tree" data-tree>
+    <ul class="tree__roots">
+      ${skills.filter((s) => !s.parent).map(branch).join("\n      ")}
+    </ul>
+    <svg class="tree__wires" aria-hidden="true"></svg>
   </div>
-  <p class="skills__key">${projects.map((p) => `<span style="--dot:${p.theme.accent}"><i></i>${esc(p.name)}</span>`).join("")}</p>
 </section>
 
 <section class="wrap section about" id="about">

@@ -53,45 +53,33 @@ export const timeline = [
   { when: "Jan 2025", what: "Published SnakeWall on Google Play", detail: "An open-source Android live wallpaper you can play.", to: "snakewall" },
 ];
 
-/* What I work with, and where each thing was used. */
+/*
+  The toolbox graph. `parent` wires a skill to the one it grows from (leave it out for a
+  root); `in` lists the games that used it, which become the coloured dots on the node.
+*/
 export const skills = [
-  {
-    group: "Engine and languages",
-    items: [
-      { label: "Unreal Engine 5", in: ["rollemout", "boomcorp", "tgf", "aurarpg"] },
-      { label: "C++", in: ["rollemout", "tgf", "aurarpg"] },
-      { label: "Blueprints", in: ["rollemout", "boomcorp", "tgf", "aurarpg"] },
-      { label: "Java (Android)", in: ["snakewall"] },
-    ],
-  },
-  {
-    group: "Gameplay systems",
-    items: [
-      { label: "Gameplay Ability System", in: ["aurarpg"] },
-      { label: "Inventory and settings", in: ["rollemout"] },
-      { label: "Custom gravity and movement", in: ["tgf"] },
-      { label: "Save and load", in: ["aurarpg", "tgf"] },
-      { label: "Enhanced Input", in: ["tgf", "aurarpg", "boomcorp"] },
-    ],
-  },
-  {
-    group: "AI, UI and visuals",
-    items: [
-      { label: "Behavior Trees and EQS", in: ["aurarpg"] },
-      { label: "UMG, widget controllers, MVVM", in: ["aurarpg", "tgf", "rollemout"] },
-      { label: "Niagara VFX", in: ["aurarpg", "boomcorp", "tgf"] },
-      { label: "Post-process toon and outline shader", in: ["boomcorp"] },
-    ],
-  },
-  {
-    group: "Shipping",
-    items: [
-      { label: "Steam, itch.io, Google Play releases", in: ["rollemout", "boomcorp", "tgf", "snakewall"] },
-      { label: "Build size and performance passes", in: ["boomcorp", "tgf"] },
-      { label: "Git, Git LFS, GitHub Actions", in: ["snakewall", "boomcorp"] },
-      { label: "Blender, Photoshop", in: ["boomcorp", "tgf"] },
-    ],
-  },
+  { id: "ue5", label: "Unreal Engine 5", in: ["rollemout", "boomcorp", "tgf", "aurarpg"] },
+  { id: "cpp", label: "C++", parent: "ue5", in: ["rollemout", "tgf", "aurarpg"] },
+  { id: "gas", label: "Gameplay Ability System", parent: "cpp", in: ["aurarpg"] },
+  { id: "gravity", label: "Custom gravity and movement", parent: "cpp", in: ["tgf"] },
+  { id: "save", label: "Save and load", parent: "cpp", in: ["aurarpg", "tgf"] },
+  { id: "ai", label: "Behavior Trees and EQS", parent: "cpp", in: ["aurarpg"] },
+  { id: "bp", label: "Blueprints", parent: "ue5", in: ["rollemout", "boomcorp", "tgf", "aurarpg"] },
+  { id: "ui", label: "UMG, widget controllers, MVVM", parent: "bp", in: ["rollemout", "tgf", "aurarpg"] },
+  { id: "inventory", label: "Inventory and settings", parent: "bp", in: ["rollemout"] },
+  { id: "input", label: "Enhanced Input", parent: "bp", in: ["boomcorp", "tgf", "aurarpg"] },
+  { id: "vfx", label: "Niagara VFX", parent: "bp", in: ["boomcorp", "tgf", "aurarpg"] },
+  { id: "shader", label: "Toon and outline shader", parent: "bp", in: ["boomcorp"] },
+
+  { id: "android", label: "Android", in: ["snakewall"] },
+  { id: "java", label: "Java", parent: "android", in: ["snakewall"] },
+  { id: "wallpaper", label: "WallpaperService and Canvas", parent: "java", in: ["snakewall"] },
+
+  { id: "ship", label: "Shipping", in: ["rollemout", "boomcorp", "tgf", "snakewall"] },
+  { id: "stores", label: "Steam, itch.io, Google Play", parent: "ship", in: ["rollemout", "boomcorp", "tgf", "snakewall"] },
+  { id: "perf", label: "Build size and performance passes", parent: "ship", in: ["boomcorp", "tgf"] },
+  { id: "git", label: "Git, Git LFS, GitHub Actions", parent: "ship", in: ["boomcorp", "snakewall"] },
+  { id: "art", label: "Blender, Photoshop", parent: "ship", in: ["boomcorp", "tgf"] },
 ];
 
 export const projects = [
