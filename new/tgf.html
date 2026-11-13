@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Gravity Flip — Puzzle platformer · Kalp Shah</title>
+<meta name="description" content="A side-scrolling platformer where one key turns the whole world: flip gravity, or bend it ninety degrees, and walk on whatever is now the floor.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b0c0f">
+<link rel="canonical" href="https://kalpshah.dev/new/tgf.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kalpshah.dev/new/tgf.html">
+<meta property="og:title" content="The Gravity Flip — Puzzle platformer · Kalp Shah">
+<meta property="og:description" content="A side-scrolling platformer where one key turns the whole world: flip gravity, or bend it ninety degrees, and walk on whatever is now the floor.">
+<meta property="og:image" content="https://kalpshah.dev/new/assets/games/tgf/4.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/x-icon" href="public/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap">
+<link rel="stylesheet" href="css/site.css">
+<script src="js/site.js" defer></script>
+</head>
+<body class="proj" style="--accent:#ff5db4;--game-font:'Sour Gummy';--game-scale:1">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top__in">
+    <a class="top__name" href="./">Kalp Shah</a>
+    <nav class="top__nav" aria-label="Main">
+      <a href="./#work">Work</a>
+      <a href="./#about">About</a>
+      <a href="./#contact">Contact</a>
+      <a class="btn btn--small" href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Résumé</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<article>
+<header class="phead wrap">
+  <div class="phead__text">
+    <p class="label"><a href="./#work">Work</a> / Puzzle platformer · 2025</p>
+    <h1 class="phead__title">The Gravity Flip</h1>
+    <p class="phead__pitch">A side-scrolling platformer where one key turns the whole world: flip gravity, or bend it ninety degrees, and walk on whatever is now the floor.</p>
+    <p class="phead__cta">
+      <a class="btn btn--solid" href="https://kryoxx-studio.itch.io/the-gravity-flip" target="_blank" rel="noopener">Download <small>itch.io</small> <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </p>
+  </div>
+  <img class="phead__img" src="assets/games/tgf/5.webp" alt="" fetchpriority="high">
+</header>
+
+<section class="wrap">
+  <dl class="facts">
+    <div><dt>Role</dt><dd>Solo developer</dd></div>
+    <div><dt>When</dt><dd>25 Apr – 10 May 2025</dd></div>
+    <div><dt>Built with</dt><dd>Unreal Engine 5 · C++ · Blueprints</dd></div>
+    <div><dt>Platform</dt><dd>Windows</dd></div>
+    <div><dt>Status</dt><dd>Released on itch.io</dd></div>
+  </dl>
+  <dl class="stats">
+    <div><dt>levels</dt><dd>10</dd></div>
+    <div><dt>start to release</dt><dd>16 days</dd></div>
+    <div><dt>gravity directions</dt><dd>4</dd></div>
+    <div><dt>download</dt><dd>276 MB</dd></div>
+  </dl>
+</section>
+
+<section class="wrap section section--split">
+  <header class="section__head"><p class="label">Overview</p><h2>The game</h2></header>
+  <div>
+    <p class="prose prose--lead">The Gravity Flip is built around a single idea: what if gravity worked the other way? Spikes on the floor? Flip. Exit on the ceiling? Flip. Each level is a small box that only makes sense once you have turned it over a few times.</p>
+    <p class="prose prose--lead">It is less about difficulty than about the feeling of disorientation and flow as the world turns on its head. I built it alone in sixteen days, with the gameplay code in C++ and the levels, UI and effects in Blueprints.</p>
+    <ul class="tags"><li>Unreal Engine 5</li><li>C++</li><li>Character movement</li><li>Enhanced Input</li><li>Level design</li></ul>
+  </div>
+</section>
+
+
+<section class="wrap section">
+  <header class="section__head"><p class="label">Systems</p><h2>How it works</h2></header>
+  <div class="systems">
+    <div class="system"><p class="system__n">01</p><h3>A four-way gravity state</h3><p>The player controller tracks which way is down: floor, ceiling, left wall or right wall. Three inputs change it: turn 90° clockwise, turn 90° counter-clockwise, or flip 180°. Each one sets a new gravity direction on the character's movement component, so jumping, falling and walking all work on any surface.</p></div>
+    <div class="system"><p class="system__n">02</p><h3>The turn itself</h3><p>While gravity is changing, input is locked, the character drops to one-tenth speed and the camera rolls to the new orientation. Then time and control come back. That short slow-motion beat is what makes a mid-air flip readable instead of nauseating.</p></div>
+    <div class="system"><p class="system__n">03</p><h3>Left stays left</h3><p>When down becomes a wall, the character's sideways axis is now vertical in the world. The controller picks the new movement axis and adds or removes the negate modifier on the A and D key mappings at runtime, so the key that moves you left on screen always moves you left on screen.</p></div>
+    <div class="system"><p class="system__n">04</p><h3>Props that fall with you</h3><p>Physics objects turn off the engine's gravity and apply their own force every tick. When the player turns gravity, the controller finds every actor that implements <code>IGravityReceiverInterface</code> and hands it the new direction, so crates fall toward the same floor you do.</p></div>
+    <div class="system"><p class="system__n">05</p><h3>A camera with a dead zone</h3><p>A separate camera actor follows the character only once they leave a box in the middle of the frame, with lag on the spring arm. Which world axes count as horizontal and vertical swap when gravity goes sideways.</p></div>
+    <div class="system"><p class="system__n">06</p><h3>Progress and input mode</h3><p>A save file records which levels are finished and whether you play with a keyboard or on a touchscreen. The HUD loads a different overlay for each, and the level select unlocks from the saved list.</p></div>
+  </div>
+  <p class="codebase">1,769 lines of C++ in 38 source files.</p>
+</section>
+
+<section class="wrap section">
+  <header class="section__head"><p class="label">Step by step</p><h2>What one key press does</h2></header>
+  <ol class="flow">
+    <li><h3>Press E, Q or F</h3><p>Turn 90° either way, or flip 180°.</p></li>
+    <li><h3>Lock and slow</h3><p>Input off, character at 0.1× time.</p></li>
+    <li><h3>New down</h3><p>Movement component and every gravity receiver get the new direction.</p></li>
+    <li><h3>Remap</h3><p>Movement axis and key modifiers updated.</p></li>
+    <li><h3>Camera roll</h3><p>Camera rotates to match, then control returns.</p></li>
+  </ol>
+</section>
+
+<section class="wrap section">
+  <header class="section__head"><p class="label">From the source</p><h2>Gravity for physics props</h2></header>
+  <figure class="code">
+    <figcaption>Source/TheGravityFlip/Private/SpecialActors/GravityActor.cpp</figcaption>
+    <pre tabindex="0"><code>void AGravityActor::Tick(float DeltaTime)
+{
+	Super::Tick(DeltaTime);
+	const FVector GravityForce = CustomGravityDirection.GetSafeNormal() * GravityStrength * MeshComponent-&gt;GetMass();
+	MeshComponent-&gt;AddForce(GravityForce);
+}
+
+void AGravityActor::OnGravityChanged_Implementation(const FVector&amp; NewGravity)
+{
+	SetGravityDirection(NewGravity);
+}</code></pre>
+  </figure>
+  <p class="prose prose--note">The engine's own gravity is switched off for these bodies in the constructor. This is everything that replaces it.</p>
+</section>
+
+
+<section class="wrap section">
+  <header class="section__head"><p class="label">The hard part</p><h2>Making the flip feel right</h2></header>
+  <ol class="psr"><li><p class="label">Problem</p><p>A responsive gravity flip caused trouble everywhere at once: which way the character faces, what counts as ground, how the camera follows, and what the movement keys mean when the floor is a wall.</p></li><li><p class="label">Approach</p><p>I tied everything to one gravity direction owned by the player controller. The character, the camera, the input mapping and the physics props all read from it or are told when it changes, instead of each guessing on its own.</p></li><li><p class="label">Result</p><p>Gravity can change mid-jump without breaking movement, and the controls stay predictable in all four orientations.</p></li></ol>
+</section>
+
+<section class="wrap section">
+  <header class="section__head"><p class="label">Gallery</p><h2>Screenshots</h2></header>
+  <div class="shots">
+    <button class="shot" data-full="assets/games/tgf/1.webp" data-alt="Main menu with the orange robot character"><img src="assets/games/tgf/1-sm.webp" width="1920" height="1080" loading="lazy" alt="Main menu with the orange robot character"></button>
+    <button class="shot" data-full="assets/games/tgf/2.webp" data-alt="Level one: a vertical shaft with the exit at the bottom"><img src="assets/games/tgf/2-sm.webp" width="1920" height="1080" loading="lazy" alt="Level one: a vertical shaft with the exit at the bottom"></button>
+    <button class="shot" data-full="assets/games/tgf/3.webp" data-alt="The level mid-rotation, tilted on screen"><img src="assets/games/tgf/3-sm.webp" width="1920" height="1080" loading="lazy" alt="The level mid-rotation, tilted on screen"></button>
+    <button class="shot" data-full="assets/games/tgf/4.webp" data-alt="A corridor with a pit of glowing spikes"><img src="assets/games/tgf/4-sm.webp" width="1920" height="1080" loading="lazy" alt="A corridor with a pit of glowing spikes"></button>
+    <button class="shot" data-full="assets/games/tgf/5.webp" data-alt="A long level seen at an angle while gravity turns"><img src="assets/games/tgf/5-sm.webp" width="1920" height="1080" loading="lazy" alt="A long level seen at an angle while gravity turns"></button>
+    <button class="shot" data-full="assets/games/tgf/6.webp" data-alt="Controls screen: choose touch or keyboard"><img src="assets/games/tgf/6-sm.webp" width="1920" height="1080" loading="lazy" alt="Controls screen: choose touch or keyboard"></button>
+    <button class="shot" data-full="assets/games/tgf/7.webp" data-alt="Touch controls overlay with move and gravity buttons"><img src="assets/games/tgf/7-sm.webp" width="1704" height="960" loading="lazy" alt="Touch controls overlay with move and gravity buttons"></button>
+  </div>
+</section>
+
+<section class="wrap section">
+  <header class="section__head"><p class="label">Reception</p><h2>What players said</h2></header>
+  <div class="quotes">
+    <figure class="quote"><blockquote>The gravity-switching mechanic is genius! Makes every level feel fresh and challenging.</blockquote><figcaption><b>Sujal</b> Player</figcaption></figure>
+    <figure class="quote"><blockquote>Solid af game, works good, smooth, nice mechanic, good idea, keep it up.</blockquote><figcaption><b>Tako</b> Player</figcaption></figure>
+    <figure class="quote"><blockquote>Man.. it's already a great fun game. Also, the graphics are so good. I liked every aspect of it.</blockquote><figcaption><b>Vivek</b> Player</figcaption></figure>
+    <figure class="quote"><blockquote>Good mechanics, I like the concept. It feels a little bit too easy but overall great game. Waiting for more levels.</blockquote><figcaption><b>Yash</b> Player</figcaption></figure>
+    <figure class="quote"><blockquote>I enjoyed it while playing man, great work, waiting for more levels.</blockquote><figcaption><b>Nitin</b> Tester</figcaption></figure>
+    <figure class="quote"><blockquote>Amazing concept. It was a fun playthrough.</blockquote><figcaption><b>Shreyash</b> Player</figcaption></figure>
+  </div>
+</section>
+
+<section class="wrap section section--split section--note">
+  <header class="section__head"><p class="label">Note</p><h2>A decision: no Android release</h2></header>
+  <div><p class="prose">The game has touch controls and I took an Android build through closed testing on Google Play. It ran well on many phones, but a number of device-specific bugs turned up that would have taken significant time to fix.</p><p class="prose">Windows was always the main platform, so I stopped the Android release rather than ship something uneven. Thanks to everyone who joined the testing.</p></div>
+</section>
+</article>
+
+<nav class="wrap next" aria-label="Next project" style="--accent:#c9a2ff;--game-font:'Pirata One';--game-scale:1.12">
+  <a href="aurarpg.html">
+    <span class="label">Next project</span>
+    <span class="next__title">AuraRPG</span>
+    <span class="next__kind">Top-down action RPG · 2025 <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  </a>
+</nav>
+</main>
+<footer class="foot" id="contact">
+  <div class="wrap">
+    <p class="label">Contact</p>
+    <h2 class="foot__h">I'm open to new opportunities, or just a friendly chat.</h2>
+    <a class="foot__mail" href="mailto:contact@kalpshah.dev">contact@kalpshah.dev</a>
+    <ul class="foot__links">
+      <li><a href="https://github.com/Kalpu-24" target="_blank" rel="noopener">GitHub <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://www.linkedin.com/in/Kalpu24/" target="_blank" rel="noopener">LinkedIn <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://kryoxx-studio.itch.io/" target="_blank" rel="noopener">itch.io <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://t.me/kalpu_24" target="_blank" rel="noopener">Telegram <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Résumé (PDF) <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+    </ul>
+    <p class="foot__copy">© <span data-year>2026</span> Kalp Shah · Gujarat, India</p>
+  </div>
+</footer>
+<dialog class="lightbox" id="lightbox" aria-label="Screenshot viewer">
+  <img id="lightbox-img" alt="">
+  <p class="lightbox__cap" id="lightbox-cap"></p>
+  <button class="lightbox__btn lightbox__prev" id="lightbox-prev" aria-label="Previous"><svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <button class="lightbox__btn lightbox__next" id="lightbox-next" aria-label="Next"><svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <button class="lightbox__btn lightbox__close" id="lightbox-close" aria-label="Close">✕</button>
+</dialog>
+</body>
+</html>

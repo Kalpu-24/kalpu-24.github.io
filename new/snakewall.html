@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SnakeWall — Android live wallpaper · Kalp Shah</title>
+<meta name="description" content="The classic Snake, rebuilt as an Android live wallpaper. The game is your home screen.">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0b0c0f">
+<link rel="canonical" href="https://kalpshah.dev/new/snakewall.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kalpshah.dev/new/snakewall.html">
+<meta property="og:title" content="SnakeWall — Android live wallpaper · Kalp Shah">
+<meta property="og:description" content="The classic Snake, rebuilt as an Android live wallpaper. The game is your home screen.">
+<meta property="og:image" content="https://kalpshah.dev/new/assets/games/snakewall/prop.webp">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/x-icon" href="public/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap">
+<link rel="stylesheet" href="css/site.css">
+<script src="js/site.js" defer></script>
+</head>
+<body class="proj" style="--accent:#ff5a4d;--game-font:'MLCD';--game-scale:0.92">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top__in">
+    <a class="top__name" href="./">Kalp Shah</a>
+    <nav class="top__nav" aria-label="Main">
+      <a href="./#work">Work</a>
+      <a href="./#about">About</a>
+      <a href="./#contact">Contact</a>
+      <a class="btn btn--small" href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Résumé</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<article>
+<header class="phead wrap phead--phone">
+  <div class="phead__text">
+    <p class="label"><a href="./#work">Work</a> / Android live wallpaper · 2024</p>
+    <h1 class="phead__title">SnakeWall</h1>
+    <p class="phead__pitch">The classic Snake, rebuilt as an Android live wallpaper. The game is your home screen.</p>
+    <p class="phead__cta">
+      <a class="btn btn--solid" href="https://play.google.com/store/apps/details?id=kalp.snake.wall" target="_blank" rel="noopener">Get it on Google Play <small>Android</small> <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="btn" href="https://github.com/Kalpu-24/SnakeWall" target="_blank" rel="noopener">Source code <small>GitHub</small> <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </p>
+  </div>
+  <div class="phone"><video src="assets/games/snakewall/demo.mp4" poster="assets/games/snakewall/demo-poster.jpg" width="576" height="1280" controls muted loop playsinline preload="none" aria-label="Forty seconds of SnakeWall running as a wallpaper."></video></div>
+</header>
+
+<section class="wrap">
+  <dl class="facts">
+    <div><dt>Role</dt><dd>Creator and maintainer</dd></div>
+    <div><dt>When</dt><dd>Dec 2024 – Oct 2025</dd></div>
+    <div><dt>Built with</dt><dd>Java · Android SDK · Canvas</dd></div>
+    <div><dt>Platform</dt><dd>Android 8.0 and later</dd></div>
+    <div><dt>Status</dt><dd>On Google Play · v1.0.8 · open source</dd></div>
+  </dl>
+  <dl class="stats">
+    <div><dt>Google Play installs</dt><dd>6k+</dd></div>
+    <div><dt>store rating</dt><dd>4.6</dd></div>
+    <div><dt>GitHub stars</dt><dd>28</dd></div>
+    <div><dt>first commit to v1.0.0</dt><dd>6 days</dd></div>
+  </dl>
+</section>
+
+<section class="wrap section section--split">
+  <header class="section__head"><p class="label">Overview</p><h2>The game</h2></header>
+  <div>
+    <p class="prose prose--lead">SnakeWall puts a playable game of Snake on your Android home screen. Set it as your wallpaper, tap start, and steer with four on-screen buttons while your app icons sit on top.</p>
+    <p class="prose prose--lead">It began as an attempt to copy the Snake widget on Nothing phones, became a wallpaper when widgets turned out to be the wrong tool, and went from first commit to a working release in six days. It has been on Google Play since January 2025, and is now at v1.0.8.</p>
+    <ul class="tags"><li>Java</li><li>Android</li><li>WallpaperService</li><li>Canvas</li><li>GitHub Actions</li><li>Open source</li></ul>
+  </div>
+</section>
+
+<section class="wrap section">
+  <div class="toy" data-toy="snake">
+    <div class="toy__side">
+      <p class="label">Playable</p>
+      <h2>Play it here</h2>
+      <p>The wallpaper's rules in your browser: a 19 × 19 board, walls that wrap, and a step that gets shorter every third piece of food. Arrow keys or the buttons.</p>
+      <dl class="toy__stats" data-toy-stats></dl>
+      <p class="toy__msg" data-toy-msg aria-live="polite"></p>
+      <div class="toy__actions" data-toy-actions></div>
+    </div>
+    <div class="toy__board" data-toy-board></div>
+  </div>
+</section>
+
+<section class="wrap section">
+  <header class="section__head"><p class="label">Systems</p><h2>How it works</h2></header>
+  <div class="systems">
+    <div class="system"><p class="system__n">01</p><h3>A game inside the wallpaper service</h3><p>There is no activity running the game. Everything lives in a <code>WallpaperService.Engine</code>: a game thread moves the snake and draws each frame to the wallpaper's surface with the Canvas API, and touches arrive through the wallpaper's own touch callback.</p></div>
+    <div class="system"><p class="system__n">02</p><h3>The board</h3><p>A 19 × 19 grid sized to the screen width. The snake is a linked list of grid coordinates: each step adds a head and removes the tail, and the walls wrap around to the opposite side.</p></div>
+    <div class="system"><p class="system__n">03</p><h3>Speed</h3><p>The game starts at one step every 200 ms. Every third piece of food shortens the step, in smaller amounts as it gets faster, so it ramps quickly at first and then levels out.</p></div>
+    <div class="system"><p class="system__n">04</p><h3>Being a good wallpaper</h3><p>A wallpaper must not drain the battery. The game pauses itself when the screen turns off, when the home screen is covered, and after ten seconds without input. The thread sleeps between steps, so nothing redraws faster than the snake moves.</p></div>
+    <div class="system"><p class="system__n">05</p><h3>Customisation</h3><p>Five colour themes, an option to change colours automatically, a grid toggle, a vibration toggle, and a custom image as the background with light or dark controls. A preview in the app renders the same game view before you apply it.</p></div>
+    <div class="system"><p class="system__n">06</p><h3>Releases</h3><p>GitHub Actions builds debug and signed release APKs. The best score is kept in shared preferences, and the app collects no data.</p></div>
+  </div>
+  <p class="codebase">2,521 lines of Java in 11 source files.</p>
+</section>
+
+
+<section class="wrap section">
+  <header class="section__head"><p class="label">From the source</p><h2>The speed ramp</h2></header>
+  <figure class="code">
+    <figcaption><a href="https://github.com/Kalpu-24/SnakeWall/blob/main/app/src/main/java/kalp/snake/wall/service/SnakeWallpaperService.java" target="_blank" rel="noopener">app/src/main/java/kalp/snake/wall/service/SnakeWallpaperService.java <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></figcaption>
+    <pre tabindex="0"><code><span class="c">// Adjust speed every 3 points</span>
+if ((this.snake.size() - this.snakeBodySize) % 3 == 0) {
+    if (this.snakeSpeed &gt; 100) {
+        this.snakeSpeed -= 15;
+    } else if (this.snakeSpeed &gt; 50) {
+        this.snakeSpeed -= 5;
+    } else if (this.snakeSpeed &gt; 20) {
+        this.snakeSpeed -= 2;
+    } else if (this.snakeSpeed &gt; 10) {
+        this.snakeSpeed -= 1;
+    }
+}</code></pre>
+  </figure>
+  <p class="prose prose--note"><code>snakeSpeed</code> is the delay between steps in milliseconds, so smaller is faster.</p>
+</section>
+
+<section class="wrap section section--split">
+  <header class="section__head"><p class="label">Timeline</p><h2>Release history</h2></header>
+  <ol class="devlog">
+    <li><time>13 Dec 2024</time><p>First commit.</p></li>
+    <li><time>19 Dec 2024</time><p>v1.0.0: playable wallpaper with colour themes.</p></li>
+    <li><time>21 Dec 2024</time><p>First GitHub release, with a themed monochrome icon.</p></li>
+    <li><time>27 Jan 2025</time><p>Published on Google Play. Vibration toggle contributed by another developer.</p></li>
+    <li><time>3 Oct 2025</time><p>v1.0.8: custom image backgrounds, also a community contribution.</p></li>
+  </ol>
+</section>
+
+<section class="wrap section section--split">
+  <header class="section__head"><p class="label">The hard part</p><h2>From widget to wallpaper</h2></header>
+  <div><p class="prose">The first plan was a home-screen widget like Nothing's. I wrote a custom view for the game with swipe gestures, then hit the wall: Android widgets cannot run a custom view or a game loop.</p>
+<p class="prose">I posted about being stuck on my Telegram channel, and someone suggested a live wallpaper instead. A wallpaper gets a real drawing surface and its own touch events, which is everything the game needed.</p>
+<p class="prose">One limit remained. A swipe on the home screen belongs to the launcher: it opens the app drawer or the notification shade. So the game uses four on-screen buttons, and that constraint ended up defining how it looks.</p></div>
+</section>
+
+<section class="wrap section">
+  <header class="section__head"><p class="label">Gallery</p><h2>Screenshots</h2></header>
+  <div class="shots shots--tall">
+    <button class="shot" data-full="assets/games/snakewall/1.webp" data-alt="The SnakeWall icon on a blank screen"><img src="assets/games/snakewall/1-sm.webp" width="230" height="512" loading="lazy" alt="The SnakeWall icon on a blank screen"></button>
+    <button class="shot" data-full="assets/games/snakewall/2.webp" data-alt="The app's home screen with preview, themes and settings tiles"><img src="assets/games/snakewall/2-sm.webp" width="230" height="512" loading="lazy" alt="The app's home screen with preview, themes and settings tiles"></button>
+    <button class="shot" data-full="assets/games/snakewall/3.webp" data-alt="Wallpaper preview with the start button and direction pad"><img src="assets/games/snakewall/3-sm.webp" width="230" height="512" loading="lazy" alt="Wallpaper preview with the start button and direction pad"></button>
+    <button class="shot" data-full="assets/games/snakewall/4.webp" data-alt="Theme picker showing light and dark themes"><img src="assets/games/snakewall/4-sm.webp" width="230" height="512" loading="lazy" alt="Theme picker showing light and dark themes"></button>
+    <button class="shot" data-full="assets/games/snakewall/5.webp" data-alt="Settings sheet with the grid toggle"><img src="assets/games/snakewall/5-sm.webp" width="230" height="512" loading="lazy" alt="Settings sheet with the grid toggle"></button>
+  </div>
+</section>
+
+<section class="wrap section">
+  <header class="section__head"><p class="label">Reception</p><h2>What players said</h2></header>
+  <div class="quotes">
+    <figure class="quote"><blockquote>Pretty creative stuff.</blockquote><figcaption><b>HowToMen</b> YouTuber</figcaption></figure>
+    <figure class="quote"><blockquote>Uniquely fresh idea which brings back nostalgic memories. +1 for the haptic support since it feels premium with the haptics.</blockquote><figcaption><b>Raj</b> Android user</figcaption></figure>
+    <figure class="quote"><blockquote>A super creative idea! Playing Snake right on the wallpaper is both fun and unique, never seen anything like it.</blockquote><figcaption><b>Sujal</b> Android user</figcaption></figure>
+    <figure class="quote"><blockquote>Didn't expect to be playing Snake on my home screen lol. Super fun as always and works smoothly.</blockquote><figcaption><b>Adarsh</b> Android user</figcaption></figure>
+    <figure class="quote"><blockquote>Unique idea, it works really well, I can spend hours playing the snake game and never get tired of it :)</blockquote><figcaption><b>Pie</b> Android user</figcaption></figure>
+    <figure class="quote"><blockquote>Is a great app. Is so cool and simple.</blockquote><figcaption><b>nevulastra</b> Android user</figcaption></figure>
+  </div>
+</section>
+
+</article>
+
+<nav class="wrap next" aria-label="Next project" style="--accent:#ffb347;--game-font:'Jaro';--game-scale:1.08">
+  <a href="rollemout.html">
+    <span class="label">Next project</span>
+    <span class="next__title">Roll 'Em Out</span>
+    <span class="next__kind">Co-op adventure · 2026 <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+  </a>
+</nav>
+</main>
+<footer class="foot" id="contact">
+  <div class="wrap">
+    <p class="label">Contact</p>
+    <h2 class="foot__h">I'm open to new opportunities, or just a friendly chat.</h2>
+    <a class="foot__mail" href="mailto:contact@kalpshah.dev">contact@kalpshah.dev</a>
+    <ul class="foot__links">
+      <li><a href="https://github.com/Kalpu-24" target="_blank" rel="noopener">GitHub <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://www.linkedin.com/in/Kalpu24/" target="_blank" rel="noopener">LinkedIn <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://kryoxx-studio.itch.io/" target="_blank" rel="noopener">itch.io <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://t.me/kalpu_24" target="_blank" rel="noopener">Telegram <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Résumé (PDF) <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+    </ul>
+    <p class="foot__copy">© <span data-year>2026</span> Kalp Shah · Gujarat, India</p>
+  </div>
+</footer>
+<dialog class="lightbox" id="lightbox" aria-label="Screenshot viewer">
+  <img id="lightbox-img" alt="">
+  <p class="lightbox__cap" id="lightbox-cap"></p>
+  <button class="lightbox__btn lightbox__prev" id="lightbox-prev" aria-label="Previous"><svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <button class="lightbox__btn lightbox__next" id="lightbox-next" aria-label="Next"><svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <button class="lightbox__btn lightbox__close" id="lightbox-close" aria-label="Close">✕</button>
+</dialog>
+</body>
+</html>
