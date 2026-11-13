@@ -6,22 +6,22 @@
 <title>SnakeWall — Android live wallpaper · Kalp Shah</title>
 <meta name="description" content="The classic Snake, rebuilt as an Android live wallpaper. The game is your home screen.">
 <meta name="robots" content="noindex">
-<meta name="theme-color" content="#0b0c0f">
+<meta name="theme-color" content="#eeeef2">
 <link rel="canonical" href="https://kalpshah.dev/new/snakewall.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kalpshah.dev/new/snakewall.html">
 <meta property="og:title" content="SnakeWall — Android live wallpaper · Kalp Shah">
 <meta property="og:description" content="The classic Snake, rebuilt as an Android live wallpaper. The game is your home screen.">
-<meta property="og:image" content="https://kalpshah.dev/new/assets/games/snakewall/prop.webp">
+<meta property="og:image" content="https://kalpshah.dev/new/assets/games/snakewall/key.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/x-icon" href="public/favicon.ico">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap">
 <link rel="stylesheet" href="css/site.css">
 <script src="js/site.js" defer></script>
 </head>
-<body class="proj" style="--accent:#ff5a4d;--game-font:'MLCD';--game-scale:0.92">
+<body class="proj proj--light" style="--bg:#eeeef2;--surface:#ffffff;--ink:#141218;--muted:#5d5a66;--accent:#c8201b;--on-accent:#ffffff;--game-font:'MLCD';--game-scale:0.92">
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="wrap top__in">
@@ -103,26 +103,6 @@
 </section>
 
 
-<section class="wrap section">
-  <header class="section__head"><p class="label">From the source</p><h2>The speed ramp</h2></header>
-  <figure class="code">
-    <figcaption><a href="https://github.com/Kalpu-24/SnakeWall/blob/main/app/src/main/java/kalp/snake/wall/service/SnakeWallpaperService.java" target="_blank" rel="noopener">app/src/main/java/kalp/snake/wall/service/SnakeWallpaperService.java <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></figcaption>
-    <pre tabindex="0"><code><span class="c">// Adjust speed every 3 points</span>
-if ((this.snake.size() - this.snakeBodySize) % 3 == 0) {
-    if (this.snakeSpeed &gt; 100) {
-        this.snakeSpeed -= 15;
-    } else if (this.snakeSpeed &gt; 50) {
-        this.snakeSpeed -= 5;
-    } else if (this.snakeSpeed &gt; 20) {
-        this.snakeSpeed -= 2;
-    } else if (this.snakeSpeed &gt; 10) {
-        this.snakeSpeed -= 1;
-    }
-}</code></pre>
-  </figure>
-  <p class="prose prose--note"><code>snakeSpeed</code> is the delay between steps in milliseconds, so smaller is faster.</p>
-</section>
-
 <section class="wrap section section--split">
   <header class="section__head"><p class="label">Timeline</p><h2>Release history</h2></header>
   <ol class="devlog">
@@ -166,8 +146,8 @@ if ((this.snake.size() - this.snakeBodySize) % 3 == 0) {
 
 </article>
 
-<nav class="wrap next" aria-label="Next project" style="--accent:#ffb347;--game-font:'Jaro';--game-scale:1.08">
-  <a href="rollemout.html">
+<nav class="wrap next" aria-label="Next project">
+  <a href="rollemout.html" style="--bg:#0b1f24;--surface:#12303a;--ink:#f3efe6;--muted:#9fb6b6;--accent:#ffb347;--on-accent:#1d1300;--game-font:'Jaro';--game-scale:1.08">
     <span class="label">Next project</span>
     <span class="next__title">Roll 'Em Out</span>
     <span class="next__kind">Co-op adventure · 2026 <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
