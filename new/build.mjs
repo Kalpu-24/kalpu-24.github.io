@@ -1,7 +1,14 @@
 #!/usr/bin/env node
 /* Generates the static pages from src/content.mjs.  Run:  node build.mjs  */
-import { writeFileSync } from "node:fs";
+import { readFileSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
 import { site, profile, headlineStats, timeline, skills, projects } from "./src/content.mjs";
+
+/* The stylesheet and script are linked as site.css?v=<hash of the file>, so a browser that
+   cached an older copy fetches the new one as soon as the pages change. */
+const versioned = (path) => `${path}?v=${createHash("sha1").update(readFileSync(new URL(path, import.meta.url))).digest("hex").slice(0, 8)}`;
+const CSS = versioned("css/site.css");
+const JS = versioned("js/site.js");
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const fmt = (s) => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>");
@@ -34,8 +41,8 @@ ${site.noindex ? `<meta name="robots" content="noindex">\n` : ""}<meta name="the
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="${FONTS}">
-<link rel="stylesheet" href="css/site.css">
-<script src="js/site.js" defer></script>
+<link rel="stylesheet" href="${CSS}">
+<script src="${JS}" defer></script>
 </head>
 <body class="${bodyClass}"${style ? ` style="${style}"` : ""}>
 <a class="skip" href="#main">Skip to content</a>
