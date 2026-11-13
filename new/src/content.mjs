@@ -18,7 +18,7 @@ export const profile = {
   location: "Gujarat, India",
   headline: "I build games in Unreal Engine 5 and C++.",
   intro:
-    "Gameplay systems, UI and the unglamorous work of getting a build out the door. Most recently a programmer on the co-op adventure Roll 'Em Out at Shortgun Games; before that, a jam-winning puzzle game, a gravity platformer and an action RPG, built solo.",
+    "Gameplay systems, UI and the unglamorous work of getting a build out the door. I'm a programmer at Shortgun Games, where I worked on the co-op adventure Roll 'Em Out; before that, a jam-winning puzzle game, a gravity platformer and an action RPG, built solo.",
   email: "contact@kalpshah.dev",
   resume: "public/Kalp-Resume-Game.pdf",
   links: [
@@ -40,13 +40,12 @@ export const profile = {
 export const headlineStats = [
   { v: "1st", l: "Druid Mechanics Game Jam 2025", to: "boomcorp" },
   { v: "4", l: "Unreal Engine 5 games", to: null },
-  { v: "11.8k", l: "lines of C++ in two public UE5 codebases", to: "aurarpg" }, // source: wc -l on Source/ in Aura-RPG (10,037) and TheGravityFlip (1,769)
   { v: "6k+", l: "Google Play installs", to: "snakewall" },
 ];
 
 /* Experience and education, newest first. */
 export const timeline = [
-  { when: "Mar – Jun 2026", what: "Programmer, Shortgun Games", detail: "Inventory, settings and UI on Roll 'Em Out, a four-player co-op adventure on Steam.", to: "rollemout" },
+  { when: "Jan 2026 – present", what: "Programmer, Shortgun Games", detail: "Inventory, settings and UI on Roll 'Em Out, a four-player co-op adventure on Steam.", to: "rollemout" },
   { when: "2022 – 2026", what: "B.Tech, Computer Science and Engineering", detail: "Uka Tarsadia University, Gujarat." },
   { when: "Aug 2025", what: "Winner, Druid Mechanics Game Jam 2025", detail: "Boom Corp., designed, built and released solo in nine days.", to: "boomcorp" },
   { when: "May 2025", what: "Released The Gravity Flip", detail: "A ten-level gravity platformer in C++, on itch.io.", to: "tgf" },
@@ -54,45 +53,33 @@ export const timeline = [
   { when: "Jan 2025", what: "Published SnakeWall on Google Play", detail: "An open-source Android live wallpaper you can play.", to: "snakewall" },
 ];
 
-/* What I work with, and where each thing was used. */
+/*
+  The toolbox graph. `parent` wires a skill to the one it grows from (leave it out for a
+  root); `in` lists the games that used it, which become the coloured dots on the node.
+*/
 export const skills = [
-  {
-    group: "Engine and languages",
-    items: [
-      { label: "Unreal Engine 5", in: ["rollemout", "boomcorp", "tgf", "aurarpg"] },
-      { label: "C++", in: ["rollemout", "tgf", "aurarpg"] },
-      { label: "Blueprints", in: ["rollemout", "boomcorp", "tgf", "aurarpg"] },
-      { label: "Java (Android)", in: ["snakewall"] },
-    ],
-  },
-  {
-    group: "Gameplay systems",
-    items: [
-      { label: "Gameplay Ability System", in: ["aurarpg"] },
-      { label: "Inventory and settings", in: ["rollemout"] },
-      { label: "Custom gravity and movement", in: ["tgf"] },
-      { label: "Save and load", in: ["aurarpg", "tgf"] },
-      { label: "Enhanced Input", in: ["tgf", "aurarpg", "boomcorp"] },
-    ],
-  },
-  {
-    group: "AI, UI and visuals",
-    items: [
-      { label: "Behavior Trees and EQS", in: ["aurarpg"] },
-      { label: "UMG, widget controllers, MVVM", in: ["aurarpg", "tgf", "rollemout"] },
-      { label: "Niagara VFX", in: ["aurarpg", "boomcorp", "tgf"] },
-      { label: "Post-process toon and outline shader", in: ["boomcorp"] },
-    ],
-  },
-  {
-    group: "Shipping",
-    items: [
-      { label: "Steam, itch.io, Google Play releases", in: ["rollemout", "boomcorp", "tgf", "snakewall"] },
-      { label: "Build size and performance passes", in: ["boomcorp", "tgf"] },
-      { label: "Git, Git LFS, GitHub Actions", in: ["snakewall", "boomcorp"] },
-      { label: "Blender, Photoshop", in: ["boomcorp", "tgf"] },
-    ],
-  },
+  { id: "ue5", label: "Unreal Engine 5", in: ["rollemout", "boomcorp", "tgf", "aurarpg"] },
+  { id: "cpp", label: "C++", parent: "ue5", in: ["rollemout", "tgf", "aurarpg"] },
+  { id: "gas", label: "Gameplay Ability System", parent: "cpp", in: ["aurarpg"] },
+  { id: "gravity", label: "Custom gravity and movement", parent: "cpp", in: ["tgf"] },
+  { id: "save", label: "Save and load", parent: "cpp", in: ["aurarpg", "tgf"] },
+  { id: "ai", label: "Behavior Trees and EQS", parent: "cpp", in: ["aurarpg"] },
+  { id: "bp", label: "Blueprints", parent: "ue5", in: ["rollemout", "boomcorp", "tgf", "aurarpg"] },
+  { id: "ui", label: "UMG, widget controllers, MVVM", parent: "bp", in: ["rollemout", "tgf", "aurarpg"] },
+  { id: "inventory", label: "Inventory and settings", parent: "bp", in: ["rollemout"] },
+  { id: "input", label: "Enhanced Input", parent: "bp", in: ["boomcorp", "tgf", "aurarpg"] },
+  { id: "vfx", label: "Niagara VFX", parent: "bp", in: ["boomcorp", "tgf", "aurarpg"] },
+  { id: "shader", label: "Toon and outline shader", parent: "bp", in: ["boomcorp"] },
+
+  { id: "android", label: "Android", in: ["snakewall"] },
+  { id: "java", label: "Java", parent: "android", in: ["snakewall"] },
+  { id: "wallpaper", label: "WallpaperService and Canvas", parent: "java", in: ["snakewall"] },
+
+  { id: "ship", label: "Shipping", in: ["rollemout", "boomcorp", "tgf", "snakewall"] },
+  { id: "stores", label: "Steam, itch.io, Google Play", parent: "ship", in: ["rollemout", "boomcorp", "tgf", "snakewall"] },
+  { id: "perf", label: "Build size and performance passes", parent: "ship", in: ["boomcorp", "tgf"] },
+  { id: "git", label: "Git, Git LFS, GitHub Actions", parent: "ship", in: ["boomcorp", "snakewall"] },
+  { id: "art", label: "Blender, Photoshop", parent: "ship", in: ["boomcorp", "tgf"] },
 ];
 
 export const projects = [
@@ -122,18 +109,18 @@ export const projects = [
     highlights: [
       "Built the inventory system, the settings menu and in-game UI",
       "Also worked on gameplay, networking and animation in a small team",
-      "Four months from joining to a public Steam demo",
+      "Developed in four months, with a free demo out on Steam",
     ],
     tags: ["Unreal Engine 5", "C++", "Blueprints", "Online co-op", "UI"],
     stats: [
       { v: "1 – 4", l: "players, online co-op" },
-      { v: "4 months", l: "on the team" },
+      { v: "4 months", l: "development time" }, // source: previous site
       { v: "150+", l: "Steam wishlists" }, // source: previous site
       { v: "4", l: "interface languages" }, // source: Steam store page
     ],
     overview: [
       "A few friends enter a cave. One of them touches an ancient relic, gets cursed and turns into a bouncy ball. Everyone else is tied together on one rope and has to get him out before the cave comes down. You slap the ball, hook it, pull it and push it past carnivorous plants, bats, snakes and a spirit that hunts the ball if it rolls too far from the group.",
-      "I joined Shortgun Games as a programmer for the four months leading up to the demo. It is a small studio, so the work was broad: I owned some systems outright and helped wherever the build needed it.",
+      "I joined Shortgun Games as a programmer in January 2026 and still work there. Roll 'Em Out was developed between March and June 2026. It is a small studio, so the work was broad: I owned some systems outright and helped wherever the build needed it.",
     ],
     systemsTitle: "What I worked on",
     systems: [
@@ -145,7 +132,7 @@ export const projects = [
     challenge: {
       title: "A short runway and a small team",
       paragraphs: [
-        "The game went from my first day to a public demo in four months, with limited people and limited time. That meant deciding early what each system had to do for the demo and what could wait, and then keeping to it.",
+        "The game was developed in four months, with limited people and limited time. That meant deciding early what each system had to do for the demo and what could wait, and then keeping to it.",
         "It also meant picking up unfamiliar areas quickly. I came in having built single-player games alone; here the code had to work for four players at once and fit into systems other people were writing at the same time.",
       ],
     },
@@ -487,11 +474,11 @@ export const projects = [
       { v: "6k+", l: "Google Play installs" }, // source: previous site (Play Console); the public badge reads 5K+
       { v: "4.6", l: "store rating" }, // source: previous site
       { v: "28", l: "GitHub stars" }, // source: GitHub, 13 Nov 2026
-      { v: "6 days", l: "first commit to v1.0.0" }, // source: commit log, 13 – 19 Dec 2024
+      { v: "19 × 19", l: "board, with wrapping walls" }, // source: SnakeWallpaperService.java
     ],
     overview: [
       "SnakeWall puts a playable game of Snake on your Android home screen. Set it as your wallpaper, tap start, and steer with four on-screen buttons while your app icons sit on top.",
-      "It began as an attempt to copy the Snake widget on Nothing phones, became a wallpaper when widgets turned out to be the wrong tool, and went from first commit to a working release in six days. It has been on Google Play since January 2025, and is now at v1.0.8.",
+      "It began as an attempt to copy the Snake widget on Nothing phones, became a wallpaper when widgets turned out to be the wrong tool, and had a working release within a week. It has been on Google Play since January 2025, and is now at v1.0.8.",
     ],
     systemsTitle: "How it works",
     systems: [
@@ -502,16 +489,6 @@ export const projects = [
       { title: "Customisation", text: "Five colour themes, an option to change colours automatically, a grid toggle, a vibration toggle, and a custom image as the background with light or dark controls. A preview in the app renders the same game view before you apply it." },
       { title: "Releases", text: "GitHub Actions builds debug and signed release APKs. The best score is kept in shared preferences, and the app collects no data." },
     ],
-    devlog: {
-      title: "Release history",
-      items: [
-        { d: "13 Dec 2024", t: "First commit." },
-        { d: "19 Dec 2024", t: "v1.0.0: playable wallpaper with colour themes." },
-        { d: "21 Dec 2024", t: "First GitHub release, with a themed monochrome icon." },
-        { d: "27 Jan 2025", t: "Published on Google Play. Vibration toggle contributed by another developer." },
-        { d: "3 Oct 2025", t: "v1.0.8: custom image backgrounds, also a community contribution." },
-      ],
-    },
     challenge: {
       title: "From widget to wallpaper",
       paragraphs: [

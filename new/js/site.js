@@ -19,6 +19,48 @@
     place();
   }
 
+  /* Home: toolbox graph ------------------------------------------------ */
+  const tree = document.querySelector("[data-tree]");
+  if (tree) {
+    const svg = tree.querySelector("svg");
+    const nodes = [...tree.querySelectorAll(".node")];
+    const wire = () => {
+      const box = tree.getBoundingClientRect();
+      svg.innerHTML = nodes.filter((n) => n.dataset.parent).map((n) => {
+        const a = document.getElementById(`skill-${n.dataset.parent}`).getBoundingClientRect();
+        const b = n.getBoundingClientRect();
+        const y2 = b.top + b.height / 2 - box.top;
+        let d;
+        if (b.left >= a.right) {
+          // Sideways: a curve from the parent's right edge to the child's left edge.
+          const x1 = a.right - box.left, y1 = a.top + a.height / 2 - box.top, x2 = b.left - box.left, mid = (x1 + x2) / 2;
+          d = `M${x1},${y1} C${mid},${y1} ${mid},${y2} ${x2},${y2}`;
+        } else {
+          // Stacked: an elbow down from under the parent, then across to the child.
+          const x1 = a.left - box.left + 16, y1 = a.bottom - box.top, x2 = b.left - box.left;
+          d = `M${x1},${y1} V${y2 - 8} Q${x1},${y2} ${x1 + 8},${y2} H${x2}`;
+        }
+        return `<path d="${d}" data-to="${n.id}"/>`;
+      }).join("");
+      light(tree.dataset.game);
+    };
+    const light = (game) => {
+      const key = document.querySelector("[data-tree-key]");
+      key.querySelectorAll("button").forEach((b) => b.setAttribute("aria-pressed", b.dataset.game === game));
+      if (game) { tree.dataset.game = game; tree.style.setProperty("--hl", getComputedStyle(key.querySelector(`[data-game="${game}"]`)).getPropertyValue("--dot")); }
+      else delete tree.dataset.game;
+      nodes.forEach((n) => n.classList.toggle("is-on", !!game && n.dataset.in.split(" ").includes(game)));
+      svg.querySelectorAll("path").forEach((p) => p.classList.toggle("is-on", document.getElementById(p.dataset.to).classList.contains("is-on")));
+    };
+    document.querySelector("[data-tree-key]").addEventListener("click", (e) => {
+      const b = e.target.closest("button");
+      if (b) light(tree.dataset.game === b.dataset.game ? undefined : b.dataset.game);
+    });
+    new ResizeObserver(wire).observe(tree);
+    document.fonts?.ready.then(wire);
+    wire();
+  }
+
   /* Screenshot lightbox ------------------------------------------------ */
   const box = document.getElementById("lightbox");
   const shots = [...document.querySelectorAll(".shot")];

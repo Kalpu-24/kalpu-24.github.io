@@ -87,7 +87,7 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--ink) 10%, 
 .hero__p { margin-top: 26px; max-width: 56ch; font-size: clamp(1.02rem, 1.5vw, 1.2rem); color: color-mix(in srgb, var(--ink) 80%, transparent); }
 .hero__cta, .phead__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 
-.numbers { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-block: 1px solid var(--line); }
+.numbers { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--line); }
 .numbers > div { display: flex; flex-direction: column-reverse; justify-content: flex-end; gap: 8px; padding: clamp(20px, 3vw, 34px) clamp(14px, 2vw, 28px); border-left: 1px solid var(--line); }
 .numbers > div:first-child { border-left: 0; padding-left: 0; }
 .numbers dd { font: 800 clamp(1.9rem, 4.4vw, 3.4rem)/1 var(--display); font-stretch: 112%; letter-spacing: -0.03em; }
@@ -122,16 +122,27 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--ink) 10%, 
 .slide__prop--float { width: clamp(80px, 12vw, 170px); right: -2%; top: clamp(-56px, -4vw, -26px); transform: translateY(calc(var(--p, 0) * 40px)) rotate(calc(var(--p, 0) * 24deg)); }
 
 /* Home: toolbox ------------------------------------------------------ */
-.skills { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(20px, 3vw, 40px); }
-.skills__group h3 { padding-bottom: 14px; border-bottom: 1px solid var(--ink); font: 500 0.74rem var(--mono); letter-spacing: 0.12em; text-transform: uppercase; }
-.skills__group li { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 0.95rem; }
-.skills__in { display: flex; gap: 4px; flex: none; }
-.skills__in a { display: block; padding: 4px 2px; }
-.skills__in i, .skills__key i { display: block; width: 9px; height: 9px; border-radius: 50%; background: var(--dot); }
-.skills__in b { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
-.skills__in a:hover i { outline: 2px solid var(--ink); outline-offset: 1px; }
-.skills__key { display: flex; flex-wrap: wrap; gap: 6px 20px; margin-top: 22px; font: 400 0.76rem var(--mono); color: var(--muted); }
-.skills__key span { display: inline-flex; align-items: center; gap: 7px; }
+/* A graph that grows sideways: each list item is a node followed by its children.
+   js/site.js draws the wires and handles the game filter. */
+.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.tree { position: relative; }
+.tree ul { display: grid; gap: 12px; }
+.tree .tree__roots { gap: 44px; }
+.tree li { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; justify-items: start; column-gap: clamp(40px, 6vw, 96px); }
+.node { position: relative; z-index: 1; display: inline-flex; align-items: center; gap: 12px; padding: 9px 14px; border: 1px solid color-mix(in srgb, var(--ink) 22%, var(--bg)); border-radius: 10px; background: var(--surface); font-size: 0.95rem; font-weight: 500; transition: opacity 0.25s, border-color 0.25s, box-shadow 0.25s; }
+.node--root { padding: 13px 18px; border-color: var(--ink); font: 800 1.05rem var(--display); font-stretch: 112%; letter-spacing: 0.02em; text-transform: uppercase; }
+.node__in { display: flex; gap: 4px; flex: none; }
+.node__in i, .tree__key i { display: block; width: 9px; height: 9px; border-radius: 50%; background: var(--dot); }
+.tree__wires { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+.tree__wires path { fill: none; stroke: color-mix(in srgb, var(--ink) 30%, var(--bg)); stroke-width: 1.5; transition: opacity 0.25s, stroke 0.25s; }
+.tree__key { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: clamp(28px, 4vw, 44px); }
+.tree__key button { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; border: 1px solid var(--line); border-radius: 999px; background: none; color: var(--muted); font: 500 0.78rem var(--mono); cursor: pointer; transition: border-color 0.2s, color 0.2s; }
+.tree__key button:hover, .tree__key button[aria-pressed="true"] { border-color: var(--dot); color: var(--ink); }
+/* A game is picked: its nodes and wires light up in its colour, the rest fall back. */
+.tree[data-game] .node:not(.is-on) { opacity: 0.28; }
+.tree[data-game] .node.is-on { border-color: var(--hl); box-shadow: 0 0 0 1px var(--hl), 0 0 28px -8px var(--hl); }
+.tree[data-game] .tree__wires path { opacity: 0.25; }
+.tree[data-game] .tree__wires path.is-on { opacity: 1; stroke: var(--hl); }
 
 /* Home: about -------------------------------------------------------- */
 .about { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); gap: clamp(28px, 6vw, 96px); align-items: start; }
@@ -265,7 +276,10 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--ink) 10%, 
 
 /* Small screens ------------------------------------------------------ */
 @media (max-width: 1000px) {
-  .skills { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  /* Not enough width for a sideways graph: stack it as an indented outline. */
+  .tree li { grid-template-columns: minmax(0, 1fr); }
+  .tree li > ul { margin-top: 12px; padding-left: 34px; }
+  .tree .tree__roots { gap: 30px; }
   .systems { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .flow { grid-auto-flow: row; }
   .flow li { padding: 0 0 26px 30px; border-top: 0; border-left: 2px solid var(--accent); }
@@ -276,15 +290,16 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--ink) 10%, 
 @media (max-width: 760px) {
   body { font-size: 1rem; }
   .hero { min-height: 92svh; }
-  .numbers, .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .numbers > div:nth-child(odd), .stats > div:nth-child(odd) { border-left: 0; padding-left: 0; }
-  .numbers > div:nth-child(n + 3), .stats > div:nth-child(n + 3) { border-top: 1px solid var(--line); }
+  .numbers dt { font-size: 0.78rem; }
+  .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .stats > div:nth-child(odd) { border-left: 0; padding-left: 0; }
+  .stats > div:nth-child(n + 3) { border-top: 1px solid var(--line); }
   .slide__art { aspect-ratio: 16 / 10; }
   .slide__prop--roll { margin-top: calc(100% * 10 / 16 - clamp(64px, 9.5vw, 136px) * 0.62); }
   .slide__info, .about, .section--split, .toy, .phead--phone { grid-template-columns: minmax(0, 1fr); }
   .slide__side { min-width: 0; }
   .section--split .section__head { position: static; }
-  .skills, .systems, .systems--2, .psr { grid-template-columns: minmax(0, 1fr); }
+  .systems, .systems--2, .psr { grid-template-columns: minmax(0, 1fr); }
   .shots { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .shots--tall { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
