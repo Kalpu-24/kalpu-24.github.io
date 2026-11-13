@@ -329,7 +329,6 @@ export const projects = [
         ],
       },
     ],
-    codebase: { lines: "1,769", files: 38 }, // source: wc -l on Source/
     shots: [
       { n: 1, w: 1920, h: 1080, alt: "Main menu with the orange robot character" },
       { n: 2, w: 1920, h: 1080, alt: "Level one: a vertical shaft with the exit at the bottom" },
@@ -356,11 +355,11 @@ export const projects = [
     font: "Pirata One",
     fontScale: 1.12,
     theme: { bg: "#0b072a", surface: "#161042", ink: "#eeeef8", muted: "#aaa5d2", accent: "#f3c969", onAccent: "#251a00" },
-    fact: "10,000 lines of C++ on the Gameplay Ability System",
+    fact: "Built on Unreal's Gameplay Ability System",
     art: { src: "key", pos: "50% 22%" },
     kind: "Top-down action RPG",
     year: "2025",
-    pitch: "A top-down action RPG on Unreal's Gameplay Ability System: spells, attributes, enemy AI, save slots and a full UI, in about ten thousand lines of C++.",
+    pitch: "A top-down action RPG on Unreal's Gameplay Ability System: spells, attributes, enemy AI, save slots and a full UI, in C++ and Blueprints.",
     role: "Solo developer",
     period: "Jan – Apr 2025",
     status: "Playable demo · source on GitHub",
@@ -371,13 +370,13 @@ export const projects = [
       { label: "Download the demo", note: "Telegram", url: "https://t.me/KryoxxStudio/7/113" },
     ],
     highlights: [
-      "About 10,000 lines of C++ on the Gameplay Ability System",
+      "Combat, stats and spells on the Gameplay Ability System, in C++",
       "Seven spells, 22 attributes, four damage types with their own debuffs",
       "Six enemy variants on Behavior Trees and EQS, three save slots, checkpoints",
     ],
     tags: ["Unreal Engine 5", "C++", "Gameplay Ability System", "Behavior Trees", "EQS", "MVVM", "Niagara"],
     stats: [
-      { v: "10,037", l: "lines of C++ in 134 files" }, // source: wc -l on Source/Aura
+      { v: "6", l: "enemy variants in 3 classes" }, // source: Content/Blueprints/Character, CharacterClassInfo
       { v: "7", l: "spells: 4 offensive, 3 passive" }, // source: AuraGameplayTags.cpp
       { v: "22", l: "gameplay attributes" }, // source: AuraAttributeSet.h
       { v: "72", l: "native gameplay tags" }, // source: AuraGameplayTags.cpp
@@ -425,7 +424,6 @@ export const projects = [
         ],
       },
     ],
-    codebase: { lines: "10,037", files: 134 },
     shots: [
       { n: 1, w: 1920, h: 1080, alt: "Main menu: Aura, Master of the Elements" },
       { n: 2, w: 1920, h: 1080, alt: "A checkpoint crystal in a showcase level" },
@@ -497,7 +495,6 @@ export const projects = [
         "One limit remained. A swipe on the home screen belongs to the launcher: it opens the app drawer or the notification shade. So the game uses four on-screen buttons, and that constraint ended up defining how it looks.",
       ],
     },
-    codebase: { lines: "2,521", files: 11 }, // source: wc -l on app/src/main/java
     video: { src: "assets/games/snakewall/demo.mp4", w: 576, h: 1280, caption: "Forty seconds of SnakeWall running as a wallpaper." },
     shots: [
       { n: 1, w: 230, h: 512, alt: "The SnakeWall icon on a blank screen" },

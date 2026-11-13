@@ -254,7 +254,6 @@ ${p.toy ? `
   <div class="systems${p.systems.length % 3 ? " systems--2" : ""}">
     ${p.systems.map((s, k) => `<div class="system"><p class="system__n">${String(k + 1).padStart(2, "0")}</p><h3>${esc(s.title)}</h3><p>${fmt(s.text)}</p></div>`).join("\n    ")}
   </div>
-  ${p.codebase ? `<p class="codebase">${esc(p.codebase.lines)} lines of ${p.id === "snakewall" ? "Java" : "C++"} in ${p.codebase.files} source files.</p>` : ""}
 </section>
 ${p.flow ? `
 <section class="wrap section">
