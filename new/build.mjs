@@ -94,12 +94,26 @@ ${body}
 
 /* ---------------------------------------------------------------- home */
 function home() {
+  /* Each game lends its slide one small element that reacts to scrolling. js/site.js sets
+     --q on it, from 0 as the slide enters the screen to 1 as it leaves; css/site.css does the rest. */
+  const prop = (p) => {
+    const open = `<div class="slide__prop slide__prop--${p.prop}" data-drift aria-hidden="true">`;
+    switch (p.prop) {
+      case "roll": return `${open}<img src="${img(p, "prop")}" alt="" loading="lazy"></div>`; // the ball rolls
+      case "flip": return `${open}<img src="${img(p, "prop")}" alt="" loading="lazy"></div>`; // the robot drops from the ceiling
+      case "tiles": return `${open}${["1", "1", "2", "", "2", "1", "1"].map((n, k) => `<i style="--k:${k}"${n ? "" : ` class="is-live"`}>${n}</i>`).join("")}</div>`; // tiles are cleared, the live one is marked
+      case "circle": return `${open}<i></i><i></i><i></i></div>`; // a magic circle turns
+      case "snake": return `${open}${"<i></i>".repeat(6)}<b></b></div>`; // a dot snake reaches its food
+      default: return "";
+    }
+  };
+
   const game = (p, i) => `
     <article class="slide${p.theme.bg > "#8" ? " slide--light" : ""}" style="${theme(p)}">
       <a class="slide__art" href="${p.id}.html" tabindex="-1" aria-hidden="true">
-        <img src="${img(p, p.art.src)}" style="object-position:${p.art.pos}" alt="" loading="${i ? "lazy" : "eager"}">
+        <img${p.art.fit === "contain" ? ` class="is-contained"` : ""} src="${img(p, p.art.src)}" style="object-position:${p.art.pos}" alt="" loading="${i ? "lazy" : "eager"}">
       </a>
-      ${p.prop ? `<img class="slide__prop slide__prop--${p.prop}" src="${img(p, "prop")}" alt="" data-drift loading="lazy">` : ""}
+      ${prop(p)}
       <div class="slide__info">
         <div class="slide__main">
           <p class="label">${String(i + 1).padStart(2, "0")} / ${esc(p.kind)} · ${esc(p.year)}</p>
@@ -180,13 +194,20 @@ function home() {
 </section>
 
 <section class="wrap section about" id="about">
+  <img class="about__pic" src="assets/kalp.webp" width="640" height="640" loading="lazy" alt="Illustrated portrait of Kalp wearing headphones">
   <div class="about__card">
-    <img class="about__pic" src="assets/kalp.webp" width="640" height="640" loading="lazy" alt="Illustrated portrait of Kalp wearing headphones">
     <p class="label">About</p>
     <h2>${esc(profile.about.punch)}</h2>
     ${profile.about.paragraphs.map((t) => `<p class="prose">${esc(t)}</p>`).join("\n    ")}
     <p><a class="btn" href="${profile.resume}" target="_blank" rel="noopener">Download résumé ${out}</a></p>
   </div>
+</section>
+
+<section class="wrap section" id="path">
+  <header class="section__head">
+    <p class="label">So far</p>
+    <h2 class="big">Path</h2>
+  </header>
   <ol class="path">
     ${timeline.map((t) => `<li>
       <p class="label">${esc(t.when)}</p>

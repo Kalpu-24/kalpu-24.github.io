@@ -129,6 +129,8 @@
     canvas.addEventListener("pointermove", (e) => { over = true; hit = toCloud(e); });
     canvas.addEventListener("pointerdown", (e) => { over = true; hit = toCloud(e); });
     canvas.addEventListener("pointerleave", () => { over = false; });
+    canvas.addEventListener("pointercancel", () => { over = false; });
+    ["selectstart", "dragstart", "contextmenu"].forEach((type) => canvas.addEventListener(type, (e) => e.preventDefault())); // a long press must not select the canvas
     canvas.addEventListener("click", () => { wanted = (at + 1) % shapes.length; });
     picks.forEach((b) => b.addEventListener("click", () => { wanted = shapes.findIndex((s) => s.id === b.dataset.morphPick); }));
 

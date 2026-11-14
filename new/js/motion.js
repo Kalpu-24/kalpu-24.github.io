@@ -38,7 +38,7 @@
   }
 
   /* Everything else: rise into place the first time it scrolls into view, a group at a time. */
-  const rise = ".section__head, .numbers > div, .tree__key, .about__card > *, .path li, .facts > div, .stats > div, .prose--lead, .tags, .toy, .system, .flow li, .devlog li, .psr li, .shot, .quote, .section--note > div, .next a, .foot .wrap > *";
+  const rise = ".section__head, .numbers > div, .tree__key, .about__pic, .about__card > *, .path li, .facts > div, .stats > div, .prose--lead, .tags, .toy, .system, .flow li, .devlog li, .psr li, .shot, .quote, .section--note > div, .next a, .foot .wrap > *";
   gsap.set(rise, { opacity: 0, y: 26 });
   ScrollTrigger.batch(rise, {
     start: "top 90%", once: true,

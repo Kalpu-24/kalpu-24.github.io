@@ -157,7 +157,7 @@ export const projects = [
     theme: { bg: "#020710", surface: "#08142b", ink: "#dcfff7", muted: "#84aeb0", accent: "#cdff1b", onAccent: "#0b1300" },
     fact: "Winner, Druid Mechanics Game Jam 2025",
     art: { src: "key", pos: "50% 50%" },
-    prop: "float", // the bomb drifts above the card
+    prop: "tiles", // a strip of floor tiles is cleared as you scroll, and the live one gets marked
     kind: "First-person puzzle",
     year: "2025",
     pitch: "Minesweeper you have to walk through: a first-person puzzle game about scanning a room for buried explosives.",
@@ -266,6 +266,7 @@ export const projects = [
     theme: { bg: "#0c0b10", surface: "#1a1722", ink: "#f2f0f6", muted: "#a7a2b5", accent: "#ff5db4", onAccent: "#2b0017" },
     fact: "Four-way gravity, written in C++",
     art: { src: "key", pos: "50% 20%" },
+    prop: "flip", // the robot starts on the ceiling and drops to the floor as you scroll
     kind: "Puzzle platformer",
     year: "2025",
     pitch: "A side-scrolling platformer where one key turns the whole world: flip gravity, or bend it ninety degrees, and walk on whatever is now the floor.",
@@ -357,6 +358,7 @@ export const projects = [
     theme: { bg: "#0b072a", surface: "#161042", ink: "#eeeef8", muted: "#aaa5d2", accent: "#f3c969", onAccent: "#251a00" },
     fact: "Built on Unreal's Gameplay Ability System",
     art: { src: "key", pos: "50% 22%" },
+    prop: "circle", // a magic circle turns with the scroll
     kind: "Top-down action RPG",
     year: "2025",
     pitch: "A top-down action RPG on Unreal's Gameplay Ability System: spells, attributes, enemy AI, save slots and a full UI, in C++ and Blueprints.",
@@ -449,7 +451,8 @@ export const projects = [
     fontScale: 0.92,
     theme: { bg: "#eeeef2", surface: "#ffffff", ink: "#141218", muted: "#5d5a66", accent: "#c8201b", onAccent: "#ffffff" },
     fact: "6k+ installs on Google Play",
-    art: { src: "prop", pos: "50% 46%" },
+    art: { src: "prop", pos: "50% 50%", fit: "contain" }, // show the whole phone, not a crop
+    prop: "snake", // a dot snake crawls toward its food as you scroll
     kind: "Android live wallpaper",
     year: "2024",
     pitch: "The classic Snake, rebuilt as an Android live wallpaper. The game is your home screen.",
