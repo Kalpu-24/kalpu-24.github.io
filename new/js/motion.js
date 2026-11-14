@@ -39,11 +39,24 @@
 
   /* Everything else: rise into place the first time it scrolls into view, a group at a time. */
   const rise = ".section__head, .numbers > div, .tree__key, .about__pic, .about__card > *, .path li, .facts > div, .stats > div, .prose--lead, .tags, .toy, .system, .flow li, .devlog li, .psr li, .shot, .quote, .section--note > div, .next a, .foot .wrap > *";
-  gsap.set(rise, { opacity: 0, y: 26 });
-  ScrollTrigger.batch(rise, {
-    start: "top 90%", once: true,
-    onEnter: (els) => gsap.to(els, { opacity: 1, y: 0, stagger: 0.06, duration: 0.7, overwrite: true, clearProps: "transform,opacity" }),
-  });
+  const risers = all(rise);
+  const show = (els) => gsap.to(els, { opacity: 1, y: 0, stagger: 0.06, duration: 0.7, overwrite: true, clearProps: "transform,opacity" });
+  gsap.set(risers, { opacity: 0, y: 26 });
+  // Reveal as soon as the top edge enters the screen. A trigger point higher up (such as 90%) can
+  // be out of reach for the last items on the page, which then never appear.
+  ScrollTrigger.batch(rise, { start: "top bottom", once: true, onEnter: show });
+
+  // Safety net: whatever is still hidden once the visitor reaches the bottom of the page, or
+  // once a couple of seconds have passed with the item on screen, is shown anyway.
+  let swept = false;
+  const sweep = () => {
+    if (swept) return;
+    const left = risers.filter((el) => getComputedStyle(el).opacity === "0" && el.getBoundingClientRect().top < innerHeight);
+    if (left.length) show(left);
+    if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) { swept = true; show(risers.filter((el) => getComputedStyle(el).opacity === "0")); }
+  };
+  addEventListener("scroll", () => { clearTimeout(sweep.t); sweep.t = setTimeout(sweep, 1800); }, { passive: true });
+  addEventListener("scrollend", sweep, { passive: true });
 
   /* Project banner: drifts a little slower than the page. */
   const banner = document.querySelector(".phead__img");
