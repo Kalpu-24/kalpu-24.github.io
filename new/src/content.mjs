@@ -18,7 +18,7 @@ export const profile = {
   location: "Gujarat, India",
   headline: "I build games in Unreal Engine 5 and C++.",
   intro:
-    "Gameplay systems, UI and the unglamorous work of getting a build out the door. I'm a programmer at Shortgun Games, where I worked on the co-op adventure Roll 'Em Out; before that, a jam-winning puzzle game, a gravity platformer and an action RPG, built solo.",
+    "Programmer at Shortgun Games. Gameplay systems, UI and shipping.",
   email: "contact@kalpshah.dev",
   resume: "public/Kalp-Resume-Game.pdf",
   links: [

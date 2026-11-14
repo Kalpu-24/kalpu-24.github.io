@@ -134,17 +134,16 @@ function home() {
 <section class="hero">
   <div class="wrap hero__in">
     <div class="hero__text">
-    <p class="hero__who"><img src="assets/kalp.webp" width="56" height="56" alt=""> <span><b>${esc(profile.name)}</b>${esc(profile.role)} · ${esc(profile.location)}</span></p>
+    <p class="label">${esc(profile.name)} · ${esc(profile.role)}</p>
     <h1 class="hero__h">I build games in Unreal Engine 5 and C++.</h1>
     <p class="hero__p">${esc(profile.intro)}</p>
     <p class="hero__cta">
       <a class="btn btn--solid btn--big" href="#work">See the games ${arrow}</a>
-      <a class="btn btn--big" href="mailto:${profile.email}">${profile.email}</a>
     </p>
     </div>
     <div class="hero__stage">
       <canvas class="hero__canvas" data-morph="${esc(JSON.stringify(shapes))}" aria-hidden="true"></canvas>
-      <p class="hero__now" data-morph-now hidden><span>Now forming</span> <a href="${shapes[0].id}.html">${esc(shapes[0].name)}</a></p>
+      <p class="hero__now" data-morph-now hidden><a href="${shapes[0].id}.html">${esc(shapes[0].name)}</a></p>
     </div>
   </div>
 </section>
