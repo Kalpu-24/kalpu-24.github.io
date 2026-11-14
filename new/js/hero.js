@@ -18,7 +18,7 @@
   const sample = (shape) => new Promise((resolve, reject) => {
     const im = new Image();
     im.onload = () => {
-      const S = 150, k = S / Math.max(im.width, im.height);
+      const S = 240, k = S / Math.max(im.width, im.height);
       const w = Math.max(1, Math.round(im.width * k)), h = Math.max(1, Math.round(im.height * k));
       const c = document.createElement("canvas"); c.width = w; c.height = h;
       const ctx = c.getContext("2d", { willReadFrequently: true });
@@ -35,7 +35,8 @@
         const i = keep[Math.floor(Math.random() * keep.length)];
         const x = ((i % w) + Math.random() - w / 2) / half, y = -(Math.floor(i / w) + Math.random() - h / 2) / half;
         pos[n * 3] = x; pos[n * 3 + 1] = y;
-        pos[n * 3 + 2] = 0.42 * Math.sqrt(Math.max(0, 1 - (x * x + y * y))) + (Math.random() - 0.5) * 0.05;
+        // A thin slab with a slight swell: enough depth to catch the light of a turn, not enough to bend the drawing.
+        pos[n * 3 + 2] = 0.07 * Math.sqrt(Math.max(0, 1 - (x * x + y * y))) + (Math.random() - 0.5) * 0.07;
         let r = px[i * 4] / 255, g = px[i * 4 + 1] / 255, b = px[i * 4 + 2] / 255;
         if (shape.mode === "dark" && r + g + b < 0.9) [r, g, b] = INK; // black art would vanish on a dark page
         // Lift the shadows a little so dark art still reads against a dark page.
@@ -56,7 +57,7 @@
       float arc = sin(e * 3.14159);                                        // 0 at rest, 1 mid-flight
       vec3 swirl = vec3(sin(aSeed * 91.0 + uTime), cos(aSeed * 57.0 - uTime), sin(aSeed * 33.0)) * 0.55;
       p += swirl * arc;
-      p.xy += 0.006 * vec2(sin(uTime * 1.3 + aSeed * 40.0), cos(uTime * 1.1 + aSeed * 70.0)); // a little life at rest
+      p.xy += 0.003 * vec2(sin(uTime * 1.3 + aSeed * 40.0), cos(uTime * 1.1 + aSeed * 70.0)); // a little life at rest
       float cy = cos(uTurn), sy = sin(uTurn), cx = cos(uTilt), sx = sin(uTilt);
       p = vec3(p.x * cy + p.z * sy, p.y, -p.x * sy + p.z * cy);
       p = vec3(p.x, p.y * cx - p.z * sx, p.y * sx + p.z * cx);
@@ -129,11 +130,11 @@
           mix = Math.min(1, (t - flyStart) / FLY);
           if (mix === 1) { setFrom(clouds[at].pos); setColFrom(clouds[at].col); flying = false; held = t; mix = 0; }
         }
-        turn[0] += (pointer[0] * 0.5 - turn[0]) * 0.05; turn[1] += (pointer[1] * 0.3 - turn[1]) * 0.05;
+        turn[0] += (pointer[0] * 0.3 - turn[0]) * 0.05; turn[1] += (pointer[1] * 0.18 - turn[1]) * 0.05;
         gl.uniform1f(U.uMix, mix);
         gl.uniform1f(U.uTime, t / 1000);
-        gl.uniform1f(U.uTurn, Math.sin(t / 2600) * 0.38 + turn[0]);
-        gl.uniform1f(U.uTilt, Math.sin(t / 3400) * 0.1 + turn[1]);
+        gl.uniform1f(U.uTurn, Math.sin(t / 2600) * 0.2 + turn[0]);
+        gl.uniform1f(U.uTilt, Math.sin(t / 3400) * 0.05 + turn[1]);
       }
       gl.clearColor(0, 0, 0, 0);
       gl.clear(gl.COLOR_BUFFER_BIT);

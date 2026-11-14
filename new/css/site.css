@@ -72,7 +72,7 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--ink) 10%, 
 
 /* Home hero: the headline beside a cloud of points that morphs between the games' characters (js/hero.js) */
 .hero { display: grid; align-items: center; min-height: min(100svh, 940px); padding-block: 110px clamp(40px, 6vw, 72px); overflow: hidden; }
-.hero__in { display: grid; grid-template-columns: minmax(0, 1fr) clamp(280px, 38vw, 520px); gap: clamp(16px, 4vw, 56px); align-items: center; }
+.hero__in { display: grid; grid-template-columns: minmax(0, 1fr) clamp(300px, 42vw, 560px); gap: clamp(24px, 6vw, 88px); align-items: center; }
 .hero__stage { position: relative; aspect-ratio: 1; }
 .hero__stage::before { content: ""; position: absolute; inset: 8%; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--glow, #f3f1ec) 20%, transparent), transparent); transition: background 1.2s; }
 .hero__canvas { position: absolute; inset: -8%; width: 116%; height: 116%; }
@@ -82,7 +82,7 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--ink) 10%, 
 .hero__who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--ink); }
 .hero__who span { font: 500 0.74rem/1.5 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--ink) 75%, transparent); }
 .hero__who b { display: block; font: 700 1rem var(--body); letter-spacing: 0; text-transform: none; color: var(--ink); }
-.hero__h { margin-top: 26px; max-width: 13em; font-size: clamp(2.5rem, 5.5vw, 4.9rem); font-weight: 850; line-height: 0.94; letter-spacing: -0.035em; text-transform: uppercase; }
+.hero__h { margin-top: 22px; max-width: 11em; font-size: clamp(2.3rem, 4.6vw, 4.2rem); font-weight: 850; line-height: 0.94; letter-spacing: -0.035em; text-transform: uppercase; }
 .hero__p { margin-top: 26px; max-width: 56ch; font-size: clamp(1.02rem, 1.5vw, 1.2rem); color: color-mix(in srgb, var(--ink) 80%, transparent); }
 .hero__cta, .phead__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 
