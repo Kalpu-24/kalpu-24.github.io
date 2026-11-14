@@ -4,14 +4,18 @@
 
   /* Home: characters that drift as their slide crosses the screen ------ */
   const drifters = [...document.querySelectorAll("[data-drift]")];
+  // With reduced motion they stay at --q: 0.5, the resting middle of each animation.
   if (drifters.length && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
     let queued = false;
     const place = () => {
       queued = false;
       for (const el of drifters) {
-        const r = el.parentElement.getBoundingClientRect();
-        const p = (r.top + r.height / 2 - innerHeight / 2) / (innerHeight / 2 + r.height / 2);
-        el.style.setProperty("--p", Math.max(-1, Math.min(1, p)).toFixed(3));
+        const slide = el.parentElement, r = slide.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > innerHeight + 200) continue;
+        // 0 when the slide's top reaches the bottom of the screen, 1 when its bottom reaches the top
+        const q = (innerHeight - r.top) / (innerHeight + r.height);
+        el.style.setProperty("--q", Math.max(0, Math.min(1, q)).toFixed(3));
+        el.style.setProperty("--art", `${slide.querySelector(".slide__art").clientHeight}px`);
       }
     };
     addEventListener("scroll", () => { if (!queued) { queued = true; requestAnimationFrame(place); } }, { passive: true });

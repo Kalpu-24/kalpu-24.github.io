@@ -18,8 +18,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap">
-<link rel="stylesheet" href="css/site.css?v=5f32cf2a">
-<script src="js/site.js?v=0f16c2d8" defer></script>
+<link rel="stylesheet" href="css/site.css?v=b145130e">
+<script src="js/site.js?v=f212c8e2" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
 <script src="js/motion.js?v=949e782f" defer></script>
@@ -78,7 +78,7 @@
       <a class="slide__art" href="rollemout.html" tabindex="-1" aria-hidden="true">
         <img src="assets/games/rollemout/key.webp" style="object-position:50% 30%" alt="" loading="eager">
       </a>
-      <img class="slide__prop slide__prop--roll" src="assets/games/rollemout/prop.webp" alt="" data-drift loading="lazy">
+      <div class="slide__prop slide__prop--roll" data-drift aria-hidden="true"><img src="assets/games/rollemout/prop.webp" alt="" loading="lazy"></div>
       <div class="slide__info">
         <div class="slide__main">
           <p class="label">01 / Co-op adventure · 2026</p>
@@ -97,7 +97,7 @@
       <a class="slide__art" href="boomcorp.html" tabindex="-1" aria-hidden="true">
         <img src="assets/games/boomcorp/key.webp" style="object-position:50% 50%" alt="" loading="lazy">
       </a>
-      <img class="slide__prop slide__prop--float" src="assets/games/boomcorp/prop.webp" alt="" data-drift loading="lazy">
+      <div class="slide__prop slide__prop--tiles" data-drift aria-hidden="true"><i style="--k:0">1</i><i style="--k:1">1</i><i style="--k:2">2</i><i style="--k:3" class="is-live"></i><i style="--k:4">2</i><i style="--k:5">1</i><i style="--k:6">1</i></div>
       <div class="slide__info">
         <div class="slide__main">
           <p class="label">02 / First-person puzzle · 2025</p>
@@ -116,7 +116,7 @@
       <a class="slide__art" href="tgf.html" tabindex="-1" aria-hidden="true">
         <img src="assets/games/tgf/key.webp" style="object-position:50% 20%" alt="" loading="lazy">
       </a>
-      
+      <div class="slide__prop slide__prop--flip" data-drift aria-hidden="true"><img src="assets/games/tgf/prop.webp" alt="" loading="lazy"></div>
       <div class="slide__info">
         <div class="slide__main">
           <p class="label">03 / Puzzle platformer · 2025</p>
@@ -135,7 +135,7 @@
       <a class="slide__art" href="aurarpg.html" tabindex="-1" aria-hidden="true">
         <img src="assets/games/aurarpg/key.webp" style="object-position:50% 22%" alt="" loading="lazy">
       </a>
-      
+      <div class="slide__prop slide__prop--circle" data-drift aria-hidden="true"><i></i><i></i><i></i></div>
       <div class="slide__info">
         <div class="slide__main">
           <p class="label">04 / Top-down action RPG · 2025</p>
@@ -152,9 +152,9 @@
 
     <article class="slide slide--light" style="--bg:#eeeef2;--surface:#ffffff;--ink:#141218;--muted:#5d5a66;--accent:#c8201b;--on-accent:#ffffff;--game-font:'MLCD';--game-scale:0.92">
       <a class="slide__art" href="snakewall.html" tabindex="-1" aria-hidden="true">
-        <img src="assets/games/snakewall/prop.webp" style="object-position:50% 46%" alt="" loading="lazy">
+        <img class="is-contained" src="assets/games/snakewall/prop.webp" style="object-position:50% 50%" alt="" loading="lazy">
       </a>
-      
+      <div class="slide__prop slide__prop--snake" data-drift aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div>
       <div class="slide__info">
         <div class="slide__main">
           <p class="label">05 / Android live wallpaper · 2024</p>
