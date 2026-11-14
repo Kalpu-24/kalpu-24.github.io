@@ -180,13 +180,20 @@ function home() {
 </section>
 
 <section class="wrap section about" id="about">
+  <img class="about__pic" src="assets/kalp.webp" width="640" height="640" loading="lazy" alt="Illustrated portrait of Kalp wearing headphones">
   <div class="about__card">
-    <img class="about__pic" src="assets/kalp.webp" width="640" height="640" loading="lazy" alt="Illustrated portrait of Kalp wearing headphones">
     <p class="label">About</p>
     <h2>${esc(profile.about.punch)}</h2>
     ${profile.about.paragraphs.map((t) => `<p class="prose">${esc(t)}</p>`).join("\n    ")}
     <p><a class="btn" href="${profile.resume}" target="_blank" rel="noopener">Download résumé ${out}</a></p>
   </div>
+</section>
+
+<section class="wrap section" id="path">
+  <header class="section__head">
+    <p class="label">So far</p>
+    <h2 class="big">Path</h2>
+  </header>
   <ol class="path">
     ${timeline.map((t) => `<li>
       <p class="label">${esc(t.when)}</p>
