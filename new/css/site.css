@@ -70,20 +70,19 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--ink) 10%, 
 .top__nav > a:not(.btn) { text-decoration: none; color: color-mix(in srgb, var(--ink) 72%, transparent); }
 .top__nav > a:not(.btn):hover { color: var(--ink); }
 
-/* Home hero: a slow reel of gameplay behind the headline ------------- */
-.hero { position: relative; display: grid; align-items: end; min-height: min(100svh, 980px); padding-block: 120px clamp(48px, 8vw, 96px); overflow: hidden; isolation: isolate; }
-.hero__reel { position: absolute; inset: 0; z-index: -1; }
-.hero__reel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; animation: reel 28s infinite; }
-.hero__reel img:nth-child(2) { animation-delay: 7s; }
-.hero__reel img:nth-child(3) { animation-delay: 14s; }
-.hero__reel img:nth-child(4) { animation-delay: 21s; }
-.hero__reel::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, var(--bg) 2%, rgb(7 8 10 / 0.7) 36%, rgb(7 8 10 / 0.3) 68%, rgb(7 8 10 / 0.62)), linear-gradient(to right, rgb(7 8 10 / 0.55), transparent 75%); }
-@keyframes reel { 0% { opacity: 0; transform: scale(1.02); } 5%, 25% { opacity: 1; } 31%, 100% { opacity: 0; transform: scale(1.12); } }
+/* Home hero: the headline beside a cloud of points that morphs between the games' characters (js/hero.js) */
+.hero { display: grid; align-items: center; min-height: min(100svh, 940px); padding-block: 110px clamp(40px, 6vw, 72px); overflow: hidden; }
+.hero__in { display: grid; grid-template-columns: minmax(0, 1fr) clamp(280px, 38vw, 520px); gap: clamp(16px, 4vw, 56px); align-items: center; }
+.hero__stage { position: relative; aspect-ratio: 1; }
+.hero__stage::before { content: ""; position: absolute; inset: 8%; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--glow, #f3f1ec) 20%, transparent), transparent); transition: background 1.2s; }
+.hero__canvas { position: absolute; inset: -8%; width: 116%; height: 116%; }
+.hero__now { position: absolute; left: 0; right: 0; bottom: -6px; text-align: center; font: 500 0.72rem var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.hero__now a { color: var(--ink); text-decoration-color: var(--glow, currentColor); text-decoration-thickness: 2px; }
 .hero__who { display: flex; align-items: center; gap: 14px; }
 .hero__who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--ink); }
 .hero__who span { font: 500 0.74rem/1.5 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: color-mix(in srgb, var(--ink) 75%, transparent); }
 .hero__who b { display: block; font: 700 1rem var(--body); letter-spacing: 0; text-transform: none; color: var(--ink); }
-.hero__h { margin-top: 26px; max-width: 13em; font-size: clamp(2.6rem, 7.6vw, 6.4rem); font-weight: 850; line-height: 0.94; letter-spacing: -0.035em; text-transform: uppercase; }
+.hero__h { margin-top: 26px; max-width: 13em; font-size: clamp(2.5rem, 5.5vw, 4.9rem); font-weight: 850; line-height: 0.94; letter-spacing: -0.035em; text-transform: uppercase; }
 .hero__p { margin-top: 26px; max-width: 56ch; font-size: clamp(1.02rem, 1.5vw, 1.2rem); color: color-mix(in srgb, var(--ink) 80%, transparent); }
 .hero__cta, .phead__cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 30px; }
 
@@ -292,7 +291,9 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--ink) 10%, 
 }
 @media (max-width: 760px) {
   body { font-size: 1rem; }
-  .hero { min-height: 92svh; }
+  .hero { min-height: 0; padding-top: 88px; }
+  .hero__in { grid-template-columns: minmax(0, 1fr); }
+  .hero__stage { order: -1; width: min(300px, 74vw); margin-inline: auto; }
   .numbers dt { font-size: 0.78rem; }
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .stats > div:nth-child(odd) { border-left: 0; padding-left: 0; }
@@ -316,6 +317,5 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--ink) 10%, 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .hero__reel img:first-child { opacity: 1; }
   .slide__prop { transform: none !important; }
 }

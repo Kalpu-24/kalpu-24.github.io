@@ -9,6 +9,9 @@ import { site, profile, headlineStats, timeline, skills, projects } from "./src/
 const versioned = (path) => `${path}?v=${createHash("sha1").update(readFileSync(new URL(path, import.meta.url))).digest("hex").slice(0, 8)}`;
 const CSS = versioned("css/site.css");
 const JS = versioned("js/site.js");
+const HERO_JS = versioned("js/hero.js");
+const MOTION_JS = versioned("js/motion.js");
+const GSAP = "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist"; // the version the original site used
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const fmt = (s) => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>");
@@ -43,6 +46,9 @@ ${site.noindex ? `<meta name="robots" content="noindex">\n` : ""}<meta name="the
 <link rel="stylesheet" href="${FONTS}">
 <link rel="stylesheet" href="${CSS}">
 <script src="${JS}" defer></script>
+<script src="${GSAP}/gsap.min.js" defer></script>
+<script src="${GSAP}/ScrollTrigger.min.js" defer></script>
+<script src="${MOTION_JS}" defer></script>${file === "index.html" ? `\n<script src="${HERO_JS}" defer></script>` : ""}
 </head>
 <body class="${bodyClass}"${style ? ` style="${style}"` : ""}>
 <a class="skip" href="#main">Skip to content</a>
@@ -120,14 +126,14 @@ function home() {
       </li>`;
   };
 
-  const reel = [["rollemout", 3], ["aurarpg", 8], ["boomcorp", 4], ["tgf", 5]];
+  /* Hero: a cloud of points that takes the shape of each game's character in turn.
+     js/hero.js samples these images; "dark" keeps only the dark pixels of art on a white background. */
+  const shapes = projects.map((p) => ({ id: p.id, name: p.name, color: p.theme.accent, src: img(p, p.id === "snakewall" ? "key" : "prop"), mode: p.id === "snakewall" ? "dark" : "alpha" }));
 
   const body = `
 <section class="hero">
-  <div class="hero__reel" aria-hidden="true">
-    ${reel.map(([id, n]) => `<img src="assets/games/${id}/${n}.webp" alt="">`).join("\n    ")}
-  </div>
   <div class="wrap hero__in">
+    <div class="hero__text">
     <p class="hero__who"><img src="assets/kalp.webp" width="56" height="56" alt=""> <span><b>${esc(profile.name)}</b>${esc(profile.role)} · ${esc(profile.location)}</span></p>
     <h1 class="hero__h">I build games in Unreal Engine 5 and C++.</h1>
     <p class="hero__p">${esc(profile.intro)}</p>
@@ -135,6 +141,11 @@ function home() {
       <a class="btn btn--solid btn--big" href="#work">See the games ${arrow}</a>
       <a class="btn btn--big" href="mailto:${profile.email}">${profile.email}</a>
     </p>
+    </div>
+    <div class="hero__stage">
+      <canvas class="hero__canvas" data-morph="${esc(JSON.stringify(shapes))}" aria-hidden="true"></canvas>
+      <p class="hero__now" data-morph-now hidden><span>Now forming</span> <a href="${shapes[0].id}.html">${esc(shapes[0].name)}</a></p>
+    </div>
   </div>
 </section>
 
