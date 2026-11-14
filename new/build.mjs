@@ -181,6 +181,7 @@ function home() {
 
 <section class="wrap section about" id="about">
   <div class="about__card">
+    <img class="about__pic" src="assets/kalp.webp" width="640" height="640" loading="lazy" alt="Illustrated portrait of Kalp wearing headphones">
     <p class="label">About</p>
     <h2>${esc(profile.about.punch)}</h2>
     ${profile.about.paragraphs.map((t) => `<p class="prose">${esc(t)}</p>`).join("\n    ")}
