@@ -24,7 +24,7 @@
 body, .slide, .next a { --line: color-mix(in srgb, var(--ink) 14%, var(--bg)); }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
+html { -webkit-tap-highlight-color: transparent; overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: 84px; -webkit-text-size-adjust: 100%; }
 body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1.0625rem/1.65 var(--body); -webkit-font-smoothing: antialiased; overflow-x: clip; }
 img, video { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-underline-offset: 0.2em; text-decoration-color: color-mix(in srgb, currentColor 35%, transparent); }
@@ -76,6 +76,10 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--ink) 10%, 
 .hero__stage { position: relative; aspect-ratio: 1; }
 .hero__stage::before { content: ""; position: absolute; inset: 8%; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--glow, #f3f1ec) 20%, transparent), transparent); transition: background 1.2s; }
 .hero__canvas { position: absolute; inset: -8%; width: 116%; height: 116%; cursor: pointer; touch-action: pan-y; }
+/* Tapping or dragging on the cloud must not select it or flash the browser's tap highlight. */
+.hero__stage, .hero__stage * { -webkit-tap-highlight-color: transparent; -webkit-touch-callout: none; -webkit-user-select: none; user-select: none; }
+.hero__canvas:focus { outline: none; }
+.hero__stage ::selection { background: transparent; }
 .hero__pick { display: flex; justify-content: center; gap: 4px; margin-top: 8px; }
 .hero__pick button { width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
 .hero__pick button::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: color-mix(in srgb, var(--ink) 30%, var(--bg)); transition: background 0.3s, scale 0.3s; }
