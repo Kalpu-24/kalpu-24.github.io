@@ -143,7 +143,10 @@ function home() {
     </div>
     <div class="hero__stage">
       <canvas class="hero__canvas" data-morph="${esc(JSON.stringify(shapes))}" aria-hidden="true"></canvas>
-      <p class="hero__now" data-morph-now hidden><a href="${shapes[0].id}.html">${esc(shapes[0].name)}</a></p>
+      <div class="hero__now" data-morph-now hidden>
+        <p><a href="${shapes[0].id}.html">${esc(shapes[0].name)}</a></p>
+        <p class="hero__pick">${shapes.map((s) => `<button type="button" data-morph-pick="${s.id}" style="--dot:${s.color}" aria-label="Show ${esc(s.name)}" aria-pressed="false"></button>`).join("")}</p>
+      </div>
     </div>
   </div>
 </section>
@@ -178,6 +181,7 @@ function home() {
 
 <section class="wrap section about" id="about">
   <div class="about__card">
+    <img class="about__pic" src="assets/kalp.webp" width="640" height="640" loading="lazy" alt="Illustrated portrait of Kalp wearing headphones">
     <p class="label">About</p>
     <h2>${esc(profile.about.punch)}</h2>
     ${profile.about.paragraphs.map((t) => `<p class="prose">${esc(t)}</p>`).join("\n    ")}

@@ -50,7 +50,7 @@
 
   const VERT = `
     attribute vec3 aFrom, aTo, aColFrom, aColTo; attribute float aSeed;
-    uniform float uMix, uTime, uTurn, uTilt, uSize; varying vec3 vCol; varying float vFade;
+    uniform float uMix, uTime, uTurn, uTilt, uSize, uPush; uniform vec2 uPointer; varying vec3 vCol; varying float vFade;
     void main() {
       float e = smoothstep(aSeed * 0.45, aSeed * 0.45 + 0.55, uMix);       // each point leaves at its own moment
       vec3 p = mix(aFrom, aTo, e);
@@ -58,6 +58,10 @@
       vec3 swirl = vec3(sin(aSeed * 91.0 + uTime), cos(aSeed * 57.0 - uTime), sin(aSeed * 33.0)) * 0.55;
       p += swirl * arc;
       p.xy += 0.003 * vec2(sin(uTime * 1.3 + aSeed * 40.0), cos(uTime * 1.1 + aSeed * 70.0)); // a little life at rest
+      vec2 away = p.xy - uPointer;                                         // the pointer parts the cloud
+      float near = smoothstep(0.26, 0.0, length(away)) * uPush;
+      p.xy += normalize(away + 0.0001) * near * (0.1 + 0.16 * aSeed);
+      p.z += near * (aSeed - 0.3) * 0.5;
       float cy = cos(uTurn), sy = sin(uTurn), cx = cos(uTilt), sx = sin(uTilt);
       p = vec3(p.x * cy + p.z * sy, p.y, -p.x * sy + p.z * cy);
       p = vec3(p.x, p.y * cx - p.z * sx, p.y * sx + p.z * cx);
@@ -91,12 +95,14 @@
     gl.vertexAttribPointer(at, size, gl.FLOAT, false, 0, 0);
     return (next) => { gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferSubData(gl.ARRAY_BUFFER, 0, next); };
   };
-  const U = Object.fromEntries(["uMix", "uTime", "uTurn", "uTilt", "uSize"].map((n) => [n, gl.getUniformLocation(prog, n)]));
+  const U = Object.fromEntries(["uMix", "uTime", "uTurn", "uTilt", "uSize", "uPush", "uPointer"].map((n) => [n, gl.getUniformLocation(prog, n)]));
 
   const stage = canvas.parentElement, now = document.querySelector("[data-morph-now]");
+  const picks = [...document.querySelectorAll("[data-morph-pick]")];
   const announce = (s) => {
     stage.style.setProperty("--glow", s.color);
     if (now) { now.hidden = false; const a = now.querySelector("a"); a.textContent = s.name; a.href = `${s.id}.html`; }
+    picks.forEach((b) => b.setAttribute("aria-pressed", b.dataset.morphPick === s.id));
   };
 
   let dpr = 1;
@@ -112,19 +118,36 @@
     buffer("aSeed", 1, seeds);
     const setFrom = buffer("aFrom", 3, clouds[0].pos), setTo = buffer("aTo", 3, clouds[0].pos);
     const setColFrom = buffer("aColFrom", 3, clouds[0].col), setColTo = buffer("aColTo", 3, clouds[0].col);
-    let at = 0, flyStart = 0, held = performance.now(), flying = false, visible = true, pointer = [0, 0], turn = [0, 0];
+    let at = 0, flyStart = 0, held = performance.now(), hold = HOLD, flying = false, visible = true, pointer = [0, 0], turn = [0, 0];
+    let wanted = -1, over = false, push = 0, hit = [9, 9];
     announce(shapes[0]);
     new ResizeObserver(resize).observe(canvas);
     resize();
 
+    /* Interaction: move over the cloud to part it, click it for the next game, or pick one below. */
+    const toCloud = (e) => { const r = canvas.getBoundingClientRect(); return [((e.clientX - r.left) / r.width * 2 - 1) * 1.333, -((e.clientY - r.top) / r.height * 2 - 1) * 1.333]; };
+    canvas.addEventListener("pointermove", (e) => { over = true; hit = toCloud(e); });
+    canvas.addEventListener("pointerdown", (e) => { over = true; hit = toCloud(e); });
+    canvas.addEventListener("pointerleave", () => { over = false; });
+    canvas.addEventListener("click", () => { wanted = (at + 1) % shapes.length; });
+    picks.forEach((b) => b.addEventListener("click", () => { wanted = shapes.findIndex((s) => s.id === b.dataset.morphPick); }));
+
     const frame = (t) => {
       if (!visible) return;
       if (!still) {
-        if (!flying && t - held > HOLD) {
-          const next = (at + 1) % shapes.length;
-          setTo(clouds[next].pos); setColTo(clouds[next].col);
-          flying = true; flyStart = t; at = next; announce(shapes[at]);
+        if (!flying && (wanted >= 0 || t - held > hold)) {
+          const next = wanted >= 0 ? wanted : (at + 1) % shapes.length;
+          hold = wanted >= 0 ? HOLD * 2.5 : HOLD; // a game someone chose stays up longer
+          wanted = -1;
+          if (next === at) { held = t; }
+          else {
+            setTo(clouds[next].pos); setColTo(clouds[next].col);
+            flying = true; flyStart = t; at = next; announce(shapes[at]);
+          }
         }
+        push += ((over ? 1 : 0) - push) * 0.12;
+        gl.uniform1f(U.uPush, push);
+        gl.uniform2f(U.uPointer, hit[0], hit[1]);
         let mix = 0;
         if (flying) {
           mix = Math.min(1, (t - flyStart) / FLY);
