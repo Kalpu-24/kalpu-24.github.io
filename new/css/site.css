@@ -75,8 +75,14 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--ink) 10%, 
 .hero__in { display: grid; grid-template-columns: minmax(0, 1fr) clamp(300px, 42vw, 560px); gap: clamp(24px, 6vw, 88px); align-items: center; }
 .hero__stage { position: relative; aspect-ratio: 1; }
 .hero__stage::before { content: ""; position: absolute; inset: 8%; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--glow, #f3f1ec) 20%, transparent), transparent); transition: background 1.2s; }
-.hero__canvas { position: absolute; inset: -8%; width: 116%; height: 116%; }
-.hero__now { position: absolute; left: 0; right: 0; bottom: -6px; text-align: center; font: 500 0.72rem var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.hero__canvas { position: absolute; inset: -8%; width: 116%; height: 116%; cursor: pointer; touch-action: pan-y; }
+.hero__pick { display: flex; justify-content: center; gap: 4px; margin-top: 8px; }
+.hero__pick button { width: 28px; height: 28px; padding: 0; border: 0; background: none; cursor: pointer; display: grid; place-items: center; }
+.hero__pick button::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: color-mix(in srgb, var(--ink) 30%, var(--bg)); transition: background 0.3s, scale 0.3s; }
+.hero__pick button:hover::before { background: var(--ink); }
+.hero__pick button[aria-pressed="true"]::before { background: var(--dot); scale: 1.5; }
+.hero__stage { margin-bottom: 44px; }
+.hero__now { position: absolute; z-index: 1; left: 0; right: 0; bottom: -44px; text-align: center; font: 500 0.72rem var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 .hero__now a { color: var(--ink); text-decoration-color: var(--glow, currentColor); text-decoration-thickness: 2px; }
 .hero__who { display: flex; align-items: center; gap: 14px; }
 .hero__who img { width: 56px; height: 56px; border-radius: 50%; object-fit: cover; border: 2px solid var(--ink); }
