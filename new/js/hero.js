@@ -68,9 +68,9 @@
       for (int k = 0; k < ${TRAIL_MAX}; k++) {
         vec4 t = uTrail[k];
         if (t.z <= 0.0) continue;
-        float l = clamp(t.z * (1.0 + 0.6 * (aSeed - 0.5)), 0.0, 1.0);      // each point lets go at its own moment
+        float l = clamp(t.z * (1.0 + 0.2 * (aSeed - 0.5)), 0.0, 1.0);      // points return at almost the same pace
         vec2 d = p.xy - t.xy;
-        float near = smoothstep(0.27 * (0.55 + 0.45 * l), 0.0, length(d)) * l * (2.0 - l) * 0.9; // eases back quickly, no sudden snap
+        float near = smoothstep(0.27 * (0.55 + 0.45 * l), 0.0, length(d)) * l * 0.9; // linear in the spot's life: points start back at once and move at a steady pace
         push += normalize(d + 0.0001) * near * (0.1 + 0.16 * aSeed);      // straight away from the pointer
       }
       p.xy += push * min(1.0, 0.3 / max(length(push), 0.0001));            // overlapping spots must not fling points far
