@@ -12,7 +12,7 @@
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const N = innerWidth < 760 ? 11000 : 22000; // points
   const HOLD = 3600, FLY = 1900; // ms a shape is held, ms the change takes
-  const TRAIL_MS = 1300;  // how long a spot the pointer passed stays parted while it closes again
+  const TRAIL_MS = 620;   // how long a spot the pointer passed takes to close again (points vary around this)
   const TRAIL_MAX = 56;   // spots remembered (the first slot is the pointer itself)
   const SPACING = 0.07;   // a spot every this far along the path, so a fast sweep leaves no gaps
   const INK = [0.95, 0.945, 0.925];
@@ -65,11 +65,13 @@
       // pointer's recent path (x, y, strength), each spot's strength fading from 1 to 0 over time.
       vec2 push = vec2(0.0); float lift = 0.0;
       for (int k = 0; k < ${TRAIL_MAX}; k++) {
-        vec3 t = uTrail[k];
+        vec3 t = uTrail[k];                                                // z is how much life the spot has left, 1 to 0
         if (t.z <= 0.0) continue;
+        float l = clamp(t.z * (1.0 + 0.9 * (aSeed - 0.5)), 0.0, 1.0);      // every point heals at its own pace, so they drift home instead of snapping back together
+        float s = l * l * (3.0 - 2.0 * l);
         vec2 away = p.xy - t.xy;
-        float near = smoothstep(0.26, 0.0, length(away)) * t.z;
-        push += normalize(away + 0.0001) * near * (0.1 + 0.16 * aSeed);
+        float near = smoothstep(0.3 * (0.45 + 0.55 * l), 0.0, length(away)) * s; // the gap narrows as it heals
+        push += normalize(away + 0.0001) * near * (0.07 + 0.13 * aSeed);
         lift += near * (aSeed - 0.3) * 0.5;
       }
       float len = length(push);
@@ -180,7 +182,7 @@
         for (let k = 0; k < spots.length; k++) {
           const s = spots[k], life = 1 - (t - s.t) / TRAIL_MS, o = (k + 1) * 3;
           trailData[o] = s.x; trailData[o + 1] = s.y;
-          trailData[o + 2] = life > 0 ? life * life * (3 - 2 * life) * 0.85 : 0; // smoothstep: eases out gently
+          trailData[o + 2] = life > 0 ? life : 0; // the shader shapes this per point
         }
         gl.uniform3fv(U.uTrail, trailData);
         let mix = 0;
