@@ -16,9 +16,9 @@ export const profile = {
   name: "Kalp Shah",
   role: "Game developer",
   location: "Gujarat, India",
-  headline: "I build games in Unreal Engine 5 and C++.",
+  headline: "I build games in Unreal Engine 5.",
   intro:
-    "Programmer at Shortgun Games. Gameplay systems, UI and shipping.",
+    "Game developer",
   email: "contact@kalpshah.dev",
   resume: "public/Kalp-Resume-Game.pdf",
   links: [
