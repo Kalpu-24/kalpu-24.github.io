@@ -40,7 +40,9 @@ ${site.noindex ? `<meta name="robots" content="noindex">\n` : ""}<meta name="the
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:image" content="${site.url}${image}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" type="image/x-icon" href="public/favicon.ico">
+<link rel="icon" href="${versioned("public/favicon.ico")}" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="${versioned("public/favicon.svg")}">
+<link rel="apple-touch-icon" href="${versioned("public/apple-touch-icon.png")}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="${FONTS}">
