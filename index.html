@@ -1,333 +1,400 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./css/index.css" />
-    <link rel="stylesheet" href="./css/index-max962.css" />
-    <link rel="stylesheet" href="./css/index-max600.css" />
-    <link rel="stylesheet" href="./css/index-max350.css" />
-    <link rel="stylesheet" href="./css/index-hover.css">
-    <title>Kalp Shah</title>
-    <link rel="icon" type="image/x-icon" href="./public/favicon.ico">
-  </head>
-  <body>
-    <span id="circle" class="circle"></span>
-    <div class="menuplaceholder">
-      <div class="menu">
-        <div class="menuTitle">Menu</div>
-        <div class="menuList">
-          <div class="menuItem workMenuItem">
-            <div class="arrow">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 256 256"
-                focusable="false"
-              >
-                <g>
-                  <path
-                    d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
-                  ></path>
-                </g>
-              </svg>
-            </div>
-            <div class="menuItemNames">
-              <div class="menuItemName Primary">Projects</div>
-              <div class="menuItemName Secondary">Projects</div>
-            </div>
-          </div>
-          <div class="menuItem aboutMenuItem">
-            <div class="arrow">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 256 256"
-                focusable="false"
-              >
-                <g>
-                  <path
-                    d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
-                  ></path>
-                </g>
-              </svg>
-            </div>
-            <div class="menuItemNames">
-              <div class="menuItemName Primary">About</div>
-              <div class="menuItemName Secondary">About</div>
-            </div>
-          </div>
-          <div class="menuItem contactMenuItem">
-            <div class="arrow">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 256 256"
-                focusable="false"
-              >
-                <g>
-                  <path
-                    d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
-                  ></path>
-                </g>
-              </svg>
-            </div>
-            <div class="menuItemNames">
-              <div class="menuItemName Primary">Contact</div>
-              <div class="menuItemName Secondary">Contact</div>
-            </div>
-          </div>
-        </div>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kalp Shah — Game developer, Unreal Engine 5 and C++</title>
+<meta name="description" content="Kalp Shah builds games in Unreal Engine 5 and C++: Roll 'Em Out at Shortgun Games, the jam-winning Boom Corp., The Gravity Flip, AuraRPG and SnakeWall.">
+<meta name="theme-color" content="#07080a">
+<link rel="canonical" href="https://kalpshah.dev/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kalpshah.dev/">
+<meta property="og:title" content="Kalp Shah — Game developer, Unreal Engine 5 and C++">
+<meta property="og:description" content="Kalp Shah builds games in Unreal Engine 5 and C++: Roll 'Em Out at Shortgun Games, the jam-winning Boom Corp., The Gravity Flip, AuraRPG and SnakeWall.">
+<meta property="og:image" content="https://kalpshah.dev/assets/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="public/favicon.ico?v=de458b1c" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="public/favicon.svg?v=9879fb7f">
+<link rel="apple-touch-icon" href="public/apple-touch-icon.png?v=6bf2dc38">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap">
+<link rel="stylesheet" href="css/site.css?v=878b9533">
+<script src="js/site.js?v=f212c8e2" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
+<script src="js/motion.js?v=e77071d7" defer></script>
+<script src="js/hero.js?v=abc3265e" defer></script>
+</head>
+<body class="home">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap top__in">
+    <a class="top__name" href="./">Kalp Shah</a>
+    <nav class="top__nav" aria-label="Main">
+      <a href="./#work">Work</a>
+      <a href="./#about">About</a>
+      <a href="./#contact">Contact</a>
+      <a class="btn btn--small" href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Résumé</a>
+    </nav>
+  </div>
+</header>
+<main id="main">
+
+<section class="hero">
+  <div class="wrap hero__in">
+    <div class="hero__text">
+    <p class="label">Kalp Shah · Game developer</p>
+    <h1 class="hero__h">I build games in Unreal Engine 5 and C++.</h1>
+    <p class="hero__p">Game developer</p>
+    <p class="hero__cta">
+      <a class="btn btn--solid btn--big" href="#work">See the games <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </p>
+    </div>
+    <div class="hero__stage">
+      <canvas class="hero__canvas" data-morph="[{&quot;id&quot;:&quot;rollemout&quot;,&quot;name&quot;:&quot;Roll 'Em Out&quot;,&quot;color&quot;:&quot;#ffb347&quot;,&quot;src&quot;:&quot;assets/games/rollemout/prop.webp&quot;,&quot;mode&quot;:&quot;alpha&quot;},{&quot;id&quot;:&quot;boomcorp&quot;,&quot;name&quot;:&quot;Boom Corp.&quot;,&quot;color&quot;:&quot;#cdff1b&quot;,&quot;src&quot;:&quot;assets/games/boomcorp/prop.webp&quot;,&quot;mode&quot;:&quot;alpha&quot;},{&quot;id&quot;:&quot;tgf&quot;,&quot;name&quot;:&quot;The Gravity Flip&quot;,&quot;color&quot;:&quot;#ff5db4&quot;,&quot;src&quot;:&quot;assets/games/tgf/prop.webp&quot;,&quot;mode&quot;:&quot;alpha&quot;},{&quot;id&quot;:&quot;aurarpg&quot;,&quot;name&quot;:&quot;AuraRPG&quot;,&quot;color&quot;:&quot;#f3c969&quot;,&quot;src&quot;:&quot;assets/games/aurarpg/prop.webp&quot;,&quot;mode&quot;:&quot;alpha&quot;},{&quot;id&quot;:&quot;snakewall&quot;,&quot;name&quot;:&quot;SnakeWall&quot;,&quot;color&quot;:&quot;#c8201b&quot;,&quot;src&quot;:&quot;assets/games/snakewall/key.webp&quot;,&quot;mode&quot;:&quot;dark&quot;}]" aria-hidden="true"></canvas>
+      <div class="hero__now" data-morph-now hidden>
+        <p><a href="rollemout.html">Roll 'Em Out</a></p>
+        <p class="hero__pick"><button type="button" data-morph-pick="rollemout" style="--dot:#ffb347" aria-label="Show Roll 'Em Out" aria-pressed="false"></button><button type="button" data-morph-pick="boomcorp" style="--dot:#cdff1b" aria-label="Show Boom Corp." aria-pressed="false"></button><button type="button" data-morph-pick="tgf" style="--dot:#ff5db4" aria-label="Show The Gravity Flip" aria-pressed="false"></button><button type="button" data-morph-pick="aurarpg" style="--dot:#f3c969" aria-label="Show AuraRPG" aria-pressed="false"></button><button type="button" data-morph-pick="snakewall" style="--dot:#c8201b" aria-label="Show SnakeWall" aria-pressed="false"></button></p>
       </div>
     </div>
-    <div class="nav">
-      <div class="ham">
-        <button class="menu-button hoverable" id="menuToggle">
-          <div class="icon">
-            <span class="bar top-bar"></span>
-            <span class="bar bottom-bar"></span>
-          </div>
-          <div class="label2">
-            <div class="menu-text">MENU</div>
-            <div class="close-text">CLOSE</div>
-          </div>
-        </button>
+  </div>
+</section>
+
+<section class="wrap">
+  <dl class="numbers">
+    <div><dt>Druid Mechanics Game Jam 2025</dt><dd>1st</dd></div>
+    <div><dt>Unreal Engine 5 games</dt><dd>4</dd></div>
+    <div><dt>Google Play installs</dt><dd>6k+</dd></div>
+  </dl>
+</section>
+
+<section class="wrap wrap--wide section" id="work">
+  <header class="section__head">
+    <p class="label">Selected work</p>
+    <h2 class="big">The games</h2>
+  </header>
+  <div class="games">
+  
+    <article class="slide" style="--bg:#0b1f24;--surface:#12303a;--ink:#f3efe6;--muted:#9fb6b6;--accent:#ffb347;--on-accent:#1d1300;--game-font:'Jaro';--game-scale:1.08">
+      <a class="slide__art" href="rollemout.html" tabindex="-1" aria-hidden="true">
+        <img src="assets/games/rollemout/key.webp" style="object-position:50% 30%" alt="" loading="eager">
+      </a>
+      <div class="slide__prop slide__prop--roll" data-drift aria-hidden="true"><img src="assets/games/rollemout/prop.webp" alt="" loading="lazy"></div>
+      <div class="slide__info">
+        <div class="slide__main">
+          <p class="label">01 / Co-op adventure · 2026</p>
+          <h3 class="slide__title"><a href="rollemout.html">Roll 'Em Out</a></h3>
+          <p class="slide__pitch">A co-op adventure for up to four players, tied together by a rope, rolling a cursed friend out of a collapsing cave.</p>
+        </div>
+        <div class="slide__side">
+          <p class="fact">Free demo on Steam</p>
+          <p class="slide__role">Programmer, Shortgun Games</p>
+          <a class="btn btn--solid" href="rollemout.html">View project <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
       </div>
-      <div class="title hoverable">
-        <div class="titletext">KALP.SHAH</div>
+    </article>
+
+    <article class="slide" style="--bg:#020710;--surface:#08142b;--ink:#dcfff7;--muted:#84aeb0;--accent:#cdff1b;--on-accent:#0b1300;--game-font:'Orbitron';--game-scale:0.8">
+      <a class="slide__art" href="boomcorp.html" tabindex="-1" aria-hidden="true">
+        <img src="assets/games/boomcorp/key.webp" style="object-position:50% 50%" alt="" loading="lazy">
+      </a>
+      <div class="slide__prop slide__prop--tiles" data-drift aria-hidden="true"><i style="--k:0">1</i><i style="--k:1">1</i><i style="--k:2">2</i><i style="--k:3" class="is-live"></i><i style="--k:4">2</i><i style="--k:5">1</i><i style="--k:6">1</i></div>
+      <div class="slide__info">
+        <div class="slide__main">
+          <p class="label">02 / First-person puzzle · 2025</p>
+          <h3 class="slide__title"><a href="boomcorp.html">Boom Corp.</a></h3>
+          <p class="slide__pitch">Minesweeper you have to walk through: a first-person puzzle game about scanning a room for buried explosives.</p>
+        </div>
+        <div class="slide__side">
+          <p class="fact">Winner, Druid Mechanics Game Jam 2025</p>
+          <p class="slide__role">Solo developer</p>
+          <a class="btn btn--solid" href="boomcorp.html">View project <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
       </div>
-      <div class="contactbut hoverable">
-        <div class="hover-text">NOW -></div>
-        <div class="non-hover-text">CONTACT ME</div>
+    </article>
+
+    <article class="slide" style="--bg:#0c0b10;--surface:#1a1722;--ink:#f2f0f6;--muted:#a7a2b5;--accent:#ff5db4;--on-accent:#2b0017;--game-font:'Sour Gummy';--game-scale:1">
+      <a class="slide__art" href="tgf.html" tabindex="-1" aria-hidden="true">
+        <img src="assets/games/tgf/key.webp" style="object-position:50% 20%" alt="" loading="lazy">
+      </a>
+      <div class="slide__prop slide__prop--flip" data-drift aria-hidden="true"><img src="assets/games/tgf/prop.webp" alt="" loading="lazy"></div>
+      <div class="slide__info">
+        <div class="slide__main">
+          <p class="label">03 / Puzzle platformer · 2025</p>
+          <h3 class="slide__title"><a href="tgf.html">The Gravity Flip</a></h3>
+          <p class="slide__pitch">A side-scrolling platformer where one key turns the whole world: flip gravity, or bend it ninety degrees, and walk on whatever is now the floor.</p>
+        </div>
+        <div class="slide__side">
+          <p class="fact">Four-way gravity, written in C++</p>
+          <p class="slide__role">Solo developer</p>
+          <a class="btn btn--solid" href="tgf.html">View project <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
       </div>
-    </div>
-    <div id="smooth-wrapper">
-      <div id="smooth-content">
-        <div class="hero stretch">
-          <div class="intro">Hello, I'm Kalp Shah</div>
-          <div class="tagline">Game Developer</div>
-          <div class="intro">I develop games using Unreal Engine 5</div>
-          <br />
-          <div class="contactbut2 hoverable">
-            <div class="hover-text">NOW -></div>
-            <div class="non-hover-text">CONTACT ME</div>
-          </div>
+    </article>
+
+    <article class="slide" style="--bg:#0b072a;--surface:#161042;--ink:#eeeef8;--muted:#aaa5d2;--accent:#f3c969;--on-accent:#251a00;--game-font:'Pirata One';--game-scale:1.12">
+      <a class="slide__art slide__art--wide" href="aurarpg.html" tabindex="-1" aria-hidden="true"><span class="slide__blur" style="background-image:url('assets/games/aurarpg/key.webp')"></span>
+        <img class="is-wide" src="assets/games/aurarpg/key.webp" style="object-position:50% 50%" alt="" loading="lazy">
+      </a>
+      <div class="slide__prop slide__prop--circle" data-drift aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="slide__info">
+        <div class="slide__main">
+          <p class="label">04 / Top-down action RPG · 2025</p>
+          <h3 class="slide__title"><a href="aurarpg.html">AuraRPG</a></h3>
+          <p class="slide__pitch">A top-down action RPG on Unreal's Gameplay Ability System: spells, attributes, enemy AI, save slots and a full UI, in C++ and Blueprints.</p>
         </div>
-        <div class="social stretch">
-          <a
-            target="_blank"
-            href="https://www.linkedin.com/in/Kalpu24/"
-            class="hoverable SocialLink linkedin"
-          >
-            <div class="SocialContainer">
-              <div class="SocialIcons">
-                <div class="SocialIcon ArrowIcon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 256 256"
-                    focusable="false"
-                  >
-                    <g>
-                      <path
-                        d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
-                      ></path>
-                    </g>
-                  </svg>
-                </div>
-                <div class="SocialIcon LinkedInIcon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 256 256"
-                    focusable="false"
-                  >
-                    <g>
-                      <path
-                        d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"
-                      ></path>
-                    </g>
-                  </svg>
-                </div>
-              </div>
-              <div class="SocialTexts">
-                <div class="SocialText SocialName">LinkedIn</div>
-                <div class="SocialText VisitText">Visit Link</div>
-              </div>
-            </div>
-          </a>
-          <a target="_blank" href="https://github.com/Kalpu-24" class="hoverable SocialLink github">
-            <div class="SocialContainer">
-              <div class="SocialIcons">
-                <div class="SocialIcon ArrowIcon">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 256 256"
-                    focusable="false"
-                  >
-                    <g>
-                      <path
-                        d="M221.66,133.66l-72,72a8,8,0,0,1-11.32-11.32L196.69,136H40a8,8,0,0,1,0-16H196.69L138.34,61.66a8,8,0,0,1,11.32-11.32l72,72A8,8,0,0,1,221.66,133.66Z"
-                      ></path>
-                    </g>
-                  </svg>
-                </div>
-                <div class="SocialIcon GithubInIcon">
-                  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                    <g>
-                      <path
-                        d="M16,3a13,13,0,0,0-3.46,25.53,1,1,0,1,0,.53-1.92,11,11,0,1,1,7-.4,15.85,15.85,0,0,0-.3-3.92A6.27,6.27,0,0,0,24.68,16a6.42,6.42,0,0,0-1.05-3.87,7.09,7.09,0,0,0-.4-3.36,1,1,0,0,0-1.1-.67,8,8,0,0,0-3.37,1.28A11.35,11.35,0,0,0,16,9a13.09,13.09,0,0,0-3,.43A5.74,5.74,0,0,0,9.62,8.25a1,1,0,0,0-1,.66,7.06,7.06,0,0,0-.37,3.19A7.15,7.15,0,0,0,7.2,16a6.66,6.66,0,0,0,5,6.28,7.43,7.43,0,0,0-.15.79c-1,.06-1.58-.55-2.32-1.48a3.45,3.45,0,0,0-1.94-1.53,1,1,0,0,0-1.15.76A1,1,0,0,0,7.35,22c.16,0,.55.52.77.81a4.74,4.74,0,0,0,3.75,2.25,4.83,4.83,0,0,0,1.3-.18h0a1,1,0,0,0,.29-.14l0,0a.72.72,0,0,0,.18-.21.34.34,0,0,0,.08-.09.85.85,0,0,0,.06-.17,1.52,1.52,0,0,0,.06-.2v0a4.11,4.11,0,0,1,.46-1.91,1,1,0,0,0-.76-1.65A4.6,4.6,0,0,1,9.2,16a4.84,4.84,0,0,1,.87-3,1,1,0,0,0,.24-.83,5,5,0,0,1,0-1.85,3.59,3.59,0,0,1,1.74.92,1,1,0,0,0,1,.23A12.49,12.49,0,0,1,16,11a9.91,9.91,0,0,1,2.65.43,1,1,0,0,0,1-.18,5,5,0,0,1,2-1,4.11,4.11,0,0,1,0,1.91,1.05,1.05,0,0,0,.32,1A4,4,0,0,1,22.68,16a4.29,4.29,0,0,1-4.41,4.46,1,1,0,0,0-.94.65,1,1,0,0,0,.28,1.11c.59.51.5,4,.47,5.36a1,1,0,0,0,.38.81,1,1,0,0,0,.62.21,1.07,1.07,0,0,0,.25,0A13,13,0,0,0,16,3Z"
-                      />
-                    </g>
-                  </svg>
-                </div>
-              </div>
-              <div class="SocialTexts">
-                <div class="SocialText SocialName">Github</div>
-                <div class="SocialText VisitText">Visit Link</div>
-              </div>
-            </div>
-          </a>
+        <div class="slide__side">
+          <p class="fact">Built on Unreal's Gameplay Ability System</p>
+          <p class="slide__role">Solo developer</p>
+          <a class="btn btn--solid" href="aurarpg.html">View project <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
         </div>
-        <div class="projects">
-          <div class="ProjectHeading">Selected Works</div>
-          <div class="projectTag">The work I'm proud of</div>
-          <div class="ProjectBox stretchBox">
-            <img src="./public/RollEmOut-prop1.png" alt="" srcset="" class="RollEmOut-prop1"/>
-            <div class="desc">
-              <a href="./pages/projectdetails.html?project=rollemout"><div class="GameTitle projecthoverable RollEmOutGameTitle">ROLL 'EM OUT</div></a>
-              <div class="GameDesc">Roll 'Em Out is a first-person co-op adventure about rolling your friend out of a mysterious cave.</div>
-                <div class="MultiLinks">
-                <a target="_blank" class="hoverable" href="https://store.steampowered.com/app/4139160/Roll_em_Out/"><div class="SteamBut">Steam(Windows) -></div></a>
-                <a class="hoverable" href="./pages/projectdetails.html?project=rollemout"><div class="ViewBut">View More -></div></a>
-              </div>
-            </div>
-            <div class="thumbnail RollEmOutThumbnail">
-              <img src="./public/RollEmOut-main.png" alt="" srcset="" class="mainImage"/>
-            </div>
-          </div>
-          <div class="ProjectBox stretchBox">
-            <img src="./public/BoomCorp-prop1.png" alt="" srcset="" class="BoomCorp-prop1"/>
-            <div class="thumbnail BoomCorpThumbnail">
-              <img src="./public/BoomCorp-main.png" alt="" srcset="" class="mainImage"/>
-            </div>
-            <div class="desc">
-              <a href="./pages/projectdetails.html?project=boomcorp"><div class="GameTitle projecthoverable BoomCorpGameTitle">Boom Corp.</div></a>
-              <div class="GameDesc">Boom Corp. is a first-person 3D puzzle game of logic and consequence.</div>
-                <div class="MultiLinks">
-                <a target="_blank" class="hoverable" href="https://www.youtube.com/watch?v=o26X81-yo5w"><div class="youtubeBut">Trailer -></div></a>
-                <a target="_blank" class="hoverable" href="https://kryoxx-studio.itch.io/boom-corp"><div class="itchBut">Itch.io(Windows) -></div></a>
-                <a class="hoverable" href="./pages/projectdetails.html?project=boomcorp"><div class="ViewBut">View More -></div></a>
-              </div>
-              </div>
-          </div>
-          <div class="ProjectBox stretchBox">
-            <img src="./public/tgf-prop1.png" alt="" srcset="" class="tgf-prop1"/>
-            <div class="desc">
-              <a href="./pages/projectdetails.html?project=tgf"><div class="GameTitle projecthoverable tgfGameTitle">The Gravity Flip</div></a>
-              <div class="GameDesc">The Gravity Flip is a game built around a single, perspective-bending idea — what if gravity worked the other way?<br/></div>
-              <div class="MultiLinks">
-                <a target="_blank" class="hoverable" href="https://kryoxx-studio.itch.io/the-gravity-flip"><div class="itchBut">Itch.io(Windows) -></div></a>
-                <a class="hoverable" href="./pages/projectdetails.html?project=tgf"><div class="ViewBut">View More -></div></a>
-              </div>
-            </div>
-                    <div class="thumbnail TgfThumbnail">
-              <img src="./public/tgf-main.png" alt="" srcset="" class="mainImage"/>
-            </div>
-          </div>
-          <div class="ProjectBox stretchBox">
-            <img src="./public/Aura-prop1.png" alt="" srcset="" class="Aura-prop1"/>
-            <div class="thumbnail AuraThumbnail">
-              <img src="./public/Aura-main.png" alt="" srcset="" class="mainImage"/>
-            </div>
-            <div class="desc">
-              <a href="./pages/projectdetails.html?project=aurarpg"><div class="GameTitle projecthoverable AuraGameTitle">AuraRPG</div></a>
-              <div class="GameDesc">AuraRPG is a stylized top-down action RPG built in Unreal Engine 5 using the Gameplay Ability System. It features fluid combat, modular abilities, and a dynamic world that reacts to player progression.</div>
-              <div class="MultiLinks">
-                <a target="_blank" class="hoverable" href="https://t.me/KryoxxStudio/7/113"><div class="TeleBut">Download(Telegram) -></div></a>
-                <a target="_blank" class="hoverable" href="https://github.com/Kalpu-24/Aura-RPG"><div class="codeBut">GitHub -></div></a>
-                <a class="hoverable" href="./pages/projectdetails.html?project=aurarpg"><div class="ViewBut">View More -></div></a>
-              </div>
-              </div>
-          </div>
-          <div class="ProjectBox stretchBox">
-            <img src="./public/SnakeWall-prop1.png" alt="" srcset="" class="SnakeWall-prop1"/>
-            <div class="desc">
-              <a href="./pages/projectdetails.html?project=snakewall"><div class="GameTitle projecthoverable SnakeWallGameTitle">SnakeWall</div></a>
-              <div class="GameDesc">Snakewall is a modern twist on the classic Snake game, re-imagined as a dynamic Live Wallpaper. Built for Android, it features smooth animations, adaptive design, and minimalist visuals.</div>
-              <div class="MultiLinks">
-                <a target="_blank" class="hoverable" href="https://play.google.com/store/apps/details?id=kalp.snake.wall"><div class="playBut">PlayStore -></div></a>
-                <a target="_blank" class="hoverable" href="https://github.com/Kalpu-24/SnakeWall"><div class="codeBut">GitHub -></div></a>
-                <a class="hoverable" href="./pages/projectdetails.html?project=snakewall"><div class="ViewBut">View More -></div></a>
-              </div>
-            </div>
-            <div class="thumbnail SnakeThumbnail">
-              <img src="./public/SnakeWall-main.png" alt="" srcset="" class="mainImage"/>
-            </div>
-          </div>
-        </div>
-        <div class="about">
-          <div class="aboutHeading">About Me</div>
-          <div class="projectTag">Where I press, I feel.</div>
-          <div class="aboutBoxes">
-            <div class="aboutBoxText stretchBox">
-              <div class="aboutPunch">A game developer figuring it out, one idea at a time.</div>
-              <div class="aboutDesc">I didn't start building things because I had a plan — I just couldn't stop thinking about how cool it would be if this existed.
-                <br/> I make things out of curiosity, emotion, and the hope that someone out there will feel something too.</div>
-              <div class="aboutButtons">
-                <a target="_blank" href="./public/Kalp-Resume-Game.pdf">
-                  <div class="aboutButton hoverable">Download Resume ⇩</div>
-                </a>
-              </div>
-            </div>
-            <div class="aboutBoxImage stretchBox">
-              <img src="./public/kalp.png" class="theImage" />
-            </div>
-          </div>
-        </div>
-        <div class="contact stretch">
-          <div class="contactHeading">Contact Me</div>
-          <div class="contactDesc">I'm open to new opportunities or just a friendly chat. Feel free to reach out!</div>
-          <a target="_blank" href="mailto:contact@kalpshah.dev" class="emailText">
-            <div class="mailhoverable">contact@kalpshah.dev</div>
-          </a>
-          <div class="contactButtons">
-            <a target="_blank" href="https://t.me/kalpu_24">
-              <div style="background-color: #24A1DE;" class="contactButton hoverable"><svg xmlns="http://www.w3.org/2000/svg" width="800px" height="800px" viewBox="0 0 48 48" id="Layer_2" data-name="Layer 2"><path class="cls-1" d="M40.83,8.48c1.14,0,2,1,1.54,2.86l-5.58,26.3c-.39,1.87-1.52,2.32-3.08,1.45L20.4,29.26a.4.4,0,0,1,0-.65L35.77,14.73c.7-.62-.15-.92-1.07-.36L15.41,26.54a.46.46,0,0,1-.4.05L6.82,24C5,23.47,5,22.22,7.23,21.33L40,8.69a2.16,2.16,0,0,1,.83-.21Z"/></svg>Telegram</div>
-            </a>
-            <a target="_blank" href="https://www.linkedin.com/in/Kalpu24/">
-              <div style="background-color: #2d64bc;" class="contactButton hoverable"><svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 256 256"
-                focusable="false"
-              >
-                <g>
-                  <path
-                    d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24Zm0,192H40V40H216V216ZM96,112v64a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0Zm88,28v36a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140ZM100,84A12,12,0,1,1,88,72,12,12,0,0,1,100,84Z"
-                  ></path>
-                </g>
-              </svg>LinkedIn</div>
-            </a>
-            <a target="_blank" href="https://github.com/Kalpu-24">
-              <div style="background-color: #0e1116;" class="contactButton hoverable"><svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
-                <g>
-                  <path
-                    d="M16,3a13,13,0,0,0-3.46,25.53,1,1,0,1,0,.53-1.92,11,11,0,1,1,7-.4,15.85,15.85,0,0,0-.3-3.92A6.27,6.27,0,0,0,24.68,16a6.42,6.42,0,0,0-1.05-3.87,7.09,7.09,0,0,0-.4-3.36,1,1,0,0,0-1.1-.67,8,8,0,0,0-3.37,1.28A11.35,11.35,0,0,0,16,9a13.09,13.09,0,0,0-3,.43A5.74,5.74,0,0,0,9.62,8.25a1,1,0,0,0-1,.66,7.06,7.06,0,0,0-.37,3.19A7.15,7.15,0,0,0,7.2,16a6.66,6.66,0,0,0,5,6.28,7.43,7.43,0,0,0-.15.79c-1,.06-1.58-.55-2.32-1.48a3.45,3.45,0,0,0-1.94-1.53,1,1,0,0,0-1.15.76A1,1,0,0,0,7.35,22c.16,0,.55.52.77.81a4.74,4.74,0,0,0,3.75,2.25,4.83,4.83,0,0,0,1.3-.18h0a1,1,0,0,0,.29-.14l0,0a.72.72,0,0,0,.18-.21.34.34,0,0,0,.08-.09.85.85,0,0,0,.06-.17,1.52,1.52,0,0,0,.06-.2v0a4.11,4.11,0,0,1,.46-1.91,1,1,0,0,0-.76-1.65A4.6,4.6,0,0,1,9.2,16a4.84,4.84,0,0,1,.87-3,1,1,0,0,0,.24-.83,5,5,0,0,1,0-1.85,3.59,3.59,0,0,1,1.74.92,1,1,0,0,0,1,.23A12.49,12.49,0,0,1,16,11a9.91,9.91,0,0,1,2.65.43,1,1,0,0,0,1-.18,5,5,0,0,1,2-1,4.11,4.11,0,0,1,0,1.91,1.05,1.05,0,0,0,.32,1A4,4,0,0,1,22.68,16a4.29,4.29,0,0,1-4.41,4.46,1,1,0,0,0-.94.65,1,1,0,0,0,.28,1.11c.59.51.5,4,.47,5.36a1,1,0,0,0,.38.81,1,1,0,0,0,.62.21,1.07,1.07,0,0,0,.25,0A13,13,0,0,0,16,3Z"
-                  />
-                </g>
-              </svg>GitHub</div>
-            </a>
-          </div>
-          <div class="copyright">©Kalp Shah 2025, All rights reserved</div>
-        </div>
-        <div class="bottomSpacer"></div>
       </div>
-    </div>
-  </body>
-  <script
-    src="https://code.jquery.com/jquery-3.7.1.min.js"
-    integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-    crossorigin="anonymous"
-  ></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-  <!-- ScrollSmoother requires ScrollTrigger -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
-  <script defer src="./javascript/index.js"></script>
+    </article>
+
+    <article class="slide slide--light" style="--bg:#eeeef2;--surface:#ffffff;--ink:#141218;--muted:#5d5a66;--accent:#c8201b;--on-accent:#ffffff;--game-font:'MLCD';--game-scale:0.92">
+      <a class="slide__art" href="snakewall.html" tabindex="-1" aria-hidden="true">
+        <img class="is-contained" src="assets/games/snakewall/prop.webp" style="object-position:50% 50%" alt="" loading="lazy">
+      </a>
+      <div class="slide__prop slide__prop--snake" data-drift aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><b></b></div>
+      <div class="slide__info">
+        <div class="slide__main">
+          <p class="label">05 / Android live wallpaper · 2024</p>
+          <h3 class="slide__title"><a href="snakewall.html">SnakeWall</a></h3>
+          <p class="slide__pitch">The classic Snake, rebuilt as an Android live wallpaper. The game is your home screen.</p>
+        </div>
+        <div class="slide__side">
+          <p class="fact">6k+ installs on Google Play</p>
+          <p class="slide__role">Creator and maintainer</p>
+          <a class="btn btn--solid" href="snakewall.html">View project <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </article>
+    <article class="slide slide--more">
+      <a class="slide__art" href="https://github.com/Kalpu-24" tabindex="-1" aria-hidden="true">
+        <span class="more__dots"><i style="--dot:#ffb347"></i><i style="--dot:#cdff1b"></i><i style="--dot:#ff5db4"></i><i style="--dot:#f3c969"></i><i style="--dot:#c8201b"></i></span>
+      </a>
+      <div class="slide__info">
+        <div class="slide__main">
+          <p class="label">06 / More</p>
+          <h3 class="slide__title"><a href="https://github.com/Kalpu-24">More on GitHub</a></h3>
+          <p class="slide__pitch">Source code for AuraRPG and SnakeWall, and everything else I've put up.</p>
+        </div>
+        <div class="slide__side">
+          <a class="btn" href="https://github.com/Kalpu-24">github.com/Kalpu-24 <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="wrap section" id="skills">
+  <header class="section__head">
+    <p class="label">Pick a game to light up what it used</p>
+    <h2 class="big">Toolbox</h2>
+  </header>
+  <p class="tree__key" data-tree-key><button type="button" data-game="rollemout" style="--dot:#ffb347"><i></i>Roll 'Em Out</button><button type="button" data-game="boomcorp" style="--dot:#cdff1b"><i></i>Boom Corp.</button><button type="button" data-game="tgf" style="--dot:#ff5db4"><i></i>The Gravity Flip</button><button type="button" data-game="aurarpg" style="--dot:#f3c969"><i></i>AuraRPG</button><button type="button" data-game="snakewall" style="--dot:#c8201b"><i></i>SnakeWall</button></p>
+  <div class="tree" data-tree>
+    <ul class="tree__roots">
+      <li>
+        <div class="node node--root" id="skill-ue5" data-parent="" data-in="rollemout boomcorp tgf aurarpg">
+          <span>Unreal Engine 5</span>
+          <span class="node__in"><i style="--dot:#ffb347" title="Roll 'Em Out"></i><i style="--dot:#cdff1b" title="Boom Corp."></i><i style="--dot:#ff5db4" title="The Gravity Flip"></i><i style="--dot:#f3c969" title="AuraRPG"></i></span>
+          <span class="sr">Used in Roll 'Em Out, Boom Corp., The Gravity Flip, AuraRPG</span>
+        </div><ul><li>
+        <div class="node" id="skill-cpp" data-parent="ue5" data-in="rollemout tgf aurarpg">
+          <span>C++</span>
+          <span class="node__in"><i style="--dot:#ffb347" title="Roll 'Em Out"></i><i style="--dot:#ff5db4" title="The Gravity Flip"></i><i style="--dot:#f3c969" title="AuraRPG"></i></span>
+          <span class="sr">Used in Roll 'Em Out, The Gravity Flip, AuraRPG</span>
+        </div><ul><li>
+        <div class="node" id="skill-gas" data-parent="cpp" data-in="aurarpg">
+          <span>Gameplay Ability System</span>
+          <span class="node__in"><i style="--dot:#f3c969" title="AuraRPG"></i></span>
+          <span class="sr">Used in AuraRPG</span>
+        </div>
+      </li><li>
+        <div class="node" id="skill-gravity" data-parent="cpp" data-in="tgf">
+          <span>Custom gravity and movement</span>
+          <span class="node__in"><i style="--dot:#ff5db4" title="The Gravity Flip"></i></span>
+          <span class="sr">Used in The Gravity Flip</span>
+        </div>
+      </li><li>
+        <div class="node" id="skill-save" data-parent="cpp" data-in="aurarpg tgf">
+          <span>Save and load</span>
+          <span class="node__in"><i style="--dot:#f3c969" title="AuraRPG"></i><i style="--dot:#ff5db4" title="The Gravity Flip"></i></span>
+          <span class="sr">Used in AuraRPG, The Gravity Flip</span>
+        </div>
+      </li><li>
+        <div class="node" id="skill-ai" data-parent="cpp" data-in="aurarpg">
+          <span>Behavior Trees and EQS</span>
+          <span class="node__in"><i style="--dot:#f3c969" title="AuraRPG"></i></span>
+          <span class="sr">Used in AuraRPG</span>
+        </div>
+      </li></ul>
+      </li><li>
+        <div class="node" id="skill-bp" data-parent="ue5" data-in="rollemout boomcorp tgf aurarpg">
+          <span>Blueprints</span>
+          <span class="node__in"><i style="--dot:#ffb347" title="Roll 'Em Out"></i><i style="--dot:#cdff1b" title="Boom Corp."></i><i style="--dot:#ff5db4" title="The Gravity Flip"></i><i style="--dot:#f3c969" title="AuraRPG"></i></span>
+          <span class="sr">Used in Roll 'Em Out, Boom Corp., The Gravity Flip, AuraRPG</span>
+        </div><ul><li>
+        <div class="node" id="skill-ui" data-parent="bp" data-in="rollemout tgf aurarpg">
+          <span>UMG, widget controllers, MVVM</span>
+          <span class="node__in"><i style="--dot:#ffb347" title="Roll 'Em Out"></i><i style="--dot:#ff5db4" title="The Gravity Flip"></i><i style="--dot:#f3c969" title="AuraRPG"></i></span>
+          <span class="sr">Used in Roll 'Em Out, The Gravity Flip, AuraRPG</span>
+        </div>
+      </li><li>
+        <div class="node" id="skill-inventory" data-parent="bp" data-in="rollemout">
+          <span>Inventory and settings</span>
+          <span class="node__in"><i style="--dot:#ffb347" title="Roll 'Em Out"></i></span>
+          <span class="sr">Used in Roll 'Em Out</span>
+        </div>
+      </li><li>
+        <div class="node" id="skill-input" data-parent="bp" data-in="boomcorp tgf aurarpg">
+          <span>Enhanced Input</span>
+          <span class="node__in"><i style="--dot:#cdff1b" title="Boom Corp."></i><i style="--dot:#ff5db4" title="The Gravity Flip"></i><i style="--dot:#f3c969" title="AuraRPG"></i></span>
+          <span class="sr">Used in Boom Corp., The Gravity Flip, AuraRPG</span>
+        </div>
+      </li><li>
+        <div class="node" id="skill-vfx" data-parent="bp" data-in="boomcorp tgf aurarpg">
+          <span>Niagara VFX</span>
+          <span class="node__in"><i style="--dot:#cdff1b" title="Boom Corp."></i><i style="--dot:#ff5db4" title="The Gravity Flip"></i><i style="--dot:#f3c969" title="AuraRPG"></i></span>
+          <span class="sr">Used in Boom Corp., The Gravity Flip, AuraRPG</span>
+        </div>
+      </li><li>
+        <div class="node" id="skill-shader" data-parent="bp" data-in="boomcorp">
+          <span>Toon and outline shader</span>
+          <span class="node__in"><i style="--dot:#cdff1b" title="Boom Corp."></i></span>
+          <span class="sr">Used in Boom Corp.</span>
+        </div>
+      </li></ul>
+      </li></ul>
+      </li>
+      <li>
+        <div class="node node--root" id="skill-android" data-parent="" data-in="snakewall">
+          <span>Android</span>
+          <span class="node__in"><i style="--dot:#c8201b" title="SnakeWall"></i></span>
+          <span class="sr">Used in SnakeWall</span>
+        </div><ul><li>
+        <div class="node" id="skill-java" data-parent="android" data-in="snakewall">
+          <span>Java</span>
+          <span class="node__in"><i style="--dot:#c8201b" title="SnakeWall"></i></span>
+          <span class="sr">Used in SnakeWall</span>
+        </div><ul><li>
+        <div class="node" id="skill-wallpaper" data-parent="java" data-in="snakewall">
+          <span>WallpaperService and Canvas</span>
+          <span class="node__in"><i style="--dot:#c8201b" title="SnakeWall"></i></span>
+          <span class="sr">Used in SnakeWall</span>
+        </div>
+      </li></ul>
+      </li></ul>
+      </li>
+      <li>
+        <div class="node node--root" id="skill-ship" data-parent="" data-in="rollemout boomcorp tgf snakewall">
+          <span>Shipping</span>
+          <span class="node__in"><i style="--dot:#ffb347" title="Roll 'Em Out"></i><i style="--dot:#cdff1b" title="Boom Corp."></i><i style="--dot:#ff5db4" title="The Gravity Flip"></i><i style="--dot:#c8201b" title="SnakeWall"></i></span>
+          <span class="sr">Used in Roll 'Em Out, Boom Corp., The Gravity Flip, SnakeWall</span>
+        </div><ul><li>
+        <div class="node" id="skill-stores" data-parent="ship" data-in="rollemout boomcorp tgf snakewall">
+          <span>Steam, itch.io, Google Play</span>
+          <span class="node__in"><i style="--dot:#ffb347" title="Roll 'Em Out"></i><i style="--dot:#cdff1b" title="Boom Corp."></i><i style="--dot:#ff5db4" title="The Gravity Flip"></i><i style="--dot:#c8201b" title="SnakeWall"></i></span>
+          <span class="sr">Used in Roll 'Em Out, Boom Corp., The Gravity Flip, SnakeWall</span>
+        </div>
+      </li><li>
+        <div class="node" id="skill-perf" data-parent="ship" data-in="boomcorp tgf">
+          <span>Build size and performance passes</span>
+          <span class="node__in"><i style="--dot:#cdff1b" title="Boom Corp."></i><i style="--dot:#ff5db4" title="The Gravity Flip"></i></span>
+          <span class="sr">Used in Boom Corp., The Gravity Flip</span>
+        </div>
+      </li><li>
+        <div class="node" id="skill-git" data-parent="ship" data-in="boomcorp snakewall">
+          <span>Git, Git LFS, GitHub Actions</span>
+          <span class="node__in"><i style="--dot:#cdff1b" title="Boom Corp."></i><i style="--dot:#c8201b" title="SnakeWall"></i></span>
+          <span class="sr">Used in Boom Corp., SnakeWall</span>
+        </div>
+      </li><li>
+        <div class="node" id="skill-art" data-parent="ship" data-in="boomcorp tgf">
+          <span>Blender, Photoshop</span>
+          <span class="node__in"><i style="--dot:#cdff1b" title="Boom Corp."></i><i style="--dot:#ff5db4" title="The Gravity Flip"></i></span>
+          <span class="sr">Used in Boom Corp., The Gravity Flip</span>
+        </div>
+      </li></ul>
+      </li>
+    </ul>
+    <svg class="tree__wires" aria-hidden="true"></svg>
+  </div>
+</section>
+
+<section class="wrap section about" id="about">
+  <img class="about__pic" src="assets/kalp.webp" width="640" height="640" loading="lazy" alt="Illustrated portrait of Kalp wearing headphones">
+  <div class="about__card">
+    <p class="label">About</p>
+    <h2>A game developer figuring it out, one idea at a time.</h2>
+    <p class="prose">I didn't start building things because I had a plan. I just couldn't stop thinking about how cool it would be if this existed.</p>
+    <p class="prose">I make things out of curiosity, emotion, and the hope that someone out there will feel something too. My solo work goes out under the name Kryoxx Studio.</p>
+    <p><a class="btn" href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Download résumé <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+  </div>
+</section>
+
+<section class="wrap section" id="path">
+  <header class="section__head">
+    <p class="label">So far</p>
+    <h2 class="big">Path</h2>
+  </header>
+  <ol class="path">
+    <li>
+      <p class="label">Jan 2026 – present</p>
+      <h3><a href="rollemout.html">Programmer, Shortgun Games</a></h3>
+      <p>Inventory, settings and UI on Roll 'Em Out, a four-player co-op adventure on Steam.</p>
+    </li>
+    <li>
+      <p class="label">2022 – 2026</p>
+      <h3>B.Tech, Computer Science and Engineering</h3>
+      <p>Uka Tarsadia University, Gujarat.</p>
+    </li>
+    <li>
+      <p class="label">Aug 2025</p>
+      <h3><a href="boomcorp.html">Winner, Druid Mechanics Game Jam 2025</a></h3>
+      <p>Boom Corp., designed, built and released solo in nine days.</p>
+    </li>
+    <li>
+      <p class="label">May 2025</p>
+      <h3><a href="tgf.html">Released The Gravity Flip</a></h3>
+      <p>A ten-level gravity platformer in C++, on itch.io.</p>
+    </li>
+    <li>
+      <p class="label">2025</p>
+      <h3><a href="aurarpg.html">Unreal Engine 5 – Gameplay Ability System – Top Down RPG</a></h3>
+      <p>Udemy course, completed as AuraRPG on a newer engine version than the course used.</p>
+    </li>
+    <li>
+      <p class="label">Jan 2025</p>
+      <h3><a href="snakewall.html">Published SnakeWall on Google Play</a></h3>
+      <p>An open-source Android live wallpaper you can play.</p>
+    </li>
+  </ol>
+</section>
+</main>
+<footer class="foot" id="contact">
+  <div class="wrap">
+    <p class="label">Contact</p>
+    <h2 class="foot__h">I'm open to new opportunities, or just a friendly chat.</h2>
+    <a class="foot__mail" href="mailto:contact@kalpshah.dev">contact@kalpshah.dev</a>
+    <ul class="foot__links">
+      <li><a href="https://github.com/Kalpu-24" target="_blank" rel="noopener">GitHub <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://www.linkedin.com/in/Kalpu24/" target="_blank" rel="noopener">LinkedIn <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://kryoxx-studio.itch.io/" target="_blank" rel="noopener">itch.io <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://t.me/kalpu_24" target="_blank" rel="noopener">Telegram <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Résumé (PDF) <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+    </ul>
+    <p class="foot__copy">© <span data-year>2026</span> Kalp Shah · Gujarat, India</p>
+  </div>
+</footer>
+<dialog class="lightbox" id="lightbox" aria-label="Screenshot viewer">
+  <img id="lightbox-img" alt="">
+  <p class="lightbox__cap" id="lightbox-cap"></p>
+  <button class="lightbox__btn lightbox__prev" id="lightbox-prev" aria-label="Previous"><svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <button class="lightbox__btn lightbox__next" id="lightbox-next" aria-label="Next"><svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <button class="lightbox__btn lightbox__close" id="lightbox-close" aria-label="Close">✕</button>
+</dialog>
+</body>
 </html>

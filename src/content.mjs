@@ -8,8 +8,8 @@
 */
 
 export const site = {
-  url: "https://kalpshah.dev/new/", // change to https://kalpshah.dev/ when this replaces the root site
-  noindex: true, // set to false when this replaces the root site
+  url: "https://kalpshah.dev/",
+  noindex: false,
 };
 
 export const profile = {
