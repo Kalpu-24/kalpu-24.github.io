@@ -50,7 +50,7 @@
 
   const VERT = `
     attribute vec3 aFrom, aTo, aColFrom, aColTo; attribute float aSeed;
-    uniform float uMix, uTime, uTurn, uTilt, uSize, uPush; uniform vec2 uPointer; varying vec3 vCol; varying float vFade;
+    uniform float uMix, uTime, uTurn, uTilt, uSize, uPush, uLagPush; uniform vec2 uPointer, uLag; varying vec3 vCol; varying float vFade;
     void main() {
       float e = smoothstep(aSeed * 0.45, aSeed * 0.45 + 0.55, uMix);       // each point leaves at its own moment
       vec3 p = mix(aFrom, aTo, e);
@@ -58,8 +58,11 @@
       vec3 swirl = vec3(sin(aSeed * 91.0 + uTime), cos(aSeed * 57.0 - uTime), sin(aSeed * 33.0)) * 0.55;
       p += swirl * arc;
       p.xy += 0.003 * vec2(sin(uTime * 1.3 + aSeed * 40.0), cos(uTime * 1.1 + aSeed * 70.0)); // a little life at rest
-      vec2 away = p.xy - uPointer;                                         // the pointer parts the cloud
-      float near = smoothstep(0.26, 0.0, length(away)) * uPush;
+      // The pointer parts the cloud at once (uPointer); points close back in behind it 0.2s late,
+      // because uLag trails the pointer and keeps its own gap open until it catches up.
+      vec2 away = p.xy - uPointer, awayLag = p.xy - uLag;
+      float near = smoothstep(0.26, 0.0, length(away)) * uPush, nearLag = smoothstep(0.26, 0.0, length(awayLag)) * uLagPush;
+      if (nearLag > near) { near = nearLag; away = awayLag; }
       p.xy += normalize(away + 0.0001) * near * (0.1 + 0.16 * aSeed);
       p.z += near * (aSeed - 0.3) * 0.5;
       float cy = cos(uTurn), sy = sin(uTurn), cx = cos(uTilt), sx = sin(uTilt);
@@ -95,7 +98,7 @@
     gl.vertexAttribPointer(at, size, gl.FLOAT, false, 0, 0);
     return (next) => { gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferSubData(gl.ARRAY_BUFFER, 0, next); };
   };
-  const U = Object.fromEntries(["uMix", "uTime", "uTurn", "uTilt", "uSize", "uPush", "uPointer"].map((n) => [n, gl.getUniformLocation(prog, n)]));
+  const U = Object.fromEntries(["uMix", "uTime", "uTurn", "uTilt", "uSize", "uPush", "uPointer", "uLagPush", "uLag"].map((n) => [n, gl.getUniformLocation(prog, n)]));
 
   const stage = canvas.parentElement, now = document.querySelector("[data-morph-now]");
   const picks = [...document.querySelectorAll("[data-morph-pick]")];
@@ -119,7 +122,7 @@
     const setFrom = buffer("aFrom", 3, clouds[0].pos), setTo = buffer("aTo", 3, clouds[0].pos);
     const setColFrom = buffer("aColFrom", 3, clouds[0].col), setColTo = buffer("aColTo", 3, clouds[0].col);
     let at = 0, flyStart = 0, held = performance.now(), hold = HOLD, flying = false, visible = true, pointer = [0, 0], turn = [0, 0];
-    let wanted = -1, over = false, push = 0, hit = [9, 9], seen = [9, 9], last = 0;
+    let wanted = -1, over = false, push = 0, lagPush = 0, hit = [9, 9], lag = [9, 9], last = 0;
     announce(shapes[0]);
     new ResizeObserver(resize).observe(canvas);
     resize();
@@ -128,7 +131,7 @@
     const toCloud = (e) => { const r = canvas.getBoundingClientRect(); return [((e.clientX - r.left) / r.width * 2 - 1) * 1.333, -((e.clientY - r.top) / r.height * 2 - 1) * 1.333]; };
     canvas.addEventListener("pointermove", (e) => { over = true; hit = toCloud(e); });
     canvas.addEventListener("pointerdown", (e) => { over = true; hit = toCloud(e); });
-    canvas.addEventListener("pointerleave", () => { over = false; });
+    canvas.addEventListener("pointerleave", () => { over = false; push = 0; }); // the gap under the pointer goes at once; the trailing one closes over 0.2s
     canvas.addEventListener("pointercancel", () => { over = false; });
     ["selectstart", "dragstart", "contextmenu"].forEach((type) => canvas.addEventListener(type, (e) => e.preventDefault())); // a long press must not select the canvas
     canvas.addEventListener("click", () => { wanted = (at + 1) % shapes.length; });
@@ -147,13 +150,14 @@
             flying = true; flyStart = t; at = next; announce(shapes[at]);
           }
         }
-        // The cloud answers the pointer with a 0.2s ease: the gap follows it and opens or closes over about 0.2s.
+        // Opening is instant, as before; closing takes about 0.2s.
         const k = 1 - Math.exp(-Math.min(t - last, 100) / 200); last = t;
-        if (seen[0] === 9) seen = [...hit]; // first touch: start where the pointer is, not off to the side
-        seen[0] += (hit[0] - seen[0]) * k; seen[1] += (hit[1] - seen[1]) * k;
-        push += ((over ? 1 : 0) - push) * k;
-        gl.uniform1f(U.uPush, push);
-        gl.uniform2f(U.uPointer, seen[0], seen[1]);
+        if (lag[0] === 9) lag = [...hit]; // first touch: start where the pointer is
+        lag[0] += (hit[0] - lag[0]) * k; lag[1] += (hit[1] - lag[1]) * k;
+        push += ((over ? 1 : 0) - push) * 0.12;
+        lagPush = over ? Math.max(lagPush, push) : lagPush * (1 - k);
+        gl.uniform1f(U.uPush, push); gl.uniform1f(U.uLagPush, lagPush);
+        gl.uniform2f(U.uPointer, hit[0], hit[1]); gl.uniform2f(U.uLag, lag[0], lag[1]);
         let mix = 0;
         if (flying) {
           mix = Math.min(1, (t - flyStart) / FLY);
