@@ -119,7 +119,7 @@
     const setFrom = buffer("aFrom", 3, clouds[0].pos), setTo = buffer("aTo", 3, clouds[0].pos);
     const setColFrom = buffer("aColFrom", 3, clouds[0].col), setColTo = buffer("aColTo", 3, clouds[0].col);
     let at = 0, flyStart = 0, held = performance.now(), hold = HOLD, flying = false, visible = true, pointer = [0, 0], turn = [0, 0];
-    let wanted = -1, over = false, push = 0, hit = [9, 9];
+    let wanted = -1, over = false, push = 0, hit = [9, 9], seen = [9, 9], last = 0;
     announce(shapes[0]);
     new ResizeObserver(resize).observe(canvas);
     resize();
@@ -147,9 +147,13 @@
             flying = true; flyStart = t; at = next; announce(shapes[at]);
           }
         }
-        push += ((over ? 1 : 0) - push) * 0.12;
+        // The cloud answers the pointer with a 0.2s ease: the gap follows it and opens or closes over about 0.2s.
+        const k = 1 - Math.exp(-Math.min(t - last, 100) / 200); last = t;
+        if (seen[0] === 9) seen = [...hit]; // first touch: start where the pointer is, not off to the side
+        seen[0] += (hit[0] - seen[0]) * k; seen[1] += (hit[1] - seen[1]) * k;
+        push += ((over ? 1 : 0) - push) * k;
         gl.uniform1f(U.uPush, push);
-        gl.uniform2f(U.uPointer, hit[0], hit[1]);
+        gl.uniform2f(U.uPointer, seen[0], seen[1]);
         let mix = 0;
         if (flying) {
           mix = Math.min(1, (t - flyStart) / FLY);
