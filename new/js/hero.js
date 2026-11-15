@@ -12,7 +12,7 @@
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const N = innerWidth < 760 ? 11000 : 22000; // points
   const HOLD = 3600, FLY = 1900; // ms a shape is held, ms the change takes
-  const TRAIL_MS = 300;   // how long a spot the pointer passed takes to let go (points vary around this)
+  const TRAIL_MS = 380;   // how long a spot the pointer passed takes to close again (points vary around this)
   const TRAIL_MAX = 48;   // spots remembered (the first slot is the pointer itself)
   const SPACING = 0.06;   // a spot every this far along the path, so a fast sweep leaves no gaps
   const INK = [0.95, 0.945, 0.925];
@@ -61,21 +61,19 @@
       vec3 swirl = vec3(sin(aSeed * 91.0 + uTime), cos(aSeed * 57.0 - uTime), sin(aSeed * 33.0)) * 0.55;
       p += swirl * arc;
       p.xy += 0.003 * vec2(sin(uTime * 1.3 + aSeed * 40.0), cos(uTime * 1.1 + aSeed * 70.0)); // a little life at rest
-      // The pointer drags points along with it, and they fall back behind it. uTrail holds the
-      // pointer's recent path: x, y, how much life the spot has left (1 to 0) and the direction
-      // the pointer was moving there. Points are carried that way, a little sideways as well, so
-      // the disturbance reads as a quick wake and not as a hole.
+      // The pointer pushes points away from it, and so does everywhere it has just been. uTrail holds
+      // the pointer's recent path: x, y and how much life each spot has left (1 to 0). Pushed points
+      // drift back quickly once the pointer has moved on, each at its own moment.
       vec2 push = vec2(0.0);
       for (int k = 0; k < ${TRAIL_MAX}; k++) {
         vec4 t = uTrail[k];
         if (t.z <= 0.0) continue;
-        float l = clamp(t.z * (1.0 + 0.5 * (aSeed - 0.5)), 0.0, 1.0);      // each point lets go at its own moment
+        float l = clamp(t.z * (1.0 + 0.6 * (aSeed - 0.5)), 0.0, 1.0);      // each point lets go at its own moment
         vec2 d = p.xy - t.xy;
-        float near = smoothstep(0.21 * (0.5 + 0.5 * l), 0.0, length(d)) * l * l; // small, and gone quickly
-        vec2 dir = vec2(cos(t.w), sin(t.w));
-        push += (dir + normalize(d + 0.0001) * 0.3) * near * (0.1 + 0.16 * aSeed);
+        float near = smoothstep(0.27 * (0.55 + 0.45 * l), 0.0, length(d)) * l * (2.0 - l) * 0.9; // eases back quickly, no sudden snap
+        push += normalize(d + 0.0001) * near * (0.1 + 0.16 * aSeed);      // straight away from the pointer
       }
-      p.xy += push * min(1.0, 0.22 / max(length(push), 0.0001));           // never far: a nudge, not a shove
+      p.xy += push * min(1.0, 0.3 / max(length(push), 0.0001));            // overlapping spots must not fling points far
       float cy = cos(uTurn), sy = sin(uTurn), cx = cos(uTilt), sx = sin(uTilt);
       p = vec3(p.x * cy + p.z * sy, p.y, -p.x * sy + p.z * cy);
       p = vec3(p.x, p.y * cx - p.z * sx, p.y * sx + p.z * cx);
