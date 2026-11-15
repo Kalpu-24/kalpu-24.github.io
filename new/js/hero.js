@@ -12,9 +12,9 @@
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const N = innerWidth < 760 ? 11000 : 22000; // points
   const HOLD = 3600, FLY = 1900; // ms a shape is held, ms the change takes
-  const TRAIL_MS = 620;   // how long a spot the pointer passed takes to close again (points vary around this)
-  const TRAIL_MAX = 56;   // spots remembered (the first slot is the pointer itself)
-  const SPACING = 0.07;   // a spot every this far along the path, so a fast sweep leaves no gaps
+  const TRAIL_MS = 300;   // how long a spot the pointer passed takes to let go (points vary around this)
+  const TRAIL_MAX = 48;   // spots remembered (the first slot is the pointer itself)
+  const SPACING = 0.06;   // a spot every this far along the path, so a fast sweep leaves no gaps
   const INK = [0.95, 0.945, 0.925];
 
   /* Turn one image into N points: x, y in -1..1, z from a dome, plus a colour each. */
@@ -53,7 +53,7 @@
 
   const VERT = `
     attribute vec3 aFrom, aTo, aColFrom, aColTo; attribute float aSeed;
-    uniform float uMix, uTime, uTurn, uTilt, uSize; uniform vec3 uTrail[${TRAIL_MAX}]; varying vec3 vCol; varying float vFade;
+    uniform float uMix, uTime, uTurn, uTilt, uSize; uniform vec4 uTrail[${TRAIL_MAX}]; varying vec3 vCol; varying float vFade;
     void main() {
       float e = smoothstep(aSeed * 0.45, aSeed * 0.45 + 0.55, uMix);       // each point leaves at its own moment
       vec3 p = mix(aFrom, aTo, e);
@@ -61,22 +61,21 @@
       vec3 swirl = vec3(sin(aSeed * 91.0 + uTime), cos(aSeed * 57.0 - uTime), sin(aSeed * 33.0)) * 0.55;
       p += swirl * arc;
       p.xy += 0.003 * vec2(sin(uTime * 1.3 + aSeed * 40.0), cos(uTime * 1.1 + aSeed * 70.0)); // a little life at rest
-      // The pointer parts the cloud, and so does everywhere it has just been: uTrail holds the
-      // pointer's recent path (x, y, strength), each spot's strength fading from 1 to 0 over time.
-      vec2 push = vec2(0.0); float lift = 0.0;
+      // The pointer drags points along with it, and they fall back behind it. uTrail holds the
+      // pointer's recent path: x, y, how much life the spot has left (1 to 0) and the direction
+      // the pointer was moving there. Points are carried that way, a little sideways as well, so
+      // the disturbance reads as a quick wake and not as a hole.
+      vec2 push = vec2(0.0);
       for (int k = 0; k < ${TRAIL_MAX}; k++) {
-        vec3 t = uTrail[k];                                                // z is how much life the spot has left, 1 to 0
+        vec4 t = uTrail[k];
         if (t.z <= 0.0) continue;
-        float l = clamp(t.z * (1.0 + 0.9 * (aSeed - 0.5)), 0.0, 1.0);      // every point heals at its own pace, so they drift home instead of snapping back together
-        float s = l * l * (3.0 - 2.0 * l);
-        vec2 away = p.xy - t.xy;
-        float near = smoothstep(0.3 * (0.45 + 0.55 * l), 0.0, length(away)) * s; // the gap narrows as it heals
-        push += normalize(away + 0.0001) * near * (0.07 + 0.13 * aSeed);
-        lift += near * (aSeed - 0.3) * 0.5;
+        float l = clamp(t.z * (1.0 + 0.5 * (aSeed - 0.5)), 0.0, 1.0);      // each point lets go at its own moment
+        vec2 d = p.xy - t.xy;
+        float near = smoothstep(0.21 * (0.5 + 0.5 * l), 0.0, length(d)) * l * l; // small, and gone quickly
+        vec2 dir = vec2(cos(t.w), sin(t.w));
+        push += (dir + normalize(d + 0.0001) * 0.3) * near * (0.1 + 0.16 * aSeed);
       }
-      float len = length(push);
-      p.xy += push * min(1.0, 0.34 / max(len, 0.0001));                    // overlapping spots must not fling points away
-      p.z += clamp(lift, -0.5, 0.5);
+      p.xy += push * min(1.0, 0.22 / max(length(push), 0.0001));           // never far: a nudge, not a shove
       float cy = cos(uTurn), sy = sin(uTurn), cx = cos(uTilt), sx = sin(uTilt);
       p = vec3(p.x * cy + p.z * sy, p.y, -p.x * sy + p.z * cy);
       p = vec3(p.x, p.y * cx - p.z * sx, p.y * sx + p.z * cx);
@@ -136,15 +135,17 @@
     let at = 0, flyStart = 0, held = performance.now(), hold = HOLD, flying = false, visible = true, pointer = [0, 0], turn = [0, 0];
     let wanted = -1, over = false, push = 0, hit = [9, 9];
     // The path the pointer has just taken: a ring of spots, each with the time it was made.
-    const spots = Array.from({ length: TRAIL_MAX - 1 }, () => ({ x: 0, y: 0, t: -1e9 }));
-    const trailData = new Float32Array(TRAIL_MAX * 3);
-    let next = 0, last = null;
-    const leave = (x, y, t) => { const s = spots[next]; s.x = x; s.y = y; s.t = t; next = (next + 1) % spots.length; };
+    const spots = Array.from({ length: TRAIL_MAX - 1 }, () => ({ x: 0, y: 0, a: 0, t: -1e9 }));
+    const trailData = new Float32Array(TRAIL_MAX * 4);
+    let next = 0, last = null, ang = 0; // ang: the direction the pointer last moved in
+    const leave = (x, y, t) => { const s = spots[next]; s.x = x; s.y = y; s.a = ang; s.t = t; next = (next + 1) % spots.length; };
     const trace = (x, y, t) => {
       if (last) { // fill in the stretch since the last event so a quick sweep leaves a solid channel
-        const dx = x - last[0], dy = y - last[1], n = Math.min(spots.length >> 1, Math.floor(Math.hypot(dx, dy) / SPACING));
+        const dx = x - last[0], dy = y - last[1], dist = Math.hypot(dx, dy);
+        if (dist < SPACING * 0.5) return; // barely moved: no new spot
+        ang = Math.atan2(dy, dx);
+        const n = Math.min(spots.length >> 1, Math.floor(dist / SPACING));
         for (let k = 1; k <= n; k++) leave(last[0] + dx * k / (n + 1), last[1] + dy * k / (n + 1), t);
-        if (n === 0 && Math.hypot(dx, dy) < SPACING * 0.5) return; // barely moved: no new spot
       }
       leave(x, y, t); last = [x, y];
     };
@@ -175,16 +176,15 @@
             flying = true; flyStart = t; at = next; announce(shapes[at]);
           }
         }
-        // Slot 0 is the pointer itself (eases in and out); the rest are the spots it has left behind,
-        // each closing over TRAIL_MS, slowly at first and then settling.
-        push += ((over ? 1 : 0) - push) * 0.12;
-        trailData[0] = hit[0]; trailData[1] = hit[1]; trailData[2] = push > 0.01 ? push : 0;
+        // Slot 0 is the pointer itself (quick to arrive and leave); the rest are the spots it has left
+        // behind, each letting go over TRAIL_MS. The shader shapes how that looks per point.
+        push += ((over ? 1 : 0) - push) * 0.3;
+        trailData[0] = hit[0]; trailData[1] = hit[1]; trailData[2] = push > 0.01 ? push : 0; trailData[3] = ang;
         for (let k = 0; k < spots.length; k++) {
-          const s = spots[k], life = 1 - (t - s.t) / TRAIL_MS, o = (k + 1) * 3;
-          trailData[o] = s.x; trailData[o + 1] = s.y;
-          trailData[o + 2] = life > 0 ? life : 0; // the shader shapes this per point
+          const s = spots[k], life = 1 - (t - s.t) / TRAIL_MS, o = (k + 1) * 4;
+          trailData[o] = s.x; trailData[o + 1] = s.y; trailData[o + 2] = life > 0 ? life : 0; trailData[o + 3] = s.a;
         }
-        gl.uniform3fv(U.uTrail, trailData);
+        gl.uniform4fv(U.uTrail, trailData);
         let mix = 0;
         if (flying) {
           mix = Math.min(1, (t - flyStart) / FLY);
