@@ -110,10 +110,11 @@ function home() {
     }
   };
 
+  const github = profile.links.find((l) => l.label === "GitHub").url;
   const game = (p, i) => `
     <article class="slide${p.theme.bg > "#8" ? " slide--light" : ""}" style="${theme(p)}">
-      <a class="slide__art" href="${p.id}.html" tabindex="-1" aria-hidden="true">
-        <img${p.art.fit === "contain" ? ` class="is-contained"` : ""} src="${img(p, p.art.src)}" style="object-position:${p.art.pos}" alt="" loading="${i ? "lazy" : "eager"}">
+      <a class="slide__art${p.art.fit === "wide" ? " slide__art--wide" : ""}" href="${p.id}.html" tabindex="-1" aria-hidden="true">${p.art.fit === "wide" ? `<span class="slide__blur" style="background-image:url('${img(p, p.art.src)}')"></span>` : ""}
+        <img${p.art.fit === "contain" ? ` class="is-contained"` : p.art.fit === "wide" ? ` class="is-wide"` : ""} src="${img(p, p.art.src)}" style="object-position:${p.art.fit === "wide" ? "50% 50%" : p.art.pos}" alt="" loading="${i ? "lazy" : "eager"}">
       </a>
       ${prop(p)}
       <div class="slide__info">
@@ -178,7 +179,24 @@ function home() {
     <p class="label">Selected work</p>
     <h2 class="big">The games</h2>
   </header>
+  <div class="games">
   ${projects.map(game).join("\n")}
+    <article class="slide slide--more">
+      <a class="slide__art" href="${github}" tabindex="-1" aria-hidden="true">
+        <span class="more__dots">${projects.map((p) => `<i style="--dot:${p.theme.accent}"></i>`).join("")}</span>
+      </a>
+      <div class="slide__info">
+        <div class="slide__main">
+          <p class="label">${String(projects.length + 1).padStart(2, "0")} / More</p>
+          <h3 class="slide__title"><a href="${github}">More on GitHub</a></h3>
+          <p class="slide__pitch">Source code for AuraRPG and SnakeWall, and everything else I've put up.</p>
+        </div>
+        <div class="slide__side">
+          <a class="btn" href="${github}">${github.replace("https://", "")} ${arrow}</a>
+        </div>
+      </div>
+    </article>
+  </div>
 </section>
 
 <section class="wrap section" id="skills">
