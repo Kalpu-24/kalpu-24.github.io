@@ -152,7 +152,7 @@ function home() {
   <div class="wrap hero__in">
     <div class="hero__text">
     <p class="label">${esc(profile.name)} · ${esc(profile.role)}</p>
-    <h1 class="hero__h">I build games in Unreal Engine 5 and C++.</h1>
+    <h1 class="hero__h">I build games in Unreal Engine 5.</h1>
     <p class="hero__p">${esc(profile.intro)}</p>
     <p class="hero__cta">
       <a class="btn btn--solid btn--big" href="#work">See the games ${arrow}</a>
