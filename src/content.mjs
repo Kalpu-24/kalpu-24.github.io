@@ -40,7 +40,7 @@ export const profile = {
 export const headlineStats = [
   { v: "1st", l: "Druid Mechanics Game Jam 2025", to: "boomcorp" },
   { v: "4", l: "Unreal Engine 5 games", to: null },
-  { v: "6k+", l: "Google Play installs", to: "snakewall" },
+  { v: "7k+", l: "Google Play installs", to: "snakewall" },
 ];
 
 /* Experience and education, newest first. */
@@ -450,7 +450,7 @@ export const projects = [
     font: "MLCD",
     fontScale: 0.92,
     theme: { bg: "#eeeef2", surface: "#ffffff", ink: "#141218", muted: "#5d5a66", accent: "#c8201b", onAccent: "#ffffff" },
-    fact: "6k+ installs on Google Play",
+    fact: "7k+ installs on Google Play",
     art: { src: "prop", pos: "50% 50%", fit: "contain" }, // show the whole phone, not a crop
     prop: "snake", // a dot snake crawls toward its food as you scroll
     kind: "Android live wallpaper",
@@ -466,14 +466,14 @@ export const projects = [
       { label: "Source code", note: "GitHub", url: "https://github.com/Kalpu-24/SnakeWall" },
     ],
     highlights: [
-      "6k+ installs on Google Play and 28 stars on GitHub",
+      "7k+ installs on Google Play and 28 stars on GitHub",
       "The whole game runs inside Android's wallpaper service, drawn on a Canvas",
       "Open source under MIT, with features contributed by other developers",
     ],
     tags: ["Java", "Android", "WallpaperService", "Canvas", "GitHub Actions", "Open source"],
     stats: [
-      { v: "6k+", l: "Google Play installs" }, // source: previous site (Play Console); the public badge reads 5K+
-      { v: "4.6", l: "store rating" }, // source: previous site
+      { v: "7k+", l: "Google Play installs" }, // source: previous site (Play Console); the public badge reads 5K+
+      { v: "4.5", l: "store rating" }, // source: previous site
       { v: "28", l: "GitHub stars" }, // source: GitHub, 13 Nov 2026
       { v: "19 × 19", l: "board, with wrapping walls" }, // source: SnakeWallpaperService.java
     ],
