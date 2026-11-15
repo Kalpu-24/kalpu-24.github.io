@@ -12,9 +12,6 @@
   const still = matchMedia("(prefers-reduced-motion: reduce)").matches;
   const N = innerWidth < 760 ? 11000 : 22000; // points
   const HOLD = 3600, FLY = 1900; // ms a shape is held, ms the change takes
-  const TRAIL_MS = 380;   // how long a spot the pointer passed takes to close again (points vary around this)
-  const TRAIL_MAX = 48;   // spots remembered (the first slot is the pointer itself)
-  const SPACING = 0.06;   // a spot every this far along the path, so a fast sweep leaves no gaps
   const INK = [0.95, 0.945, 0.925];
 
   /* Turn one image into N points: x, y in -1..1, z from a dome, plus a colour each. */
@@ -53,7 +50,7 @@
 
   const VERT = `
     attribute vec3 aFrom, aTo, aColFrom, aColTo; attribute float aSeed;
-    uniform float uMix, uTime, uTurn, uTilt, uSize; uniform vec4 uTrail[${TRAIL_MAX}]; varying vec3 vCol; varying float vFade;
+    uniform float uMix, uTime, uTurn, uTilt, uSize, uPush; uniform vec2 uPointer; varying vec3 vCol; varying float vFade;
     void main() {
       float e = smoothstep(aSeed * 0.45, aSeed * 0.45 + 0.55, uMix);       // each point leaves at its own moment
       vec3 p = mix(aFrom, aTo, e);
@@ -61,19 +58,10 @@
       vec3 swirl = vec3(sin(aSeed * 91.0 + uTime), cos(aSeed * 57.0 - uTime), sin(aSeed * 33.0)) * 0.55;
       p += swirl * arc;
       p.xy += 0.003 * vec2(sin(uTime * 1.3 + aSeed * 40.0), cos(uTime * 1.1 + aSeed * 70.0)); // a little life at rest
-      // The pointer pushes points away from it, and so does everywhere it has just been. uTrail holds
-      // the pointer's recent path: x, y and how much life each spot has left (1 to 0). Pushed points
-      // drift back quickly once the pointer has moved on, each at its own moment.
-      vec2 push = vec2(0.0);
-      for (int k = 0; k < ${TRAIL_MAX}; k++) {
-        vec4 t = uTrail[k];
-        if (t.z <= 0.0) continue;
-        float l = clamp(t.z * (1.0 + 0.2 * (aSeed - 0.5)), 0.0, 1.0);      // points return at almost the same pace
-        vec2 d = p.xy - t.xy;
-        float near = smoothstep(0.27 * (0.55 + 0.45 * l), 0.0, length(d)) * l * 0.9; // linear in the spot's life: points start back at once and move at a steady pace
-        push += normalize(d + 0.0001) * near * (0.1 + 0.16 * aSeed);      // straight away from the pointer
-      }
-      p.xy += push * min(1.0, 0.3 / max(length(push), 0.0001));            // overlapping spots must not fling points far
+      vec2 away = p.xy - uPointer;                                         // the pointer parts the cloud
+      float near = smoothstep(0.26, 0.0, length(away)) * uPush;
+      p.xy += normalize(away + 0.0001) * near * (0.1 + 0.16 * aSeed);
+      p.z += near * (aSeed - 0.3) * 0.5;
       float cy = cos(uTurn), sy = sin(uTurn), cx = cos(uTilt), sx = sin(uTilt);
       p = vec3(p.x * cy + p.z * sy, p.y, -p.x * sy + p.z * cy);
       p = vec3(p.x, p.y * cx - p.z * sx, p.y * sx + p.z * cx);
@@ -107,7 +95,7 @@
     gl.vertexAttribPointer(at, size, gl.FLOAT, false, 0, 0);
     return (next) => { gl.bindBuffer(gl.ARRAY_BUFFER, b); gl.bufferSubData(gl.ARRAY_BUFFER, 0, next); };
   };
-  const U = Object.fromEntries(["uMix", "uTime", "uTurn", "uTilt", "uSize", "uTrail"].map((n) => [n, gl.getUniformLocation(prog, n)]));
+  const U = Object.fromEntries(["uMix", "uTime", "uTurn", "uTilt", "uSize", "uPush", "uPointer"].map((n) => [n, gl.getUniformLocation(prog, n)]));
 
   const stage = canvas.parentElement, now = document.querySelector("[data-morph-now]");
   const picks = [...document.querySelectorAll("[data-morph-pick]")];
@@ -132,31 +120,16 @@
     const setColFrom = buffer("aColFrom", 3, clouds[0].col), setColTo = buffer("aColTo", 3, clouds[0].col);
     let at = 0, flyStart = 0, held = performance.now(), hold = HOLD, flying = false, visible = true, pointer = [0, 0], turn = [0, 0];
     let wanted = -1, over = false, push = 0, hit = [9, 9];
-    // The path the pointer has just taken: a ring of spots, each with the time it was made.
-    const spots = Array.from({ length: TRAIL_MAX - 1 }, () => ({ x: 0, y: 0, a: 0, t: -1e9 }));
-    const trailData = new Float32Array(TRAIL_MAX * 4);
-    let next = 0, last = null, ang = 0; // ang: the direction the pointer last moved in
-    const leave = (x, y, t) => { const s = spots[next]; s.x = x; s.y = y; s.a = ang; s.t = t; next = (next + 1) % spots.length; };
-    const trace = (x, y, t) => {
-      if (last) { // fill in the stretch since the last event so a quick sweep leaves a solid channel
-        const dx = x - last[0], dy = y - last[1], dist = Math.hypot(dx, dy);
-        if (dist < SPACING * 0.5) return; // barely moved: no new spot
-        ang = Math.atan2(dy, dx);
-        const n = Math.min(spots.length >> 1, Math.floor(dist / SPACING));
-        for (let k = 1; k <= n; k++) leave(last[0] + dx * k / (n + 1), last[1] + dy * k / (n + 1), t);
-      }
-      leave(x, y, t); last = [x, y];
-    };
     announce(shapes[0]);
     new ResizeObserver(resize).observe(canvas);
     resize();
 
     /* Interaction: move over the cloud to part it, click it for the next game, or pick one below. */
     const toCloud = (e) => { const r = canvas.getBoundingClientRect(); return [((e.clientX - r.left) / r.width * 2 - 1) * 1.333, -((e.clientY - r.top) / r.height * 2 - 1) * 1.333]; };
-    canvas.addEventListener("pointermove", (e) => { over = true; hit = toCloud(e); trace(hit[0], hit[1], performance.now()); });
-    canvas.addEventListener("pointerdown", (e) => { over = true; hit = toCloud(e); last = null; trace(hit[0], hit[1], performance.now()); });
-    canvas.addEventListener("pointerleave", () => { over = false; last = null; });
-    canvas.addEventListener("pointercancel", () => { over = false; last = null; });
+    canvas.addEventListener("pointermove", (e) => { over = true; hit = toCloud(e); });
+    canvas.addEventListener("pointerdown", (e) => { over = true; hit = toCloud(e); });
+    canvas.addEventListener("pointerleave", () => { over = false; });
+    canvas.addEventListener("pointercancel", () => { over = false; });
     ["selectstart", "dragstart", "contextmenu"].forEach((type) => canvas.addEventListener(type, (e) => e.preventDefault())); // a long press must not select the canvas
     canvas.addEventListener("click", () => { wanted = (at + 1) % shapes.length; });
     picks.forEach((b) => b.addEventListener("click", () => { wanted = shapes.findIndex((s) => s.id === b.dataset.morphPick); }));
@@ -174,15 +147,9 @@
             flying = true; flyStart = t; at = next; announce(shapes[at]);
           }
         }
-        // Slot 0 is the pointer itself (quick to arrive and leave); the rest are the spots it has left
-        // behind, each letting go over TRAIL_MS. The shader shapes how that looks per point.
-        push += ((over ? 1 : 0) - push) * 0.3;
-        trailData[0] = hit[0]; trailData[1] = hit[1]; trailData[2] = push > 0.01 ? push : 0; trailData[3] = ang;
-        for (let k = 0; k < spots.length; k++) {
-          const s = spots[k], life = 1 - (t - s.t) / TRAIL_MS, o = (k + 1) * 4;
-          trailData[o] = s.x; trailData[o + 1] = s.y; trailData[o + 2] = life > 0 ? life : 0; trailData[o + 3] = s.a;
-        }
-        gl.uniform4fv(U.uTrail, trailData);
+        push += ((over ? 1 : 0) - push) * 0.12;
+        gl.uniform1f(U.uPush, push);
+        gl.uniform2f(U.uPointer, hit[0], hit[1]);
         let mix = 0;
         if (flying) {
           mix = Math.min(1, (t - flyStart) / FLY);
