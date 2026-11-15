@@ -20,7 +20,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap">
-<link rel="stylesheet" href="css/site.css?v=b145130e">
+<link rel="stylesheet" href="css/site.css?v=878b9533">
 <script src="js/site.js?v=f212c8e2" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
@@ -75,6 +75,7 @@
     <p class="label">Selected work</p>
     <h2 class="big">The games</h2>
   </header>
+  <div class="games">
   
     <article class="slide" style="--bg:#0b1f24;--surface:#12303a;--ink:#f3efe6;--muted:#9fb6b6;--accent:#ffb347;--on-accent:#1d1300;--game-font:'Jaro';--game-scale:1.08">
       <a class="slide__art" href="rollemout.html" tabindex="-1" aria-hidden="true">
@@ -134,8 +135,8 @@
     </article>
 
     <article class="slide" style="--bg:#0b072a;--surface:#161042;--ink:#eeeef8;--muted:#aaa5d2;--accent:#f3c969;--on-accent:#251a00;--game-font:'Pirata One';--game-scale:1.12">
-      <a class="slide__art" href="aurarpg.html" tabindex="-1" aria-hidden="true">
-        <img src="assets/games/aurarpg/key.webp" style="object-position:50% 22%" alt="" loading="lazy">
+      <a class="slide__art slide__art--wide" href="aurarpg.html" tabindex="-1" aria-hidden="true"><span class="slide__blur" style="background-image:url('assets/games/aurarpg/key.webp')"></span>
+        <img class="is-wide" src="assets/games/aurarpg/key.webp" style="object-position:50% 50%" alt="" loading="lazy">
       </a>
       <div class="slide__prop slide__prop--circle" data-drift aria-hidden="true"><i></i><i></i><i></i></div>
       <div class="slide__info">
@@ -170,6 +171,22 @@
         </div>
       </div>
     </article>
+    <article class="slide slide--more">
+      <a class="slide__art" href="https://github.com/Kalpu-24" tabindex="-1" aria-hidden="true">
+        <span class="more__dots"><i style="--dot:#ffb347"></i><i style="--dot:#cdff1b"></i><i style="--dot:#ff5db4"></i><i style="--dot:#f3c969"></i><i style="--dot:#c8201b"></i></span>
+      </a>
+      <div class="slide__info">
+        <div class="slide__main">
+          <p class="label">06 / More</p>
+          <h3 class="slide__title"><a href="https://github.com/Kalpu-24">More on GitHub</a></h3>
+          <p class="slide__pitch">Source code for AuraRPG and SnakeWall, and everything else I've put up.</p>
+        </div>
+        <div class="slide__side">
+          <a class="btn" href="https://github.com/Kalpu-24">github.com/Kalpu-24 <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+      </div>
+    </article>
+  </div>
 </section>
 
 <section class="wrap section" id="skills">

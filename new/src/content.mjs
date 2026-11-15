@@ -357,7 +357,7 @@ export const projects = [
     fontScale: 1.12,
     theme: { bg: "#0b072a", surface: "#161042", ink: "#eeeef8", muted: "#aaa5d2", accent: "#f3c969", onAccent: "#251a00" },
     fact: "Built on Unreal's Gameplay Ability System",
-    art: { src: "key", pos: "50% 22%" },
+    art: { src: "key", pos: "50% 22%", fit: "wide" }, // wider than the card: show it whole over a blurred copy, so the title isn't cut
     prop: "circle", // a magic circle turns with the scroll
     kind: "Top-down action RPG",
     year: "2025",
