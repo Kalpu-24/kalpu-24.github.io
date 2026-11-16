@@ -79,6 +79,16 @@
     });
   }
 
+  /* ---- No hover on touch screens: colour the picture that is mid-screen ---- */
+  if (matchMedia("(hover: none)").matches && "IntersectionObserver" in window) {
+    const live = new IntersectionObserver(
+      (entries) => entries.forEach((e) => e.target.classList.toggle("is-live", e.isIntersecting)),
+      { rootMargin: "-25% 0px -25% 0px" }
+    );
+    // Watch the whole panel where there is one, so its cut-out character colours with it.
+    $$(".frame").forEach((el) => live.observe(el.closest(".panel__art") || el));
+  }
+
   /* ---- Screenshot viewer ------------------------------------------------- */
   const box = $("#lightbox");
   const shots = $$("[data-shot]");

@@ -91,6 +91,8 @@ code { padding: 0.08em 0.35em; background: var(--mist); font: 500 0.86em ui-mono
 .frame__c--br { right: -14px; bottom: -14px; border-width: 0 1.5px 1.5px 0; transform-origin: bottom right; }
 .frame__dot { right: -27px; top: -27px; width: 8px; height: 8px; background: var(--fill); }
 a:hover .frame__pic img, .panel:hover .frame__pic img, .frame:hover .frame__pic img { filter: none; }
+/* Touch screens have no hover: site.js marks the picture nearest the middle of the screen as .is-live. */
+.is-live .frame__pic img, .is-live .panel__prop { filter: none; }
 
 /* Top bar ---------------------------------------------------------- */
 .top { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 16px; height: var(--top); padding-inline: var(--pad); background: rgb(255 255 255 / 0.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
