@@ -129,6 +129,11 @@ page({
   <div class="hero__orn late" aria-hidden="true">${orn}</div>
 </section>
 
+<section class="lead wrap scene" aria-label="Highlights">
+  <span class="ln"></span>
+  ${headlineStats.map((n) => `<${n.to ? `a href="${n.to}.html"` : "div"} class="lead__item"><strong class="pair"><span><i>${esc(n.v)}</i></span></strong><u class="mark"></u><span class="fade">${esc(n.l)}</span></${n.to ? "a" : "div"}>`).join("\n  ")}
+</section>
+
 <section class="reel" id="work" aria-label="Selected work">
   <div class="reel__sticky">
     <div class="reel__head wrap">
@@ -157,17 +162,13 @@ page({
 </section>
 
 <section class="about wrap scene" id="about">
-  <div class="about__art" aria-hidden="true">
-    ${frame("../assets/kalp.webp", "frame--square")}
-  </div>
-  <div class="about__text">
+  <div class="about__head">
     <p class="eyebrow fade">${esc(profile.location)}</p>
     ${pair("About", profile.name.split(" ")[0])}
+  </div>
+  <div class="about__text">
     <p class="quote fade">${esc(profile.about.punch)}</p>
     ${profile.about.paragraphs.map((t) => `<p class="fade">${esc(t)}</p>`).join("\n    ")}
-    <dl class="about__nums late">
-      ${headlineStats.map((n) => `<div><dd>${n.to ? `<a href="${n.to}.html">${esc(n.v)}</a>` : esc(n.v)}</dd><dt>${esc(n.l)}</dt></div>`).join("")}
-    </dl>
   </div>
 </section>
 
