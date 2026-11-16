@@ -10,7 +10,7 @@ const versioned = (path) => `${path}?v=${createHash("sha1").update(readFileSync(
 const BASE = "https://kalpshah.dev/next/";
 const FONTS = "https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@600;800;900&family=Sofia+Sans:wght@400;500;700&family=Zilla+Slab:ital,wght@0,400;0,500;0,600;1,400&display=swap";
 
-/* On white, each game keeps one accent: `fill` for shapes, `text` for type (dark enough to read). */
+/* On white, each game keeps one accent: `fill` for marks and blocks, `text` for type (dark enough to read). */
 const ACCENT = {
   home: { fill: "#2440e6", text: "#2440e6", on: "#ffffff" },
   rollemout: { fill: "#ffb347", text: "#c25a00", on: "#1d1300" },
@@ -29,12 +29,14 @@ const ext = (url) => (/^https?:/.test(url) ? ` target="_blank" rel="noopener"` :
 const num = (i) => String(i + 1).padStart(2, "0");
 const arrow = `<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>`;
 const out = `<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>`;
-/* The small ornament that leads the eye along a line: three tiles and an arrow. */
-const orn = `<span class="orn" aria-hidden="true"><i></i><i></i><i></i><b></b></span>`;
+/* A short measuring rule that leads the eye along a line. */
+const orn = `<span class="orn" aria-hidden="true"><b></b></span>`;
 /* A stacked two-tone headline: first part in the accent, second in ink. */
-const pair = (a, b, tag = "h2", cls = "") => `<${tag} class="pair ${cls}"><span><i>${esc(a)}</i></span> <span><i>${esc(b)}</i></span></${tag}>`;
-/* A picture inside a shape. The outline draws first, then the picture arrives. */
-const fig = (shape, src, cls = "", attrs = "") => `<span class="shape shape--${shape} ${cls}"><img src="${src}" alt="" loading="lazy"${attrs}></span>`;
+const pair = (a, b, tag = "h2", cls = "") => `<${tag} class="pair ${cls}"><span><i>${esc(a)}</i></span> <u class="mark"></u> <span><i>${esc(b)}</i></span></${tag}>`;
+/* A picture in a viewfinder frame: two guide lines cross at one corner, marks draw at
+   the other three, then the picture wipes in. The frame is wide, so the subject is not cropped away. */
+const corners = `<i class="frame__c frame__c--tl"></i><i class="frame__c frame__c--tr"></i><i class="frame__c frame__c--br"></i>`;
+const frame = (src, cls = "", attrs = "") => `<span class="frame ${cls}"><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><img src="${src}" alt="" loading="lazy"${attrs}></span>${corners}<span class="frame__dot"></span></span>`;
 const btn = (label, url, kind = "") => `<a class="btn ${kind}" href="${esc(url)}"${ext(url)}>${esc(label)} ${/^https?:/.test(url) ? out : arrow}</a>`;
 
 function page({ file, title, description, body, id = "home" }) {
@@ -58,7 +60,7 @@ function page({ file, title, description, body, id = "home" }) {
 <body class="${id === "home" ? "home" : "project"}" style="${accent(id)}">
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
-  <a class="top__mark" href="./" aria-label="Kalp Shah, home"><span></span><span></span><span></span><b>Kalp Shah</b></a>
+  <a class="top__mark" href="./" aria-label="Kalp Shah, home"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M7 4v20M7 15 19 4M11.5 11 20 24"/><rect x="21" y="3" width="4" height="4"/></svg><b>Kalp Shah</b></a>
   <nav class="top__nav" aria-label="Main">
     <a href="./#work">Work</a>
     <a href="./#about">About</a>
@@ -116,9 +118,7 @@ page({
   body: `
 <section class="hero scene">
   <div class="hero__art" aria-hidden="true">
-    <span class="ln hero__line"></span>
-    ${fig("leaf", "../assets/kalp.webp", "hero__pic")}
-    <span class="shape shape--tile hero__tile"></span>
+    ${frame("../assets/kalp.webp", "frame--square")}
   </div>
   <div class="hero__text">
     <p class="eyebrow fade">${esc(profile.name)} · ${esc(profile.role)}</p>
@@ -139,16 +139,14 @@ page({
       ${projects.map((p, i) => `
       <article class="panel scene" style="${accent(p.id)}" id="work-${p.id}">
         <a class="panel__art" href="${p.id}.html" tabindex="-1" aria-hidden="true">
-          <span class="ln panel__line"></span>
           ${p.art.fit === "contain"
-            ? fig(i % 2 ? "arch" : "leaf", img(p, "prop"), "panel__shot is-contain")
-            : fig(i % 2 ? "arch" : "leaf", img(p, "2"), "panel__shot") + `
+            ? frame(img(p, "prop"), "is-contain")
+            : frame(img(p, "2")) + `
           <img class="panel__prop" src="${img(p, "prop")}" alt="" loading="lazy">`}
-          <span class="shape shape--tile panel__tile"></span>
         </a>
         <div class="panel__text">
           <p class="eyebrow fade">${esc(p.kind)} · ${esc(p.year)}</p>
-          <h3 class="pair pair--lg"><a href="${p.id}.html"><span><i>${esc(p.name)}</i></span> <span><i>${esc(p.fact)}</i></span></a></h3>
+          <h3 class="pair pair--lg"><a href="${p.id}.html"><span><i>${esc(p.name)}</i></span> <u class="mark"></u> <span><i>${esc(p.fact)}</i></span></a></h3>
           <p class="fade">${esc(p.pitch)}</p>
           <div class="actions late">${btn("View project", `${p.id}.html`)}</div>
         </div>
@@ -160,9 +158,7 @@ page({
 
 <section class="about wrap scene" id="about">
   <div class="about__art" aria-hidden="true">
-    <span class="ln about__line"></span>
-    ${fig("arch", "../assets/kalp.webp", "about__pic")}
-    <span class="shape shape--tile about__tile"></span>
+    ${frame("../assets/kalp.webp", "frame--square")}
   </div>
   <div class="about__text">
     <p class="eyebrow fade">${esc(profile.location)}</p>
@@ -213,9 +209,7 @@ projects.forEach((p, i) => {
     <div class="actions late">${p.links.map((l, k) => btn(l.label, l.url, k ? "btn--quiet" : "")).join("")}</div>
   </div>
   <div class="phero__art" aria-hidden="true">
-    <span class="ln phero__line"></span>
-    ${fig("leaf", img(p, "key"), `phero__key${p.art.fit === "contain" ? " is-contain" : ""}`, ` style="object-position:${p.art.pos}"`)}
-    <span class="shape shape--tile phero__tile"></span>
+    ${frame(img(p, "key"), `is-colour${p.art.fit === "contain" ? " is-contain" : ""}`, ` style="object-position:${p.art.pos}"`)}
     <img class="phero__prop" src="${img(p, "prop")}" alt="">
   </div>
 </section>
@@ -269,7 +263,7 @@ ${p.notes?.length ? block("Notes", "and credits", `<div class="notes">${p.notes.
 <a class="nextup" href="${next.id}.html" style="${accent(next.id)}">
   <span class="wrap nextup__in">
     <span class="eyebrow">Next project</span>
-    <span class="pair pair--lg"><span><i>${esc(next.name)}</i></span> <span><i>${esc(next.kind)}</i></span></span>
+    <span class="pair pair--lg"><span><i>${esc(next.name)}</i></span> <u class="mark"></u> <span><i>${esc(next.kind)}</i></span></span>
     ${orn}
   </span>
 </a>`,
