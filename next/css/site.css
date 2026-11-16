@@ -78,10 +78,12 @@ code { padding: 0.08em 0.35em; background: var(--mist); font: 500 0.86em ui-mono
 .frame--square { aspect-ratio: 1; }
 .frame > * { position: absolute; }
 .frame__pic { inset: 0; overflow: hidden; }
-.frame__pic img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.05); transition: filter 0.6s; }
+.frame__pic img { width: 100%; height: 100%; object-fit: cover; transition: filter 0.6s; }
 .frame.is-colour .frame__pic img { filter: none; }
-.frame.is-contain .frame__pic { background: var(--mist); }
+.frame.is-contain .frame__pic { background: #fff; }
 .frame.is-contain .frame__pic img { object-fit: contain; padding: 7%; }
+
+#hero__pic { filter: grayscale(1);}
 /* Two guides cross at the bottom-left corner and run past it, like crop marks. */
 .frame__h { left: calc(-1 * var(--reach, 18%)); right: -7%; bottom: -14px; }
 .frame__v { left: -14px; top: -9%; bottom: -34px; }
@@ -141,8 +143,7 @@ a.lead__item:hover strong { color: var(--accent); }
 .panel__text > p:not(.eyebrow) { color: var(--body); }
 .panel .pair span:last-child, .phero .pair span:last-child, .nextup .pair span:last-child { margin-top: 0; font-size: 0.34em; line-height: 1.05; letter-spacing: 0.05em; }
 .panel__art { position: relative; display: block; justify-self: end; width: min(100%, 540px); --reach: 30%; }
-.panel__prop { position: absolute; right: -6%; bottom: -8%; height: 62%; width: auto; max-width: 42%; object-fit: contain; object-position: bottom right; filter: grayscale(1) contrast(1.05); transition: filter 0.6s; }
-.panel:hover .panel__prop { filter: none; }
+.panel__prop { position: absolute; right: -6%; bottom: -8%; height: 62%; width: auto; max-width: 42%; object-fit: contain; object-position: bottom right; transition: filter 0.6s; }
 
 .is-reel .reel__sticky { position: sticky; top: 0; height: 100svh; display: grid; grid-template-columns: minmax(0, 1fr); grid-template-rows: auto minmax(0, 1fr) auto; padding-block: calc(var(--top) + 20px) 30px; overflow: hidden; }
 .is-reel .reel__track { display: flex; width: max-content; align-items: center; gap: 0; padding: 0; }
