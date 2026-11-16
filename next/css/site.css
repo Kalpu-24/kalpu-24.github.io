@@ -107,10 +107,26 @@ a:hover .frame__pic img, .panel:hover .frame__pic img, .frame:hover .frame__pic 
 .top__nav .top__cv { color: var(--accent); }
 
 /* Hero: one picture, one headline, one line ------------------------ */
-.hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(32px, 6vw, 96px); min-height: calc(100svh - var(--top)); padding: 24px var(--pad) clamp(48px, 8vh, 96px); }
+.hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: center; gap: clamp(32px, 6vw, 96px); min-height: calc(100svh - var(--top) - 270px); padding: 24px var(--pad) clamp(48px, 8vh, 96px); }
 .hero__art { justify-self: end; width: min(100%, 400px); --reach: 100vw; }
 .hero__text { display: grid; gap: 20px; justify-items: start; max-width: 34rem; }
 .hero__orn { position: absolute; right: var(--pad); top: 12%; }
+
+/* Highlights: the three things to remember, right under the hero ---- */
+.lead { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(24px, 4vw, 64px); }
+.lead > .ln { grid-column: 1 / -1; }
+.lead__item { display: grid; justify-items: start; align-content: start; padding: clamp(24px, 3vw, 40px) 0 0; text-decoration: none; }
+.lead__item strong { font-size: clamp(4rem, 9vw, 7.5rem); line-height: 0.82; }
+.lead__item .mark { display: block; width: 3.2rem; height: 6px; margin: 16px 0 12px; background: var(--fill); transform-origin: left; }
+.lead__item > span { max-width: 15rem; font: 600 0.82rem/1.45 var(--slab); letter-spacing: 0.16em; text-transform: uppercase; }
+a.lead__item:hover strong { color: var(--accent); }
+.js .scene .lead__item .mark { transform: scaleX(0); }
+.js .scene.is-in .lead__item .mark { transform: none; transition: transform 0.7s 0.9s var(--ease); }
+.js .lead.is-in > .ln { animation-delay: 0s, 0.9s; }
+.js .lead.is-in .pair i { transition-delay: 0.25s; }
+.js .lead.is-in .lead__item:nth-of-type(2) .pair i { transition-delay: 0.37s; }
+.js .lead.is-in .lead__item:nth-of-type(3) .pair i { transition-delay: 0.49s; }
+.js .lead.is-in .fade { transition-delay: 0.7s; }
 
 /* Reel: the work moves sideways ------------------------------------ */
 .reel { margin-top: clamp(40px, 6vw, 80px); }
@@ -136,16 +152,11 @@ a:hover .frame__pic img, .panel:hover .frame__pic img, .frame:hover .frame__pic 
 .is-reel .reel__bar span { display: block; width: 20%; height: 3px; margin-top: -1px; background: var(--ink); will-change: transform; }
 
 /* About ------------------------------------------------------------ */
-.about { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(32px, 6vw, 96px); align-items: center; margin-top: clamp(96px, 14vw, 200px); }
-.about__art { justify-self: end; width: min(100%, 360px); --reach: 40%; }
-.about__text { display: grid; gap: 18px; max-width: 32rem; }
-.about__text > p:not(.eyebrow):not(.quote) { color: var(--body); }
-.about__nums { display: flex; flex-wrap: wrap; gap: 14px 40px; margin-top: 14px; }
-.about__nums div { display: grid; gap: 2px; max-width: 11rem; }
-.about__nums dd { font: 900 2.6rem/0.95 var(--display); text-transform: uppercase; }
-.about__nums dd a { text-decoration: none; }
-.about__nums dd a:hover { color: var(--accent); }
-.about__nums dt { font: 500 0.68rem/1.5 var(--slab); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.about { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: clamp(32px, 6vw, 96px); align-items: start; margin-top: clamp(96px, 14vw, 200px); }
+.about__head { display: grid; gap: 18px; }
+.about__text { display: grid; gap: 18px; max-width: 34rem; }
+.about__text > p:not(.quote) { color: var(--body); }
+.about__text .quote { font-size: clamp(1.4rem, 2.4vw, 1.9rem); }
 
 /* Path ------------------------------------------------------------- */
 .path { display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: clamp(32px, 6vw, 96px); align-items: start; margin-top: clamp(96px, 14vw, 200px); }
@@ -353,8 +364,12 @@ a:hover .frame__pic img, .panel:hover .frame__pic img, .frame:hover .frame__pic 
   :root { --top: 60px; }
   .top__nav a:nth-child(2), .top__nav a:nth-child(3) { display: none; }
   .hero, .panel, .about, .path, .toolbox, .block, .phero, .foot__in { grid-template-columns: 1fr; }
+  .lead { grid-template-columns: 1fr; }
+  .lead__item { grid-template-columns: auto 1fr; align-items: end; gap: 0 18px; padding-top: 22px; }
+  .lead__item .mark { display: none; }
+  .lead__item strong { font-size: 4.2rem; min-width: 2.4em; }
   .hero { min-height: 0; padding-top: 28px; gap: 36px; }
-  .hero__art, .about__art { justify-self: start; width: min(64%, 280px); margin-left: 14px; }
+  .hero__art { justify-self: start; width: min(64%, 280px); margin-left: 14px; }
   .panel__art, .phero__art { justify-self: start; width: calc(100% - 28px); margin: 0 0 22px 14px; }
   .hero__orn { display: none; }
   .phero { min-height: 0; }
