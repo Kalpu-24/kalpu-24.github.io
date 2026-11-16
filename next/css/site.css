@@ -12,8 +12,8 @@
   --body: #4a4a4a;
   --muted: #7a7a7a;
   --mist: #e9ebf0;
-  --fill: #2440e6;
-  --accent: #2440e6;
+  --fill: #CCCCFF;
+  --accent: #CCCCFF;
   --on-fill: #ffffff;
   --line: 1.5px solid var(--ink);
   --display: "Sofia Sans Extra Condensed", "Arial Narrow", sans-serif;
@@ -285,7 +285,7 @@ a.lead__item:hover strong { color: var(--accent); }
 .tile.is-flag { background: var(--fill); color: var(--on-fill); }
 .tile.is-mine { background: var(--ink); border-color: var(--ink); color: #fff; }
 .tile.is-hit { background: #e0322c; border-color: #e0322c; }
-.tile.n1 { color: #2440e6; } .tile.n2 { color: #2f7d18; } .tile.n3 { color: #d2157c; } .tile.n4, .tile.n5, .tile.n6, .tile.n7, .tile.n8 { color: #c25a00; }
+.tile.n1 { color: #CCCCFF; } .tile.n2 { color: #2f7d18; } .tile.n3 { color: #d2157c; } .tile.n4, .tile.n5, .tile.n6, .tile.n7, .tile.n8 { color: #c25a00; }
 .mines.is-won .tile, .mines.is-lost .tile { cursor: default; }
 
 .snake { display: grid; gap: 18px; justify-items: center; }
