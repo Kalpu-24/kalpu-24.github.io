@@ -12,7 +12,7 @@ const FONTS = "https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condens
 
 /* On white, each game keeps one accent: `fill` for marks and blocks, `text` for type (dark enough to read). */
 const ACCENT = {
-  home: { fill: "#CCCCFF", text: "#CCCCFF", on: "#ffffff" },
+  home: { fill: "#6f6eb5", text: "#6f6eb5", on: "#ffffff" },
   rollemout: { fill: "#ffb347", text: "#c25a00", on: "#1d1300" },
   boomcorp: { fill: "#cdff1b", text: "#4a7300", on: "#0b1300" },
   tgf: { fill: "#ff5db4", text: "#d2157c", on: "#2b0017" },
