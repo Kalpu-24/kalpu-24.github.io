@@ -1,4 +1,4 @@
-/* kalpshah.dev/next — sideways work reel, reveals, screenshot viewer, two small games. */
+/* kalpshah.dev/next — sideways work reel, scene entries, screenshot viewer, two small games. */
 (() => {
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -17,7 +17,7 @@
     let on = false;
 
     const measure = () => {
-      const want = innerWidth > 900 && innerHeight > 620 && !calm;
+      const want = innerWidth > 900 && innerHeight > 600 && !calm;
       if (want !== on) {
         on = want;
         root.classList.toggle("is-reel", on);
@@ -26,7 +26,7 @@
       if (!on) return;
       const last = panels.at(-1);
       // Travel far enough to centre the last panel.
-      travel = Math.max(0, last.offsetLeft + last.offsetWidth / 2 - innerWidth / 2);
+      travel = Math.max(0, last.offsetLeft);
       reel.style.height = `${innerHeight + travel}px`;
       move();
     };
@@ -44,7 +44,7 @@
     // Tabbing to a panel that is off to the side brings it to the middle.
     const goTo = (el) => {
       if (!on) return el.scrollIntoView({ block: "start" });
-      const x = Math.min(travel, Math.max(0, el.offsetLeft + el.offsetWidth / 2 - innerWidth / 2));
+      const x = Math.min(travel, Math.max(0, el.offsetLeft));
       scrollTo({ top: reel.getBoundingClientRect().top + scrollY + x, behavior: calm ? "auto" : "smooth" });
     };
     track.addEventListener("focusin", (e) => {
@@ -64,11 +64,19 @@
     measure();
   }
 
-  /* ---- Reveal ------------------------------------------------------------ */
-  const targets = $$(".hero__text > *, .numbers, .about > *, .path > *, .toolbox > *, .block, .facts, .phero > *, .foot__in > *");
-  if (!calm && "IntersectionObserver" in window) {
-    const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }), { rootMargin: "0px 0px -8% 0px" });
-    targets.forEach((el, i) => { el.classList.add("reveal"); el.style.transitionDelay = `${(i % 4) * 60}ms`; io.observe(el); });
+  /* ---- Scenes build themselves once, when they come into view ---------- */
+  const scenes = $$(".scene");
+  if (calm || !("IntersectionObserver" in window)) scenes.forEach((el) => el.classList.add("is-in"));
+  else {
+    const io = new IntersectionObserver(
+      (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }),
+      { threshold: 0.3 }
+    );
+    scenes.forEach((el) => {
+      // A tall section would never be 30% on screen, so those start as soon as they show.
+      if (el.offsetHeight > innerHeight * 1.2) new IntersectionObserver(([e], o) => { if (e.isIntersecting) { el.classList.add("is-in"); o.disconnect(); } }, { rootMargin: "0px 0px -15% 0px" }).observe(el);
+      else io.observe(el);
+    });
   }
 
   /* ---- Screenshot viewer ------------------------------------------------- */
