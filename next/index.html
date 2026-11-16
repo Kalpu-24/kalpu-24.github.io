@@ -12,13 +12,13 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@600;800;900&family=Sofia+Sans:wght@400;500;700&family=Zilla+Slab:ital,wght@0,400;0,500;0,600;1,400&display=swap">
-<link rel="stylesheet" href="css/site.css?v=00282899">
+<link rel="stylesheet" href="css/site.css?v=8c29b69d">
 <script src="js/site.js?v=aa0d644d" defer></script>
 </head>
 <body class="home" style="--fill:#2440e6;--accent:#2440e6;--on-fill:#ffffff">
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
-  <a class="top__mark" href="./" aria-label="Kalp Shah, home"><span></span><span></span><span></span><b>Kalp Shah</b></a>
+  <a class="top__mark" href="./" aria-label="Kalp Shah, home"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M7 4v20M7 15 19 4M11.5 11 20 24"/><rect x="21" y="3" width="4" height="4"/></svg><b>Kalp Shah</b></a>
   <nav class="top__nav" aria-label="Main">
     <a href="./#work">Work</a>
     <a href="./#about">About</a>
@@ -31,17 +31,15 @@
 
 <section class="hero scene">
   <div class="hero__art" aria-hidden="true">
-    <span class="ln hero__line"></span>
-    <span class="shape shape--leaf hero__pic"><img src="../assets/kalp.webp" alt="" loading="lazy"></span>
-    <span class="shape shape--tile hero__tile"></span>
+    <span class="frame frame--square"><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><img src="../assets/kalp.webp" alt="" loading="lazy"></span><i class="frame__c frame__c--tl"></i><i class="frame__c frame__c--tr"></i><i class="frame__c frame__c--br"></i><span class="frame__dot"></span></span>
   </div>
   <div class="hero__text">
     <p class="eyebrow fade">Kalp Shah · Game developer</p>
-    <h1 class="pair pair--xl"><span><i>I build games</i></span> <span><i>in Unreal Engine 5</i></span></h1>
+    <h1 class="pair pair--xl"><span><i>I build games</i></span> <u class="mark"></u> <span><i>in Unreal Engine 5</i></span></h1>
     <p class="lede fade">A game developer figuring it out, one idea at a time.</p>
     <div class="actions late"><a class="btn " href="#work">See the work <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
   </div>
-  <div class="hero__orn late" aria-hidden="true"><span class="orn" aria-hidden="true"><i></i><i></i><i></i><b></b></span></div>
+  <div class="hero__orn late" aria-hidden="true"><span class="orn" aria-hidden="true"><b></b></span></div>
 </section>
 
 <section class="reel" id="work" aria-label="Selected work">
@@ -54,69 +52,59 @@
       
       <article class="panel scene" style="--fill:#ffb347;--accent:#c25a00;--on-fill:#1d1300" id="work-rollemout">
         <a class="panel__art" href="rollemout.html" tabindex="-1" aria-hidden="true">
-          <span class="ln panel__line"></span>
-          <span class="shape shape--leaf panel__shot"><img src="../assets/games/rollemout/2.webp" alt="" loading="lazy"></span>
+          <span class="frame "><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><img src="../assets/games/rollemout/2.webp" alt="" loading="lazy"></span><i class="frame__c frame__c--tl"></i><i class="frame__c frame__c--tr"></i><i class="frame__c frame__c--br"></i><span class="frame__dot"></span></span>
           <img class="panel__prop" src="../assets/games/rollemout/prop.webp" alt="" loading="lazy">
-          <span class="shape shape--tile panel__tile"></span>
         </a>
         <div class="panel__text">
           <p class="eyebrow fade">Co-op adventure · 2026</p>
-          <h3 class="pair pair--lg"><a href="rollemout.html"><span><i>Roll 'Em Out</i></span> <span><i>Free demo on Steam</i></span></a></h3>
+          <h3 class="pair pair--lg"><a href="rollemout.html"><span><i>Roll 'Em Out</i></span> <u class="mark"></u> <span><i>Free demo on Steam</i></span></a></h3>
           <p class="fade">A co-op adventure for up to four players, tied together by a rope, rolling a cursed friend out of a collapsing cave.</p>
           <div class="actions late"><a class="btn " href="rollemout.html">View project <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
         </div>
       </article>
       <article class="panel scene" style="--fill:#cdff1b;--accent:#4a7300;--on-fill:#0b1300" id="work-boomcorp">
         <a class="panel__art" href="boomcorp.html" tabindex="-1" aria-hidden="true">
-          <span class="ln panel__line"></span>
-          <span class="shape shape--arch panel__shot"><img src="../assets/games/boomcorp/2.webp" alt="" loading="lazy"></span>
+          <span class="frame "><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><img src="../assets/games/boomcorp/2.webp" alt="" loading="lazy"></span><i class="frame__c frame__c--tl"></i><i class="frame__c frame__c--tr"></i><i class="frame__c frame__c--br"></i><span class="frame__dot"></span></span>
           <img class="panel__prop" src="../assets/games/boomcorp/prop.webp" alt="" loading="lazy">
-          <span class="shape shape--tile panel__tile"></span>
         </a>
         <div class="panel__text">
           <p class="eyebrow fade">First-person puzzle · 2025</p>
-          <h3 class="pair pair--lg"><a href="boomcorp.html"><span><i>Boom Corp.</i></span> <span><i>Winner, Druid Mechanics Game Jam 2025</i></span></a></h3>
+          <h3 class="pair pair--lg"><a href="boomcorp.html"><span><i>Boom Corp.</i></span> <u class="mark"></u> <span><i>Winner, Druid Mechanics Game Jam 2025</i></span></a></h3>
           <p class="fade">Minesweeper you have to walk through: a first-person puzzle game about scanning a room for buried explosives.</p>
           <div class="actions late"><a class="btn " href="boomcorp.html">View project <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
         </div>
       </article>
       <article class="panel scene" style="--fill:#ff5db4;--accent:#d2157c;--on-fill:#2b0017" id="work-tgf">
         <a class="panel__art" href="tgf.html" tabindex="-1" aria-hidden="true">
-          <span class="ln panel__line"></span>
-          <span class="shape shape--leaf panel__shot"><img src="../assets/games/tgf/2.webp" alt="" loading="lazy"></span>
+          <span class="frame "><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><img src="../assets/games/tgf/2.webp" alt="" loading="lazy"></span><i class="frame__c frame__c--tl"></i><i class="frame__c frame__c--tr"></i><i class="frame__c frame__c--br"></i><span class="frame__dot"></span></span>
           <img class="panel__prop" src="../assets/games/tgf/prop.webp" alt="" loading="lazy">
-          <span class="shape shape--tile panel__tile"></span>
         </a>
         <div class="panel__text">
           <p class="eyebrow fade">Puzzle platformer · 2025</p>
-          <h3 class="pair pair--lg"><a href="tgf.html"><span><i>The Gravity Flip</i></span> <span><i>Four-way gravity, written in C++</i></span></a></h3>
+          <h3 class="pair pair--lg"><a href="tgf.html"><span><i>The Gravity Flip</i></span> <u class="mark"></u> <span><i>Four-way gravity, written in C++</i></span></a></h3>
           <p class="fade">A side-scrolling platformer where one key turns the whole world: flip gravity, or bend it ninety degrees, and walk on whatever is now the floor.</p>
           <div class="actions late"><a class="btn " href="tgf.html">View project <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
         </div>
       </article>
       <article class="panel scene" style="--fill:#b9a7ff;--accent:#5a33d6;--on-fill:#170a47" id="work-aurarpg">
         <a class="panel__art" href="aurarpg.html" tabindex="-1" aria-hidden="true">
-          <span class="ln panel__line"></span>
-          <span class="shape shape--arch panel__shot"><img src="../assets/games/aurarpg/2.webp" alt="" loading="lazy"></span>
+          <span class="frame "><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><img src="../assets/games/aurarpg/2.webp" alt="" loading="lazy"></span><i class="frame__c frame__c--tl"></i><i class="frame__c frame__c--tr"></i><i class="frame__c frame__c--br"></i><span class="frame__dot"></span></span>
           <img class="panel__prop" src="../assets/games/aurarpg/prop.webp" alt="" loading="lazy">
-          <span class="shape shape--tile panel__tile"></span>
         </a>
         <div class="panel__text">
           <p class="eyebrow fade">Top-down action RPG · 2025</p>
-          <h3 class="pair pair--lg"><a href="aurarpg.html"><span><i>AuraRPG</i></span> <span><i>Built on Unreal's Gameplay Ability System</i></span></a></h3>
+          <h3 class="pair pair--lg"><a href="aurarpg.html"><span><i>AuraRPG</i></span> <u class="mark"></u> <span><i>Built on Unreal's Gameplay Ability System</i></span></a></h3>
           <p class="fade">A top-down action RPG on Unreal's Gameplay Ability System: spells, attributes, enemy AI, save slots and a full UI, in C++ and Blueprints.</p>
           <div class="actions late"><a class="btn " href="aurarpg.html">View project <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
         </div>
       </article>
       <article class="panel scene" style="--fill:#e0322c;--accent:#c8201b;--on-fill:#ffffff" id="work-snakewall">
         <a class="panel__art" href="snakewall.html" tabindex="-1" aria-hidden="true">
-          <span class="ln panel__line"></span>
-          <span class="shape shape--leaf panel__shot is-contain"><img src="../assets/games/snakewall/prop.webp" alt="" loading="lazy"></span>
-          <span class="shape shape--tile panel__tile"></span>
+          <span class="frame is-contain"><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><img src="../assets/games/snakewall/prop.webp" alt="" loading="lazy"></span><i class="frame__c frame__c--tl"></i><i class="frame__c frame__c--tr"></i><i class="frame__c frame__c--br"></i><span class="frame__dot"></span></span>
         </a>
         <div class="panel__text">
           <p class="eyebrow fade">Android live wallpaper · 2024</p>
-          <h3 class="pair pair--lg"><a href="snakewall.html"><span><i>SnakeWall</i></span> <span><i>7k+ installs on Google Play</i></span></a></h3>
+          <h3 class="pair pair--lg"><a href="snakewall.html"><span><i>SnakeWall</i></span> <u class="mark"></u> <span><i>7k+ installs on Google Play</i></span></a></h3>
           <p class="fade">The classic Snake, rebuilt as an Android live wallpaper. The game is your home screen.</p>
           <div class="actions late"><a class="btn " href="snakewall.html">View project <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
         </div>
@@ -128,13 +116,11 @@
 
 <section class="about wrap scene" id="about">
   <div class="about__art" aria-hidden="true">
-    <span class="ln about__line"></span>
-    <span class="shape shape--arch about__pic"><img src="../assets/kalp.webp" alt="" loading="lazy"></span>
-    <span class="shape shape--tile about__tile"></span>
+    <span class="frame frame--square"><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><img src="../assets/kalp.webp" alt="" loading="lazy"></span><i class="frame__c frame__c--tl"></i><i class="frame__c frame__c--tr"></i><i class="frame__c frame__c--br"></i><span class="frame__dot"></span></span>
   </div>
   <div class="about__text">
     <p class="eyebrow fade">Gujarat, India</p>
-    <h2 class="pair "><span><i>About</i></span> <span><i>Kalp</i></span></h2>
+    <h2 class="pair "><span><i>About</i></span> <u class="mark"></u> <span><i>Kalp</i></span></h2>
     <p class="quote fade">A game developer figuring it out, one idea at a time.</p>
     <p class="fade">I didn't start building things because I had a plan. I just couldn't stop thinking about how cool it would be if this existed.</p>
     <p class="fade">I make things out of curiosity, emotion, and the hope that someone out there will feel something too. My solo work goes out under the name Kryoxx Studio.</p>
@@ -145,7 +131,7 @@
 </section>
 
 <section class="path wrap scene" id="path">
-  <div class="path__head"><h2 class="pair "><span><i>The path</i></span> <span><i>so far</i></span></h2><span class="late"><span class="orn" aria-hidden="true"><i></i><i></i><i></i><b></b></span></span></div>
+  <div class="path__head"><h2 class="pair "><span><i>The path</i></span> <u class="mark"></u> <span><i>so far</i></span></h2><span class="late"><span class="orn" aria-hidden="true"><b></b></span></span></div>
   <ol class="path__list">
     <li><span class="path__when">Jan 2026 – present</span><div><strong><a href="rollemout.html">Programmer, Shortgun Games</a></strong><p>Inventory, settings and UI on Roll 'Em Out, a four-player co-op adventure on Steam.</p></div></li>
     <li><span class="path__when">2022 – 2026</span><div><strong>B.Tech, Computer Science and Engineering</strong><p>Uka Tarsadia University, Gujarat.</p></div></li>
@@ -157,7 +143,7 @@
 </section>
 
 <section class="toolbox wrap scene" id="toolbox">
-  <div class="toolbox__head"><h2 class="pair "><span><i>The</i></span> <span><i>toolbox</i></span></h2></div>
+  <div class="toolbox__head"><h2 class="pair "><span><i>The</i></span> <u class="mark"></u> <span><i>toolbox</i></span></h2></div>
   <div class="toolbox__grid">
     <div class="tool"><h3>Unreal Engine 5</h3><ul><li><span class="skill">C++</span><ul><li><span class="skill">Gameplay Ability System</span></li><li><span class="skill">Custom gravity and movement</span></li><li><span class="skill">Save and load</span></li><li><span class="skill">Behavior Trees and EQS</span></li></ul></li><li><span class="skill">Blueprints</span><ul><li><span class="skill">UMG, widget controllers, MVVM</span></li><li><span class="skill">Inventory and settings</span></li><li><span class="skill">Enhanced Input</span></li><li><span class="skill">Niagara VFX</span></li><li><span class="skill">Toon and outline shader</span></li></ul></li></ul></div>
     <div class="tool"><h3>Android</h3><ul><li><span class="skill">Java</span><ul><li><span class="skill">WallpaperService and Canvas</span></li></ul></li></ul></div>
@@ -169,7 +155,7 @@
   <div class="wrap foot__in">
     <div>
       <p class="eyebrow">Open to new opportunities, or just a friendly chat</p>
-      <h2 class="pair "><span><i>Get in</i></span> <span><i>touch</i></span></h2>
+      <h2 class="pair "><span><i>Get in</i></span> <u class="mark"></u> <span><i>touch</i></span></h2>
       <a class="foot__mail" href="mailto:contact@kalpshah.dev">contact@kalpshah.dev</a>
     </div>
     <ul class="foot__links">
