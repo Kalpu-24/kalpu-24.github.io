@@ -10,3 +10,9 @@ Static pages, no dependencies.
 - Images live in `assets/games/<project id>/` (`1.webp`, `1-sm.webp`, …).
 
 To add a project: add its images, add an entry to `projects` in `src/content.mjs`, run the build.
+
+## `next/`: a design preview
+
+`next/` (kalpshah.dev/next/) is a second design of the same site: white, black type and one accent per page.
+It reads the same `src/content.mjs` and shares `assets/` and `public/`. After editing content, also run `node next/build.mjs`.
+Its pages are marked `noindex`.

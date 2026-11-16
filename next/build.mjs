@@ -1,0 +1,286 @@
+#!/usr/bin/env node
+/* Generates this folder's pages from ../src/content.mjs.  Run:  node next/build.mjs
+   Images, the résumé and the favicon are shared with the main site (../assets, ../public). */
+import { readFileSync, writeFileSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { profile, headlineStats, timeline, skills, projects } from "../src/content.mjs";
+
+const here = (p) => new URL(p, import.meta.url);
+const versioned = (path) => `${path}?v=${createHash("sha1").update(readFileSync(here(path))).digest("hex").slice(0, 8)}`;
+const BASE = "https://kalpshah.dev/next/";
+const FONTS = "https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@600;800;900&family=Sofia+Sans:wght@400;500;700&family=Zilla+Slab:ital,wght@0,400;0,500;0,600;1,400&display=swap";
+
+/* On white, each game keeps one accent: `fill` for shapes, `text` for type (dark enough to read). */
+const ACCENT = {
+  home: { fill: "#2440e6", text: "#2440e6", on: "#ffffff" },
+  rollemout: { fill: "#ffb347", text: "#c25a00", on: "#1d1300" },
+  boomcorp: { fill: "#cdff1b", text: "#4a7300", on: "#0b1300" },
+  tgf: { fill: "#ff5db4", text: "#d2157c", on: "#2b0017" },
+  aurarpg: { fill: "#b9a7ff", text: "#5a33d6", on: "#170a47" },
+  snakewall: { fill: "#e0322c", text: "#c8201b", on: "#ffffff" },
+};
+const accent = (id) => { const a = ACCENT[id] || ACCENT.home; return `--fill:${a.fill};--accent:${a.text};--on-fill:${a.on}`; };
+
+const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+const fmt = (s) => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>");
+const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
+const img = (p, n) => `../assets/games/${p.id}/${n}.webp`;
+const ext = (url) => (/^https?:/.test(url) ? ` target="_blank" rel="noopener"` : "");
+const num = (i) => String(i + 1).padStart(2, "0");
+const arrow = `<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>`;
+const out = `<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>`;
+/* The small ornament that leads the eye along a line: three tiles and an arrow. */
+const orn = `<span class="orn" aria-hidden="true"><i></i><i></i><i></i><b></b></span>`;
+/* A stacked two-tone headline: first part in the accent, second in ink. */
+const pair = (a, b, tag = "h2", cls = "") => `<${tag} class="pair ${cls}"><span>${esc(a)}</span> <span>${esc(b)}</span></${tag}>`;
+const btn = (label, url, kind = "") => `<a class="btn ${kind}" href="${esc(url)}"${ext(url)}>${esc(label)} ${/^https?:/.test(url) ? out : arrow}</a>`;
+
+function page({ file, title, description, body, id = "home" }) {
+  const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${esc(title)}</title>
+<meta name="description" content="${esc(description)}">
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="${BASE}${file === "index.html" ? "" : file}">
+<link rel="icon" href="../public/favicon.ico" sizes="48x48">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="${FONTS}">
+<link rel="stylesheet" href="${versioned("css/site.css")}">
+<script src="${versioned("js/site.js")}" defer></script>
+</head>
+<body class="${id === "home" ? "home" : "project"}" style="${accent(id)}">
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <a class="top__mark" href="./" aria-label="Kalp Shah, home"><span></span><span></span><span></span><b>Kalp Shah</b></a>
+  <nav class="top__nav" aria-label="Main">
+    <a href="./#work">Work</a>
+    <a href="./#about">About</a>
+    <a href="./#toolbox">Toolbox</a>
+    <a href="./#contact">Contact</a>
+    <a class="top__cv" href="../${esc(profile.resume)}" target="_blank" rel="noopener">Résumé</a>
+  </nav>
+</header>
+<main id="main">
+${body}
+</main>
+<footer class="foot" id="contact">
+  <div class="wrap foot__in">
+    <div>
+      <p class="eyebrow">Open to new opportunities, or just a friendly chat</p>
+      ${pair("Get in", "touch")}
+      <a class="foot__mail" href="mailto:${esc(profile.email)}">${esc(profile.email)}</a>
+    </div>
+    <ul class="foot__links">
+      ${profile.links.map((l) => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ${out}</a></li>`).join("\n      ")}
+      <li><a href="../${esc(profile.resume)}" target="_blank" rel="noopener">Résumé (PDF) ${out}</a></li>
+    </ul>
+  </div>
+  <p class="wrap foot__copy">© ${new Date().getFullYear()} ${esc(profile.name)} · ${esc(profile.location)}</p>
+</footer>
+<dialog class="lightbox" id="lightbox" aria-label="Screenshot viewer">
+  <img id="lightbox-img" alt="">
+  <p class="lightbox__count" id="lightbox-count"></p>
+  <button class="lightbox__btn lightbox__prev" id="lightbox-prev" aria-label="Previous screenshot">${arrow}</button>
+  <button class="lightbox__btn lightbox__next" id="lightbox-next" aria-label="Next screenshot">${arrow}</button>
+  <button class="lightbox__btn lightbox__close" id="lightbox-close" aria-label="Close">✕</button>
+</dialog>
+</body>
+</html>
+`;
+  writeFileSync(here(file), html);
+  console.log("wrote", file);
+}
+
+/* ------------------------------------------------------------------ home */
+const [headA, headB] = (() => {
+  const h = profile.headline.replace(/\.$/, "");
+  const i = h.indexOf(" in ");
+  return i > 0 ? [h.slice(0, i), h.slice(i + 1)] : [h, ""];
+})();
+const shot = (p, n) => `<img src="${img(p, `${n}-sm`)}" alt="" loading="lazy">`;
+
+const roots = skills.filter((s) => !s.parent);
+const kids = (id) => skills.filter((s) => s.parent === id);
+const dots = (s) => `<span class="dots">${s.in.map((g) => `<i style="--c:${ACCENT[g].fill}" title="${esc(byId[g].name)}"></i>`).join("")}</span>`;
+const branch = (s) => `<li><span class="skill">${esc(s.label)} ${dots(s)}</span>${kids(s.id).length ? `<ul>${kids(s.id).map(branch).join("")}</ul>` : ""}</li>`;
+
+page({
+  file: "index.html",
+  title: `${profile.name} — ${profile.role}`,
+  description: `${profile.headline} ${projects.map((p) => p.name).join(", ")}.`,
+  body: `
+<section class="hero wrap">
+  <div class="hero__art" aria-hidden="true">
+    <span class="shape shape--leaf hero__pic"><img src="../assets/kalp.webp" alt=""></span>
+    <span class="shape shape--quarter hero__s1">${shot(projects[0], 2)}</span>
+    <span class="shape shape--tile hero__s2"></span>
+    <span class="shape shape--arc hero__s3"></span>
+    <span class="rule hero__rule"></span>
+  </div>
+  <div class="hero__text">
+    <p class="eyebrow">${esc(profile.name)} · ${esc(profile.role)}</p>
+    ${pair(headA, headB, "h1", "pair--xl")}
+    <p class="lede">${esc(profile.about.punch)}</p>
+    <div class="actions">${btn("See the work", "#work", "btn--solid")}${btn("Résumé", `../${profile.resume}`)}</div>
+  </div>
+  <div class="hero__side" aria-hidden="true">
+    ${orn}
+    <span class="shape shape--arch hero__s4">${shot(projects[1], 2)}</span>
+    <span class="shape shape--leaf2 hero__s5">${shot(projects[2], 4)}</span>
+    <span class="shape shape--tile hero__s6"></span>
+  </div>
+</section>
+
+<section class="numbers wrap" aria-label="In numbers">
+  ${headlineStats.map((s) => `<${s.to ? `a href="${s.to}.html"` : "div"} class="number"><strong>${esc(s.v)}</strong><span>${esc(s.l)}</span></${s.to ? "a" : "div"}>`).join("\n  ")}
+</section>
+
+<section class="reel" id="work" aria-label="Selected work">
+  <div class="reel__sticky">
+    <div class="reel__head wrap">
+      ${pair("Selected", "work")}
+      <p class="reel__count" aria-hidden="true"><b id="reel-now">01</b> / ${num(projects.length - 1)}</p>
+    </div>
+    <div class="reel__track" id="reel-track">
+      ${projects.map((p, i) => `
+      <article class="panel" style="${accent(p.id)}" id="work-${p.id}">
+        <div class="panel__text">
+          <p class="panel__num" aria-hidden="true">${num(i)}</p>
+          <p class="eyebrow">${esc(p.kind)} · ${esc(p.year)}</p>
+          <h3 class="pair pair--lg"><a href="${p.id}.html"><span>${esc(p.name)}</span> <span>${esc(p.fact)}</span></a></h3>
+          <p>${esc(p.pitch)}</p>
+          <p class="panel__role">${esc(p.role)} · ${esc(p.engine)}</p>
+          ${btn("View project", `${p.id}.html`)}
+        </div>
+        <a class="panel__art" href="${p.id}.html" tabindex="-1" aria-hidden="true">
+          <span class="shape shape--tile panel__tile"></span>
+          ${p.art.fit === "contain"
+            ? `<span class="shape ${i % 2 ? "shape--leaf2" : "shape--leaf"} panel__shot is-contain"><img src="${img(p, "prop")}" alt="" loading="lazy"></span>
+          <span class="shape shape--arc panel__arc"></span>`
+            : `<span class="shape ${i % 2 ? "shape--leaf2" : "shape--leaf"} panel__shot"><img src="${img(p, "2")}" alt="" loading="lazy"></span>
+          <span class="shape shape--arc panel__arc"></span>
+          <img class="panel__prop" src="${img(p, "prop")}" alt="" loading="lazy">`}
+        </a>
+      </article>`).join("")}
+    </div>
+    <div class="reel__bar wrap" aria-hidden="true"><span id="reel-bar"></span></div>
+  </div>
+</section>
+
+<section class="about wrap" id="about">
+  <div class="about__art" aria-hidden="true">
+    <span class="shape shape--arch about__pic"><img src="../assets/kalp.webp" alt=""></span>
+    <span class="shape shape--tile about__tile"></span>
+    <span class="shape shape--arc about__arc"></span>
+  </div>
+  <div class="about__text">
+    <p class="eyebrow">${esc(profile.location)}</p>
+    ${pair("About", profile.name.split(" ")[0])}
+    <p class="quote">${esc(profile.about.punch)}</p>
+    ${profile.about.paragraphs.map((t) => `<p>${esc(t)}</p>`).join("\n    ")}
+  </div>
+</section>
+
+<section class="path wrap" id="path">
+  <div class="path__head">${orn}${pair("The path", "so far")}</div>
+  <ol class="path__list">
+    ${timeline.map((t) => `<li><span class="path__when">${esc(t.when)}</span><div><strong>${t.to ? `<a href="${t.to}.html">${esc(t.what)}</a>` : esc(t.what)}</strong><p>${esc(t.detail)}</p></div></li>`).join("\n    ")}
+  </ol>
+</section>
+
+<section class="toolbox wrap" id="toolbox">
+  <div class="toolbox__head">
+    ${pair("The", "toolbox")}
+    <p class="legend">Each square is a project that used it: ${projects.map((p) => `<span><i style="--c:${ACCENT[p.id].fill}"></i>${esc(p.name)}</span>`).join(" ")}</p>
+  </div>
+  <div class="toolbox__grid">
+    ${roots.map((r) => `<div class="tool"><h3>${esc(r.label)} ${dots(r)}</h3><ul>${kids(r.id).map(branch).join("")}</ul></div>`).join("\n    ")}
+  </div>
+</section>`,
+});
+
+/* --------------------------------------------------------------- projects */
+projects.forEach((p, i) => {
+  const next = projects[(i + 1) % projects.length];
+  const steps3 = (rows) => `<ol class="steps">${rows.map(([k, v]) => `<li><h3>${esc(k)}</h3><p>${fmt(v)}</p></li>`).join("")}</ol>`;
+  const paras = (list) => list.map((t) => `<p>${fmt(t)}</p>`).join("");
+  const block = (a, b, inner, cls = "") => `<section class="block wrap ${cls}"><div class="block__head">${pair(a, b)}</div><div class="block__body">${inner}</div></section>`;
+  const tall = p.shots[0].w < p.shots[0].h;
+
+  page({
+    file: `${p.id}.html`,
+    id: p.id,
+    title: `${p.name} — ${profile.name}`,
+    description: p.pitch,
+    body: `
+<section class="phero wrap">
+  <div class="phero__text">
+    <a class="back" href="./#work-${p.id}">${arrow} All work</a>
+    <p class="eyebrow">${esc(p.kind)} · ${esc(p.year)}</p>
+    ${pair(p.name, p.fact, "h1", "pair--xl")}
+    <p class="lede">${esc(p.pitch)}</p>
+    <div class="actions">${p.links.map((l, k) => btn(l.label, l.url, k ? "" : "btn--solid")).join("")}</div>
+  </div>
+  <div class="phero__art" aria-hidden="true">
+    <span class="shape shape--tile phero__tile"></span>
+    <span class="shape shape--leaf phero__key${p.art.fit === "contain" ? " is-contain" : ""}"><img src="${img(p, p.art.fit === "contain" ? "key" : "key")}" alt="" style="object-position:${p.art.pos}"></span>
+    <span class="shape shape--arc phero__arc"></span>
+    <img class="phero__prop" src="${img(p, "prop")}" alt="">
+  </div>
+</section>
+
+<section class="facts wrap" aria-label="Project facts">
+  <dl>
+    ${[["Role", p.role], ["When", p.period], ["Status", p.status], ["Built with", p.engine], ["Platform", p.platform]].map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("\n    ")}
+  </dl>
+</section>
+
+<section class="numbers wrap" aria-label="In numbers">
+  ${p.stats.map((s) => `<div class="number"><strong>${esc(s.v)}</strong><span>${esc(s.l)}</span></div>`).join("\n  ")}
+</section>
+
+${block("The", "short version", `<ul class="highlights">${p.highlights.map((h, k) => `<li><b>${num(k)}</b>${esc(h)}</li>`).join("")}</ul><div class="prose prose--lead">${paras(p.overview)}</div><p class="tags">${p.tags.map((t) => `<span>${esc(t)}</span>`).join("")}</p>`)}
+
+${p.toy ? `<section class="block wrap toy" id="toy" data-kind="${p.toy.kind}">
+  <div class="block__head">${pair(p.toy.title.split(" ").slice(0, -1).join(" ") || p.toy.title, p.toy.title.split(" ").slice(-1)[0])}<p>${esc(p.toy.text)}</p><dl class="toy__stats" id="toy-stats"></dl><p class="toy__msg" id="toy-msg" role="status"></p><div class="actions" id="toy-actions"></div></div>
+  <div class="block__body"><div class="toy__board" id="toy-board"></div></div>
+</section>` : ""}
+
+${p.video ? block("See it", "running", `<figure class="video"><video controls preload="none" playsinline poster="../assets/games/${p.id}/demo-poster.jpg" width="${p.video.w}" height="${p.video.h}"><source src="../${esc(p.video.src)}" type="video/mp4"></video><figcaption>${esc(p.video.caption)}</figcaption></figure>`) : ""}
+
+<section class="block wrap">
+  <div class="block__head">${pair("In", "pictures")}${orn}</div>
+  <ul class="shots${tall ? " shots--tall" : ""}">
+    ${p.shots.map((s, k) => `<li><button data-shot="${k}" data-full="${img(p, s.n)}" data-w="${s.w}" data-h="${s.h}" aria-label="Open screenshot ${k + 1} of ${p.shots.length}"><img src="${img(p, `${s.n}-sm`)}" width="${s.w}" height="${s.h}" loading="lazy" alt="${esc(s.alt)}"></button></li>`).join("\n    ")}
+  </ul>
+</section>
+
+${block(...(() => { const w = p.systemsTitle.split(" "); return [w.slice(0, -1).join(" "), w.slice(-1)[0]]; })(), `<div class="systems">${p.systems.map((s) => `<article><h3>${esc(s.title)}</h3><p>${fmt(s.text)}</p></article>`).join("")}</div>`)}
+
+${p.flow ? `<section class="block wrap flow">
+  <div class="block__head">${pair(...(() => { const w = p.flow.title.split(" "); const k = Math.ceil(w.length / 2); return [w.slice(0, k).join(" "), w.slice(k).join(" ")]; })())}${p.flow.intro ? `<p>${fmt(p.flow.intro)}</p>` : ""}</div>
+  <ol class="flow__steps">${p.flow.steps.map((s, k) => `<li><b>${num(k)}</b><h3>${esc(s.t)}</h3><p>${fmt(s.d)}</p></li>`).join("")}</ol>
+</section>` : ""}
+
+${p.devlog ? block("The", "build log", `<p class="eyebrow">${esc(p.devlog.title)}</p><ol class="path__list">${p.devlog.items.map((d) => `<li><span class="path__when">${esc(d.d)}</span><div><p>${fmt(d.t)}</p></div></li>`).join("")}</ol>`) : ""}
+
+${block("The", "hard part", `<p class="quote">${esc(p.challenge.title)}</p>${p.challenge.steps ? steps3(p.challenge.steps) : `<div class="prose">${paras(p.challenge.paragraphs)}</div>`}`)}
+
+${p.reviews.length ? block("What", "players said", `<div class="reviews">${p.reviews.map((r) => `<figure><blockquote>${esc(r.text)}</blockquote><figcaption><b>${esc(r.author)}</b> ${esc(r.role)}</figcaption></figure>`).join("")}</div>`) : ""}
+
+${p.notes?.length ? block("Notes", "and credits", `<div class="notes">${p.notes.map((n) => `<article><h3>${esc(n.title)}</h3>${paras(n.paragraphs)}</article>`).join("")}</div>`) : ""}
+
+<a class="nextup" href="${next.id}.html" style="${accent(next.id)}">
+  <span class="wrap nextup__in">
+    <span class="eyebrow">Next project</span>
+    <span class="pair pair--lg"><span>${esc(next.name)}</span> <span>${esc(next.kind)}</span></span>
+    ${orn}
+  </span>
+</a>`,
+  });
+});
