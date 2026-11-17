@@ -61,6 +61,7 @@ function page({ file, title, description, body, id = "home" }) {
 <meta name="theme-color" content="#ffffff">
 <link rel="canonical" href="${BASE}${file === "index.html" ? "" : file}">
 <link rel="icon" href="../public/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><path d="M8 19 20 2 32 19z" fill="${(ACCENT[id] || ACCENT.home).text}"/><path d="M8 21h24L20 38z" fill="#141414"/></svg>`)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="${FONTS}">
@@ -70,7 +71,7 @@ function page({ file, title, description, body, id = "home" }) {
 <body class="${id === "home" ? "home" : "project"}" style="${accent(id)}">
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
-  <a class="top__mark" href="./" aria-label="Kalp Shah, home"><svg viewBox="0 0 28 28" aria-hidden="true"><path d="M7 4v20M7 15 19 4M11.5 11 20 24"/><rect x="21" y="3" width="4" height="4"/></svg><b>Kalp Shah</b></a>
+  <a class="top__mark" href="./" aria-label="Kalp Shah, home"><svg viewBox="0 0 40 40" aria-hidden="true"><path class="top__up" d="M8 19 20 2 32 19z"/><path class="top__down" d="M8 21h24L20 38z"/></svg><b>Kalp Shah</b></a>
   <nav class="top__nav" aria-label="Main">
     <a href="./#work">Work</a>
     <a href="./#about">About</a>
