@@ -1,6 +1,7 @@
 /*
   All the words and numbers on the site live in this file.
-  Edit it, then run `node build.mjs` from the new/ folder to regenerate the pages.
+  Edit it, then run `node build.mjs` and `node old/v2/build.mjs` from the repository folder to
+  regenerate the pages of the site and of the previous design in old/v2/.
 
   Text is plain text. Wrap something in `backticks` to show it as code.
   Every figure here was checked against the project repositories, the store

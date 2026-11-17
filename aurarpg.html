@@ -3,172 +3,139 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AuraRPG — Top-down action RPG · Kalp Shah</title>
+<title>AuraRPG — Kalp Shah</title>
 <meta name="description" content="A top-down action RPG on Unreal's Gameplay Ability System: spells, attributes, enemy AI, save slots and a full UI, in C++ and Blueprints.">
-<meta name="theme-color" content="#0b072a">
+<meta name="theme-color" content="#ffffff">
 <link rel="canonical" href="https://kalpshah.dev/aurarpg.html">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://kalpshah.dev/aurarpg.html">
-<meta property="og:title" content="AuraRPG — Top-down action RPG · Kalp Shah">
+<meta property="og:title" content="AuraRPG — Kalp Shah">
 <meta property="og:description" content="A top-down action RPG on Unreal's Gameplay Ability System: spells, attributes, enemy AI, save slots and a full UI, in C++ and Blueprints.">
 <meta property="og:image" content="https://kalpshah.dev/assets/games/aurarpg/key.webp">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="public/favicon.ico?v=de458b1c" sizes="48x48">
-<link rel="icon" type="image/svg+xml" href="public/favicon.svg?v=9879fb7f">
-<link rel="apple-touch-icon" href="public/apple-touch-icon.png?v=6bf2dc38">
+<link rel="icon" href="public/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Cstyle%3E.u%7Bfill%3A%235a33d6%7D.d%7Bfill%3A%23141414%7D%40media%20(prefers-color-scheme%3Adark)%7B.u%7Bfill%3A%23b9a7ff%7D.d%7Bfill%3A%23f2f1ec%7D%7D%3C%2Fstyle%3E%3Cpath%20class%3D%22u%22%20d%3D%22M8%2019%2020%202%2032%2019z%22%2F%3E%3Cpath%20class%3D%22d%22%20d%3D%22M8%2021h24L20%2038z%22%2F%3E%3C%2Fsvg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap">
-<link rel="stylesheet" href="css/site.css?v=d7e852e8">
-<script src="js/site.js?v=f212c8e2" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" defer></script>
-<script src="js/motion.js?v=e77071d7" defer></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@600;800;900&family=Sofia+Sans:wght@400;500;700&family=Zilla+Slab:ital,wght@0,400;0,500;0,600;1,400&display=swap">
+<link rel="stylesheet" href="css/site.css?v=ae83fc4b">
+<script src="js/site.js?v=55f81422" defer></script>
 </head>
-<body class="proj" style="--bg:#0b072a;--surface:#161042;--ink:#eeeef8;--muted:#aaa5d2;--accent:#f3c969;--on-accent:#251a00;--game-font:'Pirata One';--game-scale:1.12">
+<body class="project" style="--fill:#b9a7ff;--accent:#5a33d6;--on-fill:#170a47">
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
-  <div class="wrap top__in">
-    <a class="top__name" href="./">Kalp Shah</a>
-    <nav class="top__nav" aria-label="Main">
-      <a href="./#work">Work</a>
-      <a href="./#about">About</a>
-      <a href="./#contact">Contact</a>
-      <a class="btn btn--small" href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Résumé</a>
-    </nav>
-  </div>
+  <a class="top__mark" href="./" aria-label="Kalp Shah, home"><svg viewBox="0 0 40 40" aria-hidden="true"><path class="top__up" d="M8 19 20 2 32 19z"/><path class="top__down" d="M8 21h24L20 38z"/></svg><b>Kalp Shah</b></a>
+  <nav class="top__nav" aria-label="Main">
+    <a href="./#work">Work</a>
+    <a href="./#about">About</a>
+    <a href="./#toolbox">Toolbox</a>
+    <a href="./#contact">Contact</a>
+    <a class="top__cv" href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Résumé</a>
+  </nav>
 </header>
 <main id="main">
 
-<article>
-<header class="phead wrap">
-  <div class="phead__text">
-    <p class="label"><a href="./#work">Work</a> / Top-down action RPG · 2025</p>
-    <h1 class="phead__title">AuraRPG</h1>
-    <p class="phead__pitch">A top-down action RPG on Unreal's Gameplay Ability System: spells, attributes, enemy AI, save slots and a full UI, in C++ and Blueprints.</p>
-    <p class="phead__cta">
-      <a class="btn btn--solid" href="https://github.com/Kalpu-24/Aura-RPG" target="_blank" rel="noopener">Source code <small>GitHub</small> <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-      <a class="btn" href="https://t.me/KryoxxStudio/7/113" target="_blank" rel="noopener">Download the demo <small>Telegram</small> <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    </p>
+<section class="phero wrap scene">
+  <div class="phero__text">
+    <a class="back fade" href="./#work-aurarpg"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg> All work</a>
+    <p class="eyebrow fade">Top-down action RPG · 2025</p>
+    <h1 class="pair pair--xl"><span><i>AuraRPG</i></span> <u class="mark"></u> <span><i>Built on Unreal's Gameplay Ability System</i></span></h1>
+    <p class="lede fade">A top-down action RPG on Unreal's Gameplay Ability System: spells, attributes, enemy AI, save slots and a full UI, in C++ and Blueprints.</p>
+    <div class="actions late"><a class="btn " href="https://github.com/Kalpu-24/Aura-RPG" target="_blank" rel="noopener">Source code <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a><a class="btn btn--quiet" href="https://t.me/KryoxxStudio/7/113" target="_blank" rel="noopener">Download the demo <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+    
   </div>
-  <img class="phead__img" src="assets/games/aurarpg/key.webp" style="object-position:50% 22%" alt="" fetchpriority="high">
-</header>
+  <div class="phero__art" aria-hidden="true">
+    <span class="frame is-colour"><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><img src="assets/games/aurarpg/key.webp" alt="" loading="lazy" style="object-position:50% 22%"></span><i class="frame__c frame__c--tl"></i><i class="frame__c frame__c--tr"></i><i class="frame__c frame__c--br"></i><span class="frame__dot"></span></span>
+    <img class="phero__prop" src="assets/games/aurarpg/prop.webp" alt="">
+  </div>
+</section>
 
-<section class="wrap">
-  <dl class="facts">
+<section class="facts wrap scene" aria-label="Project facts">
+  <span class="ln"></span>
+  <dl>
     <div><dt>Role</dt><dd>Solo developer</dd></div>
     <div><dt>When</dt><dd>Jan – Apr 2025</dd></div>
+    <div><dt>Status</dt><dd>Playable demo · source on GitHub</dd></div>
     <div><dt>Built with</dt><dd>Unreal Engine 5.5 · C++ · Blueprints · GAS</dd></div>
     <div><dt>Platform</dt><dd>Windows, Linux</dd></div>
-    <div><dt>Status</dt><dd>Playable demo · source on GitHub</dd></div>
-  </dl>
-  <dl class="stats">
-    <div><dt>spells: 4 to cast, 3 passive</dt><dd>7</dd></div>
-    <div><dt>enemy types to fight</dt><dd>6</dd></div>
-    <div><dt>damage types, each with its own debuff</dt><dd>4</dd></div>
-    <div><dt>save slots, with checkpoints</dt><dd>3</dd></div>
   </dl>
 </section>
 
-<section class="wrap section section--split">
-  <header class="section__head"><p class="label">Overview</p><h2>The game</h2></header>
-  <div>
-    <p class="prose prose--lead">AuraRPG is a top-down action RPG in the style of Diablo. You click to move, cast fire, lightning and arcane spells from a hotbar, level up, spend points on attributes and new spells, and fight through goblins, shamans, demons and ghouls that each attack differently.</p>
-    <p class="prose prose--lead">I built it while working through a long Gameplay Ability System course, as my way into Unreal's C++ side. The course targets Unreal 5.2; I built on 5.5, so a good part of the work was reading engine source and documentation to adapt what had changed. The demo levels at the end are my own.</p>
-    <ul class="tags"><li>Unreal Engine 5</li><li>C++</li><li>Gameplay Ability System</li><li>Behavior Trees</li><li>EQS</li><li>MVVM</li><li>Niagara</li></ul>
-  </div>
+<section class="numbers wrap scene" aria-label="In numbers">
+  <span class="ln"></span>
+  <div class="number"><strong class="fig"><span class="fig__n">7</span></strong><span>spells: 4 to cast, 3 passive</span></div>
+  <div class="number"><strong class="fig"><span class="fig__n">6</span></strong><span>enemy types to fight</span></div>
+  <div class="number"><strong class="fig"><span class="fig__n">4</span></strong><span>damage types, each with its own debuff</span></div>
+  <div class="number"><strong class="fig"><span class="fig__n">3</span></strong><span>save slots, with checkpoints</span></div>
+</section>
+
+<section class="block wrap scene "><span class="ln"></span><div class="block__head"><h2 class="pair "><span><i>The</i></span> <u class="mark"></u> <span><i>short version</i></span></h2></div><div class="block__body fade"><ul class="highlights"><li><b>01</b>Combat, levelling and spells built on Unreal's Gameplay Ability System, in C++</li><li><b>02</b>Seven spells to unlock, and four damage types that each add their own effect, like burn or stun</li><li><b>03</b>Six enemy types that pick their own attacks and positions, plus save slots and checkpoints</li></ul><div class="prose prose--lead"><p>AuraRPG is a top-down action RPG in the style of Diablo. You click to move, cast fire, lightning and arcane spells from a hotbar, level up, spend points on attributes and new spells, and fight through goblins, shamans, demons and ghouls that each attack differently.</p><p>I built it while working through a long Gameplay Ability System course, as my way into Unreal's C++ side. The course targets Unreal 5.2; I built on 5.5, so a good part of the work was reading engine source and documentation to adapt what had changed. The demo levels at the end are my own.</p></div></div></section>
+
+
+
+<section class="block wrap scene">
+  <span class="ln"></span>
+  <div class="block__head"><h2 class="pair "><span><i>In</i></span> <u class="mark"></u> <span><i>pictures</i></span></h2></div>
+  <ul class="shots fade">
+    <li><button data-shot="0" data-full="assets/games/aurarpg/1.webp" data-w="1920" data-h="1080" aria-label="Open screenshot 1 of 10"><img src="assets/games/aurarpg/1-sm.webp" width="1920" height="1080" loading="lazy" alt="Main menu: Aura, Master of the Elements"></button></li>
+    <li><button data-shot="1" data-full="assets/games/aurarpg/2.webp" data-w="1920" data-h="1080" aria-label="Open screenshot 2 of 10"><img src="assets/games/aurarpg/2-sm.webp" width="1920" height="1080" loading="lazy" alt="A checkpoint crystal in a showcase level"></button></li>
+    <li><button data-shot="2" data-full="assets/games/aurarpg/3.webp" data-w="1920" data-h="1080" aria-label="Open screenshot 3 of 10"><img src="assets/games/aurarpg/3-sm.webp" width="1920" height="1080" loading="lazy" alt="Level-one character facing enemies in the levelling showcase"></button></li>
+    <li><button data-shot="3" data-full="assets/games/aurarpg/4.webp" data-w="1920" data-h="1080" aria-label="Open screenshot 4 of 10"><img src="assets/games/aurarpg/4-sm.webp" width="1920" height="1080" loading="lazy" alt="A level-up burst of golden particles"></button></li>
+    <li><button data-shot="4" data-full="assets/games/aurarpg/5.webp" data-w="1920" data-h="1080" aria-label="Open screenshot 5 of 10"><img src="assets/games/aurarpg/5-sm.webp" width="1920" height="1080" loading="lazy" alt="The abilities menu with offensive and passive spell trees"></button></li>
+    <li><button data-shot="5" data-full="assets/games/aurarpg/6.webp" data-w="1920" data-h="1080" aria-label="Open screenshot 6 of 10"><img src="assets/games/aurarpg/6-sm.webp" width="1920" height="1080" loading="lazy" alt="The attributes menu listing primary and secondary stats"></button></li>
+    <li><button data-shot="6" data-full="assets/games/aurarpg/7.webp" data-w="1920" data-h="1080" aria-label="Open screenshot 7 of 10"><img src="assets/games/aurarpg/7-sm.webp" width="1920" height="1080" loading="lazy" alt="The enemy types showcase with shamans and demons"></button></li>
+    <li><button data-shot="7" data-full="assets/games/aurarpg/8.webp" data-w="1920" data-h="1080" aria-label="Open screenshot 8 of 10"><img src="assets/games/aurarpg/8-sm.webp" width="1920" height="1080" loading="lazy" alt="A fire spell exploding in a crowd of enemies, with a Block message"></button></li>
+    <li><button data-shot="8" data-full="assets/games/aurarpg/9.webp" data-w="1920" data-h="1080" aria-label="Open screenshot 9 of 10"><img src="assets/games/aurarpg/9-sm.webp" width="1920" height="1080" loading="lazy" alt="A lightning beam striking an enemy"></button></li>
+    <li><button data-shot="9" data-full="assets/games/aurarpg/10.webp" data-w="1920" data-h="1080" aria-label="Open screenshot 10 of 10"><img src="assets/games/aurarpg/10-sm.webp" width="1920" height="1080" loading="lazy" alt="An arcane spell erupting among enemies"></button></li>
+  </ul>
+</section>
+
+<section class="block wrap scene "><span class="ln"></span><div class="block__head"><h2 class="pair "><span><i>What is in</i></span> <u class="mark"></u> <span><i>it</i></span></h2></div><div class="block__body fade"><div class="systems"><article><h3>Ability system core</h3><p>A custom <code>UAuraAbilitySystemComponent</code> and <code>UAuraAttributeSet</code>. Abilities are granted, levelled, equipped to input slots and unlocked by level, with their state tracked through gameplay tags (locked, eligible, unlocked, equipped).</p></article><article><h3>Seven spells</h3><p>Fire Bolt (projectiles that home and spread as it levels), Fire Blast (a ring of fireballs that go out and come back), Electrocute (a beam that chains to nearby enemies) and Arcane Shards (a targeted area spell with a magic-circle cursor). Three passives: Halo of Protection, Life Siphon and Mana Siphon.</p></article><article><h3>Attributes and damage</h3><p>Four primary attributes drive ten secondary ones through gameplay effects and custom modifier calculations. Four resistances, health and mana complete the set. All damage goes through one execution calculation.</p></article><article><h3>Debuffs</h3><p>Each damage type can apply its own debuff: burn, stun, and arcane and physical effects. The chance is reduced by the target's resistance, and the damage, frequency and duration ride along in a custom gameplay effect context that is serialised for the network.</p></article><article><h3>Enemies</h3><p>Six variants across three classes (warrior, ranger, elementalist): spear and slingshot goblins, demon warriors and rangers, ghouls, and a shaman that throws fire and summons minions. Behavior Trees pick the action; an EQS query finds ranged attackers a position with a clear shot.</p></article><article><h3>Click-to-move</h3><p>A short click builds a navigation path, turns it into a spline and auto-runs the character along it. Holding the button moves directly toward the cursor. The same cursor trace highlights enemies and interactable objects in different colours.</p></article><article><h3>UI</h3><p>Health and mana globes, XP bar, spell hotbar with cooldowns, attribute menu, a spell tree and floating damage numbers that show blocks and crits. Widgets never touch gameplay classes directly: three widget controllers broadcast changes to them, and the load screen uses Unreal's MVVM plugin.</p></article><article><h3>Save and load</h3><p>Three save slots. Checkpoints save the player's level, XP, attributes and abilities, plus the state of world actors flagged for saving, and the game resumes at the right map and player start.</p></article><article><h3>Loot, spawns and demo levels</h3><p>Enemies drop potions and crystals from chance-based loot tiers, and spawn volumes bring in waves as you enter an area. I added five showcase maps that walk a player through movement, checkpoints, levelling and enemy types, and end in a brawl arena with its own spawner class.</p></article></div></div></section>
+
+<section class="block wrap scene flow">
+  <span class="ln"></span>
+  <div class="block__head"><h2 class="pair "><span><i>What happens to a</i></span> <u class="mark"></u> <span><i>point of damage</i></span></h2><p>Every hit in the game runs through <code>UExecCalc_Damage</code>, in this order.</p></div>
+  <ol class="flow__steps fade"><li><b>01</b><h3>Resist</h3><p>Each damage type is cut by the target's matching resistance, 0 – 100%.</p></li><li><b>02</b><h3>Fall off</h3><p>Area spells scale by distance from the centre.</p></li><li><b>03</b><h3>Block</h3><p>A roll against block rate. A block halves the hit.</p></li><li><b>04</b><h3>Armor</h3><p>Armor, less the attacker's penetration, scaled by level curves.</p></li><li><b>05</b><h3>Crit</h3><p>Crit chance less the target's crit resistance. A crit doubles the hit and adds bonus damage.</p></li></ol>
 </section>
 
 
-<section class="wrap section">
-  <header class="section__head"><p class="label">Systems</p><h2>What is in it</h2></header>
-  <div class="systems">
-    <div class="system"><p class="system__n">01</p><h3>Ability system core</h3><p>A custom <code>UAuraAbilitySystemComponent</code> and <code>UAuraAttributeSet</code>. Abilities are granted, levelled, equipped to input slots and unlocked by level, with their state tracked through gameplay tags (locked, eligible, unlocked, equipped).</p></div>
-    <div class="system"><p class="system__n">02</p><h3>Seven spells</h3><p>Fire Bolt (projectiles that home and spread as it levels), Fire Blast (a ring of fireballs that go out and come back), Electrocute (a beam that chains to nearby enemies) and Arcane Shards (a targeted area spell with a magic-circle cursor). Three passives: Halo of Protection, Life Siphon and Mana Siphon.</p></div>
-    <div class="system"><p class="system__n">03</p><h3>Attributes and damage</h3><p>Four primary attributes drive ten secondary ones through gameplay effects and custom modifier calculations. Four resistances, health and mana complete the set. All damage goes through one execution calculation.</p></div>
-    <div class="system"><p class="system__n">04</p><h3>Debuffs</h3><p>Each damage type can apply its own debuff: burn, stun, and arcane and physical effects. The chance is reduced by the target's resistance, and the damage, frequency and duration ride along in a custom gameplay effect context that is serialised for the network.</p></div>
-    <div class="system"><p class="system__n">05</p><h3>Enemies</h3><p>Six variants across three classes (warrior, ranger, elementalist): spear and slingshot goblins, demon warriors and rangers, ghouls, and a shaman that throws fire and summons minions. Behavior Trees pick the action; an EQS query finds ranged attackers a position with a clear shot.</p></div>
-    <div class="system"><p class="system__n">06</p><h3>Click-to-move</h3><p>A short click builds a navigation path, turns it into a spline and auto-runs the character along it. Holding the button moves directly toward the cursor. The same cursor trace highlights enemies and interactable objects in different colours.</p></div>
-    <div class="system"><p class="system__n">07</p><h3>UI</h3><p>Health and mana globes, XP bar, spell hotbar with cooldowns, attribute menu, a spell tree and floating damage numbers that show blocks and crits. Widgets never touch gameplay classes directly: three widget controllers broadcast changes to them, and the load screen uses Unreal's MVVM plugin.</p></div>
-    <div class="system"><p class="system__n">08</p><h3>Save and load</h3><p>Three save slots. Checkpoints save the player's level, XP, attributes and abilities, plus the state of world actors flagged for saving, and the game resumes at the right map and player start.</p></div>
-    <div class="system"><p class="system__n">09</p><h3>Loot, spawns and demo levels</h3><p>Enemies drop potions and crystals from chance-based loot tiers, and spawn volumes bring in waves as you enter an area. I added five showcase maps that walk a player through movement, checkpoints, levelling and enemy types, and end in a brawl arena with its own spawner class.</p></div>
-  </div>
-</section>
 
-<section class="wrap section">
-  <header class="section__head"><p class="label">Step by step</p><h2>What happens to a point of damage</h2><p class="prose">Every hit in the game runs through <code>UExecCalc_Damage</code>, in this order.</p></header>
-  <ol class="flow">
-    <li><h3>Resist</h3><p>Each damage type is cut by the target's matching resistance, 0 – 100%.</p></li>
-    <li><h3>Fall off</h3><p>Area spells scale by distance from the centre.</p></li>
-    <li><h3>Block</h3><p>A roll against block rate. A block halves the hit.</p></li>
-    <li><h3>Armor</h3><p>Armor, less the attacker's penetration, scaled by level curves.</p></li>
-    <li><h3>Crit</h3><p>Crit chance less the target's crit resistance. A crit doubles the hit and adds bonus damage.</p></li>
-  </ol>
-</section>
+<section class="block wrap scene "><span class="ln"></span><div class="block__head"><h2 class="pair "><span><i>The</i></span> <u class="mark"></u> <span><i>hard part</i></span></h2></div><div class="block__body fade"><p class="quote">Following a 5.2 course on 5.5</p><ol class="steps"><li><h3>Problem</h3><p>The course was recorded on Unreal Engine 5.2 and I was on 5.5. Several systems, the Gameplay Ability System most of all, had breaking changes or deprecated nodes, and I was new to all of it.</p></li><li><h3>Approach</h3><p>Whenever the course and the engine disagreed, I went to the 5.5 documentation, the engine source, community forums and GitHub discussions, worked out what had changed, and rewrote that part of the C++ or Blueprint logic to match.</p></li><li><h3>Result</h3><p>A finished project on the newer engine, and practice at something that matters on long-lived codebases: working out what changed between versions and migrating code across it.</p></li></ol></div></section>
 
+<section class="block wrap scene "><span class="ln"></span><div class="block__head"><h2 class="pair "><span><i>What</i></span> <u class="mark"></u> <span><i>players said</i></span></h2></div><div class="block__body fade"><div class="reviews"><figure><blockquote>Great game with many fun abilities. Last level was diabolical though :)</blockquote><figcaption><b>Shreyash</b> Player</figcaption></figure></div></div></section>
 
-<section class="wrap section">
-  <header class="section__head"><p class="label">The hard part</p><h2>Following a 5.2 course on 5.5</h2></header>
-  <ol class="psr"><li><p class="label">Problem</p><p>The course was recorded on Unreal Engine 5.2 and I was on 5.5. Several systems, the Gameplay Ability System most of all, had breaking changes or deprecated nodes, and I was new to all of it.</p></li><li><p class="label">Approach</p><p>Whenever the course and the engine disagreed, I went to the 5.5 documentation, the engine source, community forums and GitHub discussions, worked out what had changed, and rewrote that part of the C++ or Blueprint logic to match.</p></li><li><p class="label">Result</p><p>A finished project on the newer engine, and practice at something that matters on long-lived codebases: working out what changed between versions and migrating code across it.</p></li></ol>
-</section>
+<section class="block wrap scene "><span class="ln"></span><div class="block__head"><h2 class="pair "><span><i>Notes</i></span> <u class="mark"></u> <span><i>and credits</i></span></h2></div><div class="block__body fade"><div class="notes"><article><h3>Credits</h3><p>The architecture follows the Udemy course &quot;Unreal Engine 5 – Gameplay Ability System – Top Down RPG&quot;. Characters, environment pieces, particle effects, icons and sounds are the course's licensed assets. The showcase maps, the brawl spawner and the 5.5 port are mine.</p></article></div></div></section>
 
-<section class="wrap section">
-  <header class="section__head"><p class="label">Gallery</p><h2>Screenshots</h2></header>
-  <div class="shots">
-    <button class="shot" data-full="assets/games/aurarpg/1.webp" data-alt="Main menu: Aura, Master of the Elements"><img src="assets/games/aurarpg/1-sm.webp" width="1920" height="1080" loading="lazy" alt="Main menu: Aura, Master of the Elements"></button>
-    <button class="shot" data-full="assets/games/aurarpg/2.webp" data-alt="A checkpoint crystal in a showcase level"><img src="assets/games/aurarpg/2-sm.webp" width="1920" height="1080" loading="lazy" alt="A checkpoint crystal in a showcase level"></button>
-    <button class="shot" data-full="assets/games/aurarpg/3.webp" data-alt="Level-one character facing enemies in the levelling showcase"><img src="assets/games/aurarpg/3-sm.webp" width="1920" height="1080" loading="lazy" alt="Level-one character facing enemies in the levelling showcase"></button>
-    <button class="shot" data-full="assets/games/aurarpg/4.webp" data-alt="A level-up burst of golden particles"><img src="assets/games/aurarpg/4-sm.webp" width="1920" height="1080" loading="lazy" alt="A level-up burst of golden particles"></button>
-    <button class="shot" data-full="assets/games/aurarpg/5.webp" data-alt="The abilities menu with offensive and passive spell trees"><img src="assets/games/aurarpg/5-sm.webp" width="1920" height="1080" loading="lazy" alt="The abilities menu with offensive and passive spell trees"></button>
-    <button class="shot" data-full="assets/games/aurarpg/6.webp" data-alt="The attributes menu listing primary and secondary stats"><img src="assets/games/aurarpg/6-sm.webp" width="1920" height="1080" loading="lazy" alt="The attributes menu listing primary and secondary stats"></button>
-    <button class="shot" data-full="assets/games/aurarpg/7.webp" data-alt="The enemy types showcase with shamans and demons"><img src="assets/games/aurarpg/7-sm.webp" width="1920" height="1080" loading="lazy" alt="The enemy types showcase with shamans and demons"></button>
-    <button class="shot" data-full="assets/games/aurarpg/8.webp" data-alt="A fire spell exploding in a crowd of enemies, with a Block message"><img src="assets/games/aurarpg/8-sm.webp" width="1920" height="1080" loading="lazy" alt="A fire spell exploding in a crowd of enemies, with a Block message"></button>
-    <button class="shot" data-full="assets/games/aurarpg/9.webp" data-alt="A lightning beam striking an enemy"><img src="assets/games/aurarpg/9-sm.webp" width="1920" height="1080" loading="lazy" alt="A lightning beam striking an enemy"></button>
-    <button class="shot" data-full="assets/games/aurarpg/10.webp" data-alt="An arcane spell erupting among enemies"><img src="assets/games/aurarpg/10-sm.webp" width="1920" height="1080" loading="lazy" alt="An arcane spell erupting among enemies"></button>
-  </div>
-</section>
-
-<section class="wrap section">
-  <header class="section__head"><p class="label">Reception</p><h2>What players said</h2></header>
-  <div class="quotes">
-    <figure class="quote"><blockquote>Great game with many fun abilities. Last level was diabolical though :)</blockquote><figcaption><b>Shreyash</b> Player</figcaption></figure>
-  </div>
-</section>
-
-<section class="wrap section section--split section--note">
-  <header class="section__head"><p class="label">Note</p><h2>Credits</h2></header>
-  <div><p class="prose">The architecture follows the Udemy course &quot;Unreal Engine 5 – Gameplay Ability System – Top Down RPG&quot;. Characters, environment pieces, particle effects, icons and sounds are the course's licensed assets. The showcase maps, the brawl spawner and the 5.5 port are mine.</p></div>
-</section>
-</article>
-
-<nav class="wrap next" aria-label="Next project">
-  <a href="snakewall.html" style="--bg:#eeeef2;--surface:#ffffff;--ink:#141218;--muted:#5d5a66;--accent:#c8201b;--on-accent:#ffffff;--game-font:'MLCD';--game-scale:0.92">
-    <span class="label">Next project</span>
-    <span class="next__title">SnakeWall</span>
-    <span class="next__kind">Android live wallpaper · 2024 <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-  </a>
-</nav>
+<a class="nextup" href="snakewall.html" style="--fill:#e0322c;--accent:#c8201b;--on-fill:#ffffff">
+  <span class="wrap nextup__in">
+    <span class="eyebrow">Next project</span>
+    <span class="pair pair--lg"><span><i>SnakeWall</i></span> <u class="mark"></u> <span><i>Android live wallpaper</i></span></span>
+    <span class="orn" aria-hidden="true"><b></b></span>
+  </span>
+</a>
 </main>
-<footer class="foot" id="contact">
-  <div class="wrap">
-    <p class="label">Contact</p>
-    <h2 class="foot__h">I'm open to new opportunities, or just a friendly chat.</h2>
-    <a class="foot__mail" href="mailto:contact@kalpshah.dev">contact@kalpshah.dev</a>
+<footer class="foot scene" id="contact">
+  <div class="wrap foot__in">
+    <div>
+      <p class="eyebrow">Open to new opportunities, or just a friendly chat</p>
+      <h2 class="pair "><span><i>Get in</i></span> <u class="mark"></u> <span><i>touch</i></span></h2>
+      <a class="foot__mail" href="mailto:contact@kalpshah.dev">contact@kalpshah.dev</a>
+    </div>
     <ul class="foot__links">
-      <li><a href="https://github.com/Kalpu-24" target="_blank" rel="noopener">GitHub <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-      <li><a href="https://www.linkedin.com/in/Kalpu24/" target="_blank" rel="noopener">LinkedIn <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-      <li><a href="https://kryoxx-studio.itch.io/" target="_blank" rel="noopener">itch.io <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-      <li><a href="https://t.me/kalpu_24" target="_blank" rel="noopener">Telegram <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
-      <li><a href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Résumé (PDF) <svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></a></li>
+      <li><a href="https://github.com/Kalpu-24" target="_blank" rel="noopener">GitHub <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+      <li><a href="https://www.linkedin.com/in/Kalpu24/" target="_blank" rel="noopener">LinkedIn <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+      <li><a href="https://kryoxx-studio.itch.io/" target="_blank" rel="noopener">itch.io <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+      <li><a href="https://t.me/kalpu_24" target="_blank" rel="noopener">Telegram <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
+      <li><a href="public/Kalp-Resume-Game.pdf" target="_blank" rel="noopener">Résumé (PDF) <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></li>
     </ul>
-    <p class="foot__copy">© <span data-year>2026</span> Kalp Shah · Gujarat, India</p>
   </div>
+  <p class="wrap foot__copy">© 2026 Kalp Shah · Gujarat, India</p>
 </footer>
 <dialog class="lightbox" id="lightbox" aria-label="Screenshot viewer">
   <img id="lightbox-img" alt="">
-  <p class="lightbox__cap" id="lightbox-cap"></p>
-  <button class="lightbox__btn lightbox__prev" id="lightbox-prev" aria-label="Previous"><svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-  <button class="lightbox__btn lightbox__next" id="lightbox-next" aria-label="Next"><svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+  <p class="lightbox__count" id="lightbox-count"></p>
+  <button class="lightbox__btn lightbox__prev" id="lightbox-prev" aria-label="Previous screenshot"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+  <button class="lightbox__btn lightbox__next" id="lightbox-next" aria-label="Next screenshot"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
   <button class="lightbox__btn lightbox__close" id="lightbox-close" aria-label="Close">✕</button>
 </dialog>
 </body>
