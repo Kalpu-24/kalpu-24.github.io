@@ -107,12 +107,20 @@ ${body}
   </div>
   <p class="wrap foot__copy">© ${new Date().getFullYear()} ${esc(profile.name)} · ${esc(profile.location)}</p>
 </footer>
-<dialog class="lightbox" id="lightbox" aria-label="Screenshot viewer">
-  <img id="lightbox-img" alt="">
-  <p class="lightbox__count" id="lightbox-count"></p>
-  <button class="lightbox__btn lightbox__prev" id="lightbox-prev" aria-label="Previous screenshot">${arrow}</button>
-  <button class="lightbox__btn lightbox__next" id="lightbox-next" aria-label="Next screenshot">${arrow}</button>
-  <button class="lightbox__btn lightbox__close" id="lightbox-close" aria-label="Close">✕</button>
+<dialog class="lightbox" id="lightbox" aria-label="Screenshot viewer" aria-roledescription="carousel">
+  <div class="viewer__top">
+    <p class="viewer__count" id="lightbox-count" aria-live="polite"></p>
+    <button class="lightbox__btn" id="lightbox-close" aria-label="Close">✕</button>
+  </div>
+  <div class="viewer__stage" id="viewer-stage">
+    <div class="viewer__track" id="viewer-track"></div>
+    <button class="lightbox__btn lightbox__prev" id="lightbox-prev" aria-label="Previous screenshot">${arrow}</button>
+    <button class="lightbox__btn lightbox__next" id="lightbox-next" aria-label="Next screenshot">${arrow}</button>
+  </div>
+  <div class="viewer__foot">
+    <p class="viewer__cap" id="viewer-cap"></p>
+    <div class="viewer__thumbs" id="viewer-thumbs" role="tablist" aria-label="Screenshots"></div>
+  </div>
 </dialog>
 </body>
 </html>
@@ -283,12 +291,16 @@ ${p.reviews.length ? block("What", "players said", `<div class="reviews">${p.rev
 
 ${p.notes?.length ? block("Notes", "and credits", `<div class="notes">${p.notes.map((n) => `<article><h3>${esc(n.title)}</h3>${paras(n.paragraphs)}</article>`).join("")}</div>`) : ""}
 
-<a class="nextup" href="${next.id}.html" style="${accent(next.id)}">
-  <span class="wrap nextup__in">
-    <span class="eyebrow">Next project</span>
-    <span class="pair pair--lg"><span><i>${esc(next.name)}</i></span> <u class="mark"></u> <span><i>${esc(next.kind)}</i></span></span>
-    ${orn}
-  </span>
-</a>`,
+<nav class="nextup wrap scene" aria-label="Next project" style="${accent(next.id)}">
+  <span class="ln"></span>
+  <article class="panel">
+    <a class="panel__art" href="${next.id}.html" tabindex="-1" aria-hidden="true">${frame(img(next, "key"), next.art.fit === "contain" ? "is-contain" : "")}</a>
+    <div class="panel__text">
+      <p class="eyebrow fade">Next project<span class="nextup__kind"> · ${esc(next.kind)}</span></p>
+      <h2 class="pair"><a href="${next.id}.html"><span><i>${esc(next.name)}</i></span> <u class="mark"></u></a></h2>
+      <div class="actions late">${btn("View project", `${next.id}.html`)}</div>
+    </div>
+  </article>
+</nav>`,
   });
 });

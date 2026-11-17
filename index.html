@@ -18,8 +18,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@600;800;900&family=Sofia+Sans:wght@400;500;700&family=Zilla+Slab:ital,wght@0,400;0,500;0,600;1,400&display=swap">
-<link rel="stylesheet" href="css/site.css?v=7edaf6e2">
-<script src="js/site.js?v=f1b9adb1" defer></script>
+<link rel="stylesheet" href="css/site.css?v=e34247c7">
+<script src="js/site.js?v=450af8ec" defer></script>
 </head>
 <body class="home" style="--fill:#6f6eb5;--accent:#6f6eb5;--on-fill:#ffffff">
 <a class="skip" href="#main">Skip to content</a>
@@ -175,12 +175,20 @@
   </div>
   <p class="wrap foot__copy">© 2026 Kalp Shah · Gujarat, India</p>
 </footer>
-<dialog class="lightbox" id="lightbox" aria-label="Screenshot viewer">
-  <img id="lightbox-img" alt="">
-  <p class="lightbox__count" id="lightbox-count"></p>
-  <button class="lightbox__btn lightbox__prev" id="lightbox-prev" aria-label="Previous screenshot"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
-  <button class="lightbox__btn lightbox__next" id="lightbox-next" aria-label="Next screenshot"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
-  <button class="lightbox__btn lightbox__close" id="lightbox-close" aria-label="Close">✕</button>
+<dialog class="lightbox" id="lightbox" aria-label="Screenshot viewer" aria-roledescription="carousel">
+  <div class="viewer__top">
+    <p class="viewer__count" id="lightbox-count" aria-live="polite"></p>
+    <button class="lightbox__btn" id="lightbox-close" aria-label="Close">✕</button>
+  </div>
+  <div class="viewer__stage" id="viewer-stage">
+    <div class="viewer__track" id="viewer-track"></div>
+    <button class="lightbox__btn lightbox__prev" id="lightbox-prev" aria-label="Previous screenshot"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    <button class="lightbox__btn lightbox__next" id="lightbox-next" aria-label="Next screenshot"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+  </div>
+  <div class="viewer__foot">
+    <p class="viewer__cap" id="viewer-cap"></p>
+    <div class="viewer__thumbs" id="viewer-thumbs" role="tablist" aria-label="Screenshots"></div>
+  </div>
 </dialog>
 </body>
 </html>

@@ -18,8 +18,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@600;800;900&family=Sofia+Sans:wght@400;500;700&family=Zilla+Slab:ital,wght@0,400;0,500;0,600;1,400&display=swap">
-<link rel="stylesheet" href="css/site.css?v=7edaf6e2">
-<script src="js/site.js?v=f1b9adb1" defer></script>
+<link rel="stylesheet" href="css/site.css?v=e34247c7">
+<script src="js/site.js?v=450af8ec" defer></script>
 </head>
 <body class="project" style="--fill:#cdff1b;--accent:#4a7300;--on-fill:#0b1300">
 <a class="skip" href="#main">Skip to content</a>
@@ -106,13 +106,17 @@
 
 <section class="block wrap scene "><span class="ln"></span><div class="block__head"><h2 class="pair "><span><i>Notes</i></span> <u class="mark"></u> <span><i>and credits</i></span></h2></div><div class="block__body fade"><div class="notes"><article><h3>After the jam: v1.2</h3><p>The jam build used fully dynamic lighting with Lumen. For a single static room that was wasted cost, so v1.2 bakes all the lighting, replaces temporal super resolution with FXAA and strips the plugins the game never used. The download dropped from 430 MB to 307 MB and the game runs on weaker hardware.</p></article><article><h3>Credits</h3><p>Environment models are from KayKit's Prototype Bits. The break and impact particles started from two Niagara packs on Fab. I modelled the bomb scanner and the title-screen letters in Blender and textured them to match.</p></article></div></div></section>
 
-<a class="nextup" href="tgf.html" style="--fill:#ff5db4;--accent:#d2157c;--on-fill:#2b0017">
-  <span class="wrap nextup__in">
-    <span class="eyebrow">Next project</span>
-    <span class="pair pair--lg"><span><i>The Gravity Flip</i></span> <u class="mark"></u> <span><i>Puzzle platformer</i></span></span>
-    <span class="orn" aria-hidden="true"><b></b></span>
-  </span>
-</a>
+<nav class="nextup wrap scene" aria-label="Next project" style="--fill:#ff5db4;--accent:#d2157c;--on-fill:#2b0017">
+  <span class="ln"></span>
+  <article class="panel">
+    <a class="panel__art" href="tgf.html" tabindex="-1" aria-hidden="true"><span class="frame "><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><img src="assets/games/tgf/key.webp" alt="" loading="lazy"></span><i class="frame__c frame__c--tl"></i><i class="frame__c frame__c--tr"></i><i class="frame__c frame__c--br"></i><span class="frame__dot"></span></span></a>
+    <div class="panel__text">
+      <p class="eyebrow fade">Next project<span class="nextup__kind"> · Puzzle platformer</span></p>
+      <h2 class="pair"><a href="tgf.html"><span><i>The Gravity Flip</i></span> <u class="mark"></u></a></h2>
+      <div class="actions late"><a class="btn " href="tgf.html">View project <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a></div>
+    </div>
+  </article>
+</nav>
 </main>
 <footer class="foot scene" id="contact">
   <div class="wrap foot__in">
@@ -131,12 +135,20 @@
   </div>
   <p class="wrap foot__copy">© 2026 Kalp Shah · Gujarat, India</p>
 </footer>
-<dialog class="lightbox" id="lightbox" aria-label="Screenshot viewer">
-  <img id="lightbox-img" alt="">
-  <p class="lightbox__count" id="lightbox-count"></p>
-  <button class="lightbox__btn lightbox__prev" id="lightbox-prev" aria-label="Previous screenshot"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
-  <button class="lightbox__btn lightbox__next" id="lightbox-next" aria-label="Next screenshot"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
-  <button class="lightbox__btn lightbox__close" id="lightbox-close" aria-label="Close">✕</button>
+<dialog class="lightbox" id="lightbox" aria-label="Screenshot viewer" aria-roledescription="carousel">
+  <div class="viewer__top">
+    <p class="viewer__count" id="lightbox-count" aria-live="polite"></p>
+    <button class="lightbox__btn" id="lightbox-close" aria-label="Close">✕</button>
+  </div>
+  <div class="viewer__stage" id="viewer-stage">
+    <div class="viewer__track" id="viewer-track"></div>
+    <button class="lightbox__btn lightbox__prev" id="lightbox-prev" aria-label="Previous screenshot"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+    <button class="lightbox__btn lightbox__next" id="lightbox-next" aria-label="Next screenshot"><svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+  </div>
+  <div class="viewer__foot">
+    <p class="viewer__cap" id="viewer-cap"></p>
+    <div class="viewer__thumbs" id="viewer-thumbs" role="tablist" aria-label="Screenshots"></div>
+  </div>
 </dialog>
 </body>
 </html>

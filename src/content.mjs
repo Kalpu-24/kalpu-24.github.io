@@ -105,7 +105,7 @@ export const projects = [
     links: [
       { label: "Steam page", note: "Wishlist", url: "https://store.steampowered.com/app/4139160/Roll_em_Out/" },
       { label: "Play the demo", note: "Steam", url: "https://store.steampowered.com/app/4676930/Roll_em_Out_Demo/" },
-      { label: "Studio page", note: "shortgun.in", url: "https://www.shortgun.in/games/roll-em-out" },
+      { label: "Studio page", note: "shortgun.in", url: "https://shortgun.in/" },
     ],
     highlights: [
       "Built the inventory system, the settings menu and in-game UI",
@@ -170,7 +170,6 @@ export const projects = [
     links: [
       { label: "Download", note: "itch.io", url: "https://kryoxx-studio.itch.io/boom-corp" },
       { label: "Watch the trailer", note: "YouTube", url: "https://www.youtube.com/watch?v=o26X81-yo5w" },
-      { label: "Jam entry", note: "itch.io", url: "https://itch.io/jam/druid-mechanics-community-game-jam-3/rate/3801801" },
     ],
     highlights: [
       "Overall winner of the Druid Mechanics Game Jam 2025",

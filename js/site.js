@@ -112,25 +112,137 @@
   const box = $("#lightbox");
   const shots = $$("[data-shot]");
   if (box && shots.length) {
-    const pic = $("#lightbox-img");
+    // All screenshots sit side by side in one track that slides. Each slide starts with the small
+    // picture the page already loaded, so it shows at once; the full-size one replaces it when ready.
+    // A copy of the last slide sits before the first and a copy of the first after the last,
+    // so going past either end still slides the same way before quietly jumping back.
+    const n = shots.length;
+    const stage = $("#viewer-stage");
+    const track = $("#viewer-track");
     const count = $("#lightbox-count");
-    let at = 0;
-    const open = (i) => {
-      at = (i + shots.length) % shots.length;
-      const b = shots[at];
-      pic.src = b.dataset.full;
-      pic.width = b.dataset.w;
-      pic.height = b.dataset.h;
-      pic.alt = $("img", b).alt;
-      count.textContent = `${String(at + 1).padStart(2, "0")} / ${String(shots.length).padStart(2, "0")}`;
-      if (!box.open) box.showModal();
+    const cap = $("#viewer-cap");
+    const thumbs = $("#viewer-thumbs");
+    const pad = (v) => String(v).padStart(2, "0");
+    const info = shots.map((b) => {
+      const small = $("img", b);
+      return { small: small.currentSrc || small.src, full: b.dataset.full, w: b.dataset.w, h: b.dataset.h, alt: small.alt, ready: false };
+    });
+    const slide = (i) => {
+      const s = document.createElement("div");
+      s.className = "viewer__slide";
+      const im = document.createElement("img");
+      im.src = info[i].small;
+      im.width = info[i].w;
+      im.height = info[i].h;
+      im.alt = info[i].alt;
+      im.dataset.i = i;
+      im.draggable = false;
+      s.append(im);
+      return s;
     };
+    track.append(slide(n - 1), ...info.map((_, i) => slide(i)), slide(0));
+    if (n > 1) track.firstChild.setAttribute("aria-hidden", "true"), track.lastChild.setAttribute("aria-hidden", "true");
+    const tabs = info.map((s, i) => {
+      const t = document.createElement("button");
+      t.type = "button";
+      t.setAttribute("role", "tab");
+      t.setAttribute("aria-label", `Screenshot ${i + 1} of ${n}`);
+      const im = document.createElement("img");
+      im.src = s.small;
+      im.alt = "";
+      t.append(im);
+      t.addEventListener("click", () => go(i));
+      thumbs.append(t);
+      return t;
+    });
+    if (n < 2) $("#lightbox-prev").hidden = $("#lightbox-next").hidden = thumbs.hidden = true;
+
+    const sharpen = (i) => {
+      i = (i + n) % n;
+      const s = info[i];
+      if (s.ready) return;
+      s.ready = true;
+      const full = new Image();
+      full.onload = () => $$(`img[data-i="${i}"]`, track).forEach((im) => (im.src = s.full));
+      full.src = s.full;
+    };
+
+    let at = 0;   // the screenshot shown, 0 … n-1
+    let pos = 1;  // its place in the track, counting the leading copy
+    const place = (offset = 0, jump = false) => {
+      track.classList.toggle("is-jump", jump);
+      track.style.transform = `translateX(calc(${-pos * 100}% + ${offset}px))`;
+      if (jump) void track.offsetWidth;
+    };
+    const label = () => {
+      count.textContent = `${pad(at + 1)} / ${pad(n)}`;
+      cap.textContent = info[at].alt;
+      tabs.forEach((t, i) => t.setAttribute("aria-selected", i === at));
+      tabs[at].scrollIntoView({ block: "nearest", inline: "center", behavior: calm ? "auto" : "smooth" });
+      sharpen(at); sharpen(at + 1); sharpen(at - 1);
+    };
+    // Snap back from a copy at either end to the real slide, without anyone seeing the jump.
+    const settle = () => { if (pos === 0 || pos === n + 1) { pos = at + 1; place(0, true); } };
+    track.addEventListener("transitionend", (e) => { if (e.target === track) settle(); });
+    function go(i, step) {
+      settle();
+      at = (i + n) % n;
+      pos = step ? pos + step : at + 1;
+      place();
+      label();
+      if (calm) settle();
+    }
+
+    const open = (i) => {
+      at = i; pos = i + 1;
+      place(0, true);
+      label();
+      if (!box.open) { box.showModal(); root.style.overflow = "hidden"; }
+    };
+    box.addEventListener("close", () => (root.style.overflow = ""));
     shots.forEach((b, i) => b.addEventListener("click", () => open(i)));
-    $("#lightbox-prev").addEventListener("click", () => open(at - 1));
-    $("#lightbox-next").addEventListener("click", () => open(at + 1));
+    $("#lightbox-prev").addEventListener("click", () => go(at - 1, -1));
+    $("#lightbox-next").addEventListener("click", () => go(at + 1, 1));
     $("#lightbox-close").addEventListener("click", () => box.close());
-    box.addEventListener("click", (e) => { if (e.target === box) box.close(); });
-    box.addEventListener("keydown", (e) => { if (e.key === "ArrowRight") open(at + 1); if (e.key === "ArrowLeft") open(at - 1); });
+    box.addEventListener("keydown", (e) => {
+      if (e.key === "ArrowRight") { e.preventDefault(); go(at + 1, 1); }
+      if (e.key === "ArrowLeft") { e.preventDefault(); go(at - 1, -1); }
+    });
+
+    // Drag with a mouse or swipe with a finger: the picture follows, and letting go past
+    // a fifth of the width (or with a quick flick) moves on. A tap beside the picture closes.
+    let down = null;
+    stage.addEventListener("pointerdown", (e) => {
+      if (e.button !== 0 || e.target.closest("button")) return;
+      settle();
+      down = { x: e.clientX, y: e.clientY, t: performance.now(), dx: 0, id: e.pointerId };
+      stage.setPointerCapture(e.pointerId);
+    });
+    stage.addEventListener("pointermove", (e) => {
+      if (!down || e.pointerId !== down.id) return;
+      down.dx = e.clientX - down.x;
+      if (n < 2) return;
+      if (Math.abs(down.dx) > 4) stage.classList.add("is-drag");
+      if (stage.classList.contains("is-drag")) place(down.dx);
+    });
+    const release = (e) => {
+      if (!down || e.pointerId !== down.id) return;
+      const { dx, t } = down;
+      const moved = stage.classList.contains("is-drag");
+      down = null;
+      stage.classList.remove("is-drag");
+      if (moved) {
+        const quick = Math.abs(dx) > 30 && performance.now() - t < 250;
+        if (Math.abs(dx) > stage.clientWidth * 0.2 || quick) dx < 0 ? go(at + 1, 1) : go(at - 1, -1);
+        else place();
+        return;
+      }
+      if (e.type === "pointercancel") return;
+      const r = $("img", track.children[pos]).getBoundingClientRect();
+      if (e.clientX < r.left || e.clientX > r.right || e.clientY < r.top || e.clientY > r.bottom) box.close();
+    };
+    stage.addEventListener("pointerup", release);
+    stage.addEventListener("pointercancel", release);
   }
 
   /* ---- Playable versions ------------------------------------------------- */

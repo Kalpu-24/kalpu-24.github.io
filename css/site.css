@@ -287,11 +287,13 @@ a.lead__item:hover .fig { color: var(--accent); }
 .demo__state::after { content: ""; position: absolute; left: 22px; top: 17px; border-style: solid; border-width: 11px 0 11px 17px; border-color: transparent transparent transparent #fff; }
 .demo__screen.is-paused .demo__state { opacity: 1; }
 
-.nextup { display: block; margin-top: clamp(96px, 14vw, 200px); padding-block: clamp(48px, 7vw, 96px); border-top: 1px solid var(--mist); text-decoration: none; }
-.nextup__in { display: grid; gap: 14px; justify-items: start; }
-.nextup .eyebrow { color: var(--muted); }
-.nextup .orn b { width: clamp(80px, 16vw, 240px); transition: width 0.4s var(--ease); }
-.nextup:hover .orn b { width: clamp(120px, 24vw, 340px); }
+/* Next project: a small version of the home page's game panel, under a full-width rule. */
+.nextup { position: relative; margin-block: clamp(80px, 10vw, 140px) clamp(56px, 7vw, 96px); padding-top: clamp(28px, 3.5vw, 44px); }
+.nextup > .ln { position: absolute; left: 0; right: 0; top: 0; }
+.nextup .panel { grid-template-columns: auto minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); }
+.nextup .panel__art { justify-self: start; width: clamp(150px, 20vw, 260px); --reach: 20%; }
+.nextup .panel__text { gap: 12px; }
+.nextup .pair { font-size: clamp(2rem, 3.4vw, 2.8rem); }
 .project .foot { margin-top: 0; }
 
 /* Playable versions ------------------------------------------------ */
@@ -327,17 +329,33 @@ a.lead__item:hover .fig { color: var(--accent); }
 .snake__pad [data-dir="1,0"] { grid-area: 2 / 3; }
 
 /* Screenshot viewer ------------------------------------------------ */
-.lightbox { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: clamp(12px, 4vw, 56px); border: 0; background: rgb(255 255 255 / 0.98); color: var(--ink); }
-.lightbox[open] { display: grid; place-items: center; }
+.lightbox { width: 100vw; height: 100dvh; max-width: none; max-height: none; margin: 0; padding: 0; border: 0; background: #fff; color: var(--ink); overflow: hidden; }
+.lightbox[open] { display: grid; grid-template-rows: auto minmax(0, 1fr) auto; }
 .lightbox::backdrop { background: #fff; }
-.lightbox img { max-width: 100%; max-height: calc(100dvh - 2 * clamp(12px, 4vw, 56px) - 44px); width: auto; height: auto; object-fit: contain; }
-.lightbox__count { position: absolute; bottom: 16px; left: 50%; translate: -50% 0; font: 800 1rem var(--display); letter-spacing: 0.2em; }
-.lightbox__btn { position: absolute; display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: var(--paper); border: var(--line); cursor: pointer; }
+.viewer__top { display: flex; align-items: center; justify-content: space-between; padding: 14px clamp(14px, 3vw, 32px); }
+.viewer__count { margin: 0; font: 800 1.1rem var(--display); letter-spacing: 0.2em; }
+.viewer__stage { position: relative; overflow: hidden; touch-action: pan-y; cursor: grab; user-select: none; }
+.viewer__stage.is-drag { cursor: grabbing; }
+.viewer__track { display: flex; height: 100%; will-change: transform; transition: transform 0.5s var(--ease); }
+.viewer__stage.is-drag .viewer__track, .viewer__track.is-jump { transition: none; }
+.viewer__slide { flex: 0 0 100%; display: grid; place-items: center; padding: 0 clamp(14px, 7vw, 96px); min-width: 0; }
+.viewer__slide img { max-width: 100%; max-height: 100%; width: auto; height: auto; object-fit: contain; -webkit-user-drag: none; pointer-events: none; }
+.viewer__foot { display: grid; gap: 12px; justify-items: center; padding: 14px clamp(14px, 3vw, 32px) 18px; }
+.viewer__cap { margin: 0; max-width: 60ch; min-height: 1.5em; text-align: center; font-size: 0.95rem; }
+.viewer__thumbs { display: flex; gap: 8px; max-width: 100%; overflow-x: auto; padding: 3px; scrollbar-width: none; }
+.viewer__thumbs::-webkit-scrollbar { display: none; }
+.viewer__thumbs button { flex: none; width: 72px; aspect-ratio: 16 / 10; padding: 0; border: 0; outline: 1.5px solid transparent; outline-offset: 2px; background: var(--mist); cursor: pointer; opacity: 0.45; transition: opacity 0.2s, outline-color 0.2s; }
+.viewer__thumbs button:hover { opacity: 0.8; }
+.viewer__thumbs button[aria-selected="true"] { opacity: 1; outline-color: var(--ink); }
+.viewer__thumbs img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.lightbox__btn { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; background: var(--paper); color: var(--ink); border: var(--line); cursor: pointer; }
 .lightbox__btn:hover { background: var(--ink); color: #fff; }
-.lightbox__prev { left: 14px; top: 50%; translate: 0 -50%; }
+.lightbox__prev, .lightbox__next { position: absolute; top: 50%; translate: 0 -50%; }
+.lightbox__prev { left: clamp(10px, 2vw, 28px); }
 .lightbox__prev .i { transform: rotate(180deg); }
-.lightbox__next { right: 14px; top: 50%; translate: 0 -50%; }
-.lightbox__close { right: 14px; top: 14px; }
+.lightbox__next { right: clamp(10px, 2vw, 28px); }
+@media (hover: none) { .lightbox__prev, .lightbox__next { display: none; } .viewer__slide { padding: 0 10px; } }
+@media (prefers-reduced-motion: reduce) { .viewer__track { transition: none; } }
 
 /* ------------------------------------------------------------------
    Entry: each .scene builds itself once, as it comes into view.
@@ -392,6 +410,11 @@ a.lead__item:hover .fig { color: var(--accent); }
   .hero { min-height: 0; padding-top: 28px; gap: 36px; }
   .hero__art { justify-self: start; width: min(64%, 280px); margin-left: 14px; }
   .panel__art, .phero__art { justify-self: start; width: calc(100% - 28px); margin: 0 0 22px 14px; }
+  /* Next project keeps its small picture beside the text on phones. */
+  .nextup .panel { gap: 36px; align-items: center; }
+  .nextup__kind { display: none; }
+  .nextup .btn { padding: 0.7em 1em 0.64em; font-size: 0.82rem; letter-spacing: 0.16em; }
+  .nextup .panel__art { width: 34vw; margin: 0 0 0 14px; }
   .hero__orn { display: none; }
   .phero { min-height: 0; }
   .phero__art { order: -1; }
