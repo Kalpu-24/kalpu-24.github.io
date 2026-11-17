@@ -1,30 +1,60 @@
 #!/usr/bin/env node
-/* Generates the static pages from src/content.mjs.  Run:  node build.mjs  */
+/* Generates the site's pages (index.html and one page per project) from src/content.mjs.
+   Run:  node build.mjs   The previous design lives in v2/ and has its own v2/build.mjs. */
 import { readFileSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { site, profile, headlineStats, timeline, skills, projects } from "./src/content.mjs";
+import { profile, headlineStats, timeline, skills, projects } from "./src/content.mjs";
 
-/* The stylesheet and script are linked as site.css?v=<hash of the file>, so a browser that
-   cached an older copy fetches the new one as soon as the pages change. */
-const versioned = (path) => `${path}?v=${createHash("sha1").update(readFileSync(new URL(path, import.meta.url))).digest("hex").slice(0, 8)}`;
-const CSS = versioned("css/site.css");
-const JS = versioned("js/site.js");
-const HERO_JS = versioned("js/hero.js");
-const MOTION_JS = versioned("js/motion.js");
-const GSAP = "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist"; // the version the original site used
+const here = (p) => new URL(p, import.meta.url);
+const versioned = (path) => `${path}?v=${createHash("sha1").update(readFileSync(here(path))).digest("hex").slice(0, 8)}`;
+const BASE = "https://kalpshah.dev/";
+const FONTS = "https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@600;800;900&family=Sofia+Sans:wght@400;500;700&family=Zilla+Slab:ital,wght@0,400;0,500;0,600;1,400&display=swap";
+
+/* On white, each game keeps one accent: `fill` for marks and blocks, `text` for type (dark enough to read). */
+const ACCENT = {
+  home: { fill: "#6f6eb5", text: "#6f6eb5", on: "#ffffff" },
+  rollemout: { fill: "#ffb347", text: "#c25a00", on: "#1d1300" },
+  boomcorp: { fill: "#cdff1b", text: "#4a7300", on: "#0b1300" },
+  tgf: { fill: "#ff5db4", text: "#d2157c", on: "#2b0017" },
+  aurarpg: { fill: "#b9a7ff", text: "#5a33d6", on: "#170a47" },
+  snakewall: { fill: "#e0322c", text: "#c8201b", on: "#ffffff" },
+};
+const accent = (id) => { const a = ACCENT[id] || ACCENT.home; return `--fill:${a.fill};--accent:${a.text};--on-fill:${a.on}`; };
 
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const fmt = (s) => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>");
 const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
 const img = (p, n) => `assets/games/${p.id}/${n}.webp`;
-const arrow = `<svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
-const out = `<svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const ext = (url) => (/^https?:/.test(url) ? ` target="_blank" rel="noopener"` : "");
-const theme = (p) => `--bg:${p.theme.bg};--surface:${p.theme.surface};--ink:${p.theme.ink};--muted:${p.theme.muted};--accent:${p.theme.accent};--on-accent:${p.theme.onAccent};--game-font:'${p.font}';--game-scale:${p.fontScale}`;
-const FONTS = "https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,400..900&family=Inter:wght@400..700&family=JetBrains+Mono:wght@400;500&family=Jaro:opsz@6..72&family=Orbitron:wght@600..800&family=Pirata+One&family=Sour+Gummy:wght@500..700&display=swap";
+const num = (i) => String(i + 1).padStart(2, "0");
+const arrow = `<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h15M13 6l6 6-6 6"/></svg>`;
+const out = `<svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>`;
+/* A short measuring rule that leads the eye along a line. */
+const orn = `<span class="orn" aria-hidden="true"><b></b></span>`;
+/* A stacked two-tone headline: first part in the accent, second in ink. */
+const pair = (a, b, tag = "h2", cls = "") => `<${tag} class="pair ${cls}"><span><i>${esc(a)}</i></span> <u class="mark"></u> <span><i>${esc(b)}</i></span></${tag}>`;
+/* A picture in a viewfinder frame: two guide lines cross at one corner, marks draw at
+   the other three, then the picture wipes in. The frame is wide, so the subject is not cropped away. */
+const corners = `<i class="frame__c frame__c--tl"></i><i class="frame__c frame__c--tr"></i><i class="frame__c frame__c--br"></i>`;
+const frame = (src, cls = "", attrs = "") => `<span class="frame ${cls}"><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><img src="${src}" alt="" loading="lazy"${attrs}></span>${corners}<span class="frame__dot"></span></span>`;
+/* A figure such as "4 months" or "307 MB": the number stays large and the unit sits beside it,
+   smaller, so a long unit never pushes the number onto two lines. A figure with no number in
+   it ("Overall winner") is set as words. */
+const figure = (v) => {
+  const m = String(v).match(/^([\d.,]+(?:\s*[×–-]\s*[\d.,]+)?[k+]*)\s+([A-Za-z].*)$/);
+  if (m) return `<strong class="fig"><span class="fig__n">${esc(m[1])}</span><span class="fig__u">${esc(m[2])}</span></strong>`;
+  return `<strong class="fig"><span class="${/^\d/.test(v) ? "fig__n" : "fig__w"}">${esc(v)}</span></strong>`;
+};
+/* A still app screen shown beside the recording at the top of a page (`video.beside`, by shot number). */
+const beside = (p, k) => {
+  const s = p.shots.find((x) => x.n === p.video?.beside?.[k]);
+  return s ? `<span class="side-shot"><img src="${img(p, `${s.n}-sm`)}" width="${s.w}" height="${s.h}" alt="${esc(s.alt)}"></span>` : "";
+};
+/* Games whose work panel also shows the cut-out character beside the key art. */
+const PANEL_PROP = new Set(["rollemout", "snakewall"]);
+const btn = (label, url, kind = "") => `<a class="btn ${kind}" href="${esc(url)}"${ext(url)}>${esc(label)} ${/^https?:/.test(url) ? out : arrow}</a>`;
 
-function page({ file, title, description, image, body, bodyClass = "", style = "", themeColor = "#07080a" }) {
-  const url = site.url + (file === "index.html" ? "" : file);
+function page({ file, title, description, body, id = "home" }) {
   const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -32,343 +62,233 @@ function page({ file, title, description, image, body, bodyClass = "", style = "
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
-${site.noindex ? `<meta name="robots" content="noindex">\n` : ""}<meta name="theme-color" content="${themeColor}">
-<link rel="canonical" href="${url}">
+<meta name="theme-color" content="#ffffff">
+<link rel="canonical" href="${BASE}${file === "index.html" ? "" : file}">
 <meta property="og:type" content="website">
-<meta property="og:url" content="${url}">
+<meta property="og:url" content="${BASE}${file === "index.html" ? "" : file}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
-<meta property="og:image" content="${site.url}${image}">
+<meta property="og:image" content="${BASE}${id === "home" ? "assets/og.jpg" : `assets/games/${id}/key.webp`}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="${versioned("public/favicon.ico")}" sizes="48x48">
-<link rel="icon" type="image/svg+xml" href="${versioned("public/favicon.svg")}">
-<link rel="apple-touch-icon" href="${versioned("public/apple-touch-icon.png")}">
+<link rel="icon" href="public/favicon.ico" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><style>.u{fill:${(ACCENT[id] || ACCENT.home).text}}.d{fill:#141414}@media (prefers-color-scheme:dark){.u{fill:${(ACCENT[id] || ACCENT.home).fill}}.d{fill:#f2f1ec}}</style><path class="u" d="M8 19 20 2 32 19z"/><path class="d" d="M8 21h24L20 38z"/></svg>`)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="${FONTS}">
-<link rel="stylesheet" href="${CSS}">
-<script src="${JS}" defer></script>
-<script src="${GSAP}/gsap.min.js" defer></script>
-<script src="${GSAP}/ScrollTrigger.min.js" defer></script>
-<script src="${MOTION_JS}" defer></script>${file === "index.html" ? `\n<script src="${HERO_JS}" defer></script>` : ""}
+<link rel="stylesheet" href="${versioned("css/site.css")}">
+<script src="${versioned("js/site.js")}" defer></script>
 </head>
-<body class="${bodyClass}"${style ? ` style="${style}"` : ""}>
+<body class="${id === "home" ? "home" : "project"}" style="${accent(id)}">
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
-  <div class="wrap top__in">
-    <a class="top__name" href="./">Kalp Shah</a>
-    <nav class="top__nav" aria-label="Main">
-      <a href="./#work">Work</a>
-      <a href="./#about">About</a>
-      <a href="./#contact">Contact</a>
-      <a class="btn btn--small" href="${profile.resume}" target="_blank" rel="noopener">Résumé</a>
-    </nav>
-  </div>
+  <a class="top__mark" href="./" aria-label="Kalp Shah, home"><svg viewBox="0 0 40 40" aria-hidden="true"><path class="top__up" d="M8 19 20 2 32 19z"/><path class="top__down" d="M8 21h24L20 38z"/></svg><b>Kalp Shah</b></a>
+  <nav class="top__nav" aria-label="Main">
+    <a href="./#work">Work</a>
+    <a href="./#about">About</a>
+    <a href="./#toolbox">Toolbox</a>
+    <a href="./#contact">Contact</a>
+    <a class="top__cv" href="${esc(profile.resume)}" target="_blank" rel="noopener">Résumé</a>
+  </nav>
 </header>
 <main id="main">
 ${body}
 </main>
-<footer class="foot" id="contact">
-  <div class="wrap">
-    <p class="label">Contact</p>
-    <h2 class="foot__h">I'm open to new opportunities, or just a friendly chat.</h2>
-    <a class="foot__mail" href="mailto:${profile.email}">${profile.email}</a>
+<footer class="foot scene" id="contact">
+  <div class="wrap foot__in">
+    <div>
+      <p class="eyebrow">Open to new opportunities, or just a friendly chat</p>
+      ${pair("Get in", "touch")}
+      <a class="foot__mail" href="mailto:${esc(profile.email)}">${esc(profile.email)}</a>
+    </div>
     <ul class="foot__links">
-      ${profile.links.map((l) => `<li><a href="${l.url}" target="_blank" rel="noopener">${esc(l.label)} ${out}</a></li>`).join("\n      ")}
-      <li><a href="${profile.resume}" target="_blank" rel="noopener">Résumé (PDF) ${out}</a></li>
+      ${profile.links.map((l) => `<li><a href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} ${out}</a></li>`).join("\n      ")}
+      <li><a href="${esc(profile.resume)}" target="_blank" rel="noopener">Résumé (PDF) ${out}</a></li>
     </ul>
-    <p class="foot__copy">© <span data-year>2026</span> Kalp Shah · ${esc(profile.location)}</p>
   </div>
+  <p class="wrap foot__copy">© ${new Date().getFullYear()} ${esc(profile.name)} · ${esc(profile.location)}</p>
 </footer>
 <dialog class="lightbox" id="lightbox" aria-label="Screenshot viewer">
   <img id="lightbox-img" alt="">
-  <p class="lightbox__cap" id="lightbox-cap"></p>
-  <button class="lightbox__btn lightbox__prev" id="lightbox-prev" aria-label="Previous">${arrow}</button>
-  <button class="lightbox__btn lightbox__next" id="lightbox-next" aria-label="Next">${arrow}</button>
+  <p class="lightbox__count" id="lightbox-count"></p>
+  <button class="lightbox__btn lightbox__prev" id="lightbox-prev" aria-label="Previous screenshot">${arrow}</button>
+  <button class="lightbox__btn lightbox__next" id="lightbox-next" aria-label="Next screenshot">${arrow}</button>
   <button class="lightbox__btn lightbox__close" id="lightbox-close" aria-label="Close">✕</button>
 </dialog>
 </body>
 </html>
 `;
-  writeFileSync(new URL(file, import.meta.url), html);
+  writeFileSync(here(file), html);
   console.log("wrote", file);
 }
 
-/* ---------------------------------------------------------------- home */
-function home() {
-  /* Each game lends its slide one small element that reacts to scrolling. js/site.js sets
-     --q on it, from 0 as the slide enters the screen to 1 as it leaves; css/site.css does the rest. */
-  const prop = (p) => {
-    const open = `<div class="slide__prop slide__prop--${p.prop}" data-drift aria-hidden="true">`;
-    switch (p.prop) {
-      case "roll": return `${open}<img src="${img(p, "prop")}" alt="" loading="lazy"></div>`; // the ball rolls
-      case "flip": return `${open}<img src="${img(p, "prop")}" alt="" loading="lazy"></div>`; // the robot drops from the ceiling
-      case "tiles": return `${open}${["1", "1", "2", "", "2", "1", "1"].map((n, k) => `<i style="--k:${k}"${n ? "" : ` class="is-live"`}>${n}</i>`).join("")}</div>`; // tiles are cleared, the live one is marked
-      case "circle": return `${open}<i></i><i></i><i></i></div>`; // a magic circle turns
-      case "snake": return `${open}${"<i></i>".repeat(6)}<b></b></div>`; // a dot snake reaches its food
-      default: return "";
-    }
-  };
+/* ------------------------------------------------------------------ home */
+const [headA, headB] = (() => {
+  const h = profile.headline.replace(/\.$/, "");
+  const i = h.indexOf(" in ");
+  return i > 0 ? [h.slice(0, i), h.slice(i + 1)] : [h, ""];
+})();
 
-  const github = profile.links.find((l) => l.label === "GitHub").url;
-  const game = (p, i) => `
-    <article class="slide${p.theme.bg > "#8" ? " slide--light" : ""}" style="${theme(p)}">
-      <a class="slide__art${p.art.fit === "wide" ? " slide__art--wide" : ""}" href="${p.id}.html" tabindex="-1" aria-hidden="true">${p.art.fit === "wide" ? `<span class="slide__blur" style="background-image:url('${img(p, p.art.src)}')"></span>` : ""}
-        <img${p.art.fit === "contain" ? ` class="is-contained"` : p.art.fit === "wide" ? ` class="is-wide"` : ""} src="${img(p, p.art.src)}" style="object-position:${p.art.fit === "wide" ? "50% 50%" : p.art.pos}" alt="" loading="${i ? "lazy" : "eager"}">
-      </a>
-      ${prop(p)}
-      <div class="slide__info">
-        <div class="slide__main">
-          <p class="label">${String(i + 1).padStart(2, "0")} / ${esc(p.kind)} · ${esc(p.year)}</p>
-          <h3 class="slide__title"><a href="${p.id}.html">${esc(p.name)}</a></h3>
-          <p class="slide__pitch">${esc(p.pitch)}</p>
-        </div>
-        <div class="slide__side">
-          <p class="fact">${esc(p.fact)}</p>
-          <p class="slide__role">${esc(p.role)}</p>
-          <a class="btn btn--solid" href="${p.id}.html">View project ${arrow}</a>
-        </div>
-      </div>
-    </article>`;
+const roots = skills.filter((s) => !s.parent);
+const kids = (id) => skills.filter((s) => s.parent === id);
+const branch = (s) => `<li><span class="skill">${esc(s.label)}</span>${kids(s.id).length ? `<ul>${kids(s.id).map(branch).join("")}</ul>` : ""}</li>`;
 
-  /* Toolbox graph: nested lists; js/site.js draws the wires between a node and its parent. */
-  const branch = (s) => {
-    const kids = skills.filter((k) => k.parent === s.id);
-    return `<li>
-        <div class="node${s.parent ? "" : " node--root"}" id="skill-${s.id}" data-parent="${s.parent || ""}" data-in="${s.in.join(" ")}">
-          <span>${esc(s.label)}</span>
-          <span class="node__in">${s.in.map((id) => `<i style="--dot:${byId[id].theme.accent}" title="${esc(byId[id].name)}"></i>`).join("")}</span>
-          <span class="sr">Used in ${s.in.map((id) => esc(byId[id].name)).join(", ")}</span>
-        </div>${kids.length ? `<ul>${kids.map(branch).join("")}</ul>` : ""}
-      </li>`;
-  };
+page({
+  file: "index.html",
+  title: `${profile.name} — ${profile.role}`,
+  description: `${profile.headline} ${projects.map((p) => p.name).join(", ")}.`,
+  body: `
+<section class="hero scene">
+  <div class="hero__art" aria-hidden="true">
+    ${frame("assets/kalp.webp", "frame--square", ` id="hero__pic"`)}
+  </div>
+  <div class="hero__text">
+    <p class="eyebrow fade">${esc(profile.name)} · ${esc(profile.role)}</p>
+    ${pair(headA, headB, "h1", "pair--xl")}
+    <p class="lede fade">${esc(profile.about.punch)}</p>
+    <div class="actions late">${btn("See the work", "#work")}</div>
+  </div>
+  <div class="hero__orn late" aria-hidden="true">${orn}</div>
+</section>
 
-  /* Hero: a cloud of points that takes the shape of each game's character in turn.
-     js/hero.js samples these images; "dark" keeps only the dark pixels of art on a white background. */
-  const shapes = projects.map((p) => ({ id: p.id, name: p.name, color: p.theme.accent, src: img(p, p.id === "snakewall" ? "key" : "prop"), mode: p.id === "snakewall" ? "dark" : "alpha" }));
+<section class="lead wrap scene" aria-label="Highlights">
+  <span class="ln"></span>
+  ${headlineStats.map((n) => `<${n.to ? `a href="${n.to}.html"` : "div"} class="lead__item">${figure(n.v)}<span>${esc(n.l)}</span></${n.to ? "a" : "div"}>`).join("\n  ")}
+</section>
 
-  const body = `
-<section class="hero">
-  <div class="wrap hero__in">
-    <div class="hero__text">
-    <p class="label">${esc(profile.name)} · ${esc(profile.role)}</p>
-    <h1 class="hero__h">I build games in Unreal Engine 5.</h1>
-    <p class="hero__p">${esc(profile.intro)}</p>
-    <p class="hero__cta">
-      <a class="btn btn--solid btn--big" href="#work">See the games ${arrow}</a>
-    </p>
+<section class="reel" id="work" aria-label="Selected work">
+  <div class="reel__sticky">
+    <div class="reel__head wrap">
+      <h2 class="eyebrow">Selected work</h2>
+      <p class="reel__count" aria-hidden="true"><b id="reel-now">01</b> / ${num(projects.length - 1)}</p>
     </div>
-    <div class="hero__stage">
-      <canvas class="hero__canvas" data-morph="${esc(JSON.stringify(shapes))}" aria-hidden="true"></canvas>
-      <div class="hero__now" data-morph-now hidden>
-        <p><a href="${shapes[0].id}.html">${esc(shapes[0].name)}</a></p>
-        <p class="hero__pick">${shapes.map((s) => `<button type="button" data-morph-pick="${s.id}" style="--dot:${s.color}" aria-label="Show ${esc(s.name)}" aria-pressed="false"></button>`).join("")}</p>
-      </div>
+    <div class="reel__track" id="reel-track">
+      ${projects.map((p, i) => `
+      <article class="panel scene" style="${accent(p.id)}" id="work-${p.id}">
+        <a class="panel__art" href="${p.id}.html" tabindex="-1" aria-hidden="true">
+          ${frame(img(p, "key"), p.art.fit === "contain" ? "is-contain" : "")}${PANEL_PROP.has(p.id) ? `
+          <img class="panel__prop" src="${img(p, "prop")}" alt="" loading="lazy">` : ""}
+        </a>
+        <div class="panel__text">
+          <p class="eyebrow fade">${esc(p.kind)} · ${esc(p.year)}</p>
+          <h3 class="pair pair--lg"><a href="${p.id}.html"><span><i>${esc(p.name)}</i></span> <u class="mark"></u> <span><i>${esc(p.fact)}</i></span></a></h3>
+          <p class="fade">${esc(p.pitch)}</p>
+          <div class="actions late">${btn("View project", `${p.id}.html`)}</div>
+        </div>
+      </article>`).join("")}
     </div>
+    <div class="reel__bar wrap" aria-hidden="true"><span id="reel-bar"></span></div>
   </div>
 </section>
 
-<section class="wrap">
-  <dl class="numbers">
-    ${headlineStats.map((s) => `<div><dt>${esc(s.l)}</dt><dd>${esc(s.v)}</dd></div>`).join("\n    ")}
-  </dl>
-</section>
-
-<section class="wrap wrap--wide section" id="work">
-  <header class="section__head">
-    <p class="label">Selected work</p>
-    <h2 class="big">The games</h2>
-  </header>
-  <div class="games">
-  ${projects.map(game).join("\n")}
-    <article class="slide slide--more">
-      <a class="slide__art" href="${github}" tabindex="-1" aria-hidden="true">
-        <span class="more__dots">${projects.map((p) => `<i style="--dot:${p.theme.accent}"></i>`).join("")}</span>
-      </a>
-      <div class="slide__info">
-        <div class="slide__main">
-          <p class="label">${String(projects.length + 1).padStart(2, "0")} / More</p>
-          <h3 class="slide__title"><a href="${github}">More on GitHub</a></h3>
-          <p class="slide__pitch">Source code for AuraRPG and SnakeWall, and everything else I've put up.</p>
-        </div>
-        <div class="slide__side">
-          <a class="btn" href="${github}">${github.replace("https://", "")} ${arrow}</a>
-        </div>
-      </div>
-    </article>
+<section class="about wrap scene" id="about">
+  <div class="about__head">
+    <p class="eyebrow fade">${esc(profile.location)}</p>
+    ${pair("About", profile.name.split(" ")[0])}
+  </div>
+  <div class="about__text">
+    <p class="quote fade">${esc(profile.about.punch)}</p>
+    ${profile.about.paragraphs.map((t) => `<p class="fade">${esc(t)}</p>`).join("\n    ")}
   </div>
 </section>
 
-<section class="wrap section" id="skills">
-  <header class="section__head">
-    <p class="label">Pick a game to light up what it used</p>
-    <h2 class="big">Toolbox</h2>
-  </header>
-  <p class="tree__key" data-tree-key>${projects.map((p) => `<button type="button" data-game="${p.id}" style="--dot:${p.theme.accent}"><i></i>${esc(p.name)}</button>`).join("")}</p>
-  <div class="tree" data-tree>
-    <ul class="tree__roots">
-      ${skills.filter((s) => !s.parent).map(branch).join("\n      ")}
-    </ul>
-    <svg class="tree__wires" aria-hidden="true"></svg>
-  </div>
-</section>
-
-<section class="wrap section about" id="about">
-  <img class="about__pic" src="assets/kalp.webp" width="640" height="640" loading="lazy" alt="Illustrated portrait of Kalp wearing headphones">
-  <div class="about__card">
-    <p class="label">About</p>
-    <h2>${esc(profile.about.punch)}</h2>
-    ${profile.about.paragraphs.map((t) => `<p class="prose">${esc(t)}</p>`).join("\n    ")}
-    <p><a class="btn" href="${profile.resume}" target="_blank" rel="noopener">Download résumé ${out}</a></p>
-  </div>
-</section>
-
-<section class="wrap section" id="path">
-  <header class="section__head">
-    <p class="label">So far</p>
-    <h2 class="big">Path</h2>
-  </header>
-  <ol class="path">
-    ${timeline.map((t) => `<li>
-      <p class="label">${esc(t.when)}</p>
-      <h3>${t.to ? `<a href="${t.to}.html">${esc(t.what)}</a>` : esc(t.what)}</h3>
-      <p>${esc(t.detail)}</p>
-    </li>`).join("\n    ")}
+<section class="path wrap scene" id="path">
+  <div class="path__head">${pair("The path", "so far")}<span class="late">${orn}</span></div>
+  <ol class="path__list">
+    ${timeline.map((t) => `<li><span class="path__when">${esc(t.when)}</span><div><strong>${t.to ? `<a href="${t.to}.html">${esc(t.what)}</a>` : esc(t.what)}</strong><p>${esc(t.detail)}</p></div></li>`).join("\n    ")}
   </ol>
-</section>`;
+</section>
 
-  page({
-    file: "index.html",
-    title: "Kalp Shah — Game developer, Unreal Engine 5 and C++",
-    description: "Kalp Shah builds games in Unreal Engine 5 and C++: Roll 'Em Out at Shortgun Games, the jam-winning Boom Corp., The Gravity Flip, AuraRPG and SnakeWall.",
-    image: "assets/og.jpg",
-    bodyClass: "home",
-    body,
-  });
-}
+<section class="toolbox wrap scene" id="toolbox">
+  <div class="toolbox__head">${pair("The", "toolbox")}</div>
+  <div class="toolbox__grid">
+    ${roots.map((r) => `<div class="tool"><h3>${esc(r.label)}</h3><ul>${kids(r.id).map(branch).join("")}</ul></div>`).join("\n    ")}
+  </div>
+</section>`,
+});
 
-/* ------------------------------------------------------------- project */
-function project(p, i) {
+/* --------------------------------------------------------------- projects */
+projects.forEach((p, i) => {
   const next = projects[(i + 1) % projects.length];
-  const facts = [["Role", p.role], ["When", p.period], ["Built with", p.engine], ["Platform", p.platform], ["Status", p.status]];
-  const media = p.video
-    ? `<div class="phone"><video src="${p.video.src}" poster="assets/games/${p.id}/demo-poster.jpg" width="${p.video.w}" height="${p.video.h}" controls muted loop playsinline preload="none" aria-label="${esc(p.video.caption)}"></video></div>`
-    : `<img class="phead__img" src="${img(p, "key")}" style="object-position:${p.art.pos}" alt="" fetchpriority="high">`;
-
-  const challenge = p.challenge.steps
-    ? `<ol class="psr">${p.challenge.steps.map(([k, t]) => `<li><p class="label">${esc(k)}</p><p>${fmt(t)}</p></li>`).join("")}</ol>`
-    : p.challenge.paragraphs.map((t) => `<p class="prose">${fmt(t)}</p>`).join("\n");
-
-  const body = `
-<article>
-<header class="phead wrap${p.video ? " phead--phone" : ""}">
-  <div class="phead__text">
-    <p class="label"><a href="./#work">Work</a> / ${esc(p.kind)} · ${esc(p.year)}</p>
-    <h1 class="phead__title">${esc(p.name)}</h1>
-    <p class="phead__pitch">${esc(p.pitch)}</p>
-    <p class="phead__cta">
-      ${p.links.map((l, k) => `<a class="btn${k ? "" : " btn--solid"}" href="${l.url}"${ext(l.url)}>${esc(l.label)} <small>${esc(l.note)}</small> ${out}</a>`).join("\n      ")}
-    </p>
-  </div>
-  ${media}
-</header>
-
-<section class="wrap">
-  <dl class="facts">
-    ${facts.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("\n    ")}
-  </dl>
-  <dl class="stats">
-    ${p.stats.map((s) => `<div><dt>${esc(s.l)}</dt><dd>${esc(s.v)}</dd></div>`).join("\n    ")}
-  </dl>
-</section>
-
-<section class="wrap section section--split">
-  <header class="section__head"><p class="label">Overview</p><h2>The game</h2></header>
-  <div>
-    ${p.overview.map((t) => `<p class="prose prose--lead">${fmt(t)}</p>`).join("\n    ")}
-    <ul class="tags">${p.tags.map((t) => `<li>${esc(t)}</li>`).join("")}</ul>
-  </div>
-</section>
-${p.toy ? `
-<section class="wrap section">
-  <div class="toy" data-toy="${p.toy.kind}">
-    <div class="toy__side">
-      <p class="label">Playable</p>
-      <h2>${esc(p.toy.title)}</h2>
-      <p>${esc(p.toy.text)}</p>
-      <dl class="toy__stats" data-toy-stats></dl>
-      <p class="toy__msg" data-toy-msg aria-live="polite"></p>
-      <div class="toy__actions" data-toy-actions></div>
-    </div>
-    <div class="toy__board" data-toy-board></div>
-  </div>
-</section>` : ""}
-
-<section class="wrap section">
-  <header class="section__head"><p class="label">${p.role.startsWith("Solo") || p.role.startsWith("Creator") ? "Systems" : "My part"}</p><h2>${esc(p.systemsTitle)}</h2></header>
-  <div class="systems${p.systems.length % 3 ? " systems--2" : ""}">
-    ${p.systems.map((s, k) => `<div class="system"><p class="system__n">${String(k + 1).padStart(2, "0")}</p><h3>${esc(s.title)}</h3><p>${fmt(s.text)}</p></div>`).join("\n    ")}
-  </div>
-</section>
-${p.flow ? `
-<section class="wrap section">
-  <header class="section__head"><p class="label">Step by step</p><h2>${esc(p.flow.title)}</h2>${p.flow.intro ? `<p class="prose">${fmt(p.flow.intro)}</p>` : ""}</header>
-  <ol class="flow">
-    ${p.flow.steps.map((s) => `<li><h3>${esc(s.t)}</h3><p>${fmt(s.d)}</p></li>`).join("\n    ")}
-  </ol>
-</section>` : ""}
-${p.devlog ? `
-<section class="wrap section section--split">
-  <header class="section__head"><p class="label">Timeline</p><h2>${esc(p.devlog.title)}</h2></header>
-  <ol class="devlog">
-    ${p.devlog.items.map((d) => `<li><time>${esc(d.d)}</time><p>${fmt(d.t)}</p></li>`).join("\n    ")}
-  </ol>
-</section>` : ""}
-
-<section class="wrap section${p.challenge.steps ? "" : " section--split"}">
-  <header class="section__head"><p class="label">The hard part</p><h2>${esc(p.challenge.title)}</h2></header>
-  ${p.challenge.steps ? challenge : `<div>${challenge}</div>`}
-</section>
-
-<section class="wrap section">
-  <header class="section__head"><p class="label">Gallery</p><h2>Screenshots</h2></header>
-  <div class="shots${p.shots[0].h > p.shots[0].w ? " shots--tall" : ""}">
-    ${p.shots.map((s) => `<button class="shot" data-full="${img(p, s.n)}" data-alt="${esc(s.alt)}"><img src="${img(p, s.n + "-sm")}" width="${s.w}" height="${s.h}" loading="lazy" alt="${esc(s.alt)}"></button>`).join("\n    ")}
-  </div>
-</section>
-${p.reviews.length ? `
-<section class="wrap section">
-  <header class="section__head"><p class="label">Reception</p><h2>What players said</h2></header>
-  <div class="quotes">
-    ${p.reviews.map((r) => `<figure class="quote"><blockquote>${esc(r.text)}</blockquote><figcaption><b>${esc(r.author)}</b> ${esc(r.role)}</figcaption></figure>`).join("\n    ")}
-  </div>
-</section>` : ""}
-${(p.notes || []).map((n) => `
-<section class="wrap section section--split section--note">
-  <header class="section__head"><p class="label">Note</p><h2>${esc(n.title)}</h2></header>
-  <div>${n.paragraphs.map((t) => `<p class="prose">${fmt(t)}</p>`).join("")}</div>
-</section>`).join("")}
-</article>
-
-<nav class="wrap next" aria-label="Next project">
-  <a href="${next.id}.html" style="${theme(next)}">
-    <span class="label">Next project</span>
-    <span class="next__title">${esc(next.name)}</span>
-    <span class="next__kind">${esc(next.kind)} · ${esc(next.year)} ${arrow}</span>
-  </a>
-</nav>`;
+  const steps3 = (rows) => `<ol class="steps">${rows.map(([k, v]) => `<li><h3>${esc(k)}</h3><p>${fmt(v)}</p></li>`).join("")}</ol>`;
+  const paras = (list) => list.map((t) => `<p>${fmt(t)}</p>`).join("");
+  const block = (a, b, inner, cls = "") => `<section class="block wrap scene ${cls}"><span class="ln"></span><div class="block__head">${pair(a, b)}</div><div class="block__body fade">${inner}</div></section>`;
+  const tall = p.shots[0].w < p.shots[0].h;
 
   page({
     file: `${p.id}.html`,
-    title: `${p.name} — ${p.kind} · Kalp Shah`,
+    id: p.id,
+    title: `${p.name} — ${profile.name}`,
     description: p.pitch,
-    image: img(p, "key"),
-    bodyClass: p.theme.bg > "#8" ? "proj proj--light" : "proj",
-    themeColor: p.theme.bg,
-    style: theme(p),
-    body,
-  });
-}
+    body: `
+<section class="phero wrap scene">
+  <div class="phero__text">
+    <a class="back fade" href="./#work-${p.id}">${arrow} All work</a>
+    <p class="eyebrow fade">${esc(p.kind)} · ${esc(p.year)}</p>
+    ${pair(p.name, p.fact, "h1", "pair--xl")}
+    <p class="lede fade">${esc(p.pitch)}</p>
+    <div class="actions late">${p.links.map((l, k) => btn(l.label, l.url, k ? "btn--quiet" : "")).join("")}</div>
+    ${p.video ? `<p class="phero__note late">${esc(p.video.caption)} Tap the phone to pause.</p>` : ""}
+  </div>
+  ${p.video
+    ? `<div class="phero__art phero__art--phone">
+    <span class="frame frame--phone is-colour"><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic">${beside(p, 0)}<button class="demo__screen" type="button" aria-label="Pause the recording"><video muted loop playsinline disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback" preload="none" poster="assets/games/${p.id}/demo-poster.jpg" width="${p.video.w}" height="${p.video.h}"><source src="${esc(p.video.src)}" type="video/mp4"></video><span class="demo__state" aria-hidden="true"></span></button>${beside(p, 1)}</span>${corners}<span class="frame__dot"></span></span>
+  </div>`
+    : `<div class="phero__art" aria-hidden="true">
+    ${frame(img(p, "key"), `is-colour${p.art.fit === "contain" ? " is-contain" : ""}`, ` style="object-position:${p.art.pos}"`)}
+    <img class="phero__prop" src="${img(p, "prop")}" alt="">
+  </div>`}
+</section>
 
-home();
-projects.forEach(project);
+<section class="facts wrap scene" aria-label="Project facts">
+  <span class="ln"></span>
+  <dl>
+    ${[["Role", p.role], ["When", p.period], ["Status", p.status], ["Built with", p.engine], ["Platform", p.platform]].map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("\n    ")}
+  </dl>
+</section>
+
+<section class="numbers wrap scene" aria-label="In numbers">
+  <span class="ln"></span>
+  ${p.stats.map((s) => `<div class="number">${figure(s.v)}<span>${esc(s.l)}</span></div>`).join("\n  ")}
+</section>
+
+${block("The", "short version", `<ul class="highlights">${p.highlights.map((h, k) => `<li><b>${num(k)}</b>${esc(h)}</li>`).join("")}</ul><div class="prose prose--lead">${paras(p.overview)}</div>`)}
+
+${p.toy ? `<section class="block wrap scene toy" id="toy" data-kind="${p.toy.kind}">
+  <span class="ln"></span>
+  <div class="block__head">${pair(p.toy.title.split(" ").slice(0, -1).join(" ") || p.toy.title, p.toy.title.split(" ").slice(-1)[0])}<p>${esc(p.toy.text)}</p><dl class="toy__stats" id="toy-stats"></dl><p class="toy__msg" id="toy-msg" role="status"></p><div class="actions" id="toy-actions"></div></div>
+  <div class="block__body"><div class="toy__board" id="toy-board"></div></div>
+</section>` : ""}
+
+<section class="block wrap scene">
+  <span class="ln"></span>
+  <div class="block__head">${pair("In", "pictures")}</div>
+  <ul class="shots fade${tall ? " shots--tall" : ""}">
+    ${p.shots.map((s, k) => `<li><button data-shot="${k}" data-full="${img(p, s.n)}" data-w="${s.w}" data-h="${s.h}" aria-label="Open screenshot ${k + 1} of ${p.shots.length}"><img src="${img(p, `${s.n}-sm`)}" width="${s.w}" height="${s.h}" loading="lazy" alt="${esc(s.alt)}"></button></li>`).join("\n    ")}
+  </ul>
+</section>
+
+${block(...(() => { const w = p.systemsTitle.split(" "); return [w.slice(0, -1).join(" "), w.slice(-1)[0]]; })(), `<div class="systems">${p.systems.map((s) => `<article><h3>${esc(s.title)}</h3><p>${fmt(s.text)}</p></article>`).join("")}</div>`)}
+
+${p.flow ? `<section class="block wrap scene flow">
+  <span class="ln"></span>
+  <div class="block__head">${pair(...(() => { const w = p.flow.title.split(" "); const k = Math.ceil(w.length / 2); return [w.slice(0, k).join(" "), w.slice(k).join(" ")]; })())}${p.flow.intro ? `<p>${fmt(p.flow.intro)}</p>` : ""}</div>
+  <ol class="flow__steps fade">${p.flow.steps.map((s, k) => `<li><b>${num(k)}</b><h3>${esc(s.t)}</h3><p>${fmt(s.d)}</p></li>`).join("")}</ol>
+</section>` : ""}
+
+${p.devlog ? block("The", "build log", `<p class="eyebrow">${esc(p.devlog.title)}</p><ol class="path__list">${p.devlog.items.map((d) => `<li><span class="path__when">${esc(d.d)}</span><div><p>${fmt(d.t)}</p></div></li>`).join("")}</ol>`) : ""}
+
+${block("The", "hard part", `<p class="quote">${esc(p.challenge.title)}</p>${p.challenge.steps ? steps3(p.challenge.steps) : `<div class="prose">${paras(p.challenge.paragraphs)}</div>`}`)}
+
+${p.reviews.length ? block("What", "players said", `<div class="reviews">${p.reviews.map((r) => `<figure><blockquote>${esc(r.text)}</blockquote><figcaption><b>${esc(r.author)}</b> ${esc(r.role)}</figcaption></figure>`).join("")}</div>`) : ""}
+
+${p.notes?.length ? block("Notes", "and credits", `<div class="notes">${p.notes.map((n) => `<article><h3>${esc(n.title)}</h3>${paras(n.paragraphs)}</article>`).join("")}</div>`) : ""}
+
+<a class="nextup" href="${next.id}.html" style="${accent(next.id)}">
+  <span class="wrap nextup__in">
+    <span class="eyebrow">Next project</span>
+    <span class="pair pair--lg"><span><i>${esc(next.name)}</i></span> <u class="mark"></u> <span><i>${esc(next.kind)}</i></span></span>
+    ${orn}
+  </span>
+</a>`,
+  });
+});
