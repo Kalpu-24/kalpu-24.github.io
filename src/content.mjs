@@ -498,7 +498,8 @@ export const projects = [
         "One limit remained. A swipe on the home screen belongs to the launcher: it opens the app drawer or the notification shade. So the game uses four on-screen buttons, and that constraint ended up defining how it looks.",
       ],
     },
-    video: { src: "assets/games/snakewall/demo.mp4", w: 576, h: 1280, caption: "Forty seconds of SnakeWall running as a wallpaper." },
+    // `beside` (next/ only): screenshots shown either side of the recording at the top of the page, by `n`.
+    video: { src: "assets/games/snakewall/demo.mp4", w: 576, h: 1280, caption: "Forty seconds of SnakeWall running as a wallpaper.", beside: [4, 5] },
     shots: [
       { n: 1, w: 230, h: 512, alt: "The SnakeWall icon on a blank screen" },
       { n: 2, w: 230, h: 512, alt: "The app's home screen with preview, themes and settings tiles" },

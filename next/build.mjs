@@ -45,6 +45,11 @@ const figure = (v) => {
   if (m) return `<strong class="fig"><span class="fig__n">${esc(m[1])}</span><span class="fig__u">${esc(m[2])}</span></strong>`;
   return `<strong class="fig"><span class="${/^\d/.test(v) ? "fig__n" : "fig__w"}">${esc(v)}</span></strong>`;
 };
+/* A still app screen shown beside the recording at the top of a page (`video.beside`, by shot number). */
+const beside = (p, k) => {
+  const s = p.shots.find((x) => x.n === p.video?.beside?.[k]);
+  return s ? `<span class="side-shot"><img src="${img(p, `${s.n}-sm`)}" width="${s.w}" height="${s.h}" alt="${esc(s.alt)}"></span>` : "";
+};
 /* Games whose work panel also shows the cut-out character beside the key art. */
 const PANEL_PROP = new Set(["rollemout", "snakewall"]);
 const btn = (label, url, kind = "") => `<a class="btn ${kind}" href="${esc(url)}"${ext(url)}>${esc(label)} ${/^https?:/.test(url) ? out : arrow}</a>`;
@@ -221,7 +226,7 @@ projects.forEach((p, i) => {
   </div>
   ${p.video
     ? `<div class="phero__art phero__art--phone">
-    <span class="frame frame--phone"><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><button class="demo__screen" type="button" aria-label="Pause the recording"><video muted loop playsinline disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback" preload="none" poster="../assets/games/${p.id}/demo-poster.jpg" width="${p.video.w}" height="${p.video.h}"><source src="../${esc(p.video.src)}" type="video/mp4"></video><span class="demo__state" aria-hidden="true"></span></button></span>${corners}<span class="frame__dot"></span></span>
+    <span class="frame frame--phone is-colour"><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic">${beside(p, 0)}<button class="demo__screen" type="button" aria-label="Pause the recording"><video muted loop playsinline disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback" preload="none" poster="../assets/games/${p.id}/demo-poster.jpg" width="${p.video.w}" height="${p.video.h}"><source src="../${esc(p.video.src)}" type="video/mp4"></video><span class="demo__state" aria-hidden="true"></span></button>${beside(p, 1)}</span>${corners}<span class="frame__dot"></span></span>
   </div>`
     : `<div class="phero__art" aria-hidden="true">
     ${frame(img(p, "key"), `is-colour${p.art.fit === "contain" ? " is-contain" : ""}`, ` style="object-position:${p.art.pos}"`)}
