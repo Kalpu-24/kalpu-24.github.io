@@ -267,12 +267,19 @@ a.lead__item:hover .fig { color: var(--accent); }
 .shots img { width: 100%; height: auto; transition: transform 0.6s var(--ease); }
 .shots button:hover img { transform: scale(1.04); }
 
-/* "See it running": the recording inside a drawn phone, playing like a live wallpaper. */
-.demo { align-items: center; }
-.demo .block__head > p { max-width: 24rem; }
-.demo__phone { justify-self: center; width: min(250px, 62vw); padding: 10px; border: 3px solid var(--ink); border-radius: 36px; background: var(--paper); }
-.demo__screen { position: relative; display: block; width: 100%; padding: 0; border: 0; border-radius: 26px; overflow: hidden; background: var(--mist); cursor: pointer; }
-.demo__screen video { display: block; width: 100%; height: auto; }
+/* A recording in the hero (SnakeWall): a drawn phone inside the usual viewfinder frame,
+   playing like a live wallpaper. */
+.phero__art--phone { justify-self: center; width: min(100%, 270px); --reach: 70%; }
+.frame--phone { aspect-ratio: 9 / 19; }
+.frame--phone .frame__pic { padding: 8px; border: 3px solid var(--ink); border-radius: 36px; background: var(--paper); }
+.phero__note { max-width: 26rem; font: 500 0.72rem/1.6 var(--slab); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.demo__screen { position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; border-radius: 27px; overflow: hidden; background: var(--mist); cursor: pointer; }
+.demo__screen video { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+/* No seek bar or play controls: the recording behaves like a wallpaper, not a video player. */
+.demo__screen video::-webkit-media-controls,
+.demo__screen video::-webkit-media-controls-enclosure,
+.demo__screen video::-webkit-media-controls-panel,
+.demo__screen video::-webkit-media-controls-start-playback-button { display: none !important; -webkit-appearance: none; }
 /* A play mark shows only while paused. */
 .demo__state { position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; translate: -50% -50%; border-radius: 50%; background: rgb(20 20 20 / 0.72); opacity: 0; transition: opacity 0.25s; }
 .demo__state::after { content: ""; position: absolute; left: 22px; top: 17px; border-style: solid; border-width: 11px 0 11px 17px; border-color: transparent transparent transparent #fff; }
@@ -389,6 +396,7 @@ a.lead__item:hover .fig { color: var(--accent); }
   .hero { min-height: 0; padding-top: 28px; gap: 36px; }
   .hero__art { justify-self: start; width: min(64%, 280px); margin-left: 14px; }
   .panel__art, .phero__art { justify-self: start; width: calc(100% - 28px); margin: 0 0 22px 14px; }
+  .phero__art--phone { justify-self: center; width: min(44vw, 190px); margin: 14px 0 30px; }
   .hero__orn { display: none; }
   .phero { min-height: 0; }
   .phero__art { order: -1; }

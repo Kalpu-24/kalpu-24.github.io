@@ -217,11 +217,16 @@ projects.forEach((p, i) => {
     ${pair(p.name, p.fact, "h1", "pair--xl")}
     <p class="lede fade">${esc(p.pitch)}</p>
     <div class="actions late">${p.links.map((l, k) => btn(l.label, l.url, k ? "btn--quiet" : "")).join("")}</div>
+    ${p.video ? `<p class="phero__note late">${esc(p.video.caption)} Tap the phone to pause.</p>` : ""}
   </div>
-  <div class="phero__art" aria-hidden="true">
+  ${p.video
+    ? `<div class="phero__art phero__art--phone">
+    <span class="frame frame--phone"><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><button class="demo__screen" type="button" aria-label="Pause the recording"><video muted loop playsinline disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback" preload="none" poster="../assets/games/${p.id}/demo-poster.jpg" width="${p.video.w}" height="${p.video.h}"><source src="../${esc(p.video.src)}" type="video/mp4"></video><span class="demo__state" aria-hidden="true"></span></button></span>${corners}<span class="frame__dot"></span></span>
+  </div>`
+    : `<div class="phero__art" aria-hidden="true">
     ${frame(img(p, "key"), `is-colour${p.art.fit === "contain" ? " is-contain" : ""}`, ` style="object-position:${p.art.pos}"`)}
     <img class="phero__prop" src="${img(p, "prop")}" alt="">
-  </div>
+  </div>`}
 </section>
 
 <section class="facts wrap scene" aria-label="Project facts">
@@ -242,17 +247,6 @@ ${p.toy ? `<section class="block wrap scene toy" id="toy" data-kind="${p.toy.kin
   <span class="ln"></span>
   <div class="block__head">${pair(p.toy.title.split(" ").slice(0, -1).join(" ") || p.toy.title, p.toy.title.split(" ").slice(-1)[0])}<p>${esc(p.toy.text)}</p><dl class="toy__stats" id="toy-stats"></dl><p class="toy__msg" id="toy-msg" role="status"></p><div class="actions" id="toy-actions"></div></div>
   <div class="block__body"><div class="toy__board" id="toy-board"></div></div>
-</section>` : ""}
-
-${p.video ? `<section class="block wrap scene demo">
-  <span class="ln"></span>
-  <div class="block__head">${pair("See it", "running")}<p class="fade">${esc(p.video.caption)} It plays on its own, the way it runs behind your app icons. Tap the phone to pause.</p></div>
-  <figure class="demo__phone fade">
-    <button class="demo__screen" type="button" aria-label="Pause the recording">
-      <video muted loop playsinline preload="none" poster="../assets/games/${p.id}/demo-poster.jpg" width="${p.video.w}" height="${p.video.h}"><source src="../${esc(p.video.src)}" type="video/mp4"></video>
-      <span class="demo__state" aria-hidden="true"></span>
-    </button>
-  </figure>
 </section>` : ""}
 
 <section class="block wrap scene">
