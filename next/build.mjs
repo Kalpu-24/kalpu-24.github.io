@@ -45,6 +45,11 @@ const figure = (v) => {
   if (m) return `<strong class="fig"><span class="fig__n">${esc(m[1])}</span><span class="fig__u">${esc(m[2])}</span></strong>`;
   return `<strong class="fig"><span class="${/^\d/.test(v) ? "fig__n" : "fig__w"}">${esc(v)}</span></strong>`;
 };
+/* A still app screen shown beside the recording at the top of a page (`video.beside`, by shot number). */
+const beside = (p, k) => {
+  const s = p.shots.find((x) => x.n === p.video?.beside?.[k]);
+  return s ? `<span class="side-shot"><img src="${img(p, `${s.n}-sm`)}" width="${s.w}" height="${s.h}" alt="${esc(s.alt)}"></span>` : "";
+};
 /* Games whose work panel also shows the cut-out character beside the key art. */
 const PANEL_PROP = new Set(["rollemout", "snakewall"]);
 const btn = (label, url, kind = "") => `<a class="btn ${kind}" href="${esc(url)}"${ext(url)}>${esc(label)} ${/^https?:/.test(url) ? out : arrow}</a>`;
@@ -61,7 +66,7 @@ function page({ file, title, description, body, id = "home" }) {
 <meta name="theme-color" content="#ffffff">
 <link rel="canonical" href="${BASE}${file === "index.html" ? "" : file}">
 <link rel="icon" href="../public/favicon.ico" sizes="48x48">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><path d="M8 19 20 2 32 19z" fill="${(ACCENT[id] || ACCENT.home).text}"/><path d="M8 21h24L20 38z" fill="#141414"/></svg>`)}">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,${encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><style>.u{fill:${(ACCENT[id] || ACCENT.home).text}}.d{fill:#141414}@media (prefers-color-scheme:dark){.u{fill:${(ACCENT[id] || ACCENT.home).fill}}.d{fill:#f2f1ec}}</style><path class="u" d="M8 19 20 2 32 19z"/><path class="d" d="M8 21h24L20 38z"/></svg>`)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="${FONTS}">
@@ -217,11 +222,16 @@ projects.forEach((p, i) => {
     ${pair(p.name, p.fact, "h1", "pair--xl")}
     <p class="lede fade">${esc(p.pitch)}</p>
     <div class="actions late">${p.links.map((l, k) => btn(l.label, l.url, k ? "btn--quiet" : "")).join("")}</div>
+    ${p.video ? `<p class="phero__note late">${esc(p.video.caption)} Tap the phone to pause.</p>` : ""}
   </div>
-  <div class="phero__art" aria-hidden="true">
+  ${p.video
+    ? `<div class="phero__art phero__art--phone">
+    <span class="frame frame--phone is-colour"><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic">${beside(p, 0)}<button class="demo__screen" type="button" aria-label="Pause the recording"><video muted loop playsinline disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback" preload="none" poster="../assets/games/${p.id}/demo-poster.jpg" width="${p.video.w}" height="${p.video.h}"><source src="../${esc(p.video.src)}" type="video/mp4"></video><span class="demo__state" aria-hidden="true"></span></button>${beside(p, 1)}</span>${corners}<span class="frame__dot"></span></span>
+  </div>`
+    : `<div class="phero__art" aria-hidden="true">
     ${frame(img(p, "key"), `is-colour${p.art.fit === "contain" ? " is-contain" : ""}`, ` style="object-position:${p.art.pos}"`)}
     <img class="phero__prop" src="${img(p, "prop")}" alt="">
-  </div>
+  </div>`}
 </section>
 
 <section class="facts wrap scene" aria-label="Project facts">
@@ -243,8 +253,6 @@ ${p.toy ? `<section class="block wrap scene toy" id="toy" data-kind="${p.toy.kin
   <div class="block__head">${pair(p.toy.title.split(" ").slice(0, -1).join(" ") || p.toy.title, p.toy.title.split(" ").slice(-1)[0])}<p>${esc(p.toy.text)}</p><dl class="toy__stats" id="toy-stats"></dl><p class="toy__msg" id="toy-msg" role="status"></p><div class="actions" id="toy-actions"></div></div>
   <div class="block__body"><div class="toy__board" id="toy-board"></div></div>
 </section>` : ""}
-
-${p.video ? block("See it", "running", `<figure class="video"><video controls preload="none" playsinline poster="../assets/games/${p.id}/demo-poster.jpg" width="${p.video.w}" height="${p.video.h}"><source src="../${esc(p.video.src)}" type="video/mp4"></video><figcaption>${esc(p.video.caption)}</figcaption></figure>`) : ""}
 
 <section class="block wrap scene">
   <span class="ln"></span>

@@ -89,6 +89,27 @@
     $$(".frame").forEach((el) => live.observe(el.closest(".panel__art") || el));
   }
 
+  /* ---- "See it running": plays like a live wallpaper while on screen --------- */
+  const demo = $(".demo__screen");
+  if (demo) {
+    const video = $("video", demo);
+    let wanted = !calm; // with reduced motion it waits for a tap
+    const show = () => {
+      const paused = !wanted;
+      demo.classList.toggle("is-paused", paused);
+      demo.setAttribute("aria-label", paused ? "Play the recording" : "Pause the recording");
+    };
+    const sync = (visible) => {
+      if (wanted && visible) video.play().catch(() => { wanted = false; show(); });
+      else video.pause();
+    };
+    let onScreen = false;
+    new IntersectionObserver(([e]) => { onScreen = e.isIntersecting; sync(onScreen); }, { threshold: 0.4 }).observe(demo);
+    demo.addEventListener("click", () => { wanted = !wanted; show(); sync(onScreen); });
+    document.addEventListener("visibilitychange", () => sync(onScreen && !document.hidden));
+    show();
+  }
+
   /* ---- Screenshot viewer ------------------------------------------------- */
   const box = $("#lightbox");
   const shots = $$("[data-shot]");

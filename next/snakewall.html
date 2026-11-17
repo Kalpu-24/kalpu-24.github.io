@@ -9,12 +9,12 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="canonical" href="https://kalpshah.dev/next/snakewall.html">
 <link rel="icon" href="../public/favicon.ico" sizes="48x48">
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Cpath%20d%3D%22M8%2019%2020%202%2032%2019z%22%20fill%3D%22%23c8201b%22%2F%3E%3Cpath%20d%3D%22M8%2021h24L20%2038z%22%20fill%3D%22%23141414%22%2F%3E%3C%2Fsvg%3E">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2040%2040%22%3E%3Cstyle%3E.u%7Bfill%3A%23c8201b%7D.d%7Bfill%3A%23141414%7D%40media%20(prefers-color-scheme%3Adark)%7B.u%7Bfill%3A%23e0322c%7D.d%7Bfill%3A%23f2f1ec%7D%7D%3C%2Fstyle%3E%3Cpath%20class%3D%22u%22%20d%3D%22M8%2019%2020%202%2032%2019z%22%2F%3E%3Cpath%20class%3D%22d%22%20d%3D%22M8%2021h24L20%2038z%22%2F%3E%3C%2Fsvg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@600;800;900&family=Sofia+Sans:wght@400;500;700&family=Zilla+Slab:ital,wght@0,400;0,500;0,600;1,400&display=swap">
-<link rel="stylesheet" href="css/site.css?v=25fe0362">
-<script src="js/site.js?v=141e31a2" defer></script>
+<link rel="stylesheet" href="css/site.css?v=ae83fc4b">
+<script src="js/site.js?v=55f81422" defer></script>
 </head>
 <body class="project" style="--fill:#e0322c;--accent:#c8201b;--on-fill:#ffffff">
 <a class="skip" href="#main">Skip to content</a>
@@ -37,10 +37,10 @@
     <h1 class="pair pair--xl"><span><i>SnakeWall</i></span> <u class="mark"></u> <span><i>7k+ installs on Google Play</i></span></h1>
     <p class="lede fade">The classic Snake, rebuilt as an Android live wallpaper. The game is your home screen.</p>
     <div class="actions late"><a class="btn " href="https://play.google.com/store/apps/details?id=kalp.snake.wall" target="_blank" rel="noopener">Get it on Google Play <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a><a class="btn btn--quiet" href="https://github.com/Kalpu-24/SnakeWall" target="_blank" rel="noopener">Source code <svg class="i" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg></a></div>
+    <p class="phero__note late">Forty seconds of SnakeWall running as a wallpaper. Tap the phone to pause.</p>
   </div>
-  <div class="phero__art" aria-hidden="true">
-    <span class="frame is-colour is-contain"><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><img src="../assets/games/snakewall/key.webp" alt="" loading="lazy" style="object-position:50% 50%"></span><i class="frame__c frame__c--tl"></i><i class="frame__c frame__c--tr"></i><i class="frame__c frame__c--br"></i><span class="frame__dot"></span></span>
-    <img class="phero__prop" src="../assets/games/snakewall/prop.webp" alt="">
+  <div class="phero__art phero__art--phone">
+    <span class="frame frame--phone is-colour"><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><span class="side-shot"><img src="../assets/games/snakewall/4-sm.webp" width="230" height="512" alt="Theme picker showing light and dark themes"></span><button class="demo__screen" type="button" aria-label="Pause the recording"><video muted loop playsinline disablepictureinpicture disableremoteplayback controlslist="nodownload nofullscreen noremoteplayback" preload="none" poster="../assets/games/snakewall/demo-poster.jpg" width="576" height="1280"><source src="../assets/games/snakewall/demo.mp4" type="video/mp4"></video><span class="demo__state" aria-hidden="true"></span></button><span class="side-shot"><img src="../assets/games/snakewall/5-sm.webp" width="230" height="512" alt="Settings sheet with the grid toggle"></span></span><i class="frame__c frame__c--tl"></i><i class="frame__c frame__c--tr"></i><i class="frame__c frame__c--br"></i><span class="frame__dot"></span></span>
   </div>
 </section>
 
@@ -70,8 +70,6 @@
   <div class="block__head"><h2 class="pair "><span><i>Play it</i></span> <u class="mark"></u> <span><i>here</i></span></h2><p>The wallpaper's rules in your browser: a 19 × 19 board, walls that wrap, and a step that gets shorter every third piece of food. Arrow keys or the buttons.</p><dl class="toy__stats" id="toy-stats"></dl><p class="toy__msg" id="toy-msg" role="status"></p><div class="actions" id="toy-actions"></div></div>
   <div class="block__body"><div class="toy__board" id="toy-board"></div></div>
 </section>
-
-<section class="block wrap scene "><span class="ln"></span><div class="block__head"><h2 class="pair "><span><i>See it</i></span> <u class="mark"></u> <span><i>running</i></span></h2></div><div class="block__body fade"><figure class="video"><video controls preload="none" playsinline poster="../assets/games/snakewall/demo-poster.jpg" width="576" height="1280"><source src="../assets/games/snakewall/demo.mp4" type="video/mp4"></video><figcaption>Forty seconds of SnakeWall running as a wallpaper.</figcaption></figure></div></section>
 
 <section class="block wrap scene">
   <span class="ln"></span>
