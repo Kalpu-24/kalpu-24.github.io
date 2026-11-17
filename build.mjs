@@ -283,16 +283,17 @@ ${p.reviews.length ? block("What", "players said", `<div class="reviews">${p.rev
 
 ${p.notes?.length ? block("Notes", "and credits", `<div class="notes">${p.notes.map((n) => `<article><h3>${esc(n.title)}</h3>${paras(n.paragraphs)}</article>`).join("")}</div>`) : ""}
 
-<nav class="nextup wrap" aria-label="Next project">
-  <a class="nextup__card" href="${next.id}.html" style="${accent(next.id)}">
-    <span class="nextup__pic"><img src="${img(next, "key")}" alt="" loading="lazy"></span>
-    <span class="nextup__text">
-      <span class="eyebrow">Next project</span>
-      <span class="nextup__name">${esc(next.name)}</span>
-      <span class="nextup__kind">${esc(next.kind)} · ${esc(next.year)}</span>
-    </span>
-    <span class="nextup__go">View project ${arrow}</span>
-  </a>
+<nav class="nextup wrap scene" aria-label="Next project" style="${accent(next.id)}">
+  <span class="ln"></span>
+  <article class="panel">
+    <a class="panel__art" href="${next.id}.html" tabindex="-1" aria-hidden="true">${frame(img(next, "key"), next.art.fit === "contain" ? "is-contain" : "")}</a>
+    <div class="panel__text">
+      <p class="eyebrow fade">Next project · ${esc(next.kind)}</p>
+      <h2 class="pair pair--lg"><a href="${next.id}.html"><span><i>${esc(next.name)}</i></span> <u class="mark"></u> <span><i>${esc(next.fact)}</i></span></a></h2>
+      <p class="fade">${esc(next.pitch)}</p>
+      <div class="actions late">${btn("View project", `${next.id}.html`)}</div>
+    </div>
+  </article>
 </nav>`,
   });
 });

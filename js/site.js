@@ -85,7 +85,6 @@
     );
     // Watch the whole panel where there is one, so its cut-out character colours with it.
     $$(".frame").forEach((el) => live.observe(el.closest(".panel__art") || el));
-    $$(".nextup__card").forEach((el) => live.observe(el));
   }
 
   /* ---- "See it running": plays like a live wallpaper while on screen --------- */
