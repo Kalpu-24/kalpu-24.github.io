@@ -267,16 +267,10 @@ a.lead__item:hover .fig { color: var(--accent); }
 .shots img { width: 100%; height: auto; transition: transform 0.6s var(--ease); }
 .shots button:hover img { transform: scale(1.04); }
 
-/* A recording in the hero (SnakeWall): a dark phone standing on the game's own dot grid,
-   which fades out around it, with one "food" dot in the accent colour. */
-.phero__art--phone { position: relative; justify-self: center; display: grid; place-items: center; width: min(100%, 500px); aspect-ratio: 1 / 1.05; }
-.phero__art--phone::before { content: ""; position: absolute; inset: -6%; background: radial-gradient(#c9ccd5 1.6px, transparent 2.2px) 0 0 / 22px 22px; -webkit-mask: radial-gradient(closest-side, #000 35%, transparent); mask: radial-gradient(closest-side, #000 35%, transparent); }
-.phero__art--phone::after { content: ""; position: absolute; right: 18%; top: 24%; width: 13px; height: 13px; border-radius: 50%; background: var(--accent); }
-.frame--phone { position: relative; z-index: 1; width: 250px; aspect-ratio: 9 / 19; filter: drop-shadow(0 30px 28px rgb(0 0 0 / 0.28)); }
-.frame--phone .ln, .frame--phone .lv, .frame--phone .frame__c, .frame--phone .frame__dot { display: none; }
-.frame--phone .frame__pic { padding: 8px; border-radius: 40px; background: var(--ink); }
-.js .scene .frame--phone .frame__pic { clip-path: inset(0 100% 0 0 round 40px); }
-.js .scene.is-in .frame--phone .frame__pic { clip-path: inset(0 round 40px); }
+/* A recording in the hero (SnakeWall). Same wide crop-mark frame as every other game page;
+   inside it a flat grey panel with the recording as a plain dark phone, centred. No shadow. */
+.frame--phone .frame__pic { display: grid; place-items: center; background: var(--mist); }
+.frame--phone .demo__screen { width: auto; height: 88%; aspect-ratio: 576 / 1280; border: 5px solid var(--ink); border-radius: 22px; background: var(--ink); }
 .phero__note { max-width: 26rem; font: 500 0.72rem/1.6 var(--slab); letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
 .demo__screen { position: relative; display: block; width: 100%; height: 100%; padding: 0; border: 0; border-radius: 32px; overflow: hidden; background: var(--mist); cursor: pointer; }
 .demo__screen video { display: block; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
@@ -401,8 +395,6 @@ a.lead__item:hover .fig { color: var(--accent); }
   .hero { min-height: 0; padding-top: 28px; gap: 36px; }
   .hero__art { justify-self: start; width: min(64%, 280px); margin-left: 14px; }
   .panel__art, .phero__art { justify-self: start; width: calc(100% - 28px); margin: 0 0 22px 14px; }
-  .phero__art--phone { justify-self: stretch; width: 100%; margin: 6px 0 24px; }
-  .frame--phone { width: min(46vw, 190px); }
   .hero__orn { display: none; }
   .phero { min-height: 0; }
   .phero__art { order: -1; }
