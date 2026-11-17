@@ -287,9 +287,13 @@ a.lead__item:hover .fig { color: var(--accent); }
 .demo__state::after { content: ""; position: absolute; left: 22px; top: 17px; border-style: solid; border-width: 11px 0 11px 17px; border-color: transparent transparent transparent #fff; }
 .demo__screen.is-paused .demo__state { opacity: 1; }
 
-/* Next project: the same panel the home page uses for each game, under a full-width rule. */
-.nextup { position: relative; margin-block: clamp(96px, 14vw, 200px) clamp(72px, 9vw, 130px); padding-top: clamp(40px, 5vw, 64px); }
+/* Next project: a small version of the home page's game panel, under a full-width rule. */
+.nextup { position: relative; margin-block: clamp(80px, 10vw, 140px) clamp(56px, 7vw, 96px); padding-top: clamp(28px, 3.5vw, 44px); }
 .nextup > .ln { position: absolute; left: 0; right: 0; top: 0; }
+.nextup .panel { grid-template-columns: auto minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); }
+.nextup .panel__art { justify-self: start; width: clamp(150px, 20vw, 260px); --reach: 20%; }
+.nextup .panel__text { gap: 12px; }
+.nextup .pair { font-size: clamp(2rem, 3.4vw, 2.8rem); }
 .project .foot { margin-top: 0; }
 
 /* Playable versions ------------------------------------------------ */
@@ -390,6 +394,11 @@ a.lead__item:hover .fig { color: var(--accent); }
   .hero { min-height: 0; padding-top: 28px; gap: 36px; }
   .hero__art { justify-self: start; width: min(64%, 280px); margin-left: 14px; }
   .panel__art, .phero__art { justify-self: start; width: calc(100% - 28px); margin: 0 0 22px 14px; }
+  /* Next project keeps its small picture beside the text on phones. */
+  .nextup .panel { gap: 36px; align-items: center; }
+  .nextup__kind { display: none; }
+  .nextup .btn { padding: 0.7em 1em 0.64em; font-size: 0.82rem; letter-spacing: 0.16em; }
+  .nextup .panel__art { width: 34vw; margin: 0 0 0 14px; }
   .hero__orn { display: none; }
   .phero { min-height: 0; }
   .phero__art { order: -1; }

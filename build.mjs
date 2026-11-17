@@ -288,9 +288,8 @@ ${p.notes?.length ? block("Notes", "and credits", `<div class="notes">${p.notes.
   <article class="panel">
     <a class="panel__art" href="${next.id}.html" tabindex="-1" aria-hidden="true">${frame(img(next, "key"), next.art.fit === "contain" ? "is-contain" : "")}</a>
     <div class="panel__text">
-      <p class="eyebrow fade">Next project · ${esc(next.kind)}</p>
-      <h2 class="pair pair--lg"><a href="${next.id}.html"><span><i>${esc(next.name)}</i></span> <u class="mark"></u> <span><i>${esc(next.fact)}</i></span></a></h2>
-      <p class="fade">${esc(next.pitch)}</p>
+      <p class="eyebrow fade">Next project<span class="nextup__kind"> · ${esc(next.kind)}</span></p>
+      <h2 class="pair"><a href="${next.id}.html"><span><i>${esc(next.name)}</i></span> <u class="mark"></u></a></h2>
       <div class="actions late">${btn("View project", `${next.id}.html`)}</div>
     </div>
   </article>
