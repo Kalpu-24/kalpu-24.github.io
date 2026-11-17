@@ -13,8 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Extra+Condensed:wght@600;800;900&family=Sofia+Sans:wght@400;500;700&family=Zilla+Slab:ital,wght@0,400;0,500;0,600;1,400&display=swap">
-<link rel="stylesheet" href="css/site.css?v=25fe0362">
-<script src="js/site.js?v=141e31a2" defer></script>
+<link rel="stylesheet" href="css/site.css?v=b7945bd4">
+<script src="js/site.js?v=55f81422" defer></script>
 </head>
 <body class="project" style="--fill:#e0322c;--accent:#c8201b;--on-fill:#ffffff">
 <a class="skip" href="#main">Skip to content</a>
@@ -71,7 +71,16 @@
   <div class="block__body"><div class="toy__board" id="toy-board"></div></div>
 </section>
 
-<section class="block wrap scene "><span class="ln"></span><div class="block__head"><h2 class="pair "><span><i>See it</i></span> <u class="mark"></u> <span><i>running</i></span></h2></div><div class="block__body fade"><figure class="video"><video controls preload="none" playsinline poster="../assets/games/snakewall/demo-poster.jpg" width="576" height="1280"><source src="../assets/games/snakewall/demo.mp4" type="video/mp4"></video><figcaption>Forty seconds of SnakeWall running as a wallpaper.</figcaption></figure></div></section>
+<section class="block wrap scene demo">
+  <span class="ln"></span>
+  <div class="block__head"><h2 class="pair "><span><i>See it</i></span> <u class="mark"></u> <span><i>running</i></span></h2><p class="fade">Forty seconds of SnakeWall running as a wallpaper. It plays on its own, the way it runs behind your app icons. Tap the phone to pause.</p></div>
+  <figure class="demo__phone fade">
+    <button class="demo__screen" type="button" aria-label="Pause the recording">
+      <video muted loop playsinline preload="none" poster="../assets/games/snakewall/demo-poster.jpg" width="576" height="1280"><source src="../assets/games/snakewall/demo.mp4" type="video/mp4"></video>
+      <span class="demo__state" aria-hidden="true"></span>
+    </button>
+  </figure>
+</section>
 
 <section class="block wrap scene">
   <span class="ln"></span>

@@ -228,6 +228,8 @@ a.lead__item:hover .fig { color: var(--accent); }
 .block__head > p { font-size: 0.95rem; color: var(--body); }
 .block__body { display: grid; gap: 32px; min-width: 0; }
 .block > .shots { grid-column: 1 / -1; }
+/* The screenshots run full width under the heading, so that heading must not stay pinned over them. */
+.block:has(> .shots) .block__head { position: static; }
 
 .highlights li { display: grid; grid-template-columns: 3rem minmax(0, 1fr); align-items: baseline; padding: 14px 0; border-top: 1px solid var(--mist); font-weight: 500; }
 .highlights li:first-child { border-top: 0; padding-top: 0; }
@@ -265,9 +267,16 @@ a.lead__item:hover .fig { color: var(--accent); }
 .shots img { width: 100%; height: auto; transition: transform 0.6s var(--ease); }
 .shots button:hover img { transform: scale(1.04); }
 
-.video { display: grid; gap: 12px; justify-items: start; }
-.video video { width: min(300px, 100%); height: auto; background: var(--mist); }
-.video figcaption { font: 500 0.68rem var(--slab); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+/* "See it running": the recording inside a drawn phone, playing like a live wallpaper. */
+.demo { align-items: center; }
+.demo .block__head > p { max-width: 24rem; }
+.demo__phone { justify-self: center; width: min(250px, 62vw); padding: 10px; border: 3px solid var(--ink); border-radius: 36px; background: var(--paper); }
+.demo__screen { position: relative; display: block; width: 100%; padding: 0; border: 0; border-radius: 26px; overflow: hidden; background: var(--mist); cursor: pointer; }
+.demo__screen video { display: block; width: 100%; height: auto; }
+/* A play mark shows only while paused. */
+.demo__state { position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; translate: -50% -50%; border-radius: 50%; background: rgb(20 20 20 / 0.72); opacity: 0; transition: opacity 0.25s; }
+.demo__state::after { content: ""; position: absolute; left: 22px; top: 17px; border-style: solid; border-width: 11px 0 11px 17px; border-color: transparent transparent transparent #fff; }
+.demo__screen.is-paused .demo__state { opacity: 1; }
 
 .nextup { display: block; margin-top: clamp(96px, 14vw, 200px); padding-block: clamp(48px, 7vw, 96px); border-top: 1px solid var(--mist); text-decoration: none; }
 .nextup__in { display: grid; gap: 14px; justify-items: start; }

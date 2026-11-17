@@ -244,7 +244,16 @@ ${p.toy ? `<section class="block wrap scene toy" id="toy" data-kind="${p.toy.kin
   <div class="block__body"><div class="toy__board" id="toy-board"></div></div>
 </section>` : ""}
 
-${p.video ? block("See it", "running", `<figure class="video"><video controls preload="none" playsinline poster="../assets/games/${p.id}/demo-poster.jpg" width="${p.video.w}" height="${p.video.h}"><source src="../${esc(p.video.src)}" type="video/mp4"></video><figcaption>${esc(p.video.caption)}</figcaption></figure>`) : ""}
+${p.video ? `<section class="block wrap scene demo">
+  <span class="ln"></span>
+  <div class="block__head">${pair("See it", "running")}<p class="fade">${esc(p.video.caption)} It plays on its own, the way it runs behind your app icons. Tap the phone to pause.</p></div>
+  <figure class="demo__phone fade">
+    <button class="demo__screen" type="button" aria-label="Pause the recording">
+      <video muted loop playsinline preload="none" poster="../assets/games/${p.id}/demo-poster.jpg" width="${p.video.w}" height="${p.video.h}"><source src="../${esc(p.video.src)}" type="video/mp4"></video>
+      <span class="demo__state" aria-hidden="true"></span>
+    </button>
+  </figure>
+</section>` : ""}
 
 <section class="block wrap scene">
   <span class="ln"></span>
