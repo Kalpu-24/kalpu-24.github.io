@@ -68,15 +68,13 @@
   const scenes = $$(".scene");
   if (calm || !("IntersectionObserver" in window)) scenes.forEach((el) => el.classList.add("is-in"));
   else {
+    // A section starts as soon as its top is a little way onto the screen, whatever its height,
+    // so its heading is never later than its text.
     const io = new IntersectionObserver(
       (entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); } }),
-      { threshold: 0.3 }
+      { rootMargin: "0px 0px -8% 0px" }
     );
-    scenes.forEach((el) => {
-      // A tall section would never be 30% on screen, so those start as soon as they show.
-      if (el.offsetHeight > innerHeight * 1.2) new IntersectionObserver(([e], o) => { if (e.isIntersecting) { el.classList.add("is-in"); o.disconnect(); } }, { rootMargin: "0px 0px -15% 0px" }).observe(el);
-      else io.observe(el);
-    });
+    scenes.forEach((el) => io.observe(el));
   }
 
   /* ---- No hover on touch screens: colour the picture that is mid-screen ---- */

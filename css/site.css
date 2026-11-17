@@ -126,11 +126,11 @@ a:hover .frame__pic img, .panel:hover .frame__pic img, .frame:hover .frame__pic 
 .lead__item > span { max-width: 17rem; font: 600 0.74rem/1.5 var(--slab); letter-spacing: 0.16em; text-transform: uppercase; color: var(--body); }
 a.lead__item:hover .fig { color: var(--accent); }
 .js .scene .lead__item { opacity: 0; transform: translateY(10px); }
-.js .scene.is-in .lead__item { opacity: 1; transform: none; transition: opacity 0.7s 0.35s, transform 0.8s 0.35s var(--ease); }
-.js .scene.is-in .lead__item:nth-child(3) { transition-delay: 0.47s; }
-.js .scene.is-in .lead__item:nth-child(4) { transition-delay: 0.59s; }
-.js .scene.is-in .lead__item:nth-child(5) { transition-delay: 0.71s; }
-.js .lead.is-in > .ln { animation-delay: 0s, 0.9s; }
+.js .scene.is-in .lead__item { opacity: 1; transform: none; transition: opacity 0.5s 0.05s, transform 0.6s 0.05s var(--ease); }
+.js .scene.is-in .lead__item:nth-child(3) { transition-delay: 0.13s; }
+.js .scene.is-in .lead__item:nth-child(4) { transition-delay: 0.21s; }
+.js .scene.is-in .lead__item:nth-child(5) { transition-delay: 0.29s; }
+.js .lead.is-in > .ln { animation-delay: 0s, 0.7s; }
 
 /* Reel: the work moves sideways ------------------------------------ */
 .reel { margin-top: clamp(40px, 6vw, 80px); }
@@ -340,11 +340,12 @@ a.lead__item:hover .fig { color: var(--accent); }
 .lightbox__close { right: 14px; top: 14px; }
 
 /* ------------------------------------------------------------------
-   Entry: each .scene builds itself once, when it comes into view.
-   Order: text fades in, the two guide lines draw in the accent and
-   settle to black, three corner marks draw, the picture wipes in
-   from the left, the accent dot lands, the headline rises and its
-   mark draws, then the button and rule.
+   Entry: each .scene builds itself once, as it comes into view.
+   The headline leads, so a section is never on screen without its
+   title: the headline rises at once, the text fades in under it, the
+   guide lines draw in the accent and settle to black, the corner
+   marks draw, the picture wipes in from the left, the accent dot
+   lands, then the button and rule. Everything is done in about 1.5 s.
 ------------------------------------------------------------------- */
 .js .scene .fade { opacity: 0; transform: translateY(8px); }
 .js .scene .late { opacity: 0; }
@@ -359,29 +360,22 @@ a.lead__item:hover .fig { color: var(--accent); }
 .js .scene .panel__prop, .js .scene .phero__prop { opacity: 0; transform: translateY(16px); }
 .js .scene .orn b { transform: scaleX(0); }
 
-.js .scene.is-in .fade { opacity: 1; transform: none; transition: opacity 0.7s 0.1s, transform 0.8s 0.1s var(--ease); }
-.js .scene.is-in .fade ~ .fade { transition-delay: 0.22s; }
-.js .scene.is-in .ln { animation: drawx 0.9s 0.25s var(--ease) both, settle 0.5s 1.3s both; }
-.js .scene.is-in .lv { animation: drawy 0.8s 0.45s var(--ease) both, settle 0.5s 1.3s both; }
-.js .scene.is-in .frame__c { transform: none; transition: transform 0.45s 0.95s var(--ease); }
-.js .scene.is-in .frame__c--tr { transition-delay: 1.07s; }
-.js .scene.is-in .frame__c--br { transition-delay: 1.19s; }
-.js .scene.is-in .frame__pic { clip-path: inset(0); transition: clip-path 1s 1.3s var(--ease); }
-.js .scene.is-in .frame__pic img { transform: none; transition: transform 1.6s 1.3s var(--ease), filter 0.6s; }
-.js .scene.is-in .frame__dot { transform: none; transition: transform 0.35s 2.1s var(--ease); }
-.js .scene.is-in .pair i { transform: none; transition: transform 0.9s 0.9s var(--ease); }
-.js .scene.is-in .pair span ~ span i { transition-delay: 1.05s; }
-.js .scene.is-in .pair .mark { transform: none; transition: transform 0.7s 1.5s var(--ease); }
-.js .scene.is-in .panel__prop, .js .scene.is-in .phero__prop { opacity: 1; transform: none; transition: opacity 0.7s 2s, transform 0.9s 2s var(--ease), filter 0.6s; }
-.js .scene.is-in .late { opacity: 1; transition: opacity 0.7s 1.7s; }
-.js .scene.is-in .orn b { transform: none; transition: transform 0.9s 1.9s var(--ease); }
-
-/* Plain text sections (project blocks, facts) are quicker. */
-.js .block.is-in > .ln, .js .facts.is-in > .ln, .js .numbers.is-in > .ln { animation-delay: 0s, 0.9s; }
-.js .block.is-in .pair i { transition-delay: 0.2s; }
-.js .block.is-in .pair span ~ span i { transition-delay: 0.32s; }
-.js .block.is-in .pair .mark { transition-delay: 0.7s; }
-.js .block.is-in .fade { transition-delay: 0.45s; }
+.js .scene.is-in .pair i { transform: none; transition: transform 0.6s var(--ease); }
+.js .scene.is-in .pair span ~ span i { transition-delay: 0.08s; }
+.js .scene.is-in .pair .mark { transform: none; transition: transform 0.5s 0.35s var(--ease); }
+.js .scene.is-in .fade { opacity: 1; transform: none; transition: opacity 0.6s 0.2s, transform 0.7s 0.2s var(--ease); }
+.js .scene.is-in .fade ~ .fade { transition-delay: 0.3s; }
+.js .scene.is-in .ln { animation: drawx 0.7s 0.1s var(--ease) both, settle 0.4s 0.8s both; }
+.js .scene.is-in .lv { animation: drawy 0.6s 0.25s var(--ease) both, settle 0.4s 0.8s both; }
+.js .scene.is-in .frame__c { transform: none; transition: transform 0.35s 0.5s var(--ease); }
+.js .scene.is-in .frame__c--tr { transition-delay: 0.6s; }
+.js .scene.is-in .frame__c--br { transition-delay: 0.7s; }
+.js .scene.is-in .frame__pic { clip-path: inset(0); transition: clip-path 0.8s 0.7s var(--ease); }
+.js .scene.is-in .frame__pic img { transform: none; transition: transform 1.2s 0.7s var(--ease), filter 0.6s; }
+.js .scene.is-in .frame__dot { transform: none; transition: transform 0.3s 1.3s var(--ease); }
+.js .scene.is-in .panel__prop, .js .scene.is-in .phero__prop { opacity: 1; transform: none; transition: opacity 0.6s 1.1s, transform 0.8s 1.1s var(--ease), filter 0.6s; }
+.js .scene.is-in .late { opacity: 1; transition: opacity 0.6s 0.55s; }
+.js .scene.is-in .orn b { transform: none; transition: transform 0.8s 0.7s var(--ease); }
 
 @keyframes drawx { from { transform: scaleX(0); background: var(--accent); } to { transform: scaleX(1); background: var(--accent); } }
 @keyframes drawy { from { transform: scaleY(0); background: var(--accent); } to { transform: scaleY(1); background: var(--accent); } }
