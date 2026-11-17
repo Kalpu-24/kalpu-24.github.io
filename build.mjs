@@ -283,12 +283,16 @@ ${p.reviews.length ? block("What", "players said", `<div class="reviews">${p.rev
 
 ${p.notes?.length ? block("Notes", "and credits", `<div class="notes">${p.notes.map((n) => `<article><h3>${esc(n.title)}</h3>${paras(n.paragraphs)}</article>`).join("")}</div>`) : ""}
 
-<a class="nextup" href="${next.id}.html" style="${accent(next.id)}">
-  <span class="wrap nextup__in">
-    <span class="eyebrow">Next project</span>
-    <span class="pair pair--lg"><span><i>${esc(next.name)}</i></span> <u class="mark"></u> <span><i>${esc(next.kind)}</i></span></span>
-    ${orn}
-  </span>
-</a>`,
+<nav class="nextup wrap" aria-label="Next project">
+  <a class="nextup__card" href="${next.id}.html" style="${accent(next.id)}">
+    <span class="nextup__pic"><img src="${img(next, "key")}" alt="" loading="lazy"></span>
+    <span class="nextup__text">
+      <span class="eyebrow">Next project</span>
+      <span class="nextup__name">${esc(next.name)}</span>
+      <span class="nextup__kind">${esc(next.kind)} · ${esc(next.year)}</span>
+    </span>
+    <span class="nextup__go">View project ${arrow}</span>
+  </a>
+</nav>`,
   });
 });
