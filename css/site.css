@@ -349,6 +349,8 @@ code { font: 0.86em var(--mono); background: color-mix(in srgb, var(--ink) 10%, 
   .hero__in { grid-template-columns: minmax(0, 1fr); }
   .hero__stage { order: -1; width: min(300px, 74vw); margin-inline: auto; }
   .numbers dt { font-size: 0.78rem; }
+  /* Three columns on a phone are narrow: scale the figures so "Overall winner" fits its column. */
+  .numbers dd { font-size: clamp(1.4rem, 6.4vw, 1.9rem); }
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .stats > div:nth-child(odd) { border-left: 0; padding-left: 0; }
   .stats > div:nth-child(n + 3) { border-top: 1px solid var(--line); }

@@ -115,20 +115,19 @@ a:hover .frame__pic img, .panel:hover .frame__pic img, .frame:hover .frame__pic 
 .hero__orn { position: absolute; right: var(--pad); top: 12%; }
 
 /* Highlights: the three things to remember, right under the hero ---- */
-.lead { position: relative; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0 clamp(24px, 4vw, 64px); }
-.lead > .ln { grid-column: 1 / -1; }
-.lead__item { display: grid; justify-items: start; align-content: start; padding: clamp(24px, 3vw, 40px) 0 0; text-decoration: none; }
-.lead__item strong { font-size: clamp(4rem, 9vw, 7.5rem); line-height: 0.82; }
-.lead__item .mark { display: block; width: 3.2rem; height: 6px; margin: 16px 0 12px; background: var(--fill); transform-origin: left; }
-.lead__item > span { max-width: 15rem; font: 600 0.82rem/1.45 var(--slab); letter-spacing: 0.16em; text-transform: uppercase; }
-a.lead__item:hover strong { color: var(--accent); }
-.js .scene .lead__item .mark { transform: scaleX(0); }
-.js .scene.is-in .lead__item .mark { transform: none; transition: transform 0.7s 0.9s var(--ease); }
+.lead { position: relative; display: grid; grid-auto-flow: column; grid-auto-columns: minmax(0, 1fr); grid-template-rows: auto auto; }
+.lead > .ln { position: absolute; left: 0; right: 0; top: 0; }
+.lead__item { display: grid; grid-row: 1 / span 2; grid-template-rows: subgrid; row-gap: 12px; padding: clamp(22px, 2.6vw, 34px) clamp(16px, 2.4vw, 36px) 0; border-left: 1px solid var(--mist); text-decoration: none; }
+.lead > .ln + .lead__item { padding-left: 0; border-left: 0; }
+.lead__item .fig { font-size: clamp(3.2rem, 5.8vw, 5.4rem); }
+.lead__item > span { max-width: 17rem; font: 600 0.74rem/1.5 var(--slab); letter-spacing: 0.16em; text-transform: uppercase; color: var(--body); }
+a.lead__item:hover .fig { color: var(--accent); }
+.js .scene .lead__item { opacity: 0; transform: translateY(10px); }
+.js .scene.is-in .lead__item { opacity: 1; transform: none; transition: opacity 0.7s 0.35s, transform 0.8s 0.35s var(--ease); }
+.js .scene.is-in .lead__item:nth-child(3) { transition-delay: 0.47s; }
+.js .scene.is-in .lead__item:nth-child(4) { transition-delay: 0.59s; }
+.js .scene.is-in .lead__item:nth-child(5) { transition-delay: 0.71s; }
 .js .lead.is-in > .ln { animation-delay: 0s, 0.9s; }
-.js .lead.is-in .pair i { transition-delay: 0.25s; }
-.js .lead.is-in .lead__item:nth-of-type(2) .pair i { transition-delay: 0.37s; }
-.js .lead.is-in .lead__item:nth-of-type(3) .pair i { transition-delay: 0.49s; }
-.js .lead.is-in .fade { transition-delay: 0.7s; }
 
 /* Reel: the work moves sideways ------------------------------------ */
 .reel { margin-top: clamp(40px, 6vw, 80px); }
@@ -209,9 +208,16 @@ a.lead__item:hover strong { color: var(--accent); }
 
 .numbers { position: relative; display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 0 32px; }
 .numbers > .ln { grid-column: 1 / -1; }
-.number { display: grid; gap: 4px; align-content: start; padding: 26px 0 8px; }
-.number strong { font: 900 clamp(2.6rem, 4.6vw, 4rem)/0.9 var(--display); letter-spacing: 0.01em; text-transform: uppercase; }
-.number span { font: 500 0.68rem/1.5 var(--slab); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+.number { display: grid; grid-row: span 2; grid-template-rows: subgrid; row-gap: 8px; padding: 26px 0 8px; }
+.number .fig { font-size: clamp(2.6rem, 4.6vw, 4rem); }
+.number > span { font: 500 0.68rem/1.5 var(--slab); letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+
+/* Figures: the number large, its unit small beside it, words smaller and free to wrap.
+   Rows line up across a strip because each item shares its parent's rows (subgrid). */
+.fig { display: flex; flex-wrap: wrap; align-items: baseline; align-self: end; gap: 0 0.16em; font-weight: 900; font-family: var(--display); line-height: 0.9; letter-spacing: 0.01em; text-transform: uppercase; }
+.fig__n { white-space: nowrap; }
+.fig__u { font-size: 0.42em; letter-spacing: 0.06em; white-space: nowrap; }
+.fig__w { font-size: 0.6em; line-height: 0.95; }
 
 .block { position: relative; display: grid; grid-template-columns: minmax(0, 0.7fr) minmax(0, 1.3fr); gap: clamp(32px, 6vw, 96px); align-items: start; margin-top: clamp(80px, 11vw, 160px); padding-top: clamp(28px, 4vw, 48px); }
 .block > .ln { position: absolute; left: 0; right: 0; top: 0; }
@@ -365,10 +371,9 @@ a.lead__item:hover strong { color: var(--accent); }
   :root { --top: 60px; }
   .top__nav a:nth-child(2), .top__nav a:nth-child(3) { display: none; }
   .hero, .panel, .about, .path, .toolbox, .block, .phero, .foot__in { grid-template-columns: 1fr; }
-  .lead { grid-template-columns: 1fr; }
-  .lead__item { grid-template-columns: auto 1fr; align-items: end; gap: 0 18px; padding-top: 22px; }
-  .lead__item .mark { display: none; }
-  .lead__item strong { font-size: 4.2rem; min-width: 2.4em; }
+  .lead { grid-auto-flow: row; grid-template-columns: 1fr; grid-template-rows: none; }
+  .lead__item, .lead > .ln + .lead__item { grid-row: auto; grid-template-rows: none; row-gap: 6px; padding: 20px 0 18px; border-left: 0; border-bottom: 1px solid var(--mist); }
+  .lead__item .fig { font-size: 3rem; }
   .hero { min-height: 0; padding-top: 28px; gap: 36px; }
   .hero__art { justify-self: start; width: min(64%, 280px); margin-left: 14px; }
   .panel__art, .phero__art { justify-self: start; width: calc(100% - 28px); margin: 0 0 22px 14px; }
