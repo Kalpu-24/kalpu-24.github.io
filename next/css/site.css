@@ -99,10 +99,13 @@ a:hover .frame__pic img, .panel:hover .frame__pic img, .frame:hover .frame__pic 
 /* Top bar ---------------------------------------------------------- */
 .top { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; gap: 16px; height: var(--top); padding-inline: var(--pad); background: rgb(255 255 255 / 0.94); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
 .top__mark { display: flex; align-items: center; text-decoration: none; }
-.top__mark svg { width: 26px; height: 26px; }
-.top__mark path { fill: none; stroke: var(--ink); stroke-width: 2.6; stroke-linecap: square; }
-.top__mark rect { fill: var(--fill); }
-.top__mark b { margin-left: 12px; font: 900 1.25rem/1 var(--display); letter-spacing: 0.08em; text-transform: uppercase; }
+/* The mark: one triangle up in the accent, one down in ink. Gravity, flipped. */
+.top__mark svg { width: 24px; height: 24px; overflow: visible; }
+.top__up { fill: var(--accent); transform-origin: 50% 50%; transition: transform 0.4s var(--ease); }
+.top__down { fill: var(--ink); transform-origin: 50% 50%; transition: transform 0.4s var(--ease); }
+.top__mark:hover .top__up { transform: translateY(-2px); }
+.top__mark:hover .top__down { transform: translateY(2px); }
+.top__mark b { margin-left: 10px; font: 900 1.25rem/1 var(--display); letter-spacing: 0.08em; text-transform: uppercase; }
 .top__nav { display: flex; align-items: center; gap: clamp(16px, 3vw, 44px); font-weight: 700; font-size: 0.84rem; }
 .top__nav a { padding-block: 6px; text-decoration: none; border-bottom: 1.5px solid transparent; transition: border-color 0.2s; }
 .top__nav a:hover { border-color: currentColor; }
