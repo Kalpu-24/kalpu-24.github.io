@@ -37,6 +37,16 @@ const pair = (a, b, tag = "h2", cls = "") => `<${tag} class="pair ${cls}"><span>
    the other three, then the picture wipes in. The frame is wide, so the subject is not cropped away. */
 const corners = `<i class="frame__c frame__c--tl"></i><i class="frame__c frame__c--tr"></i><i class="frame__c frame__c--br"></i>`;
 const frame = (src, cls = "", attrs = "") => `<span class="frame ${cls}"><span class="ln frame__h"></span><span class="lv frame__v"></span><span class="frame__pic"><img src="${src}" alt="" loading="lazy"${attrs}></span>${corners}<span class="frame__dot"></span></span>`;
+/* A figure such as "4 months" or "307 MB": the number stays large and the unit sits beside it,
+   smaller, so a long unit never pushes the number onto two lines. A figure with no number in
+   it ("Overall winner") is set as words. */
+const figure = (v) => {
+  const m = String(v).match(/^([\d.,]+(?:\s*[×–-]\s*[\d.,]+)?[k+]*)\s+([A-Za-z].*)$/);
+  if (m) return `<strong class="fig"><span class="fig__n">${esc(m[1])}</span><span class="fig__u">${esc(m[2])}</span></strong>`;
+  return `<strong class="fig"><span class="${/^\d/.test(v) ? "fig__n" : "fig__w"}">${esc(v)}</span></strong>`;
+};
+/* Games whose work panel also shows the cut-out character beside the key art. */
+const PANEL_PROP = new Set(["rollemout", "snakewall"]);
 const btn = (label, url, kind = "") => `<a class="btn ${kind}" href="${esc(url)}"${ext(url)}>${esc(label)} ${/^https?:/.test(url) ? out : arrow}</a>`;
 
 function page({ file, title, description, body, id = "home" }) {
@@ -118,7 +128,7 @@ page({
   body: `
 <section class="hero scene">
   <div class="hero__art" aria-hidden="true">
-    ${frame("../assets/kalp.webp", "frame--square")}
+    ${frame("../assets/kalp.webp", "frame--square", ` id="hero__pic"`)}
   </div>
   <div class="hero__text">
     <p class="eyebrow fade">${esc(profile.name)} · ${esc(profile.role)}</p>
@@ -131,7 +141,7 @@ page({
 
 <section class="lead wrap scene" aria-label="Highlights">
   <span class="ln"></span>
-  ${headlineStats.map((n) => `<${n.to ? `a href="${n.to}.html"` : "div"} class="lead__item"><strong class="pair"><span><i>${esc(n.v)}</i></span></strong><u class="mark"></u><span class="fade">${esc(n.l)}</span></${n.to ? "a" : "div"}>`).join("\n  ")}
+  ${headlineStats.map((n) => `<${n.to ? `a href="${n.to}.html"` : "div"} class="lead__item">${figure(n.v)}<span>${esc(n.l)}</span></${n.to ? "a" : "div"}>`).join("\n  ")}
 </section>
 
 <section class="reel" id="work" aria-label="Selected work">
@@ -144,10 +154,8 @@ page({
       ${projects.map((p, i) => `
       <article class="panel scene" style="${accent(p.id)}" id="work-${p.id}">
         <a class="panel__art" href="${p.id}.html" tabindex="-1" aria-hidden="true">
-          ${p.art.fit === "contain"
-            ? frame(img(p, "prop"), "is-contain")
-            : frame(img(p, "2")) + `
-          <img class="panel__prop" src="${img(p, "prop")}" alt="" loading="lazy">`}
+          ${frame(img(p, "key"), p.art.fit === "contain" ? "is-contain" : "")}${PANEL_PROP.has(p.id) ? `
+          <img class="panel__prop" src="${img(p, "prop")}" alt="" loading="lazy">` : ""}
         </a>
         <div class="panel__text">
           <p class="eyebrow fade">${esc(p.kind)} · ${esc(p.year)}</p>
@@ -224,7 +232,7 @@ projects.forEach((p, i) => {
 
 <section class="numbers wrap scene" aria-label="In numbers">
   <span class="ln"></span>
-  ${p.stats.map((s) => `<div class="number"><strong>${esc(s.v)}</strong><span>${esc(s.l)}</span></div>`).join("\n  ")}
+  ${p.stats.map((s) => `<div class="number">${figure(s.v)}<span>${esc(s.l)}</span></div>`).join("\n  ")}
 </section>
 
 ${block("The", "short version", `<ul class="highlights">${p.highlights.map((h, k) => `<li><b>${num(k)}</b>${esc(h)}</li>`).join("")}</ul><div class="prose prose--lead">${paras(p.overview)}</div>`)}

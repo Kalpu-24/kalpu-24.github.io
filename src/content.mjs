@@ -38,7 +38,7 @@ export const profile = {
 
 /* The strip under the hero. */
 export const headlineStats = [
-  { v: "1st", l: "Druid Mechanics Game Jam 2025", to: "boomcorp" },
+  { v: "Overall winner", l: "Druid Mechanics Game Jam 2025", to: "boomcorp" },
   { v: "4", l: "Unreal Engine 5 games", to: null },
   { v: "7k+", l: "Google Play installs", to: "snakewall" },
 ];
@@ -47,7 +47,7 @@ export const headlineStats = [
 export const timeline = [
   { when: "Jan 2026 – present", what: "Programmer, Shortgun Games", detail: "Inventory, settings and UI on Roll 'Em Out, a four-player co-op adventure on Steam.", to: "rollemout" },
   { when: "2022 – 2026", what: "B.Tech, Computer Science and Engineering", detail: "Uka Tarsadia University, Gujarat." },
-  { when: "Aug 2025", what: "Winner, Druid Mechanics Game Jam 2025", detail: "Boom Corp., designed, built and released solo in nine days.", to: "boomcorp" },
+  { when: "Aug 2025", what: "Overall winner, Druid Mechanics Game Jam 2025", detail: "Boom Corp., designed, built and released solo in nine days.", to: "boomcorp" },
   { when: "May 2025", what: "Released The Gravity Flip", detail: "A ten-level gravity platformer in C++, on itch.io.", to: "tgf" },
   { when: "2025", what: "Unreal Engine 5 – Gameplay Ability System – Top Down RPG", detail: "Udemy course, completed as AuraRPG on a newer engine version than the course used.", to: "aurarpg" },
   { when: "Jan 2025", what: "Published SnakeWall on Google Play", detail: "An open-source Android live wallpaper you can play.", to: "snakewall" },
@@ -155,7 +155,7 @@ export const projects = [
     font: "Orbitron",
     fontScale: 0.8,
     theme: { bg: "#020710", surface: "#08142b", ink: "#dcfff7", muted: "#84aeb0", accent: "#cdff1b", onAccent: "#0b1300" },
-    fact: "Winner, Druid Mechanics Game Jam 2025",
+    fact: "Overall winner, Druid Mechanics Game Jam 2025",
     art: { src: "key", pos: "50% 50%" },
     prop: "tiles", // a strip of floor tiles is cleared as you scroll, and the live one gets marked
     kind: "First-person puzzle",
@@ -172,20 +172,20 @@ export const projects = [
       { label: "Jam entry", note: "itch.io", url: "https://itch.io/jam/druid-mechanics-community-game-jam-3/rate/3801801" },
     ],
     highlights: [
-      "Winner of the Druid Mechanics Game Jam 2025",
+      "Overall winner of the Druid Mechanics Game Jam 2025",
       "Designed, built and released solo in nine days, entirely in Blueprints",
       "A post-jam pass cut the download from 430 MB to 307 MB",
     ],
     tags: ["Unreal Engine 5", "Blueprints", "Post-process shader", "Niagara", "Game jam"],
     stats: [
-      { v: "1st", l: "Druid Mechanics Game Jam 2025" },
+      { v: "Overall winner", l: "Druid Mechanics Game Jam 2025" },
       { v: "9 days", l: "concept to release" },
       { v: "8 × 8", l: "tile grid, 8 explosives" },
       { v: "307 MB", l: "download, down from 430 MB" }, // source: itch.io file list, v1.0 vs v1.2
     ],
     overview: [
       "You have been recruited by Boom Corp., the galaxy's premier provider of mine detection services. Each room is an 8 × 8 floor of tiles with eight explosives buried somewhere under it. You carry two tools: a scanner that tells you how many explosives touch the tile in front of you, and a blaster that clears a tile. Clear every safe tile and you win. Clear the wrong one and the room finds out what was under it.",
-      "I made it alone for the Druid Mechanics Game Jam 2025, from an empty project to a released build in nine days, and it won the jam.",
+      "I made it alone for the Druid Mechanics Game Jam 2025, from an empty project to a released build in nine days, and it was the overall winner.",
     ],
     systemsTitle: "What I built",
     systems: [
@@ -222,7 +222,7 @@ export const projects = [
       steps: [
         ["Problem", "A nine-day jam, alone, covering design, programming, art direction and sound. The risk in a jam is a clever idea that never becomes a finished game."],
         ["Approach", "I got the core loop playable by the end of day two and treated everything after it as polish on something that already worked. I posted progress publicly every day, which kept each day tied to a specific milestone."],
-        ["Result", "A complete, published game ahead of the deadline, and first place. The host's verdict: \"Absolutely awesome game. Exceptional work.\""],
+        ["Result", "A complete, published game ahead of the deadline, and the overall win. The host's verdict: \"Absolutely awesome game. Exceptional work.\""],
       ],
     },
     notes: [
@@ -372,16 +372,16 @@ export const projects = [
       { label: "Download the demo", note: "Telegram", url: "https://t.me/KryoxxStudio/7/113" },
     ],
     highlights: [
-      "Combat, stats and spells on the Gameplay Ability System, in C++",
-      "Seven spells, 22 attributes, four damage types with their own debuffs",
-      "Six enemy variants on Behavior Trees and EQS, three save slots, checkpoints",
+      "Combat, levelling and spells built on Unreal's Gameplay Ability System, in C++",
+      "Seven spells to unlock, and four damage types that each add their own effect, like burn or stun",
+      "Six enemy types that pick their own attacks and positions, plus save slots and checkpoints",
     ],
     tags: ["Unreal Engine 5", "C++", "Gameplay Ability System", "Behavior Trees", "EQS", "MVVM", "Niagara"],
     stats: [
-      { v: "6", l: "enemy variants in 3 classes" }, // source: Content/Blueprints/Character, CharacterClassInfo
-      { v: "7", l: "spells: 4 offensive, 3 passive" }, // source: AuraGameplayTags.cpp
-      { v: "22", l: "gameplay attributes" }, // source: AuraAttributeSet.h
-      { v: "72", l: "native gameplay tags" }, // source: AuraGameplayTags.cpp
+      { v: "7", l: "spells: 4 to cast, 3 passive" }, // source: AuraGameplayTags.cpp
+      { v: "6", l: "enemy types to fight" }, // source: Content/Blueprints/Character, CharacterClassInfo
+      { v: "4", l: "damage types, each with its own debuff" }, // source: AuraGameplayTags.cpp (fire, lightning, arcane, physical)
+      { v: "3", l: "save slots, with checkpoints" }, // source: overview and save-system description below
     ],
     overview: [
       "AuraRPG is a top-down action RPG in the style of Diablo. You click to move, cast fire, lightning and arcane spells from a hotbar, level up, spend points on attributes and new spells, and fight through goblins, shamans, demons and ghouls that each attack differently.",
