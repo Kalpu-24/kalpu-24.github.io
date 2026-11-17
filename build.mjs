@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /* Generates the site's pages (index.html and one page per project) from src/content.mjs.
-   Run:  node build.mjs   The previous design lives in v2/ and has its own v2/build.mjs. */
+   Run:  node build.mjs   The previous design lives in old/v2/ and has its own old/v2/build.mjs. */
 import { readFileSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
 import { profile, headlineStats, timeline, skills, projects } from "./src/content.mjs";

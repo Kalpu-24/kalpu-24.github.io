@@ -3,7 +3,7 @@
    and typeface: build.mjs sets --bg, --surface, --ink, --muted, --accent, --on-accent,
    --game-font and --game-scale on each home-page slide and on each project page. */
 
-@font-face { font-family: "MLCD"; src: url("../../public/mlcd.ttf") format("truetype"); font-display: swap; }
+@font-face { font-family: "MLCD"; src: url("../../../public/mlcd.ttf") format("truetype"); font-display: swap; }
 
 :root {
   --bg: #07080a;

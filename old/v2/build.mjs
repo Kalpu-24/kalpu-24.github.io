@@ -1,14 +1,16 @@
 #!/usr/bin/env node
-/* The previous design, kept at kalpshah.dev/v2/. Generates this folder's pages from the shared
-   ../src/content.mjs.  Run:  node v2/build.mjs
-   Images, the résumé and the icons are shared with the main site (../assets, ../public). */
+/* The previous design ("old v2"), kept at kalpshah.dev/old/v2/. Generates this folder's pages
+   from the shared ../../src/content.mjs.  Run:  node old/v2/build.mjs
+   Images, the résumé and the icons are shared with the main site (../../assets, ../../public). */
 import { readFileSync, writeFileSync } from "node:fs";
 import { createHash } from "node:crypto";
-import { profile as shared, headlineStats, timeline, skills, projects } from "../src/content.mjs";
+import { profile as shared, headlineStats, timeline, skills, projects } from "../../src/content.mjs";
 
-/* This copy lives one folder down and is an archive: not indexed, canonical at /v2/. */
-const site = { url: "https://kalpshah.dev/v2/", noindex: true, root: "https://kalpshah.dev/" };
-const profile = { ...shared, resume: `../${shared.resume}` };
+/* This copy lives two folders down and is an archive: not indexed, canonical at /old/v2/.
+   UP leads from here back to the repository root, where the shared files are. */
+const UP = "../../";
+const site = { url: "https://kalpshah.dev/old/v2/", noindex: true, root: "https://kalpshah.dev/" };
+const profile = { ...shared, resume: `${UP}${shared.resume}` };
 
 /* The stylesheet and script are linked as site.css?v=<hash of the file>, so a browser that
    cached an older copy fetches the new one as soon as the pages change. */
@@ -22,7 +24,7 @@ const GSAP = "https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist"; // the version the
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const fmt = (s) => esc(s).replace(/`([^`]+)`/g, "<code>$1</code>");
 const byId = Object.fromEntries(projects.map((p) => [p.id, p]));
-const img = (p, n) => `../assets/games/${p.id}/${n}.webp`;
+const img = (p, n) => `${UP}assets/games/${p.id}/${n}.webp`;
 const arrow = `<svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const out = `<svg class="i" viewBox="0 0 16 16" aria-hidden="true"><path d="M5 11 11 5M6 5h5v5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 const ext = (url) => (/^https?:/.test(url) ? ` target="_blank" rel="noopener"` : "");
@@ -44,11 +46,11 @@ ${site.noindex ? `<meta name="robots" content="noindex">\n` : ""}<meta name="the
 <meta property="og:url" content="${url}">
 <meta property="og:title" content="${esc(title)}">
 <meta property="og:description" content="${esc(description)}">
-<meta property="og:image" content="${site.root}${image.replace(/^\.\.\//, "")}">
+<meta property="og:image" content="${site.root}${image.replace(/^(\.\.\/)+/, "")}">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="${versioned("../public/favicon.ico")}" sizes="48x48">
-<link rel="icon" type="image/svg+xml" href="${versioned("../public/favicon.svg")}">
-<link rel="apple-touch-icon" href="${versioned("../public/apple-touch-icon.png")}">
+<link rel="icon" href="${versioned(`${UP}public/favicon.ico`)}" sizes="48x48">
+<link rel="icon" type="image/svg+xml" href="${versioned(`${UP}public/favicon.svg`)}">
+<link rel="apple-touch-icon" href="${versioned(`${UP}public/apple-touch-icon.png`)}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="${FONTS}">
@@ -220,7 +222,7 @@ function home() {
 </section>
 
 <section class="wrap section about" id="about">
-  <img class="about__pic" src="../assets/kalp.webp" width="640" height="640" loading="lazy" alt="Illustrated portrait of Kalp wearing headphones">
+  <img class="about__pic" src="${UP}assets/kalp.webp" width="640" height="640" loading="lazy" alt="Illustrated portrait of Kalp wearing headphones">
   <div class="about__card">
     <p class="label">About</p>
     <h2>${esc(profile.about.punch)}</h2>
@@ -258,7 +260,7 @@ function project(p, i) {
   const next = projects[(i + 1) % projects.length];
   const facts = [["Role", p.role], ["When", p.period], ["Built with", p.engine], ["Platform", p.platform], ["Status", p.status]];
   const media = p.video
-    ? `<div class="phone"><video src="../${p.video.src}" poster="../assets/games/${p.id}/demo-poster.jpg" width="${p.video.w}" height="${p.video.h}" controls muted loop playsinline preload="none" aria-label="${esc(p.video.caption)}"></video></div>`
+    ? `<div class="phone"><video src="${UP}${p.video.src}" poster="${UP}assets/games/${p.id}/demo-poster.jpg" width="${p.video.w}" height="${p.video.h}" controls muted loop playsinline preload="none" aria-label="${esc(p.video.caption)}"></video></div>`
     : `<img class="phead__img" src="${img(p, "key")}" style="object-position:${p.art.pos}" alt="" fetchpriority="high">`;
 
   const challenge = p.challenge.steps
